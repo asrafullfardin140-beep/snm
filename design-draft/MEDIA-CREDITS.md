@@ -23,4 +23,4 @@ Used for the design draft only; replace with SnM's own photos and video before l
 | `ws1.jpg` | 32357250 | https://www.pexels.com/photo/32357250/ |
 | `ws2.jpg` | 40729959 | https://www.pexels.com/photo/40729959/ |
 
-`snm-logo.jpg` is SnM's own logo, taken from the SnM Brand Book.
+`snm-logo.png` is SnM's own logo from the SnM Brand Book, with its black background removed.

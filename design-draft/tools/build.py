@@ -5,7 +5,7 @@ from pathlib import Path
 SRC = Path(sys.argv[1])   # design-draft/canvas
 OUT = Path(sys.argv[2])   # design-draft/preview
 BLOBS = {
-    "8cf4e274822f4d5a96dfc2a8eaa9af51": "../media/snm-logo.jpg",
+    "90b8c00073b2615e54a7ab42cfb6a110": "../media/snm-logo.png",
     "566a4d2a9d99e3c45d61b74cd1b54b75": "../media/k1.jpg", "21022ebd0e4b9f0dfef70f44a1d448db": "../media/k3.jpg",
     "b98ea8c3950b2332e3473c854866e802": "../media/k4.jpg", "89a8ad3ef16736ea907e5fd48a85375b": "../media/c2.jpg",
     "35d91cddad66a7a9292b6ebcac7b6ec6": "../media/o1.jpg", "8fb74e7b3bf5874db9db0d5051524b25": "../media/o2.jpg",
