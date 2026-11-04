@@ -1,0 +1,147 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="snm.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+<script src="runtime.js"></script><script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false };
+  }
+  renderVals() {
+    return {
+      menuOpen: this.state.menuOpen,
+      menuOpenStr: this.state.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen })
+    };
+  }
+}
+</script></head><body><template id="tpl">
+<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+
+<header class="hdr">
+  <div class="w hdr-in">
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.jpg" alt="SnM Millwork Manufacturing Inc." width="170" height="58"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="Main.html">Home</a>
+      <a href="Commercial.html">Commercial</a>
+      <a href="Residential.html">Residential</a>
+      <div class="dd">
+        <a class="cur" href="Services.html" aria-current="page" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <div class="menu">
+          <a href="Millwork.html">Millwork &amp; Cabinetry</a>
+          <a class="sig" href="Epoxy.html">Epoxy &amp; Resin</a>
+          <a href="Design.html">Design &amp; Engineering</a>
+          <a href="FitOut.html">Interior Fit-Out</a>
+        </div>
+      </div>
+      <a class="btn" href="Quote.html">Get a Quote</a>
+    </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav class="mnav" aria-label="Mobile">
+      <a href="Main.html">Home</a>
+      <a href="Commercial.html">Commercial</a>
+      <a href="Residential.html">Residential</a>
+      <a href="Services.html">Services</a>
+      <a class="btn" href="Quote.html">Get a Quote</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+
+<section class="s" style="padding-top: 104px; padding-bottom: 96px">
+  <div class="w stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px">
+    <h1 class="d1" style="max-width: 760px">Four services, one team, one shop.</h1>
+    <p class="lede" style="color: #B9AFA2; max-width: 420px">Use one service or all four. Because the same people design, build and install, nothing gets lost in hand-offs.</p>
+  </div>
+</section>
+
+<!-- The four services, alternating -->
+<section style="padding-bottom: 128px">
+  <div class="w" style="display: flex; flex-direction: column; gap: 112px">
+
+    <article class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
+      <div class="ph im im-k3 r-32" style="grid-column: 1 / span 7"><i>[Photo: cabinetry detail]</i></div>
+      <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
+        <h2 class="d2">Millwork &amp; Cabinetry</h2>
+        <p class="p">Cabinets, panelling, counters, doors and architectural woodwork, in solid wood, veneer or lacquer.</p>
+        <a class="tl" href="Millwork.html" style="align-self: flex-start">Millwork &amp; Cabinetry</a>
+      </div>
+    </article>
+
+    <article class="bg-teal g bleed" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center; padding: 64px; margin: 0 -64px; border-radius: 2px">
+      <div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 20px">
+        <span class="meta" style="color: #F5A546">Our signature</span>
+        <h2 class="d2">Epoxy &amp; Resin</h2>
+        <p class="p">River tables, bar tops, countertops and wall pieces, with slabs chosen and resin poured in our own shop.</p>
+        <a class="btn" href="Epoxy.html" style="align-self: flex-start">Explore Epoxy &amp; Resin</a>
+      </div>
+      <div class="ph im im-t1 r-32" style="grid-column: 6 / span 7"><i>[Photo: river table from above]</i></div>
+    </article>
+
+    <article class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
+      <div class="ph im im-ws1 r-32" style="grid-column: 1 / span 7"><i>[Image: 3D render beside its shop drawing]</i></div>
+      <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
+        <h2 class="d2">Design &amp; Engineering</h2>
+        <p class="p">Concepts, 3D models and shop drawings, so you can see and approve the work before it is built.</p>
+        <a class="tl" href="Design.html" style="align-self: flex-start">Design &amp; Engineering</a>
+      </div>
+    </article>
+
+    <article class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
+      <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 20px">
+        <h2 class="d2">Interior Fit-Out</h2>
+        <p class="p">Complete interiors, with millwork, finishes and trades coordinated by one site lead.</p>
+        <a class="tl" href="FitOut.html" style="align-self: flex-start">Interior Fit-Out</a>
+      </div>
+      <div class="ph im im-o2 r-32" style="grid-column: 6 / span 7"><i>[Photo: finished office interior]</i></div>
+    </article>
+
+  </div>
+</section>
+
+<!-- Which service do I need? -->
+<section class="s bg-sand">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
+    <h2 class="d2" style="grid-column: 1 / span 4">Not sure which you need?</h2>
+    <dl style="grid-column: 6 / span 7; margin: 0">
+      <div class="rule-top" style="padding-bottom: 24px"><dt class="d4">You have drawings and need it built</dt><dd class="p" style="margin: 6px 0 0">Start with Millwork &amp; Cabinetry.</dd></div>
+      <div class="rule-top" style="padding-bottom: 24px"><dt class="d4">You have an idea but no drawings yet</dt><dd class="p" style="margin: 6px 0 0">Start with Design &amp; Engineering, then we build it.</dd></div>
+      <div class="rule-top" style="padding-bottom: 24px"><dt class="d4">You want one standout piece</dt><dd class="p" style="margin: 6px 0 0">Talk to us about Epoxy &amp; Resin.</dd></div>
+      <div class="rule-top" style="padding-bottom: 24px; border-bottom: 1px solid #2E2A26"><dt class="d4">You need a whole space delivered</dt><dd class="p" style="margin: 6px 0 0">Interior Fit-Out covers it end to end.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s">
+  <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
+      <h2 class="d2">Tell us what you're building.</h2>
+      <p class="p">We'll point you to the right service and send a budget range within [X business days].</p>
+    </div>
+    <a class="btn" href="Quote.html">Get a Quote</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <div class="ftr">
+    <div class="w ftr-g">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <img src="../media/snm-logo.jpg" alt="SnM Millwork Manufacturing Inc." width="220" height="75" style="width: 220px; height: auto; mix-blend-mode: lighten">
+        <p style="margin: 0; max-width: 300px">Custom millwork, cabinetry and epoxy resin, from Concept to Completion.</p>
+      </div>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
+      <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a></div>
+      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+    </div>
+    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
+  </div>
+</footer>
+
+</div>
+</template><div id="root"></div></body></html>

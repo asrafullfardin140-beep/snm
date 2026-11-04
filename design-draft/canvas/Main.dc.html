@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SnM Millwork: Home</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="snm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+</helmet>
+<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif; position: relative">
+
+<header class="hdr over">
+  <div class="w hdr-in">
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/8cf4e274822f4d5a96dfc2a8eaa9af51" alt="SnM Millwork Manufacturing Inc." width="170" height="58"></a>
+    <nav class="nav" aria-label="Main">
+      <a class="cur" href="Main.dc.html" aria-current="page">Home</a>
+      <a href="Commercial.dc.html">Commercial</a>
+      <a href="Residential.dc.html">Residential</a>
+      <div class="dd">
+        <a href="Services.dc.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <div class="menu">
+          <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
+          <a class="sig" href="Epoxy.dc.html">Epoxy &amp; Resin</a>
+          <a href="Design.dc.html">Design &amp; Engineering</a>
+          <a href="FitOut.dc.html">Interior Fit-Out</a>
+        </div>
+      </div>
+      <a class="btn" href="Quote.dc.html">Get a Quote</a>
+    </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav class="mnav" aria-label="Mobile">
+      <a href="Main.dc.html">Home</a>
+      <a href="Commercial.dc.html">Commercial</a>
+      <a href="Residential.dc.html">Residential</a>
+      <a href="Services.dc.html">Services</a>
+      <a class="btn" href="Quote.dc.html">Get a Quote</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+
+<!-- 1. Hero video (after Swan Canada) -->
+<section class="hero" aria-label="Introduction">
+  <video ref="{{ vidRef }}" src="/_blob/9e14a600c1b751ac712fe76f953d8182" autoplay muted loop playsinline aria-hidden="true"></video>
+  <div class="hero-shade"></div>
+  <div class="w hero-c">
+    <h1 class="d1" style="max-width: 940px">Fine millwork, cabinetry and resin, made to measure.</h1>
+    <div class="stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px">
+      <p class="lede" style="color: #E4DCD0">Designed, built in our own shop and installed by one team, for commercial interiors and private homes across [service area].</p>
+      <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
+        <a class="btn" href="Quote.dc.html">Get a Quote</a>
+        <a class="btn btn-line" href="#work">See our work</a>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="vid-btn" aria-label="{{ vidLabel }}" onClick="{{ toggleVideo }}">
+    <sc-if value="{{ vidPlaying }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></sc-if>
+    <sc-if value="{{ vidPaused }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 1l10 6-10 6z"/></svg></sc-if>
+  </button>
+</section>
+
+<!-- 2. Full-width image slider (after Magna Cabinets) -->
+<section id="work" class="slider" aria-roledescription="carousel" aria-label="Recent work" onMouseEnter="{{ pauseSlides }}" onMouseLeave="{{ resumeSlides }}">
+  <div class="track" style="transform: translateX({{ slideX }})">
+    <sc-for list="{{ slides }}" as="s" hint-placeholder-count="6">
+      <figure class="slide" role="group" aria-roledescription="slide" aria-label="{{ s.pos }}" style="margin: 0">
+        <img src="{{ s.src }}" alt="{{ s.alt }}">
+        <figcaption class="slide-cap"><div class="w" style="display: flex; flex-direction: column; gap: 6px"><span class="meta" style="color: #F5A546">{{ s.kind }}</span><span class="d3">{{ s.name }}</span></div></figcaption>
+      </figure>
+    </sc-for>
+  </div>
+  <div class="sl-ui"><div class="w">
+    <button type="button" class="arrow" aria-label="Previous slide" onClick="{{ prevSlide }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M11 3L5 9l6 6"/></svg></button>
+    <span class="count num" aria-live="polite">{{ slideCount }}</span>
+    <button type="button" class="arrow" aria-label="Next slide" onClick="{{ nextSlide }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 3l6 6-6 6"/></svg></button>
+  </div></div>
+</section>
+
+<!-- 3. Two audiences -->
+<section class="s">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
+    <a href="Commercial.dc.html" style="grid-column: 1 / span 7; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
+      <img class="cover r-32" src="/_blob/8fb74e7b3bf5874db9db0d5051524b25" alt="Reception desk with lit oak front" style="height: auto">
+      <h2 class="d3">For builders and designers</h2>
+      <p class="p">Shop drawings, tender pricing and installs that keep to your schedule, for offices, retail, hospitality and healthcare.</p>
+      <span class="tl" style="align-self: flex-start">Commercial work</span>
+    </a>
+    <a href="Residential.dc.html" style="grid-column: 8 / span 5; margin-top: 160px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
+      <img class="cover r-45" src="/_blob/89a8ad3ef16736ea907e5fd48a85375b" alt="Walk-in dressing room with lit shelving" style="height: auto">
+      <h2 class="d3">For homeowners</h2>
+      <p class="p">Kitchens, vanities, closets and built-ins, measured and made for your home.</p>
+      <span class="tl" style="align-self: flex-start">Residential work</span>
+    </a>
+  </div>
+</section>
+
+<!-- 4. Drawn first, built once -->
+<section class="s bg-sand">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
+    <div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 24px">
+      <h2 class="d2">Drawn first. Built once.</h2>
+      <p class="p">Every project starts as a shop drawing with real dimensions, materials and hardware. You approve it before we cut a single board, so what arrives on site is exactly what you signed off.</p>
+      <a class="tl" href="Design.dc.html" style="align-self: flex-start">How we design and engineer</a>
+    </div>
+    <figure style="grid-column: 6 / span 7; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+      <div style="background: #F3EEE6; border-radius: 2px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+        <svg viewBox="0 0 300 300" role="img" aria-label="Shop drawing of a kitchen wall elevation with dimensions" style="width: 100%; height: auto">
+          <g fill="none" stroke="#5C534A" stroke-width="1">
+            <rect x="30" y="40" width="240" height="78"/><line x1="90" y1="40" x2="90" y2="118"/><line x1="150" y1="40" x2="150" y2="118"/><line x1="210" y1="40" x2="210" y2="118"/>
+            <line x1="22" y1="170" x2="278" y2="170" stroke-width="2"/>
+            <rect x="30" y="174" width="240" height="96"/><line x1="110" y1="174" x2="110" y2="270"/><line x1="190" y1="174" x2="190" y2="270"/>
+            <line x1="30" y1="206" x2="110" y2="206"/><line x1="30" y1="238" x2="110" y2="238"/>
+            <line x1="60" y1="190" x2="80" y2="190"/><line x1="60" y1="222" x2="80" y2="222"/><line x1="60" y1="254" x2="80" y2="254"/>
+            <line x1="180" y1="200" x2="180" y2="240"/><line x1="200" y1="200" x2="200" y2="240"/>
+            <line x1="30" y1="286" x2="270" y2="286" stroke="#A74710"/><line x1="30" y1="281" x2="30" y2="291" stroke="#A74710"/><line x1="270" y1="281" x2="270" y2="291" stroke="#A74710"/>
+            <line x1="14" y1="40" x2="14" y2="270" stroke="#A74710"/><line x1="9" y1="40" x2="19" y2="40" stroke="#A74710"/><line x1="9" y1="270" x2="19" y2="270" stroke="#A74710"/>
+          </g>
+          <text x="150" y="298" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" fill="#A74710">3048</text>
+          <text x="8" y="160" font-family="Jost, sans-serif" font-size="9" fill="#A74710" transform="rotate(-90 8 160)">2286</text>
+        </svg>
+        <figcaption class="meta" style="color: #4A4038">The drawing</figcaption>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <img class="cover" src="/_blob/b98ea8c3950b2332e3473c854866e802" alt="Finished kitchen with gloss island" style="flex: 1 1 auto; min-height: 280px">
+        <div class="meta" style="color: #B9AFA2">The result</div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- 5. Signature: Epoxy & Resin -->
+<section class="s bg-teal">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: end">
+    <video class="cover r-169" src="/_blob/8f30b34b5892b7bd592280b8b52e80e8" autoplay muted loop playsinline aria-hidden="true" style="grid-column: 1 / span 7; height: auto"></video>
+    <div style="grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 24px">
+      <h2 class="d2">Wood and resin, poured as one piece.</h2>
+      <p class="p">River tables, bar tops and feature walls. We choose the slabs and pour in our own shop, in colours mixed for your room.</p>
+      <a class="btn" href="Epoxy.dc.html" style="align-self: flex-start">Explore Epoxy &amp; Resin</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Services -->
+<section class="s">
+  <div class="w" style="display: flex; flex-direction: column; gap: 48px">
+    <h2 class="d2" style="max-width: 760px">Everything from the first sketch to the last hinge.</h2>
+    <div style="border-bottom: 1px solid #2E2A26">
+      <a class="row" href="Millwork.dc.html"><span class="d4">Millwork &amp; Cabinetry</span><span class="p">Cabinets, panelling, counters and architectural woodwork.</span><span class="tl hm">View</span></a>
+      <a class="row" href="Epoxy.dc.html"><span class="d4">Epoxy &amp; Resin</span><span class="p">River tables, bar tops and one-of-one feature pieces.</span><span class="tl hm">View</span></a>
+      <a class="row" href="Design.dc.html"><span class="d4">Design &amp; Engineering</span><span class="p">Concepts, 3D models and shop drawings you approve first.</span><span class="tl hm">View</span></a>
+      <a class="row" href="FitOut.dc.html"><span class="d4">Interior Fit-Out</span><span class="p">Complete interiors, coordinated with your other trades.</span><span class="tl hm">View</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Process -->
+<section class="s bg-sand">
+  <div class="w" style="display: flex; flex-direction: column; gap: 56px">
+    <div class="stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px">
+      <h2 class="d2">From Concept to Completion.</h2>
+      <p class="p" style="max-width: 380px">One team carries the project through four stages, so nothing is lost between designer, shop and installer.</p>
+    </div>
+    <ol class="g" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px">
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: #F5A546">1</span><h3 class="d4">Consult</h3><p class="p" style="font-size: 16px">We visit, measure and listen, then give you a clear scope and budget range.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: #F5A546">2</span><h3 class="d4">Design</h3><p class="p" style="font-size: 16px">Drawings and 3D renders that you approve before anything is built.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: #F5A546">3</span><h3 class="d4">Build</h3><p class="p" style="font-size: 16px">Made in our shop, with progress photos sent along the way.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: #F5A546">4</span><h3 class="d4">Install</h3><p class="p" style="font-size: 16px">Our crew installs and finishes on site, then walks you through it.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 8. Review slider -->
+<section class="s" aria-roledescription="carousel" aria-label="Client reviews" onMouseEnter="{{ pauseReviews }}" onMouseLeave="{{ resumeReviews }}">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: start">
+    <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 20px">
+      <h2 class="d2">What clients say</h2>
+      <p class="p" style="font-size: 15px">[Sample reviews. Replace with real Google reviews from SnM.]</p>
+    </div>
+    <figure class="fade-in" style="grid-column: 6 / span 7; margin: 0; display: flex; flex-direction: column; gap: 24px; min-height: 300px" aria-live="polite">
+      <div class="stars" role="img" aria-label="5 out of 5 stars"><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg></div>
+      <blockquote class="d3" style="margin: 0; font-style: italic; line-height: 1.3">“{{ review.q }}”</blockquote>
+      <figcaption style="display: flex; flex-direction: column; gap: 2px"><span class="d5">{{ review.name }}</span><span class="p" style="font-size: 15px">{{ review.meta }}</span></figcaption>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #2E2A26; padding-top: 20px">
+        <div class="dots" role="group" aria-label="Choose a review">
+          <sc-for list="{{ reviewDots }}" as="d" hint-placeholder-count="5">
+            <button type="button" class="{{ d.cls }}" aria-label="{{ d.label }}" aria-pressed="{{ d.pressed }}" onClick="{{ d.pick }}"><span></span></button>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 10px">
+          <button type="button" class="arrow" aria-label="Previous review" onClick="{{ prevReview }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M11 3L5 9l6 6"/></svg></button>
+          <button type="button" class="arrow" aria-label="Next review" onClick="{{ nextReview }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 3l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- 9. Closing CTA -->
+<section class="s bg-sand">
+  <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
+      <h2 class="d2">Tell us what you're building.</h2>
+      <p class="p">Send drawings, photos or a rough idea. We reply within [X business days] with next steps and a budget range.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
+      <a class="btn" href="Quote.dc.html">Get a Quote</a>
+      <span class="p" style="font-size: 15px">Or call <a href="#">[phone]</a></span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #1C1A18"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <div class="ftr">
+    <div class="w ftr-g">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <img src="/_blob/8cf4e274822f4d5a96dfc2a8eaa9af51" alt="SnM Millwork Manufacturing Inc." width="220" height="75" style="width: 220px; height: auto; mix-blend-mode: lighten">
+        <p style="margin: 0; max-width: 300px">Custom millwork, cabinetry and epoxy resin, from Concept to Completion.</p>
+      </div>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
+      <div><h2 class="meta">Services</h2><a href="Millwork.dc.html">Millwork &amp; Cabinetry</a><a href="Epoxy.dc.html">Epoxy &amp; Resin</a><a href="Design.dc.html">Design &amp; Engineering</a><a href="FitOut.dc.html">Interior Fit-Out</a></div>
+      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+    </div>
+    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>Photos and video: Pexels (stock, for this draft only)</span></div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":6800}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, slide: 0, slidesPaused: false, review: 0, reviewsPaused: false, vidPlaying: true };
+    this.vid = null;
+  }
+  componentDidMount() {
+    this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.reduce && this.vid) { this.vid.pause(); this.setState({ vidPlaying: false }); }
+    if (this.reduce) return;
+    this.t1 = setInterval(() => { if (!this.state.slidesPaused) this.setState({ slide: (this.state.slide + 1) % 6 }); }, 5000);
+    this.t2 = setInterval(() => { if (!this.state.reviewsPaused) this.setState({ review: (this.state.review + 1) % 5 }); }, 7000);
+  }
+  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); }
+  renderVals() {
+    const s = this.state;
+    const slides = [
+      { src: '/_blob/21022ebd0e4b9f0dfef70f44a1d448db', alt: 'Kitchen with oak cabinets and dark tall units', kind: 'Residential', name: '[Oak and charcoal kitchen]' },
+      { src: '/_blob/35d91cddad66a7a9292b6ebcac7b6ec6', alt: 'Sculpted white reception desk in a lobby', kind: 'Commercial', name: '[Sculpted reception desk]' },
+      { src: '/_blob/72ae0b20c27124c73f4bb455d1241fc7', alt: 'Live-edge wood slab set against black resin', kind: 'Epoxy & Resin', name: '[Live-edge resin table]' },
+      { src: '/_blob/9301bd05abbfc66c26aba82303dc41fc', alt: 'Bar counter with lit shelving', kind: 'Hospitality', name: '[Restaurant bar]' },
+      { src: '/_blob/89a8ad3ef16736ea907e5fd48a85375b', alt: 'Walk-in dressing room with lit shelving', kind: 'Residential', name: '[Dressing room]' },
+      { src: '/_blob/566a4d2a9d99e3c45d61b74cd1b54b75', alt: 'Walnut kitchen with a large island', kind: 'Residential', name: '[Walnut kitchen and island]' }
+    ].map((x, i) => ({ ...x, pos: (i + 1) + ' of 6' }));
+    const reviews = [
+      { q: 'They turned a rough sketch into a reception desk our whole office talks about. On time, on budget, and the install crew left the site spotless.', name: '[Sample: Daniel R.]', meta: 'Commercial, office reception' },
+      { q: 'Our walnut kitchen is the best decision we made in the renovation. Every drawer lines up and the finish is perfect.', name: '[Sample: Priya and Sam K.]', meta: 'Residential, kitchen' },
+      { q: 'The river table is the first thing guests notice. They let us pick the slab and the resin colour in person.', name: '[Sample: Laura M.]', meta: 'Epoxy & Resin, dining table' },
+      { q: 'Shop drawings came back fast and clean. As a GC, that is exactly what we need from a millwork trade.', name: '[Sample: Mike T.]', meta: 'Commercial, general contractor' },
+      { q: 'Honest pricing, clear updates with photos, and a closet that finally fits everything.', name: '[Sample: Angela P.]', meta: 'Residential, walk-in closet' }
+    ];
+    const pad = (n) => String(n).padStart(2, '0');
+    return {
+      menuOpen: s.menuOpen,
+      menuOpenStr: s.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      vidRef: (el) => { this.vid = el; },
+      vidPlaying: s.vidPlaying, vidPaused: !s.vidPlaying,
+      vidLabel: s.vidPlaying ? 'Pause background video' : 'Play background video',
+      toggleVideo: () => { if (!this.vid) return; if (s.vidPlaying) this.vid.pause(); else this.vid.play(); this.setState({ vidPlaying: !s.vidPlaying }); },
+      slides,
+      slideX: (-100 * s.slide) + '%',
+      slideCount: pad(s.slide + 1) + ' / ' + pad(slides.length),
+      prevSlide: () => this.setState({ slide: (s.slide + slides.length - 1) % slides.length }),
+      nextSlide: () => this.setState({ slide: (s.slide + 1) % slides.length }),
+      pauseSlides: () => this.setState({ slidesPaused: true }),
+      resumeSlides: () => this.setState({ slidesPaused: false }),
+      review: reviews[s.review],
+      reviewDots: reviews.map((r, i) => ({ cls: i === s.review ? 'dot on' : 'dot', pressed: i === s.review ? 'true' : 'false', label: 'Review ' + (i + 1), pick: () => this.setState({ review: i }) })),
+      prevReview: () => this.setState({ review: (s.review + reviews.length - 1) % reviews.length }),
+      nextReview: () => this.setState({ review: (s.review + 1) % reviews.length }),
+      pauseReviews: () => this.setState({ reviewsPaused: true }),
+      resumeReviews: () => this.setState({ reviewsPaused: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

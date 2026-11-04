@@ -1,0 +1,245 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="snm.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+<script src="runtime.js"></script><script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, wood: 'walnut', resin: 'teal', open: 0, lb: -1 };
+  }
+  renderVals() {
+    const W = { walnut: ['Black walnut', '#5E2306', '#2E1103'], oak: ['White oak', '#B88A55', '#8A6034'], maple: ['Maple', '#E2C597', '#B9965F'] };
+    const R = { teal: ['Ocean teal', '#0D999E'], clear: ['Clear', '#CFE0DD'], smoke: ['Smoke', '#3A3633'], amber: ['Amber', '#DE701E'] };
+    const s = this.state;
+    const shots = [
+      { cat: 'Table', name: '[Live-edge slab with black resin]', src: '../media/t1.jpg', alt: 'Live-edge wood slab set against black resin' },
+      { cat: 'In the shop', name: '[Tinting a teal pour]', src: '../media/res1.jpg', alt: 'Gloved hand pouring teal resin onto wood' },
+      { cat: 'Bar top', name: '[Lit bar counter]', src: '../media/bar1.jpg', alt: 'Bar counter with lit shelving' }
+    ];
+    const opts = (map, key) => Object.keys(map).map((id) => ({
+      label: map[id][0], cls: s[key] === id ? 'pill on' : 'pill', pressed: s[key] === id ? 'true' : 'false',
+      pick: () => this.setState({ [key]: id })
+    }));
+    const faqs = [
+      ['How long does a resin table take?', 'Usually [X to X weeks] from approved design to delivery, most of it curing time.'],
+      ['How much does a river table cost?', 'Most dining tables fall between [$X,000 and $XX,000], depending on slab, size and base.'],
+      ['Will the resin yellow or scratch?', 'We use [UV-stable, food-safe resin] and a hard-wearing topcoat. Care instructions come with every piece.'],
+      ['Can I see the slab before you pour?', 'Yes. You can visit the shop or approve the slab from photos and video.']
+    ].map(([q, a], i) => ({
+      q, a, open: s.open === i, expanded: s.open === i ? 'true' : 'false',
+      icon: s.open === i ? 'M3 8h10' : 'M3 8h10M8 3v10',
+      toggle: () => this.setState({ open: s.open === i ? -1 : i })
+    }));
+    return {
+      menuOpen: s.menuOpen,
+      menuOpenStr: s.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      woods: opts(W, 'wood'),
+      resins: opts(R, 'resin'),
+      woodHex: W[s.wood][1], grainHex: W[s.wood][2], resinHex: R[s.resin][1],
+      previewLabel: W[s.wood][0] + ' with ' + R[s.resin][0].toLowerCase() + ' resin',
+      faqs,
+      shots: shots.map((p, i) => ({ ...p, open: 'Open photo: ' + p.alt, view: () => this.setState({ lb: i }) })),
+      lbOpen: s.lb >= 0,
+      lb: shots[s.lb >= 0 ? s.lb : 0],
+      lbCount: String(s.lb + 1).padStart(2, '0') + ' / ' + String(shots.length).padStart(2, '0'),
+      closeLb: () => this.setState({ lb: -1 }),
+      prevLb: () => this.setState({ lb: (s.lb + shots.length - 1) % shots.length }),
+      nextLb: () => this.setState({ lb: (s.lb + 1) % shots.length })
+    };
+  }
+}
+</script></head><body><template id="tpl">
+<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+
+<header class="hdr">
+  <div class="w hdr-in">
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.jpg" alt="SnM Millwork Manufacturing Inc." width="170" height="58"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="Main.html">Home</a>
+      <a href="Commercial.html">Commercial</a>
+      <a href="Residential.html">Residential</a>
+      <div class="dd">
+        <a class="cur" href="Services.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <div class="menu">
+          <a href="Millwork.html">Millwork &amp; Cabinetry</a>
+          <a class="sig" href="Epoxy.html" aria-current="page">Epoxy &amp; Resin</a>
+          <a href="Design.html">Design &amp; Engineering</a>
+          <a href="FitOut.html">Interior Fit-Out</a>
+        </div>
+      </div>
+      <a class="btn" href="Quote.html">Get a Quote</a>
+    </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav class="mnav" aria-label="Mobile">
+      <a href="Main.html">Home</a>
+      <a href="Commercial.html">Commercial</a>
+      <a href="Residential.html">Residential</a>
+      <a href="Services.html">Services</a>
+      <a class="btn" href="Quote.html">Get a Quote</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+
+<!-- Hero -->
+<section class="bg-teal" style="padding-top: 96px">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: end">
+    <div style="grid-column: 1 / span 6; display: flex; flex-direction: column; gap: 28px; padding-bottom: 96px">
+      <nav aria-label="Breadcrumb" style="font-size: 15px"><a href="Services.html" style="color: #CFE4E2">Services</a> <span aria-hidden="true" style="color: #7FB9BA">/</span> <span>Epoxy &amp; Resin</span></nav>
+      <h1 class="d1">Epoxy &amp; Resin</h1>
+      <p class="lede">Live-edge slabs and resin, poured as one piece in our own shop. Every table, bar top and wall piece is made once, for one room.</p>
+      <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
+        <a class="btn" href="Quote.html">Start a resin piece</a>
+        <a class="btn btn-line" href="#gallery">See finished pieces</a>
+      </div>
+    </div>
+    <video class="cover r-45" src="../media/resin.mp4" autoplay muted loop playsinline aria-hidden="true" style="grid-column: 7 / span 6; height: auto; border-radius: 2px 2px 0 0"></video>
+  </div>
+</section>
+
+<!-- What we make -->
+<section class="s">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
+    <h2 class="d2" style="grid-column: 1 / span 4">What we pour</h2>
+    <div style="grid-column: 6 / span 7; border-bottom: 1px solid #2E2A26">
+      <div class="row" style="grid-template-columns: minmax(0, 5fr) minmax(0, 6fr)"><span class="d4">River dining tables</span><span class="p">Seats 4 to 12, on steel or solid wood bases.</span></div>
+      <div class="row" style="grid-template-columns: minmax(0, 5fr) minmax(0, 6fr)"><span class="d4">Bar and counter tops</span><span class="p">For restaurants, hotels and home bars, sealed for daily use.</span></div>
+      <div class="row" style="grid-template-columns: minmax(0, 5fr) minmax(0, 6fr)"><span class="d4">Kitchen islands</span><span class="p">A single slab island top as the centre of the room.</span></div>
+      <div class="row" style="grid-template-columns: minmax(0, 5fr) minmax(0, 6fr)"><span class="d4">Wall pieces and signage</span><span class="p">Lit resin panels, reception walls and logos.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Material sampler (interactive) -->
+<section class="s bg-sand">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
+    <div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 28px">
+      <h2 class="d2">Pick a wood. Pick a pour.</h2>
+      <p class="p">A rough guide to how combinations look together. We bring real samples to your consultation.</p>
+      <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+        <legend class="d5" style="margin-bottom: 12px">Wood</legend>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{ woods }}" as="o" hint-placeholder-count="3">
+            <button type="button" class="{{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.pick }}">{{ o.label }}</button>
+          </sc-for>
+        </div>
+      </fieldset>
+      <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+        <legend class="d5" style="margin-bottom: 12px">Resin</legend>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{ resins }}" as="o" hint-placeholder-count="4">
+            <button type="button" class="{{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.pick }}">{{ o.label }}</button>
+          </sc-for>
+        </div>
+      </fieldset>
+    </div>
+    <figure style="grid-column: 7 / span 6; margin: 0; display: flex; flex-direction: column; gap: 14px">
+      <svg viewBox="0 0 600 360" role="img" aria-label="{{ previewLabel }}" style="width: 100%; height: auto; border-radius: 2px; box-shadow: 0 24px 48px -24px rgba(21,16,12,.45)">
+        <rect width="600" height="360" fill="{{ woodHex }}"/>
+        <g stroke="{{ grainHex }}" stroke-width="1.2" fill="none" opacity=".55">
+          <path d="M0 40 C 150 30, 300 60, 600 34"/><path d="M0 70 C 160 60, 320 92, 600 66"/><path d="M0 300 C 170 290, 330 318, 600 292"/><path d="M0 330 C 150 322, 320 346, 600 324"/>
+        </g>
+        <path d="M0 150 C 110 120, 190 210, 300 170 S 470 110, 600 160 L600 230 C 480 190, 400 260, 290 238 S 110 190, 0 226 Z" fill="{{ resinHex }}"/>
+        <path d="M0 150 C 110 120, 190 210, 300 170 S 470 110, 600 160" fill="none" stroke="#FBF6EC" stroke-opacity=".35" stroke-width="2"/>
+      </svg>
+      <figcaption class="p">{{ previewLabel }}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- How a piece is made: a real sequence -->
+<section class="s">
+  <div class="w" style="display: flex; flex-direction: column; gap: 56px">
+    <h2 class="d2" style="max-width: 720px">How a resin piece is made</h2>
+    <ol class="g" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 32px">
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">1</span><h3 class="d5">Choose the slab</h3><p class="p" style="font-size: 16px">Visit the shop or pick from photos of slabs in stock.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">2</span><h3 class="d5">Design the pour</h3><p class="p" style="font-size: 16px">Size, colour and edge are drawn and approved.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">3</span><h3 class="d5">Pour</h3><p class="p" style="font-size: 16px">Resin is mixed and poured in layers.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">4</span><h3 class="d5">Cure</h3><p class="p" style="font-size: 16px">[X to X weeks] of curing before shaping.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">5</span><h3 class="d5">Finish and deliver</h3><p class="p" style="font-size: 16px">Flattened, sanded, sealed and installed.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="s bg-ebony">
+  <div class="w" style="display: flex; flex-direction: column; gap: 44px">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+      <h2 class="d2">Finished pieces</h2>
+      <p class="p">[Add more of SnM's resin photos here.]</p>
+    </div>
+    <div class="gal">
+      <sc-for list="{{ shots }}" as="p" hint-placeholder-count="3">
+        <button type="button" aria-label="{{ p.open }}" onClick="{{ p.view }}">
+          <img src="{{ p.src }}" alt="{{ p.alt }}">
+          <span class="cap"><span class="meta" style="color: #F5A546; display: block">{{ p.cat }}</span><span class="d5">{{ p.name }}</span></span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="s">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
+    <h2 class="d2" style="grid-column: 1 / span 4">Questions people ask</h2>
+    <div style="grid-column: 6 / span 7; border-bottom: 1px solid #2E2A26">
+      <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="4">
+        <div class="faq">
+          <button type="button" aria-expanded="{{ q.expanded }}" onClick="{{ q.toggle }}"><span>{{ q.q }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="{{ q.icon }}"/></svg></button>
+          <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}"><p class="p" style="padding-bottom: 26px">{{ q.a }}</p></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section class="s bg-sand">
+  <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
+      <h2 class="d2">Have a room in mind for a resin piece?</h2>
+      <p class="p">Send a photo of the space and rough size. We'll suggest slabs we have in stock.</p>
+    </div>
+    <a class="btn" href="Quote.html">Start a resin piece</a>
+  </div>
+</section>
+<div style="height: 64px" aria-hidden="true"></div>
+
+</main>
+
+<sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="lb" role="dialog" aria-modal="true" aria-label="Resin piece photo viewer">
+    <div class="lb-top">
+      <div style="display: flex; flex-direction: column"><span class="meta" style="color: #F5A546">{{ lb.cat }}</span><span class="d4">{{ lb.name }}</span></div>
+      <div style="display: flex; align-items: center; gap: 20px"><span class="count num">{{ lbCount }}</span><button type="button" class="arrow" aria-label="Close viewer" onClick="{{ closeLb }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button></div>
+    </div>
+    <div class="lb-mid">
+      <button type="button" class="arrow" aria-label="Previous photo" onClick="{{ prevLb }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M11 3L5 9l6 6"/></svg></button>
+      <img src="{{ lb.src }}" alt="{{ lb.alt }}">
+      <button type="button" class="arrow" aria-label="Next photo" onClick="{{ nextLb }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 3l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</sc-if>
+
+<footer>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <div class="ftr">
+    <div class="w ftr-g">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <img src="../media/snm-logo.jpg" alt="SnM Millwork Manufacturing Inc." width="220" height="75" style="width: 220px; height: auto; mix-blend-mode: lighten">
+        <p style="margin: 0; max-width: 300px">Custom millwork, cabinetry and epoxy resin, from Concept to Completion.</p>
+      </div>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
+      <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a></div>
+      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+    </div>
+    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
+  </div>
+</footer>
+
+</div>
+</template><div id="root"></div></body></html>

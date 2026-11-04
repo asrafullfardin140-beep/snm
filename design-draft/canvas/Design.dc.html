@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SnM Millwork: Design and Engineering</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="snm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+</helmet>
+<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+
+<header class="hdr">
+  <div class="w hdr-in">
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/8cf4e274822f4d5a96dfc2a8eaa9af51" alt="SnM Millwork Manufacturing Inc." width="170" height="58"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="Main.dc.html">Home</a>
+      <a href="Commercial.dc.html">Commercial</a>
+      <a href="Residential.dc.html">Residential</a>
+      <div class="dd">
+        <a class="cur" href="Services.dc.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <div class="menu">
+          <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
+          <a class="sig" href="Epoxy.dc.html">Epoxy &amp; Resin</a>
+          <a href="Design.dc.html" aria-current="page">Design &amp; Engineering</a>
+          <a href="FitOut.dc.html">Interior Fit-Out</a>
+        </div>
+      </div>
+      <a class="btn" href="Quote.dc.html">Get a Quote</a>
+    </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav class="mnav" aria-label="Mobile">
+      <a href="Main.dc.html">Home</a>
+      <a href="Commercial.dc.html">Commercial</a>
+      <a href="Residential.dc.html">Residential</a>
+      <a href="Services.dc.html">Services</a>
+      <a class="btn" href="Quote.dc.html">Get a Quote</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+
+<section class="s" style="padding-top: 88px">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: end">
+    <div style="grid-column: 1 / span 6; display: flex; flex-direction: column; gap: 28px">
+      <nav aria-label="Breadcrumb" style="font-size: 15px"><a href="Services.dc.html">Services</a> <span aria-hidden="true" style="color: #8A7F72">/</span> <span>Design &amp; Engineering</span></nav>
+      <h1 class="d1">Design &amp; Engineering</h1>
+      <p class="lede" style="color: #B9AFA2">From a rough idea to shop drawings with every dimension, material and hinge decided. You see it and approve it before anything is built.</p>
+      <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
+        <a class="btn" href="Quote.dc.html">Start with a design</a>
+      </div>
+    </div>
+    <figure class="paper r-45" style="grid-column: 7 / span 6; margin: 0">
+      <svg viewBox="0 0 300 300" role="img" aria-label="Shop drawing of a kitchen wall elevation with dimensions">
+        <g fill="none" stroke="#5C534A" stroke-width="1">
+          <rect x="30" y="40" width="240" height="78"/><line x1="90" y1="40" x2="90" y2="118"/><line x1="150" y1="40" x2="150" y2="118"/><line x1="210" y1="40" x2="210" y2="118"/>
+          <line x1="22" y1="170" x2="278" y2="170" stroke-width="2"/>
+          <rect x="30" y="174" width="240" height="96"/><line x1="110" y1="174" x2="110" y2="270"/><line x1="190" y1="174" x2="190" y2="270"/>
+          <line x1="30" y1="206" x2="110" y2="206"/><line x1="30" y1="238" x2="110" y2="238"/>
+          <line x1="60" y1="190" x2="80" y2="190"/><line x1="60" y1="222" x2="80" y2="222"/><line x1="60" y1="254" x2="80" y2="254"/>
+          <line x1="180" y1="200" x2="180" y2="240"/><line x1="200" y1="200" x2="200" y2="240"/>
+          <line x1="30" y1="286" x2="270" y2="286" stroke="#A74710"/><line x1="30" y1="281" x2="30" y2="291" stroke="#A74710"/><line x1="270" y1="281" x2="270" y2="291" stroke="#A74710"/>
+          <line x1="14" y1="40" x2="14" y2="270" stroke="#A74710"/><line x1="9" y1="40" x2="19" y2="40" stroke="#A74710"/><line x1="9" y1="270" x2="19" y2="270" stroke="#A74710"/>
+        </g>
+        <text x="150" y="298" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" fill="#A74710">3048</text>
+        <text x="8" y="160" font-family="Jost, sans-serif" font-size="9" fill="#A74710" transform="rotate(-90 8 160)">2286</text>
+      </svg>
+      <figcaption class="meta">Shop drawing, kitchen elevation</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="s bg-sand">
+  <div class="w" style="display: flex; flex-direction: column; gap: 56px">
+    <h2 class="d2" style="max-width: 720px">What you receive</h2>
+    <ol class="g" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px">
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">1</span><h3 class="d4">Concept sketches</h3><p class="p" style="font-size: 16px">Layout options and a direction for materials.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">2</span><h3 class="d4">3D renders</h3><p class="p" style="font-size: 16px">See the room in your finishes before you commit.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">3</span><h3 class="d4">Shop drawings</h3><p class="p" style="font-size: 16px">Fully dimensioned plans, elevations and sections.</p></li>
+      <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">4</span><h3 class="d4">Samples</h3><p class="p" style="font-size: 16px">Wood, finish and hardware to hold and approve.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="s">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
+    <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 20px">
+      <h2 class="d2">Drawn, then built exactly.</h2>
+      <p class="p">The drawing you approve is the drawing the shop builds from. [Confirm: CNC programmed directly from the drawings.]</p>
+    </div>
+    <div style="grid-column: 6 / span 7; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><div class="ph t-sand r-45"><i>[Sketch]</i></div><figcaption class="p" style="font-size: 15px">Sketch</figcaption></figure>
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><div class="ph t-stone r-45"><i>[Render]</i></div><figcaption class="p" style="font-size: 15px">Render</figcaption></figure>
+      <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><div class="ph im im-k4 r-45"><i>[Installed]</i></div><figcaption class="p" style="font-size: 15px">Installed</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="s bg-ebony">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
+    <h2 class="d2" style="grid-column: 1 / span 5">Who it's for</h2>
+    <div style="grid-column: 7 / span 6; display: flex; flex-direction: column">
+      <div class="rule-top" style="padding-bottom: 24px"><h3 class="d4">Designers and architects</h3><p class="p">We turn your design intent into buildable shop drawings and value-engineer where it helps.</p></div>
+      <div class="rule-top" style="padding-bottom: 24px"><h3 class="d4">Contractors</h3><p class="p">Coordinated drawings for consultant review, on your submittal schedule.</p></div>
+      <div class="rule-top" style="padding-bottom: 24px"><h3 class="d4">Homeowners</h3><p class="p">No drawings needed. Bring an idea, a photo or a Pinterest board.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="s">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
+    <h2 class="d2" style="grid-column: 1 / span 4">Questions people ask</h2>
+    <div style="grid-column: 6 / span 7; border-bottom: 1px solid #2E2A26">
+      <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="3">
+        <div class="faq">
+          <button type="button" aria-expanded="{{ q.expanded }}" onClick="{{ q.toggle }}"><span>{{ q.q }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="{{ q.icon }}"/></svg></button>
+          <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}"><p class="p" style="padding-bottom: 26px">{{ q.a }}</p></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section class="s bg-sand">
+  <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
+      <h2 class="d2">Bring us the idea.</h2>
+      <p class="p">A sketch, a photo or a few words is enough to start.</p>
+    </div>
+    <a class="btn" href="Quote.dc.html">Start with a design</a>
+  </div>
+</section>
+<div style="height: 64px" aria-hidden="true"></div>
+
+</main>
+
+<footer>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <div class="ftr">
+    <div class="w ftr-g">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <img src="/_blob/8cf4e274822f4d5a96dfc2a8eaa9af51" alt="SnM Millwork Manufacturing Inc." width="220" height="75" style="width: 220px; height: auto; mix-blend-mode: lighten">
+        <p style="margin: 0; max-width: 300px">Custom millwork, cabinetry and epoxy resin, from Concept to Completion.</p>
+      </div>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
+      <div><h2 class="meta">Services</h2><a href="Millwork.dc.html">Millwork &amp; Cabinetry</a><a href="Epoxy.dc.html">Epoxy &amp; Resin</a><a href="Design.dc.html">Design &amp; Engineering</a><a href="FitOut.dc.html">Interior Fit-Out</a></div>
+      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+    </div>
+    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":4600}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, open: 0 };
+  }
+  renderVals() {
+    const s = this.state;
+    const faqs = [
+      ['Do I pay for design separately?', '[Confirm with SnM: design fee, or credited against the build.]'],
+      ['How many revisions are included?', '[Confirm: e.g. two rounds of revisions on drawings.]'],
+      ['Can you work with my designer?', 'Yes. We often take a designer’s concept and engineer it for production.']
+    ].map(([q, a], i) => ({
+      q, a, open: s.open === i, expanded: s.open === i ? 'true' : 'false',
+      icon: s.open === i ? 'M3 8h10' : 'M3 8h10M8 3v10',
+      toggle: () => this.setState({ open: s.open === i ? -1 : i })
+    }));
+    return {
+      menuOpen: s.menuOpen,
+      menuOpenStr: s.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      faqs
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="snm.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+<script src="runtime.js"></script><script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, step: 1, who: 'com', sent: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const labels = ['Who it’s for', 'The project', 'Details and files', 'Contact'];
+    return {
+      menuOpen: s.menuOpen,
+      menuOpenStr: s.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      sent: s.sent, editing: !s.sent,
+      s1: s.step === 1, s2: s.step === 2, s3: s.step === 3, s4: s.step === 4,
+      stepNum: s.step,
+      isCom: s.who === 'com', isRes: s.who === 'res',
+      comCls: s.who === 'com' ? 'choice on' : 'choice', comPressed: s.who === 'com' ? 'true' : 'false',
+      resCls: s.who === 'res' ? 'choice on' : 'choice', resPressed: s.who === 'res' ? 'true' : 'false',
+      pickCom: () => this.setState({ who: 'com' }),
+      pickRes: () => this.setState({ who: 'res' }),
+      steps: labels.map((label, i) => ({
+        label,
+        bar: i + 1 <= s.step ? '#F5A546' : '#2E2A26',
+        color: i + 1 === s.step ? '#F3EEE6' : '#B9AFA2',
+        current: i + 1 === s.step ? 'step' : 'false'
+      })),
+      canBack: s.step > 1, noBack: s.step === 1,
+      notLast: s.step < 4, isLast: s.step === 4,
+      back: () => this.setState({ step: Math.max(1, s.step - 1) }),
+      next: () => this.setState({ step: Math.min(4, s.step + 1) }),
+      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script></head><body><template id="tpl">
+<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+
+<header class="hdr">
+  <div class="w hdr-in">
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.jpg" alt="SnM Millwork Manufacturing Inc." width="170" height="58"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="Main.html">Home</a>
+      <a href="Commercial.html">Commercial</a>
+      <a href="Residential.html">Residential</a>
+      <div class="dd">
+        <a href="Services.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <div class="menu">
+          <a href="Millwork.html">Millwork &amp; Cabinetry</a>
+          <a class="sig" href="Epoxy.html">Epoxy &amp; Resin</a>
+          <a href="Design.html">Design &amp; Engineering</a>
+          <a href="FitOut.html">Interior Fit-Out</a>
+        </div>
+      </div>
+      <a class="btn" href="Quote.html" aria-current="page">Get a Quote</a>
+    </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav class="mnav" aria-label="Mobile">
+      <a href="Main.html">Home</a>
+      <a href="Commercial.html">Commercial</a>
+      <a href="Residential.html">Residential</a>
+      <a href="Services.html">Services</a>
+      <a class="btn" href="Quote.html">Get a Quote</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+<section class="s" style="padding-top: 88px">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 56px">
+
+    <div style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 40px">
+
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 24px; padding: 56px 0">
+          <h1 class="d1">Thank you. We have your project.</h1>
+          <p class="lede" style="color: #B9AFA2">A confirmation is on its way to your inbox. [Name] from our team will reply within [X business days] with next steps and a budget range.</p>
+          <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
+            <a class="btn btn-ink" href="Main.html">Back to home</a>
+            <a class="btn btn-line" href="Epoxy.html">Browse resin pieces</a>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ editing }}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 40px">
+          <div style="display: flex; flex-direction: column; gap: 18px">
+            <h1 class="d1" style="font-size: 72px">Tell us about your project.</h1>
+            <p class="lede" style="color: #B9AFA2">Four short steps, about three minutes. Drawings and photos help but aren't required.</p>
+          </div>
+
+          <ol aria-label="Progress" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+            <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
+              <li aria-current="{{ st.current }}" style="display: flex; flex-direction: column; gap: 10px">
+                <span style="display: block; height: 3px; border-radius: 2px; background: {{ st.bar }}"></span>
+                <span style="font-size: 14px; color: {{ st.color }}">{{ st.label }}</span>
+              </li>
+            </sc-for>
+          </ol>
+
+          <form onSubmit="{{ submit }}" style="display: flex; flex-direction: column; gap: 28px">
+
+            <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+              <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px">
+                <legend class="d3" style="margin-bottom: 20px">Who is the project for?</legend>
+                <div class="g" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+                  <button type="button" class="{{ comCls }}" aria-pressed="{{ comPressed }}" onClick="{{ pickCom }}"><span class="d4">A business</span><span class="p" style="font-size: 15px">Contractor, designer, developer or business owner.</span></button>
+                  <button type="button" class="{{ resCls }}" aria-pressed="{{ resPressed }}" onClick="{{ pickRes }}"><span class="d4">My home</span><span class="p" style="font-size: 15px">Kitchen, bath, closet, built-in or a resin piece.</span></button>
+                </div>
+              </fieldset>
+            </sc-if>
+
+            <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+              <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px">
+                <legend class="d3" style="margin-bottom: 20px">The project</legend>
+                <div class="field"><label for="q-type">What do you need?</label>
+                  <sc-if value="{{ isCom }}" hint-placeholder-val="{{ true }}"><select id="q-type"><option>Millwork package from drawings</option><option>Reception or feature desk</option><option>Retail fixtures</option><option>Full interior fit-out</option><option>Resin bar or counter top</option><option>Something else</option></select></sc-if>
+                  <sc-if value="{{ isRes }}" hint-placeholder-val="{{ false }}"><select id="q-type"><option>Kitchen</option><option>Vanity or bath</option><option>Closet</option><option>Built-in or media wall</option><option>Resin table or piece</option><option>Something else</option></select></sc-if>
+                </div>
+                <div class="g" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+                  <div class="field"><label for="q-loc">Project location</label><input id="q-loc" type="text" autocomplete="address-level2" placeholder="City or postal code"></div>
+                  <div class="field"><label for="q-when">When do you need it?</label><select id="q-when"><option>Within 1 month</option><option>1 to 3 months</option><option>3 to 6 months</option><option>Just planning</option></select></div>
+                </div>
+                <div class="field"><label for="q-budget">Budget range</label><select id="q-budget"><option>Not sure yet</option><option>[Under $10,000]</option><option>[$10,000 to $30,000]</option><option>[$30,000 to $75,000]</option><option>[Over $75,000]</option></select><span class="hint">A range helps us suggest the right materials. It doesn't lock you in.</span></div>
+              </fieldset>
+            </sc-if>
+
+            <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+              <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px">
+                <legend class="d3" style="margin-bottom: 20px">Details and files</legend>
+                <div class="field"><label for="q-desc">Describe the project</label><textarea id="q-desc" rows="5" placeholder="Sizes, materials you like, anything that matters to you"></textarea></div>
+                <div class="field"><label for="q-files">Drawings, photos or inspiration</label><input id="q-files" type="file" multiple><span class="hint">PDF, DWG, JPG or PNG, up to [25 MB] each.</span></div>
+                <sc-if value="{{ isCom }}" hint-placeholder-val="{{ true }}"><div class="field"><label for="q-tender">Tender closing date (if any)</label><input id="q-tender" type="date"></div></sc-if>
+              </fieldset>
+            </sc-if>
+
+            <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+              <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px">
+                <legend class="d3" style="margin-bottom: 20px">How do we reach you?</legend>
+                <div class="g" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+                  <div class="field"><label for="q-name">Full name</label><input id="q-name" type="text" autocomplete="name" required></div>
+                  <sc-if value="{{ isCom }}" hint-placeholder-val="{{ true }}"><div class="field"><label for="q-co">Company</label><input id="q-co" type="text" autocomplete="organization"></div></sc-if>
+                  <div class="field"><label for="q-email">Email</label><input id="q-email" type="email" autocomplete="email" required></div>
+                  <div class="field"><label for="q-phone">Phone</label><input id="q-phone" type="tel" autocomplete="tel"></div>
+                </div>
+                <div class="field"><label for="q-pref">Best way to reach you</label><select id="q-pref"><option>Email</option><option>Phone call</option><option>Text message</option></select></div>
+              </fieldset>
+            </sc-if>
+
+            <div class="stk" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid #2E2A26; padding-top: 28px">
+              <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-line" onClick="{{ back }}">Back</button></sc-if>
+              <sc-if value="{{ noBack }}" hint-placeholder-val="{{ true }}"><span class="p" style="font-size: 15px">Step {{ stepNum }} of 4</span></sc-if>
+              <sc-if value="{{ notLast }}" hint-placeholder-val="{{ true }}"><button type="button" class="btn btn-ink" onClick="{{ next }}">Continue</button></sc-if>
+              <sc-if value="{{ isLast }}" hint-placeholder-val="{{ false }}"><button type="submit" class="btn">Send my project</button></sc-if>
+            </div>
+          </form>
+        </div>
+      </sc-if>
+    </div>
+
+    <aside style="grid-column: 10 / span 3; display: flex; flex-direction: column; gap: 32px; padding-top: 12px">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <h2 class="d4">What happens next</h2>
+        <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; color: #B9AFA2; font-size: 16px">
+          <li>We confirm we've received it the same day.</li>
+          <li>We reply within [X business days] with questions and a budget range.</li>
+          <li>We book a site visit or a call.</li>
+        </ol>
+      </div>
+      <div class="rule-top" style="display: flex; flex-direction: column; gap: 8px">
+        <h2 class="d4">Prefer to talk?</h2>
+        <a href="#" style="font-size: 20px">[Phone]</a>
+        <a href="#">[Email]</a>
+        <span class="p" style="font-size: 15px">[Weekday hours]</span>
+      </div>
+      <p class="p" style="font-size: 14px">We only use your details to reply about this project.</p>
+    </aside>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <div class="ftr">
+    <div class="w ftr-g">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <img src="../media/snm-logo.jpg" alt="SnM Millwork Manufacturing Inc." width="220" height="75" style="width: 220px; height: auto; mix-blend-mode: lighten">
+        <p style="margin: 0; max-width: 300px">Custom millwork, cabinetry and epoxy resin, from Concept to Completion.</p>
+      </div>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
+      <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a></div>
+      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+    </div>
+    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
+  </div>
+</footer>
+
+</div>
+</template><div id="root"></div></body></html>

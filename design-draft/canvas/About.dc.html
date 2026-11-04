@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SnM Millwork: About</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="snm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+</helmet>
+<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+
+<header class="hdr">
+  <div class="w hdr-in">
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/8cf4e274822f4d5a96dfc2a8eaa9af51" alt="SnM Millwork Manufacturing Inc." width="170" height="58"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="Main.dc.html">Home</a>
+      <a href="Commercial.dc.html">Commercial</a>
+      <a href="Residential.dc.html">Residential</a>
+      <div class="dd">
+        <a href="Services.dc.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <div class="menu">
+          <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
+          <a class="sig" href="Epoxy.dc.html">Epoxy &amp; Resin</a>
+          <a href="Design.dc.html">Design &amp; Engineering</a>
+          <a href="FitOut.dc.html">Interior Fit-Out</a>
+        </div>
+      </div>
+      <a class="btn" href="Quote.dc.html">Get a Quote</a>
+    </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav class="mnav" aria-label="Mobile">
+      <a href="Main.dc.html">Home</a>
+      <a href="Commercial.dc.html">Commercial</a>
+      <a href="Residential.dc.html">Residential</a>
+      <a href="Services.dc.html">Services</a>
+      <a class="btn" href="Quote.dc.html">Get a Quote</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+
+<!-- Story opener -->
+<section class="s" style="padding-top: 104px; padding-bottom: 96px">
+  <div class="w" style="display: flex; flex-direction: column; gap: 32px; max-width: 1040px">
+    <h1 class="d1">A workshop that still signs its work.</h1>
+    <p class="lede" style="color: #B9AFA2">[Founding story in two or three sentences: who started SnM, when, where, and why they chose to design, build and install everything themselves.]</p>
+  </div>
+</section>
+
+<section style="padding-bottom: 128px">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px">
+    <div class="ph im im-ws2" style="grid-column: 1 / span 8; height: 520px"><i>[Photo: the workshop floor, wide]</i></div>
+    <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 24px">
+      <div class="ph im im-ws1" style="flex: 1 1 0"><i>[Photo: hands at work, close]</i></div>
+      <div class="ph im im-res1" style="flex: 1 1 0"><i>[Photo: a resin pour]</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- Founder -->
+<section class="s bg-sand">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
+    <div class="ph t-ink r-45" style="grid-column: 1 / span 5"><i>[Portrait: founder in the workshop]</i></div>
+    <figure style="grid-column: 7 / span 6; margin: 0; display: flex; flex-direction: column; gap: 24px">
+      <blockquote class="d3" style="margin: 0; font-style: italic; line-height: 1.3">“[A sentence from the founder on what good work means to them.]”</blockquote>
+      <figcaption style="display: flex; flex-direction: column; gap: 4px"><span class="d5">[Founder name]</span><span class="p" style="font-size: 15px">Founder, SnM Millwork Manufacturing Inc.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- How we work: the brand values, shown as practice -->
+<section class="s">
+  <div class="w" style="display: flex; flex-direction: column; gap: 56px">
+    <h2 class="d2" style="max-width: 720px">How we work</h2>
+    <div class="g" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px">
+      <div class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><h3 class="d4">Warm</h3><p class="p">We answer the phone, we explain choices in plain language and we treat your home or site as our own.</p></div>
+      <div class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><h3 class="d4">Bold</h3><p class="p">We take on pieces other shops turn down, like 12-foot resin pours and curved reception desks.</p></div>
+      <div class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><h3 class="d4">Refined</h3><p class="p">Tight joints, matched grain and edges you want to run a hand along. Details are the job.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- The shop and credentials -->
+<section class="s bg-ebony">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
+    <div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 20px">
+      <h2 class="d2">The shop</h2>
+      <p class="p">[Square footage, location, key equipment such as CNC and spray booth, and team size.]</p>
+    </div>
+    <dl class="num" style="grid-column: 7 / span 6; margin: 0">
+      <div class="rule-top" style="display: flex; justify-content: space-between; gap: 24px; padding-bottom: 20px"><dt>Workshop</dt><dd style="margin: 0; color: #F5A546">[X,XXX sq ft, City]</dd></div>
+      <div class="rule-top" style="display: flex; justify-content: space-between; gap: 24px; padding-bottom: 20px"><dt>Team</dt><dd style="margin: 0; color: #F5A546">[XX craftspeople and installers]</dd></div>
+      <div class="rule-top" style="display: flex; justify-content: space-between; gap: 24px; padding-bottom: 20px"><dt>Insurance</dt><dd style="margin: 0; color: #F5A546">[$X million liability]</dd></div>
+      <div class="rule-top" style="display: flex; justify-content: space-between; gap: 24px; padding-bottom: 20px"><dt>Safety</dt><dd style="margin: 0; color: #F5A546">[WSIB clearance]</dd></div>
+      <div class="rule-top" style="display: flex; justify-content: space-between; gap: 24px; padding-bottom: 20px; border-bottom: 1px solid #2E2A26"><dt>Memberships</dt><dd style="margin: 0; color: #F5A546">[AWMAC or others]</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s">
+  <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
+      <h2 class="d2">Come see the shop.</h2>
+      <p class="p">Visits are by appointment. Bring your drawings or just your questions.</p>
+    </div>
+    <a class="btn" href="Quote.dc.html">Get a Quote</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <div class="ftr">
+    <div class="w ftr-g">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <img src="/_blob/8cf4e274822f4d5a96dfc2a8eaa9af51" alt="SnM Millwork Manufacturing Inc." width="220" height="75" style="width: 220px; height: auto; mix-blend-mode: lighten">
+        <p style="margin: 0; max-width: 300px">Custom millwork, cabinetry and epoxy resin, from Concept to Completion.</p>
+      </div>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html" aria-current="page">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
+      <div><h2 class="meta">Services</h2><a href="Millwork.dc.html">Millwork &amp; Cabinetry</a><a href="Epoxy.dc.html">Epoxy &amp; Resin</a><a href="Design.dc.html">Design &amp; Engineering</a><a href="FitOut.dc.html">Interior Fit-Out</a></div>
+      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+    </div>
+    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":4400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false };
+  }
+  renderVals() {
+    return {
+      menuOpen: this.state.menuOpen,
+      menuOpenStr: this.state.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen })
+    };
+  }
+}
+</script>
+</body>
+</html>
