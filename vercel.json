@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/design-draft/preview/Main.html", "permanent": false }
+  ]
+}
