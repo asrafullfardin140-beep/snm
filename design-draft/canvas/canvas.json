@@ -1,5 +1,6 @@
 {"v":3,"createdOnFiles":{"v":1,"at":"2026-11-05T01:40:00Z"},"title":"SnM Website — Draft v2","launch":{"view":"canvas"},"pages":[],"boards":{
-"Main.dc.html":{"x":0,"y":0,"w":1280,"h":6800,"title":"01 Home","expand":"fill","is_interactive":true},
+"Main.dc.html":{"x":0,"y":0,"w":1280,"h":6200,"title":"01A Home (video hero)","expand":"fill","is_interactive":true},
+"Home-Slider.dc.html":{"x":-1360,"y":0,"w":1280,"h":6200,"title":"01B Home (slider hero)","expand":"fill","is_interactive":true},
 "Commercial.dc.html":{"x":1360,"y":0,"w":1280,"h":6000,"title":"02 Commercial","expand":"fill","is_interactive":true},
 "Residential.dc.html":{"x":2720,"y":0,"w":1280,"h":5800,"title":"03 Residential","expand":"fill","is_interactive":true},
 "Quote.dc.html":{"x":4080,"y":0,"w":1280,"h":2600,"title":"09 Get a Quote","expand":"fill","is_interactive":true},
@@ -9,8 +10,8 @@
 "Millwork.dc.html":{"x":2720,"y":7400,"w":1280,"h":4600,"title":"06 Millwork & Cabinetry","expand":"fill","is_interactive":true},
 "Design.dc.html":{"x":4080,"y":7400,"w":1280,"h":4600,"title":"07 Design & Engineering","expand":"fill","is_interactive":true},
 "FitOut.dc.html":{"x":5440,"y":7400,"w":1280,"h":4600,"title":"08 Interior Fit-Out","expand":"fill","is_interactive":true}},
-"order":["Main.dc.html","Commercial.dc.html","Residential.dc.html","Services.dc.html","Epoxy.dc.html","Millwork.dc.html","Design.dc.html","FitOut.dc.html","Quote.dc.html","About.dc.html"],
+"order":["Main.dc.html","Home-Slider.dc.html","Commercial.dc.html","Residential.dc.html","Services.dc.html","Epoxy.dc.html","Millwork.dc.html","Design.dc.html","FitOut.dc.html","Quote.dc.html","About.dc.html"],
 "notes":{
-"row1":{"x":0,"y":-320,"text":"Main pages: Home, Commercial, Residential, Get a Quote, About","kind":"title1","maxW":6720},
+"row1":{"x":-1360,"y":-320,"text":"Main pages: Home (two versions), Commercial, Residential, Get a Quote, About","kind":"title1","maxW":8080},
 "row2":{"x":0,"y":7080,"text":"Services: overview and the four service pages","kind":"title1","maxW":6720}},
 "designSystems":[]}
