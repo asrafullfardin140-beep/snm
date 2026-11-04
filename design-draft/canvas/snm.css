@@ -214,7 +214,9 @@ button{cursor:pointer}
   .slide{height:460px}
   .hero-slider .slide{height:720px}
   .hs-c .w{padding-bottom:96px;gap:20px}
-  .slide-tag{right:20px;top:96px}
+  .slide-tag{display:none}
+  .sl-foot .count{display:none}
+  .sl-foot{bottom:32px}
   .edge{width:44px;height:44px;top:auto;bottom:24px;transform:none}
   .edge.l{left:16px}.edge.r{right:16px}
   .demo-switch{bottom:12px;font-size:13px}
