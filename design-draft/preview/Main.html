@@ -18,12 +18,12 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const slides = [
-      { src: '../media/k3.jpg', alt: 'Kitchen with oak cabinets and dark tall units', kind: 'Residential', name: '[Oak and charcoal kitchen]' },
-      { src: '../media/o1.jpg', alt: 'Sculpted white reception desk in a lobby', kind: 'Commercial', name: '[Sculpted reception desk]' },
+      { src: '../media/kit1.jpg', alt: 'Kitchen with oak cabinets and dark tall units', kind: 'Residential', name: '[Oak and charcoal kitchen]' },
+      { src: '../media/rec1.jpg', alt: 'Sculpted white reception desk in a lobby', kind: 'Commercial', name: '[Sculpted reception desk]' },
       { src: '../media/t1.jpg', alt: 'Live-edge wood slab set against black resin', kind: 'Epoxy & Resin', name: '[Live-edge resin table]' },
-      { src: '../media/bar1.jpg', alt: 'Bar counter with lit shelving', kind: 'Hospitality', name: '[Restaurant bar]' },
-      { src: '../media/c2.jpg', alt: 'Walk-in dressing room with lit shelving', kind: 'Residential', name: '[Dressing room]' },
-      { src: '../media/k1.jpg', alt: 'Walnut kitchen with a large island', kind: 'Residential', name: '[Walnut kitchen and island]' }
+      { src: '../media/ret1.jpg', alt: 'Bar counter with lit shelving', kind: 'Hospitality', name: '[Restaurant bar]' },
+      { src: '../media/clo1.jpg', alt: 'Walk-in dressing room with lit shelving', kind: 'Residential', name: '[Dressing room]' },
+      { src: '../media/kit2.jpg', alt: 'Walnut kitchen with a large island', kind: 'Residential', name: '[Walnut kitchen and island]' }
     ].map((x, i) => ({ ...x, pos: (i + 1) + ' of 6' }));
     const reviews = [
       { q: 'They turned a rough sketch into a reception desk our whole office talks about. On time, on budget, and the install crew left the site spotless.', name: '[Sample: Daniel R.]', meta: 'Commercial, office reception' },
@@ -117,13 +117,13 @@ class Component extends DCLogic {
 <section id="work" class="s">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
     <a href="Commercial.html" style="grid-column: 1 / span 7; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
-      <img class="cover r-32" src="../media/o2.jpg" alt="Reception desk with lit oak front" style="height: auto">
+      <img class="cover r-32" src="../media/rec3.jpg" alt="Warm wood reception area" style="height: auto">
       <h2 class="d3">For builders and designers</h2>
       <p class="p">Shop drawings, tender pricing and installs that keep to your schedule, for offices, retail, hospitality and healthcare.</p>
       <span class="tl" style="align-self: flex-start">Commercial work</span>
     </a>
     <a href="Residential.html" style="grid-column: 8 / span 5; margin-top: 160px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
-      <img class="cover r-45" src="../media/c2.jpg" alt="Walk-in dressing room with lit shelving" style="height: auto">
+      <img class="cover r-45" src="../media/clo1.jpg" alt="Walk-in dressing room with lit shelving" style="height: auto">
       <h2 class="d3">For homeowners</h2>
       <p class="p">Kitchens, vanities, closets and built-ins, measured and made for your home.</p>
       <span class="tl" style="align-self: flex-start">Residential work</span>
@@ -158,7 +158,7 @@ class Component extends DCLogic {
         <figcaption class="meta" style="color: #4A4038">The drawing</figcaption>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px">
-        <img class="cover" src="../media/k4.jpg" alt="Finished kitchen with gloss island" style="flex: 1 1 auto; min-height: 280px">
+        <img class="cover" src="../media/tv2.jpg" alt="Finished built-in wall unit with lit shelves" style="flex: 1 1 auto; min-height: 280px">
         <div class="meta" style="color: #B9AFA2">The result</div>
       </div>
     </figure>

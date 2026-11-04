@@ -2,25 +2,35 @@
 
 Stock media from [Pexels](https://www.pexels.com), free to use under the [Pexels License](https://www.pexels.com/license/).
 Used for the design draft only; replace with SnM's own photos and video before launch.
+Photos are chosen to match the services in SnM's services document.
 
-| File | Pexels ID | Link |
+| File | Shows | Pexels link |
 |---|---|---|
-| `hero.mp4` | video 6789898 | https://www.pexels.com/video/a-man-using-smoothing-plane-on-a-wood-plank-6789898/ |
-| `resin.mp4` | video 7253679 | https://www.pexels.com/video/resin-art-on-a-wooden-floor-7253679/ |
-| `k1.jpg` | 18285887 | https://www.pexels.com/photo/18285887/ |
-| `k3.jpg` | 8089082 | https://www.pexels.com/photo/8089082/ |
-| `k4.jpg` | 7167061 | https://www.pexels.com/photo/7167061/ |
-| `c2.jpg` | 6670657 | https://www.pexels.com/photo/6670657/ |
-| `o1.jpg` | 19893582 | https://www.pexels.com/photo/19893582/ |
-| `o2.jpg` | 36631639 | https://www.pexels.com/photo/36631639/ |
-| `o3.jpg` | 164586 | https://www.pexels.com/photo/164586/ |
-| `bar1.jpg` | 14305477 | https://www.pexels.com/photo/14305477/ |
-| `bar2.jpg` | 27060619 | https://www.pexels.com/photo/27060619/ |
-| `res1.jpg` | 7256574 | https://www.pexels.com/photo/7256574/ |
-| `t1.jpg` | 6394655 | https://www.pexels.com/photo/6394655/ |
-| `v2.jpg` | 32277993 | https://www.pexels.com/photo/32277993/ |
-| `w1.jpg` | 14975208 | https://www.pexels.com/photo/14975208/ |
-| `ws1.jpg` | 32357250 | https://www.pexels.com/photo/32357250/ |
-| `ws2.jpg` | 40729959 | https://www.pexels.com/photo/40729959/ |
+| `hero.mp4` | Craftsman planing wood (homepage A hero video) | https://www.pexels.com/video/6789898/ |
+| `resin.mp4` | Resin pour on wood | https://www.pexels.com/video/7253679/ |
+| `shop1.jpg` | Woodworking shop, table saw | https://www.pexels.com/photo/10316634/ |
+| `cnc1.jpg` | CNC machine cutting a panel | https://www.pexels.com/photo/7480234/ |
+| `fin1.jpg` | Spray finishing | https://www.pexels.com/photo/31759140/ |
+| `cad1.jpg` | Designer working in CAD | https://www.pexels.com/photo/15764116/ |
+| `cad2.jpg` | Drawings at a workstation | https://www.pexels.com/photo/5582591/ |
+| `samp1.jpg` | Wood veneer samples | https://www.pexels.com/photo/6568684/ |
+| `inst1.jpg` | Installing cabinet hardware | https://www.pexels.com/photo/5768217/ |
+| `inst3.jpg` | Kitchen being installed | https://www.pexels.com/photo/15124970/ |
+| `team1.jpg` | Site team reviewing plans | https://www.pexels.com/photo/8961298/ |
+| `reno1.jpg` | Office fit-out in progress | https://www.pexels.com/photo/10346959/ |
+| `rec1.jpg` | Office reception desk | https://www.pexels.com/photo/34823913/ |
+| `rec3.jpg` | Wood reception area | https://www.pexels.com/photo/31771715/ |
+| `off2.jpg` | Executive office millwork | https://www.pexels.com/photo/35058546/ |
+| `ret1.jpg` | Retail display wall | https://www.pexels.com/photo/27781696/ |
+| `kit1.jpg` | Wood and black kitchen | https://www.pexels.com/photo/7045356/ |
+| `kit2.jpg` | Wood kitchen with island | https://www.pexels.com/photo/6908565/ |
+| `van1.jpg` | Bathroom vanity | https://www.pexels.com/photo/8134777/ |
+| `clo1.jpg` | Walk-in closet | https://www.pexels.com/photo/20705886/ |
+| `clo2.jpg` | Walnut walk-in closet | https://www.pexels.com/photo/8146203/ |
+| `tv2.jpg` | Built-in media wall | https://www.pexels.com/photo/9646752/ |
+| `w1.jpg` | Wood wall panels | https://www.pexels.com/photo/14975208/ |
+| `t1.jpg` | Live-edge slab with resin | https://www.pexels.com/photo/6394655/ |
+| `res1.jpg` | Tinting a resin pour | https://www.pexels.com/photo/7256574/ |
+| `res2.jpg` | Clear epoxy pour | https://www.pexels.com/photo/7256647/ |
 
 `snm-logo.png` is SnM's own logo from the SnM Brand Book, with its black background removed.

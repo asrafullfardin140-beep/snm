@@ -53,21 +53,29 @@ button{cursor:pointer}
 .r-45{aspect-ratio:4/5}.r-32{aspect-ratio:3/2}.r-11{aspect-ratio:1/1}.r-219{aspect-ratio:21/9}.r-169{aspect-ratio:16/9}
 .ph.im{background-size:cover;background-position:center}
 .ph.im>i{display:none}
-.im-k1{background-image:url(/_blob/566a4d2a9d99e3c45d61b74cd1b54b75)}
-.im-k3{background-image:url(/_blob/21022ebd0e4b9f0dfef70f44a1d448db)}
-.im-k4{background-image:url(/_blob/b98ea8c3950b2332e3473c854866e802)}
-.im-c2{background-image:url(/_blob/89a8ad3ef16736ea907e5fd48a85375b)}
-.im-o1{background-image:url(/_blob/35d91cddad66a7a9292b6ebcac7b6ec6)}
-.im-o2{background-image:url(/_blob/8fb74e7b3bf5874db9db0d5051524b25)}
-.im-o3{background-image:url(/_blob/e0f04356626cdbc1e0c2fc84abde60c7)}
-.im-bar1{background-image:url(/_blob/9301bd05abbfc66c26aba82303dc41fc)}
-.im-bar2{background-image:url(/_blob/a794da25d022d4671cdf95a503956a05)}
+.im-k1{background-image:url(/_blob/301cccebed344a1d214746fbfdff3600)}
+.im-k3{background-image:url(/_blob/56c65e64119f22c1036fce578f430f59)}
+.im-k4{background-image:url(/_blob/2196d1f28269268782bb2541c952cb1c)}
+.im-c2{background-image:url(/_blob/1f09c3f746d38a63ab5121a26d928802)}
+.im-o1{background-image:url(/_blob/5fb1e1ab698ff996dd5ac01ea0700127)}
+.im-o2{background-image:url(/_blob/3d5fd0436a8f69711ac794c937d30a22)}
+.im-o3{background-image:url(/_blob/bcb03b9f2bc077430207b1822a9b47ed)}
+.im-bar1{background-image:url(/_blob/a3ee2618fc4e4c646e6a32cb30125d6c)}
+.im-bar2{background-image:url(/_blob/dbfe3cb99106b16ba558dabf505f6748)}
 .im-res1{background-image:url(/_blob/9d38fcfc0294fa9a5e7501c5ede0e045)}
 .im-t1{background-image:url(/_blob/72ae0b20c27124c73f4bb455d1241fc7)}
-.im-v2{background-image:url(/_blob/37bed8af0af08535e80f397c8374f0dc)}
+.im-v2{background-image:url(/_blob/7e025c0aaaa0089b58a5c2051c36da55)}
 .im-w1{background-image:url(/_blob/fd82bb24b826587d78b37a0e8c2e215b)}
-.im-ws1{background-image:url(/_blob/4f8461f52eb19f000248a80459b6c3dd)}
-.im-ws2{background-image:url(/_blob/faf9cd1b3c871428ecdd2bf7b9be2641)}
+.im-ws1{background-image:url(/_blob/90a69e6b5d9712f0a5c86e6f41109bd7)}
+.im-ws2{background-image:url(/_blob/78eb8fbf0e90225ae7db8f6be7f49bf4)}
+.im-cad1{background-image:url(/_blob/2b8ae7be5c7fe40f4858b904094f27d1)}
+.im-cad2{background-image:url(/_blob/340e2fb6c2ca3da1bb98503c569e6663)}
+.im-samp1{background-image:url(/_blob/b478bb8ec8360c0cc56bb43710e47e81)}
+.im-team1{background-image:url(/_blob/6b57fc68f3063576774852f58ad1a0f5)}
+.im-fin1{background-image:url(/_blob/7d93deaf944dc0b5b09d04ab58cf6651)}
+.im-cnc1{background-image:url(/_blob/90a69e6b5d9712f0a5c86e6f41109bd7)}
+.im-shop1{background-image:url(/_blob/78eb8fbf0e90225ae7db8f6be7f49bf4)}
+.im-inst1{background-image:url(/_blob/064a77b376a7283bca4afe401ae122e5)}
 .cover{width:100%;height:100%;object-fit:cover;border-radius:2px}
 .paper{background:#F3EEE6;color:#4A4038;border-radius:2px;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:14px}
 .paper svg{width:100%;height:auto}
@@ -119,7 +127,16 @@ button{cursor:pointer}
 .count{font-family:Cinzel,serif;font-size:13px;letter-spacing:.14em;color:var(--ivory);min-width:76px;text-align:center}
 
 /* Hero slider (homepage version B): photos change behind a fixed headline */
-.hero-slider .slide{height:860px}
+.hero-slider .slide{height:860px;overflow:hidden}
+.hero-slider .track{transition-duration:1.4s}
+/* Slow zoom on the active photo, alternating in and out from slide to slide */
+.hero-slider .slide img{transform-origin:50% 50%;will-change:transform}
+.hero-slider .slide.kb-out img{transform:scale(1.14)}
+.hero-slider .slide.on.kb-in img{animation:kb-in 8s cubic-bezier(.25,.1,.25,1) forwards}
+.hero-slider .slide.on.kb-out img{animation:kb-out 8s cubic-bezier(.25,.1,.25,1) forwards}
+@keyframes kb-in{from{transform:scale(1)}to{transform:scale(1.14)}}
+@keyframes kb-out{from{transform:scale(1.14)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.hero-slider .slide img{animation:none!important;transform:none!important}}
 .hero-slider .hero-shade{z-index:1;pointer-events:none}
 .hs-c{position:absolute;inset:0;z-index:3;pointer-events:none}
 .hs-c .w{height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:28px;padding-bottom:120px}

@@ -15,12 +15,12 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const all = [
-      { c: 'kitchen', cat: 'Kitchen', name: '[Walnut kitchen and island]', src: '../media/k1.jpg', alt: 'Walnut kitchen with a large island' },
-      { c: 'closet', cat: 'Closet', name: '[Primary dressing room]', src: '../media/c2.jpg', alt: 'Walk-in dressing room with lit shelving' },
-      { c: 'bath', cat: 'Bath', name: '[Oak vanity, powder room]', src: '../media/v2.jpg', alt: 'Wood vanity with stone basin' },
-      { c: 'kitchen', cat: 'Kitchen', name: '[Oak and charcoal kitchen]', src: '../media/k3.jpg', alt: 'Kitchen with oak cabinets and charcoal tall units' },
+      { c: 'kitchen', cat: 'Kitchen', name: '[Walnut kitchen and island]', src: '../media/kit2.jpg', alt: 'Walnut kitchen with a large island' },
+      { c: 'closet', cat: 'Closet', name: '[Walnut walk-in closet]', src: '../media/clo2.jpg', alt: 'Walnut-panelled walk-in closet' },
+      { c: 'bath', cat: 'Bath', name: '[Oak vanity, powder room]', src: '../media/van1.jpg', alt: 'Wood vanity with stone basin' },
+      { c: 'kitchen', cat: 'Kitchen', name: '[Oak and charcoal kitchen]', src: '../media/kit1.jpg', alt: 'Kitchen with oak cabinets and charcoal tall units' },
       { c: 'resin', cat: 'Resin', name: '[Live-edge resin table]', src: '../media/t1.jpg', alt: 'Live-edge wood slab with black resin' },
-      { c: 'kitchen', cat: 'Kitchen', name: '[Gloss island kitchen]', src: '../media/k4.jpg', alt: 'Bright kitchen with gloss island' }
+      { c: 'closet', cat: 'Built-in', name: '[Built-in media wall]', src: '../media/tv2.jpg', alt: 'Built-in wood media wall with lit shelves' }
     ];
     const shown = s.filter === 'all' ? all : all.filter((p) => p.c === s.filter);
     const n = shown.length;
@@ -94,7 +94,7 @@ class Component extends DCLogic {
 <!-- Hero -->
 <section class="s" style="padding-top: 96px">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
-    <img class="cover r-45" src="../media/k3.jpg" alt="Kitchen with oak cabinets and charcoal tall units" style="grid-column: 1 / span 5; height: auto">
+    <img class="cover r-45" src="../media/kit1.jpg" alt="Kitchen with oak cabinets and charcoal tall units" style="grid-column: 1 / span 5; height: auto">
     <div style="grid-column: 7 / span 6; display: flex; flex-direction: column; gap: 32px">
       <h1 class="d1" style="font-size: 80px">Made for the way you live at home.</h1>
       <p class="lede" style="color: #B9AFA2">Kitchens, vanities, closets and built-ins, designed with you, made in our shop and installed by the same people who built them.</p>
@@ -112,20 +112,20 @@ class Component extends DCLogic {
     <h2 class="d2" style="max-width: 720px">Every room, made to measure.</h2>
     <div class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px">
       <a href="#gallery" style="grid-column: 1 / span 7; grid-row: span 2; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 14px">
-        <img class="cover" src="../media/k4.jpg" alt="Bright kitchen with a gloss island" style="flex: 1 1 auto; min-height: 520px">
+        <img class="cover" src="../media/kit2.jpg" alt="Wood kitchen with an island" style="flex: 1 1 auto; min-height: 520px">
         <h3 class="d3">Kitchens</h3>
         <p class="p">Cabinetry, islands and pantries in the wood, finish and hardware you choose.</p>
       </a>
       <a href="#gallery" style="grid-column: 8 / span 5; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 12px">
-        <img class="cover r-32" src="../media/v2.jpg" alt="Wood vanity with stone basin" style="height: auto">
+        <img class="cover r-32" src="../media/van1.jpg" alt="Wood vanity with stone basin" style="height: auto">
         <h3 class="d4">Vanities and baths</h3>
       </a>
       <a href="#gallery" style="grid-column: 8 / span 5; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 12px">
-        <img class="cover r-32" src="../media/c2.jpg" alt="Walk-in dressing room" style="height: auto">
+        <img class="cover r-32" src="../media/clo1.jpg" alt="Walk-in dressing room" style="height: auto">
         <h3 class="d4">Closets and dressing rooms</h3>
       </a>
       <a href="#gallery" style="grid-column: 1 / span 6; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 12px">
-        <img class="cover r-32" src="../media/w1.jpg" alt="Slatted wood wall" style="height: auto">
+        <img class="cover r-32" src="../media/tv2.jpg" alt="Built-in wood media wall" style="height: auto">
         <h3 class="d4">Built-ins and feature walls</h3>
       </a>
       <a href="Epoxy.html" style="grid-column: 7 / span 6; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 12px">

@@ -51,7 +51,7 @@
 <section class="{{ sliderCls }}" aria-roledescription="carousel" aria-label="Featured projects" tabindex="0" onKeyDown="{{ onKey }}" onMouseEnter="{{ pauseSlides }}" onMouseLeave="{{ resumeSlides }}" onPointerDown="{{ dragStart }}" onPointerMove="{{ dragMove }}" onPointerUp="{{ dragEnd }}" onPointerCancel="{{ dragEnd }}" onPointerLeave="{{ dragEnd }}">
   <div class="track" style="transform: translateX(calc({{ slideX }} + {{ dragPx }}px))">
     <sc-for list="{{ slides }}" as="s" hint-placeholder-count="6">
-      <figure class="slide" role="group" aria-roledescription="slide" aria-label="{{ s.pos }}" style="margin: 0">
+      <figure class="{{ s.cls }}" role="group" aria-roledescription="slide" aria-label="{{ s.pos }}" style="margin: 0">
         <img src="{{ s.src }}" alt="{{ s.alt }}" draggable="false">
         <figcaption class="slide-tag"><span class="meta" style="color: #F5A546">{{ s.kind }}</span><span class="d5">{{ s.name }}</span></figcaption>
       </figure>
@@ -86,13 +86,13 @@
 <section id="work" class="s">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
     <a href="Commercial.dc.html" style="grid-column: 1 / span 7; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
-      <img class="cover r-32" src="/_blob/8fb74e7b3bf5874db9db0d5051524b25" alt="Reception desk with lit oak front" style="height: auto">
+      <img class="cover r-32" src="/_blob/3d5fd0436a8f69711ac794c937d30a22" alt="Reception desk with lit oak front" style="height: auto">
       <h2 class="d3">For builders and designers</h2>
       <p class="p">Shop drawings, tender pricing and installs that keep to your schedule, for offices, retail, hospitality and healthcare.</p>
       <span class="tl" style="align-self: flex-start">Commercial work</span>
     </a>
     <a href="Residential.dc.html" style="grid-column: 8 / span 5; margin-top: 160px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
-      <img class="cover r-45" src="/_blob/89a8ad3ef16736ea907e5fd48a85375b" alt="Walk-in dressing room with lit shelving" style="height: auto">
+      <img class="cover r-45" src="/_blob/1f09c3f746d38a63ab5121a26d928802" alt="Walk-in dressing room with lit shelving" style="height: auto">
       <h2 class="d3">For homeowners</h2>
       <p class="p">Kitchens, vanities, closets and built-ins, measured and made for your home.</p>
       <span class="tl" style="align-self: flex-start">Residential work</span>
@@ -127,7 +127,7 @@
         <figcaption class="meta" style="color: #4A4038">The drawing</figcaption>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px">
-        <img class="cover" src="/_blob/b98ea8c3950b2332e3473c854866e802" alt="Finished kitchen with gloss island" style="flex: 1 1 auto; min-height: 280px">
+        <img class="cover" src="/_blob/2196d1f28269268782bb2541c952cb1c" alt="Finished kitchen with gloss island" style="flex: 1 1 auto; min-height: 280px">
         <div class="meta" style="color: #B9AFA2">The result</div>
       </div>
     </figure>
@@ -252,20 +252,20 @@ class Component extends DCLogic {
   componentDidMount() {
     this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (this.reduce) return;
-    this.t1 = setInterval(() => { if (!this.state.slidesPaused && !this.drag) this.setState({ slide: (this.state.slide + 1) % 6 }); }, 5000);
+    this.t1 = setInterval(() => { if (!this.state.slidesPaused && !this.drag) this.setState({ slide: (this.state.slide + 1) % 6 }); }, 7000);
     this.t2 = setInterval(() => { if (!this.state.reviewsPaused) this.setState({ review: (this.state.review + 1) % 5 }); }, 7000);
   }
   componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); }
   renderVals() {
     const s = this.state;
     const slides = [
-      { src: '/_blob/21022ebd0e4b9f0dfef70f44a1d448db', alt: 'Kitchen with oak cabinets and dark tall units', kind: 'Residential', name: '[Oak and charcoal kitchen]' },
-      { src: '/_blob/35d91cddad66a7a9292b6ebcac7b6ec6', alt: 'Sculpted white reception desk in a lobby', kind: 'Commercial', name: '[Sculpted reception desk]' },
+      { src: '/_blob/78eb8fbf0e90225ae7db8f6be7f49bf4', alt: 'Woodworking shop with table saw and stacked lumber', kind: 'Our shop', name: '[Built in our own shop]' },
+      { src: '/_blob/5fb1e1ab698ff996dd5ac01ea0700127', alt: 'Reception desk with a wood-slat feature wall', kind: 'Commercial', name: '[Office reception desk]' },
       { src: '/_blob/72ae0b20c27124c73f4bb455d1241fc7', alt: 'Live-edge wood slab set against black resin', kind: 'Epoxy & Resin', name: '[Live-edge resin table]' },
-      { src: '/_blob/9301bd05abbfc66c26aba82303dc41fc', alt: 'Bar counter with lit shelving', kind: 'Hospitality', name: '[Restaurant bar]' },
-      { src: '/_blob/89a8ad3ef16736ea907e5fd48a85375b', alt: 'Walk-in dressing room with lit shelving', kind: 'Residential', name: '[Dressing room]' },
-      { src: '/_blob/566a4d2a9d99e3c45d61b74cd1b54b75', alt: 'Walnut kitchen with a large island', kind: 'Residential', name: '[Walnut kitchen and island]' }
-    ].map((x, i) => ({ ...x, pos: (i + 1) + ' of 6' }));
+      { src: '/_blob/bcb03b9f2bc077430207b1822a9b47ed', alt: 'Executive office with walnut millwork and lit shelving', kind: 'Commercial', name: '[Executive office millwork]' },
+      { src: '/_blob/56c65e64119f22c1036fce578f430f59', alt: 'Kitchen with wood and black cabinetry', kind: 'Residential', name: '[Wood and black kitchen]' },
+      { src: '/_blob/90a69e6b5d9712f0a5c86e6f41109bd7', alt: 'CNC machine cutting a wood panel', kind: 'Fabrication', name: '[CNC precision cutting]' }
+    ].map((x, i) => ({ ...x, pos: (i + 1) + ' of 6', cls: 'slide ' + (i % 2 ? 'kb-out' : 'kb-in') + (i === s.slide ? ' on' : '') }));
     const reviews = [
       { q: 'They turned a rough sketch into a reception desk our whole office talks about. On time, on budget, and the install crew left the site spotless.', name: '[Sample: Daniel R.]', meta: 'Commercial, office reception' },
       { q: 'Our walnut kitchen is the best decision we made in the renovation. Every drawer lines up and the finish is perfect.', name: '[Sample: Priya and Sam K.]', meta: 'Residential, kitchen' },

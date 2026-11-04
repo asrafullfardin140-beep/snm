@@ -15,12 +15,12 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const all = [
-      { c: 'office', cat: 'Office', name: '[Sculpted reception desk]', src: '../media/o1.jpg', alt: 'Sculpted white reception desk' },
-      { c: 'hosp', cat: 'Hospitality', name: '[Restaurant bar counter]', src: '../media/bar1.jpg', alt: 'Bar counter with lit shelving' },
-      { c: 'office', cat: 'Office', name: '[Clinic reception]', src: '../media/o2.jpg', alt: 'Reception desk with lit oak front' },
+      { c: 'office', cat: 'Office', name: '[Office reception desk]', src: '../media/rec1.jpg', alt: 'Sculpted white reception desk' },
+      { c: 'retail', cat: 'Retail', name: '[Retail display wall]', src: '../media/ret1.jpg', alt: 'Bar counter with lit shelving' },
+      { c: 'office', cat: 'Office', name: '[Reception lounge]', src: '../media/rec3.jpg', alt: 'Reception desk with lit oak front' },
       { c: 'walls', cat: 'Feature walls', name: '[Slatted wood wall]', src: '../media/w1.jpg', alt: 'Vertical slatted wood wall panels' },
-      { c: 'hosp', cat: 'Hospitality', name: '[Restaurant bar and seating]', src: '../media/bar2.jpg', alt: 'Long restaurant bar with stools' },
-      { c: 'office', cat: 'Office', name: '[Corporate lobby]', src: '../media/o3.jpg', alt: 'Corporate lobby with stone wall' }
+      { c: 'fitout', cat: 'Fit-out', name: '[Office fit-out in progress]', src: '../media/reno1.jpg', alt: 'Long restaurant bar with stools' },
+      { c: 'office', cat: 'Office', name: '[Executive office millwork]', src: '../media/off2.jpg', alt: 'Corporate lobby with stone wall' }
     ];
     const shown = s.filter === 'all' ? all : all.filter((p) => p.c === s.filter);
     const n = shown.length;
@@ -38,7 +38,7 @@ class Component extends DCLogic {
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
       logos: logos.concat(logos),
-      filters: [['all', 'All'], ['office', 'Offices'], ['hosp', 'Hospitality'], ['walls', 'Feature walls']].map(([id, label]) => ({
+      filters: [['all', 'All'], ['office', 'Offices'], ['retail', 'Retail'], ['fitout', 'Fit-outs'], ['walls', 'Feature walls']].map(([id, label]) => ({
         label, cls: s.filter === id ? 'pill on' : 'pill', pressed: s.filter === id ? 'true' : 'false', pick: () => this.setState({ filter: id, lb: -1 })
       })),
       shots: shown.map((p, i) => ({ ...p, open: 'Open photo: ' + p.alt, view: () => this.setState({ lb: i }) })),
@@ -104,7 +104,7 @@ class Component extends DCLogic {
         <a class="btn btn-line" href="#">Capability statement [PDF]</a>
       </div>
     </div>
-    <img class="cover r-219" src="../media/o3.jpg" alt="Corporate lobby with stone feature wall" style="margin-top: 40px; height: auto">
+    <img class="cover r-219" src="../media/off2.jpg" alt="Executive office with walnut millwork" style="margin-top: 40px; height: auto">
   </div>
 </section>
 
@@ -202,7 +202,7 @@ class Component extends DCLogic {
         </svg>
         <figcaption class="meta">Shop drawing</figcaption>
       </figure>
-      <img class="cover r-45" src="../media/o2.jpg" alt="Installed reception desk" style="height: auto">
+      <img class="cover r-45" src="../media/rec3.jpg" alt="Installed reception area" style="height: auto">
     </div>
   </div>
 </section>

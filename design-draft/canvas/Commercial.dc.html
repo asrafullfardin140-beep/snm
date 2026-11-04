@@ -58,7 +58,7 @@
         <a class="btn btn-line" href="#">Capability statement [PDF]</a>
       </div>
     </div>
-    <img class="cover r-219" src="/_blob/e0f04356626cdbc1e0c2fc84abde60c7" alt="Corporate lobby with stone feature wall" style="margin-top: 40px; height: auto">
+    <img class="cover r-219" src="/_blob/bcb03b9f2bc077430207b1822a9b47ed" alt="Executive office with walnut millwork" style="margin-top: 40px; height: auto">
   </div>
 </section>
 
@@ -156,7 +156,7 @@
         </svg>
         <figcaption class="meta">Shop drawing</figcaption>
       </figure>
-      <img class="cover r-45" src="/_blob/8fb74e7b3bf5874db9db0d5051524b25" alt="Installed reception desk" style="height: auto">
+      <img class="cover r-45" src="/_blob/3d5fd0436a8f69711ac794c937d30a22" alt="Installed reception area" style="height: auto">
     </div>
   </div>
 </section>
@@ -247,12 +247,12 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const all = [
-      { c: 'office', cat: 'Office', name: '[Sculpted reception desk]', src: '/_blob/35d91cddad66a7a9292b6ebcac7b6ec6', alt: 'Sculpted white reception desk' },
-      { c: 'hosp', cat: 'Hospitality', name: '[Restaurant bar counter]', src: '/_blob/9301bd05abbfc66c26aba82303dc41fc', alt: 'Bar counter with lit shelving' },
-      { c: 'office', cat: 'Office', name: '[Clinic reception]', src: '/_blob/8fb74e7b3bf5874db9db0d5051524b25', alt: 'Reception desk with lit oak front' },
+      { c: 'office', cat: 'Office', name: '[Office reception desk]', src: '/_blob/5fb1e1ab698ff996dd5ac01ea0700127', alt: 'Sculpted white reception desk' },
+      { c: 'retail', cat: 'Retail', name: '[Retail display wall]', src: '/_blob/a3ee2618fc4e4c646e6a32cb30125d6c', alt: 'Bar counter with lit shelving' },
+      { c: 'office', cat: 'Office', name: '[Reception lounge]', src: '/_blob/3d5fd0436a8f69711ac794c937d30a22', alt: 'Reception desk with lit oak front' },
       { c: 'walls', cat: 'Feature walls', name: '[Slatted wood wall]', src: '/_blob/fd82bb24b826587d78b37a0e8c2e215b', alt: 'Vertical slatted wood wall panels' },
-      { c: 'hosp', cat: 'Hospitality', name: '[Restaurant bar and seating]', src: '/_blob/a794da25d022d4671cdf95a503956a05', alt: 'Long restaurant bar with stools' },
-      { c: 'office', cat: 'Office', name: '[Corporate lobby]', src: '/_blob/e0f04356626cdbc1e0c2fc84abde60c7', alt: 'Corporate lobby with stone wall' }
+      { c: 'fitout', cat: 'Fit-out', name: '[Office fit-out in progress]', src: '/_blob/dbfe3cb99106b16ba558dabf505f6748', alt: 'Long restaurant bar with stools' },
+      { c: 'office', cat: 'Office', name: '[Executive office millwork]', src: '/_blob/bcb03b9f2bc077430207b1822a9b47ed', alt: 'Corporate lobby with stone wall' }
     ];
     const shown = s.filter === 'all' ? all : all.filter((p) => p.c === s.filter);
     const n = shown.length;
@@ -270,7 +270,7 @@ class Component extends DCLogic {
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
       logos: logos.concat(logos),
-      filters: [['all', 'All'], ['office', 'Offices'], ['hosp', 'Hospitality'], ['walls', 'Feature walls']].map(([id, label]) => ({
+      filters: [['all', 'All'], ['office', 'Offices'], ['retail', 'Retail'], ['fitout', 'Fit-outs'], ['walls', 'Feature walls']].map(([id, label]) => ({
         label, cls: s.filter === id ? 'pill on' : 'pill', pressed: s.filter === id ? 'true' : 'false', pick: () => this.setState({ filter: id, lb: -1 })
       })),
       shots: shown.map((p, i) => ({ ...p, open: 'Open photo: ' + p.alt, view: () => this.setState({ lb: i }) })),
