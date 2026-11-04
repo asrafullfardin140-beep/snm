@@ -5,6 +5,7 @@ from pathlib import Path
 SRC = Path(sys.argv[1])   # design-draft/canvas
 OUT = Path(sys.argv[2])   # design-draft/preview
 BLOBS = {
+    "03963753ad4feea4c43c038b7e4e2ca4": "../media/hero.mp4",
     "2b8ae7be5c7fe40f4858b904094f27d1": "../media/cad1.jpg",
     "340e2fb6c2ca3da1bb98503c569e6663": "../media/cad2.jpg",
     "90a69e6b5d9712f0a5c86e6f41109bd7": "../media/cnc1.jpg",

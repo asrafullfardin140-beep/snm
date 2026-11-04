@@ -6,7 +6,7 @@ Photos are chosen to match the services in SnM's services document.
 
 | File | Shows | Pexels link |
 |---|---|---|
-| `hero.mp4` | Craftsman planing wood (homepage A hero video) | https://www.pexels.com/video/6789898/ |
+| `hero.mp4` | Walkthrough of an open living and dining space (homepage A hero video) | https://www.pexels.com/video/7578552/ |
 | `resin.mp4` | Resin pour on wood | https://www.pexels.com/video/7253679/ |
 | `shop1.jpg` | Woodworking shop, table saw | https://www.pexels.com/photo/10316634/ |
 | `cnc1.jpg` | CNC machine cutting a panel | https://www.pexels.com/photo/7480234/ |

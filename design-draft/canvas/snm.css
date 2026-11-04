@@ -228,6 +228,7 @@ button{cursor:pointer}
   .river{height:64px}
   .bleed{margin:0 -20px!important;padding:40px 20px!important;border-radius:0!important}
   .hero{height:680px}
+  .vid-btn{bottom:auto;top:92px;right:16px;width:44px;height:44px}
   .slide{height:460px}
   .hero-slider .slide{height:720px}
   .hs-c .w{padding-bottom:96px;gap:20px}
