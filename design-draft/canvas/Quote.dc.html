@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SnM Millwork: Get a Quote</title>
+<title>Get a Quote | SnM Millwork Manufacturing</title>
+<meta name="description" content="Tell us about your project in five quick steps. We reply with questions and a budget range.">
+<link rel="icon" type="image/png" href="/_blob/7eaae759c1a76744ae37e0861c5897d7">
+<link rel="apple-touch-icon" href="/_blob/93a0c92b99ffa8e064234a231ffa0a91">
 <script src="./support.js"></script>
 <link rel="stylesheet" href="snm.css">
 </head>
@@ -16,7 +19,7 @@
 
 <header class="hdr">
   <div class="w hdr-in">
-    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/90b8c00073b2615e54a7ab42cfb6a110" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/ddaee12b1d02cb40e277077a4e9a76b5" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
     <nav class="nav" aria-label="Main">
       <a href="Main.dc.html">Home</a>
       <a href="Commercial.dc.html">Commercial</a>
@@ -43,7 +46,17 @@
       <a href="Commercial.dc.html">Commercial</a>
       <a href="Residential.dc.html">Residential</a>
       <a href="Services.dc.html">Services</a>
-      <a class="btn" href="Quote.dc.html">Get a Quote</a>
+      <div class="mnav-sub">
+        <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
+        <a href="Epoxy.dc.html">Epoxy &amp; Resin</a>
+        <a href="Design.dc.html">Design &amp; Engineering</a>
+        <a href="FitOut.dc.html">Interior Fit-Out</a>
+        <a href="Fabrication.dc.html">Custom Fabrication</a>
+        <a href="Installation.dc.html">Installation</a>
+        <a href="Trades.dc.html">Trade Coordination</a>
+      </div>
+      <a href="About.dc.html">About</a>
+      <a class="btn" href="Quote.dc.html" aria-current="page">Get a Quote</a>
     </nav>
   </sc-if>
 </header>
@@ -168,11 +181,12 @@
               </fieldset>
             </sc-if>
 
+            <sc-if value="{{ hasSendError }}" hint-placeholder-val="{{ false }}"><p class="q-send-err" role="alert">{{ sendError }}</p></sc-if>
             <div class="q-nav">
               <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}"><button type="button" class="q-back" onClick="{{ back }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14 8H3M7 4L3 8l4 4"/></svg><span>Back</span></button></sc-if>
               <sc-if value="{{ noBack }}" hint-placeholder-val="{{ true }}"><span class="p" style="font-size: 14px">Takes about two minutes.</span></sc-if>
               <sc-if value="{{ showNext }}" hint-placeholder-val="{{ false }}"><button type="button" class="btn q-next" onClick="{{ next }}"><span>{{ nextLabel }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></sc-if>
-              <sc-if value="{{ isLast }}" hint-placeholder-val="{{ false }}"><button type="submit" class="btn q-next"><span>Send my project</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></sc-if>
+              <sc-if value="{{ isLast }}" hint-placeholder-val="{{ false }}"><button type="submit" class="btn q-next" disabled="{{ sending }}"><span>{{ sendLabel }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></sc-if>
             </div>
           </form>
         </div>
@@ -190,8 +204,8 @@
       </div>
       <div class="rule-top" style="display: flex; flex-direction: column; gap: 8px">
         <h2 class="d4">Prefer to talk?</h2>
-        <a href="#" style="font-size: 20px">[Phone]</a>
-        <a href="#">[Email]</a>
+        <a href="tel:[PHONE]" style="font-size: 20px">[Phone]</a>
+        <a href="mailto:[EMAIL]">[Email]</a>
         <span class="p" style="font-size: 15px">[Weekday hours]</span>
       </div>
       <p class="p" style="font-size: 14px">We only use your details to reply about this project.</p>
@@ -206,14 +220,14 @@
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="/_blob/90b8c00073b2615e54a7ab42cfb6a110" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
+        <img src="/_blob/ddaee12b1d02cb40e277077a4e9a76b5" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
       <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.dc.html">Millwork &amp; Cabinetry</a><a href="Epoxy.dc.html">Epoxy &amp; Resin</a><a href="Design.dc.html">Design &amp; Engineering</a><a href="FitOut.dc.html">Interior Fit-Out</a><a href="Fabrication.dc.html">Custom Fabrication</a><a href="Installation.dc.html">Installation</a><a href="Trades.dc.html">Trade Coordination</a></div>
-      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+      <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>
-    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
+    <div class="w ftr-b"><span>© {{ year }} SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
   </div>
 </footer>
 
@@ -303,6 +317,8 @@ class Component extends DCLogic {
     const err = s.err;
     const n = s.files.length;
     return {
+      year: new Date().getFullYear(),
+      sending: !!s.sending, sendLabel: s.sending ? 'Sending\u2026' : 'Send my project', hasSendError: !!s.sendError, sendError: s.sendError || '',
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
@@ -343,8 +359,15 @@ class Component extends DCLogic {
           setTimeout(() => { const el = document.getElementById(e2.name ? 'q-name' : 'q-email'); if (el) el.focus(); }, 30);
           return;
         }
-        this.setState({ v, err: e2, sent: true });
-        if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Set FORM_ENDPOINT to the form service URL (e.g. Formspree) before launch. Empty = demo mode.
+        const FORM_ENDPOINT = '';
+        const done = () => { this.setState({ sending: false, sent: true }); if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' }); };
+        if (!FORM_ENDPOINT) { this.setState({ v, err: e2, sendError: '' }); done(); return; }
+        this.setState({ v, err: e2, sending: true, sendError: '', still: true });
+        fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ who: s.who, need: s.need, when: s.when, budget: s.budget, pref: s.pref, files: s.files, ...v }) })
+          .then((r) => { if (!r.ok) throw new Error('send failed'); done(); })
+          .catch(() => this.setState({ sending: false, still: true, sendError: 'We couldn\u2019t send your project just now. Please try again, or call us at [Phone].' }));
       },
       thanksName: s.v.name ? ', ' + s.v.name.split(' ')[0] : '',
       sentTo: s.v.email || 'your inbox',

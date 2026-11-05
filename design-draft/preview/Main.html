@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="snm.css">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SnM Millwork Manufacturing | Custom Millwork, Cabinetry and Epoxy Resin</title><meta name="description" content="SnM Millwork Manufacturing designs, builds and installs custom millwork, cabinetry, epoxy resin pieces and interior fit-outs for businesses and homes. From Concept to Completion."><link rel="icon" type="image/png" href="../media/favicon-64.png"><link rel="apple-touch-icon" href="../media/favicon-180.png"><link rel="stylesheet" href="snm.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
 <script src="runtime.js"></script><script>
@@ -20,12 +20,12 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const slides = [
-      { src: '../media/kit1.jpg', alt: 'Kitchen with oak cabinets and dark tall units', kind: 'Residential', name: '[Oak and charcoal kitchen]' },
-      { src: '../media/rec1.jpg', alt: 'Sculpted white reception desk in a lobby', kind: 'Commercial', name: '[Sculpted reception desk]' },
-      { src: '../media/t1.jpg', alt: 'Live-edge wood slab set against black resin', kind: 'Epoxy & Resin', name: '[Live-edge resin table]' },
-      { src: '../media/ret1.jpg', alt: 'Bar counter with lit shelving', kind: 'Hospitality', name: '[Restaurant bar]' },
-      { src: '../media/clo1.jpg', alt: 'Walk-in dressing room with lit shelving', kind: 'Residential', name: '[Dressing room]' },
-      { src: '../media/kit2.jpg', alt: 'Walnut kitchen with a large island', kind: 'Residential', name: '[Walnut kitchen and island]' }
+      { src: '../media/kit1.webp', alt: 'Kitchen with oak cabinets and dark tall units', kind: 'Residential', name: '[Oak and charcoal kitchen]' },
+      { src: '../media/rec1.webp', alt: 'Sculpted white reception desk in a lobby', kind: 'Commercial', name: '[Sculpted reception desk]' },
+      { src: '../media/t1.webp', alt: 'Live-edge wood slab set against black resin', kind: 'Epoxy & Resin', name: '[Live-edge resin table]' },
+      { src: '../media/ret1.webp', alt: 'Bar counter with lit shelving', kind: 'Hospitality', name: '[Restaurant bar]' },
+      { src: '../media/clo1.webp', alt: 'Walk-in dressing room with lit shelving', kind: 'Residential', name: '[Dressing room]' },
+      { src: '../media/kit2.webp', alt: 'Walnut kitchen with a large island', kind: 'Residential', name: '[Walnut kitchen and island]' }
     ].map((x, i) => ({ ...x, pos: (i + 1) + ' of 6' }));
     const reviews = [
       { q: 'They turned a rough sketch into a reception desk our whole office talks about. On time, on budget, and the install crew left the site spotless.', name: '[Sample: Daniel R.]', meta: 'Commercial, office reception' },
@@ -36,6 +36,7 @@ class Component extends DCLogic {
     ];
     const pad = (n) => String(n).padStart(2, '0');
     return {
+      year: new Date().getFullYear(),
       showIntro: !this.state.introDone,
       skipIntro: () => { clearTimeout(this.it); this.setState({ introDone: true }); },
       litRef: (el) => {
@@ -163,7 +164,7 @@ class Component extends DCLogic {
 
 <header class="hdr over">
   <div class="w hdr-in">
-    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.png" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.webp" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
     <nav class="nav" aria-label="Main">
       <a class="cur" href="Main.html" aria-current="page">Home</a>
       <a href="Commercial.html">Commercial</a>
@@ -186,10 +187,20 @@ class Component extends DCLogic {
   </div>
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav class="mnav" aria-label="Mobile">
-      <a href="Main.html">Home</a>
+      <a href="Main.html" aria-current="page">Home</a>
       <a href="Commercial.html">Commercial</a>
       <a href="Residential.html">Residential</a>
       <a href="Services.html">Services</a>
+      <div class="mnav-sub">
+        <a href="Millwork.html">Millwork &amp; Cabinetry</a>
+        <a href="Epoxy.html">Epoxy &amp; Resin</a>
+        <a href="Design.html">Design &amp; Engineering</a>
+        <a href="FitOut.html">Interior Fit-Out</a>
+        <a href="Fabrication.html">Custom Fabrication</a>
+        <a href="Installation.html">Installation</a>
+        <a href="Trades.html">Trade Coordination</a>
+      </div>
+      <a href="About.html">About</a>
       <a class="btn" href="Quote.html">Get a Quote</a>
     </nav>
   </sc-if>
@@ -260,7 +271,7 @@ class Component extends DCLogic {
       <span class="tl" style="align-self: flex-start">Commercial work</span>
     </a>
     <a href="Residential.html" style="grid-column: 8 / span 5; margin-top: 160px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
-      <img class="cover r-45" src="../media/clo1.jpg" alt="Walk-in dressing room with lit shelving" style="height: auto">
+      <img class="cover r-45" src="../media/clo1.webp" alt="Walk-in dressing room with lit shelving" style="height: auto">
       <h2 class="d3">For homeowners</h2>
       <p class="p">Kitchens, vanities, closets and built-ins, measured and made for your home.</p>
       <span class="tl" style="align-self: flex-start">Residential work</span>
@@ -328,7 +339,7 @@ class Component extends DCLogic {
         <figcaption class="meta" style="color: #4A4038">The drawing</figcaption>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px">
-        <img class="cover" src="../media/tv2.jpg" alt="Finished built-in wall unit with lit shelves" style="flex: 1 1 auto; min-height: 280px">
+        <img class="cover" src="../media/tv2.webp" alt="Finished built-in wall unit with lit shelves" style="flex: 1 1 auto; min-height: 280px">
         <div class="meta" style="color: #B9AFA2">The result</div>
       </div>
     </figure>
@@ -424,7 +435,7 @@ class Component extends DCLogic {
     </div>
     <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
       <a class="btn" href="Quote.html">Get a Quote</a>
-      <span class="p" style="font-size: 15px">Or call <a class="call" href="#">[phone]</a></span>
+      <span class="p" style="font-size: 15px">Or call <a class="call" href="tel:[PHONE]">[phone]</a></span>
     </div>
   </div>
 </section>
@@ -436,14 +447,14 @@ class Component extends DCLogic {
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="../media/snm-logo.png" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
+        <img src="../media/snm-logo.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
       <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a><a href="Fabrication.html">Custom Fabrication</a><a href="Installation.html">Installation</a><a href="Trades.html">Trade Coordination</a></div>
-      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+      <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>
-    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>Photos and video: Pexels (stock, for this draft only)</span></div>
+    <div class="w ftr-b"><span>© {{ year }} SnM Millwork Manufacturing Inc.</span><span>Photos and video: Pexels (stock, for this draft only)</span></div>
   </div>
 </footer>
 

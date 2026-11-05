@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>SnM Millwork: Home</title>
+<title>SnM Millwork Manufacturing | Custom Millwork, Cabinetry and Epoxy Resin</title>
+<meta name="description" content="SnM Millwork Manufacturing designs, builds and installs custom millwork, cabinetry, epoxy resin pieces and interior fit-outs for businesses and homes. From Concept to Completion.">
+<link rel="icon" type="image/png" href="/_blob/7eaae759c1a76744ae37e0861c5897d7">
+<link rel="apple-touch-icon" href="/_blob/93a0c92b99ffa8e064234a231ffa0a91">
 <script src="./support.js"></script>
 <link rel="stylesheet" href="snm.css">
 </head>
@@ -29,7 +32,7 @@
 
 <header class="hdr over">
   <div class="w hdr-in">
-    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/90b8c00073b2615e54a7ab42cfb6a110" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/ddaee12b1d02cb40e277077a4e9a76b5" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
     <nav class="nav" aria-label="Main">
       <a class="cur" href="Main.dc.html" aria-current="page">Home</a>
       <a href="Commercial.dc.html">Commercial</a>
@@ -52,10 +55,20 @@
   </div>
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav class="mnav" aria-label="Mobile">
-      <a href="Main.dc.html">Home</a>
+      <a href="Main.dc.html" aria-current="page">Home</a>
       <a href="Commercial.dc.html">Commercial</a>
       <a href="Residential.dc.html">Residential</a>
       <a href="Services.dc.html">Services</a>
+      <div class="mnav-sub">
+        <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
+        <a href="Epoxy.dc.html">Epoxy &amp; Resin</a>
+        <a href="Design.dc.html">Design &amp; Engineering</a>
+        <a href="FitOut.dc.html">Interior Fit-Out</a>
+        <a href="Fabrication.dc.html">Custom Fabrication</a>
+        <a href="Installation.dc.html">Installation</a>
+        <a href="Trades.dc.html">Trade Coordination</a>
+      </div>
+      <a href="About.dc.html">About</a>
       <a class="btn" href="Quote.dc.html">Get a Quote</a>
     </nav>
   </sc-if>
@@ -290,7 +303,7 @@
     </div>
     <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
       <a class="btn" href="Quote.dc.html">Get a Quote</a>
-      <span class="p" style="font-size: 15px">Or call <a class="call" href="#">[phone]</a></span>
+      <span class="p" style="font-size: 15px">Or call <a class="call" href="tel:[PHONE]">[phone]</a></span>
     </div>
   </div>
 </section>
@@ -302,14 +315,14 @@
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="/_blob/90b8c00073b2615e54a7ab42cfb6a110" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
+        <img src="/_blob/ddaee12b1d02cb40e277077a4e9a76b5" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
       <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.dc.html">Millwork &amp; Cabinetry</a><a href="Epoxy.dc.html">Epoxy &amp; Resin</a><a href="Design.dc.html">Design &amp; Engineering</a><a href="FitOut.dc.html">Interior Fit-Out</a><a href="Fabrication.dc.html">Custom Fabrication</a><a href="Installation.dc.html">Installation</a><a href="Trades.dc.html">Trade Coordination</a></div>
-      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+      <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>
-    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>Photos and video: Pexels (stock, for this draft only)</span></div>
+    <div class="w ftr-b"><span>© {{ year }} SnM Millwork Manufacturing Inc.</span><span>Photos and video: Pexels (stock, for this draft only)</span></div>
   </div>
 </footer>
 
@@ -357,6 +370,7 @@ class Component extends DCLogic {
     ];
     const pad = (n) => String(n).padStart(2, '0');
     return {
+      year: new Date().getFullYear(),
       showIntro: !this.state.introDone,
       skipIntro: () => { clearTimeout(this.it); this.setState({ introDone: true }); },
       litRef: (el) => {

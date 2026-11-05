@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="snm.css">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Commercial Millwork and Fit-Outs | SnM Millwork Manufacturing</title><meta name="description" content="Reception desks, retail fixtures, feature walls and full interior fit-outs for contractors, designers and businesses, built in our own shop and installed by our own crew."><link rel="icon" type="image/png" href="../media/favicon-64.png"><link rel="apple-touch-icon" href="../media/favicon-180.png"><link rel="stylesheet" href="snm.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
 <script src="runtime.js"></script><script>
@@ -15,12 +15,12 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const all = [
-      { c: 'office', cat: 'Office', name: '[Office reception desk]', src: '../media/rec1.jpg', alt: 'Sculpted white reception desk' },
-      { c: 'retail', cat: 'Retail', name: '[Retail display wall]', src: '../media/ret1.jpg', alt: 'Bar counter with lit shelving' },
+      { c: 'office', cat: 'Office', name: '[Office reception desk]', src: '../media/rec1.webp', alt: 'Sculpted white reception desk' },
+      { c: 'retail', cat: 'Retail', name: '[Retail display wall]', src: '../media/ret1.webp', alt: 'Bar counter with lit shelving' },
       { c: 'walls', cat: 'Feature walls', name: 'Resin river wall, lit', src: '../media/wall-amber.webp', alt: 'Resin river feature wall lit with amber and blue LEDs' },
       { c: 'walls', cat: 'Feature walls', name: 'Resin river feature wall', src: '../media/wall-day.webp', alt: 'Live-edge wood feature wall with a resin river' },
       { c: 'fitout', cat: 'Fit-out', name: 'Feature wall install', src: '../media/install-crew.webp', alt: 'SnM installers fitting a live-edge feature wall in a restaurant' },
-      { c: 'office', cat: 'Office', name: '[Executive office millwork]', src: '../media/off2.jpg', alt: 'Corporate lobby with stone wall' }
+      { c: 'office', cat: 'Office', name: '[Executive office millwork]', src: '../media/off2.webp', alt: 'Corporate lobby with stone wall' }
     ];
     const shown = s.filter === 'all' ? all : all.filter((p) => p.c === s.filter);
     const n = shown.length;
@@ -34,6 +34,7 @@ class Component extends DCLogic {
     const logos = ['[Contractor logo]', '[Design firm logo]', '[Developer logo]', '[Retail brand logo]', '[Hotel group logo]', '[Architect logo]', '[Restaurant group logo]', '[Property manager logo]'];
     const pad = (x) => String(x).padStart(2, '0');
     return {
+      year: new Date().getFullYear(),
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
@@ -62,7 +63,7 @@ class Component extends DCLogic {
 
 <header class="hdr">
   <div class="w hdr-in">
-    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.png" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.webp" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
     <nav class="nav" aria-label="Main">
       <a href="Main.html">Home</a>
       <a class="cur" href="Commercial.html" aria-current="page">Commercial</a>
@@ -86,9 +87,19 @@ class Component extends DCLogic {
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav class="mnav" aria-label="Mobile">
       <a href="Main.html">Home</a>
-      <a href="Commercial.html">Commercial</a>
+      <a href="Commercial.html" aria-current="page">Commercial</a>
       <a href="Residential.html">Residential</a>
       <a href="Services.html">Services</a>
+      <div class="mnav-sub">
+        <a href="Millwork.html">Millwork &amp; Cabinetry</a>
+        <a href="Epoxy.html">Epoxy &amp; Resin</a>
+        <a href="Design.html">Design &amp; Engineering</a>
+        <a href="FitOut.html">Interior Fit-Out</a>
+        <a href="Fabrication.html">Custom Fabrication</a>
+        <a href="Installation.html">Installation</a>
+        <a href="Trades.html">Trade Coordination</a>
+      </div>
+      <a href="About.html">About</a>
       <a class="btn" href="Quote.html">Get a Quote</a>
     </nav>
   </sc-if>
@@ -205,7 +216,7 @@ class Component extends DCLogic {
         </svg>
         <figcaption class="meta">Shop drawing</figcaption>
       </figure>
-      <img class="cover r-45" src="../media/rec3.jpg" alt="Installed reception area" style="height: auto">
+      <img class="cover r-45" src="../media/rec3.webp" alt="Installed reception area" style="height: auto">
     </div>
   </div>
 </section>
@@ -269,14 +280,14 @@ class Component extends DCLogic {
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="../media/snm-logo.png" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
+        <img src="../media/snm-logo.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
       <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a><a href="Fabrication.html">Custom Fabrication</a><a href="Installation.html">Installation</a><a href="Trades.html">Trade Coordination</a></div>
-      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+      <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>
-    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>Photos: Pexels (stock, for this draft only)</span></div>
+    <div class="w ftr-b"><span>© {{ year }} SnM Millwork Manufacturing Inc.</span><span>Photos: Pexels (stock, for this draft only)</span></div>
   </div>
 </footer>
 

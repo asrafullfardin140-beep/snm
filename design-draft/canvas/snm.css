@@ -370,6 +370,21 @@ button{cursor:pointer}
 .cmp-paper{position:absolute;inset:0;background:#F3EEE6;display:flex;align-items:center;justify-content:center;padding:5%}
 .cmp-paper svg{height:100%;width:auto;max-width:100%}
 
+/* Fuller mobile menu */
+.mnav{max-height:calc(100svh - 76px);overflow-y:auto}
+.mnav-sub{display:flex;flex-direction:column;padding:2px 0 8px 16px;border-bottom:1px solid var(--line)}
+.mnav-sub a{font-size:15px;color:var(--ivory-2);border-bottom:0;padding:11px 0}
+.mnav a[aria-current="page"]:not(.btn){color:var(--gold)}
+
+/* Quote: send error and sending state */
+.q-send-err{margin:0;padding:14px 18px;border:1px solid rgba(229,115,92,.5);border-radius:2px;background:rgba(229,115,92,.08);color:#F3C0B4;font-size:15px}
+.q-next[disabled]{opacity:.6;cursor:progress}
+
+/* 404 page */
+.nf{padding:160px 0 140px}
+.nf-links{display:flex;flex-wrap:wrap;gap:6px 26px;border-top:1px solid var(--line);padding-top:22px;margin-top:12px}
+.nf-links a{color:var(--ivory);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:6px;min-height:44px;display:inline-flex;align-items:center}
+
 /* Footer, opened by the resin river (the one river per page) */
 .river{display:block;width:100%;height:120px}
 .ftr{background:var(--bg-3);color:var(--ivory-2);font-size:15px}

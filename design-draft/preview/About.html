@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="snm.css">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>About Us | SnM Millwork Manufacturing</title><meta name="description" content="A workshop that designs, builds and installs its own work. Meet the team behind SnM Millwork Manufacturing."><link rel="icon" type="image/png" href="../media/favicon-64.png"><link rel="apple-touch-icon" href="../media/favicon-180.png"><link rel="stylesheet" href="snm.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
 <script src="runtime.js"></script><script>
@@ -9,6 +9,7 @@ class Component extends DCLogic {
   }
   renderVals() {
     return {
+      year: new Date().getFullYear(),
       menuOpen: this.state.menuOpen,
       menuOpenStr: this.state.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen })
@@ -20,7 +21,7 @@ class Component extends DCLogic {
 
 <header class="hdr">
   <div class="w hdr-in">
-    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.png" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.webp" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
     <nav class="nav" aria-label="Main">
       <a href="Main.html">Home</a>
       <a href="Commercial.html">Commercial</a>
@@ -47,6 +48,16 @@ class Component extends DCLogic {
       <a href="Commercial.html">Commercial</a>
       <a href="Residential.html">Residential</a>
       <a href="Services.html">Services</a>
+      <div class="mnav-sub">
+        <a href="Millwork.html">Millwork &amp; Cabinetry</a>
+        <a href="Epoxy.html">Epoxy &amp; Resin</a>
+        <a href="Design.html">Design &amp; Engineering</a>
+        <a href="FitOut.html">Interior Fit-Out</a>
+        <a href="Fabrication.html">Custom Fabrication</a>
+        <a href="Installation.html">Installation</a>
+        <a href="Trades.html">Trade Coordination</a>
+      </div>
+      <a href="About.html" aria-current="page">About</a>
       <a class="btn" href="Quote.html">Get a Quote</a>
     </nav>
   </sc-if>
@@ -129,14 +140,14 @@ class Component extends DCLogic {
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="../media/snm-logo.png" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
+        <img src="../media/snm-logo.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
       <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html" aria-current="page">About</a><a href="Quote.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a><a href="Fabrication.html">Custom Fabrication</a><a href="Installation.html">Installation</a><a href="Trades.html">Trade Coordination</a></div>
-      <div><h2 class="meta">Contact</h2><a href="#">[Phone]</a><a href="#">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+      <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>
-    <div class="w ftr-b"><span>© 2026 SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
+    <div class="w ftr-b"><span>© {{ year }} SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
   </div>
 </footer>
 
