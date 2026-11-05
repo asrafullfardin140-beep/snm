@@ -15,7 +15,7 @@ class Component extends DCLogic {
     this.t1 = setInterval(() => { if (!this.state.slidesPaused && !this.drag) this.setState({ slide: (this.state.slide + 1) % (this.nSlides || 6) }); }, 7000);
     this.t2 = setInterval(() => { if (!this.state.reviewsPaused) this.setState({ review: (this.state.review + 1) % 5 }); }, 7000);
   }
-  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); }
+  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); if (this.onStory) { window.removeEventListener('scroll', this.onStory); window.removeEventListener('resize', this.onStory); } }
   renderVals() {
     const s = this.state;
     const slides = [
@@ -39,6 +39,42 @@ class Component extends DCLogic {
     this.nSlides = slides.length;
     const pad = (n) => String(n).padStart(2, '0');
     return {
+      storyRef: (el) => {
+        if (!el) return;
+        if (!this.storyBound) {
+          this.storyBound = true;
+          this.onStory = () => {
+            const box = document.querySelector('.story');
+            if (!box || box.offsetParent === null) return;
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const r = box.getBoundingClientRect();
+            const run = Math.max(1, r.height - window.innerHeight);
+            const p = Math.min(1, Math.max(0, -r.top / run));
+            const n = 4, x = p * (n - 1);
+            box.style.setProperty('--p', p.toFixed(4));
+            box.querySelectorAll('.story-frame').forEach((f, i) => {
+              const d = Math.abs(x - i);
+              f.style.opacity = Math.max(0, Math.min(1, 1.6 - d * 1.6)).toFixed(3);
+              f.style.transform = 'scale(' + (1.1 - 0.1 * Math.min(1, Math.max(0, x - i + 1) / 2)).toFixed(4) + ')';
+            });
+            box.querySelectorAll('.story-cap').forEach((c, i) => {
+              const d = x - i;
+              const o = Math.max(0, 1 - Math.abs(d) * 2.2);
+              c.style.opacity = o.toFixed(3);
+              c.style.transform = 'translateY(' + (d * -36).toFixed(1) + 'px)';
+              c.style.visibility = o > 0.02 ? 'visible' : 'hidden';
+            });
+            box.querySelectorAll('.story-tick').forEach((t, i) => t.classList.toggle('on', Math.round(x) >= i));
+            const glow = box.querySelector('.story-glow');
+            if (glow) glow.style.opacity = Math.max(0, Math.min(1, (x - 2.3) / 0.7)).toFixed(3);
+            const hint = box.querySelector('.story-hint');
+            if (hint) hint.style.opacity = Math.max(0, 1 - p * 8).toFixed(3);
+          };
+          window.addEventListener('scroll', this.onStory, { passive: true });
+          window.addEventListener('resize', this.onStory);
+        }
+        setTimeout(this.onStory, 0);
+      },
       rotWords: ['Custom Millwork.', 'Kitchens & Vanities.', 'Epoxy River Tables.', 'Reception Desks.', 'Feature Walls.', 'Interior Fit-Outs.'].map((w, i, a) => { const c = (this.state.rot || 0) % a.length, p = (c + a.length - 1) % a.length; return { t: w, cls: i === c ? 'on' : (i === p && this.state.rot ? 'out' : '') }; }),
       cmpPos: this.cmpPos == null ? 50 : this.cmpPos,
       cmpRef: (el) => {
@@ -179,6 +215,39 @@ class Component extends DCLogic {
       </sc-for>
     </div>
     <span class="count num" aria-live="polite">{{ slideCount }}</span>
+  </div>
+</section>
+
+<!-- 2b. Scroll story: one wall, from bare drywall to lights on -->
+<section class="story" ref="{{ storyRef }}" aria-labelledby="story-h">
+  <div class="story-pin">
+    <div class="story-frames">
+        <img class="story-frame" src="../media/cmp-before-v2.webp" alt="The bare dining room wall as our crew starts the install" loading="lazy">
+        <img class="story-frame" src="../media/install-crew.webp" alt="Two SnM installers fitting live-edge wood panels from a ladder" loading="lazy">
+        <img class="story-frame" src="../media/wall-day.webp" alt="The finished live-edge wood feature wall with a resin river" loading="lazy">
+        <img class="story-frame" src="../media/wall-blue.webp" alt="The finished wall lit by blue LEDs along the river" loading="lazy">
+      <div class="story-glow" aria-hidden="true"></div>
+      <div class="story-shade" aria-hidden="true"></div>
+    </div>
+    <div class="w story-ui">
+      <div class="story-head"><span class="meta" style="color: #F5A546">Recent project &middot; Restaurant feature wall</span><h2 id="story-h" class="d4">One wall, from concept to completion</h2></div>
+      <div class="story-caps">
+        <div class="story-cap"><span class="meta num">01 &middot; Before</span><h3 class="d2">A bare dining-room wall.</h3><p class="p">Rails fixed and levelled to carry every panel.</p></div>
+        <div class="story-cap"><span class="meta num">02 &middot; Install</span><h3 class="d2">Fitted panel by panel.</h3><p class="p">Our own crew sets each live-edge board in place.</p></div>
+        <div class="story-cap"><span class="meta num">03 &middot; Complete</span><h3 class="d2">One continuous river.</h3><p class="p">Live-edge boards, end-grain rounds and bark in a single wall.</p></div>
+        <div class="story-cap"><span class="meta num">04 &middot; Lights on</span><h3 class="d2">Then the lights come on.</h3><p class="p">Blue LEDs trace the river from end to end.</p></div>
+      </div>
+      <div class="story-track" aria-hidden="true">
+        <div class="story-bar"><span></span></div>
+        <ol>
+          <li class="story-tick"><span class="meta num">01</span><span>Before</span></li>
+          <li class="story-tick"><span class="meta num">02</span><span>Install</span></li>
+          <li class="story-tick"><span class="meta num">03</span><span>Complete</span></li>
+          <li class="story-tick"><span class="meta num">04</span><span>Lights on</span></li>
+        </ol>
+      </div>
+      <span class="story-hint meta" aria-hidden="true">Scroll</span>
+    </div>
   </div>
 </section>
 
