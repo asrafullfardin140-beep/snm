@@ -12,9 +12,9 @@ class Component extends DCLogic {
     const R = { teal: ['Ocean teal', '#0D999E'], clear: ['Clear', '#CFE0DD'], smoke: ['Smoke', '#3A3633'], amber: ['Amber', '#DE701E'] };
     const s = this.state;
     const shots = [
-      { cat: 'Table', name: '[Live-edge slab with black resin]', src: '../media/t1.jpg', alt: 'Live-edge wood slab set against black resin' },
-      { cat: 'In the shop', name: '[Tinting a teal pour]', src: '../media/res1.jpg', alt: 'Gloved hand pouring teal resin onto wood' },
-      { cat: 'Countertop', name: '[Clear epoxy pour]', src: '../media/res2.jpg', alt: 'Clear epoxy being poured onto a countertop' }
+      { cat: 'Table', name: 'Blue river table', src: '../media/table-blue.webp', alt: 'Live-edge slabs with a blue resin river and bark inlays' },
+      { cat: 'Table', name: 'Red river table', src: '../media/table-red.webp', alt: 'Live-edge slabs with a deep red resin river and bark inlays' },
+      { cat: 'In the shop', name: 'Bark set before the pour', src: '../media/resin-bark.webp', alt: 'Bark pieces and live-edge strips laid in a mould before the resin pour' }
     ];
     const opts = (map, key) => Object.keys(map).map((id) => ({
       label: map[id][0], cls: s[key] === id ? 'pill on' : 'pill', pressed: s[key] === id ? 'true' : 'false',

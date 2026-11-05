@@ -33,4 +33,18 @@ Photos are chosen to match the services in SnM's services document.
 | `res1.jpg` | Tinting a resin pour | https://www.pexels.com/photo/7256574/ |
 | `res2.jpg` | Clear epoxy pour | https://www.pexels.com/photo/7256647/ |
 
+## SnM's own project photos
+
+Supplied by SnM. Retouched for the web (cropped, straightened, colour and light corrected); nothing in the work itself was changed.
+
+| File | Shows | Used on |
+|---|---|---|
+| `wall-blue.webp` | Resin river feature wall, blue LEDs | Homepage "For builders and designers" card |
+| `wall-blue-slide.webp` | Same wall, lower crop for the slider headline | Homepage B, first slide |
+| `wall-day.webp` | Resin river feature wall, lights off | Commercial hero and gallery |
+| `wall-amber.webp` | Resin river wall, amber and blue LEDs | Commercial gallery |
+| `table-blue.webp` | Blue river table | Homepage B slider, Epoxy gallery |
+| `table-red.webp` | Red river table | Epoxy gallery |
+| `resin-bark.webp` | Bark and live-edge strips set before a pour | Epoxy gallery |
+
 `snm-logo.png` is SnM's own logo from the SnM Brand Book, with its black background removed.

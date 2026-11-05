@@ -216,9 +216,9 @@ class Component extends DCLogic {
     const R = { teal: ['Ocean teal', '#0D999E'], clear: ['Clear', '#CFE0DD'], smoke: ['Smoke', '#3A3633'], amber: ['Amber', '#DE701E'] };
     const s = this.state;
     const shots = [
-      { cat: 'Table', name: '[Live-edge slab with black resin]', src: '/_blob/72ae0b20c27124c73f4bb455d1241fc7', alt: 'Live-edge wood slab set against black resin' },
-      { cat: 'In the shop', name: '[Tinting a teal pour]', src: '/_blob/9d38fcfc0294fa9a5e7501c5ede0e045', alt: 'Gloved hand pouring teal resin onto wood' },
-      { cat: 'Countertop', name: '[Clear epoxy pour]', src: '/_blob/f07b9b975e9cf2157a02075fd970ba9f', alt: 'Clear epoxy being poured onto a countertop' }
+      { cat: 'Table', name: 'Blue river table', src: '/_blob/82e87a578a2c5f0a8af9f26663e44216', alt: 'Live-edge slabs with a blue resin river and bark inlays' },
+      { cat: 'Table', name: 'Red river table', src: '/_blob/86207d1a6f531ed2863316c04efb4d2e', alt: 'Live-edge slabs with a deep red resin river and bark inlays' },
+      { cat: 'In the shop', name: 'Bark set before the pour', src: '/_blob/426098e6f3da8f4e047089b6fe7db596', alt: 'Bark pieces and live-edge strips laid in a mould before the resin pour' }
     ];
     const opts = (map, key) => Object.keys(map).map((id) => ({
       label: map[id][0], cls: s[key] === id ? 'pill on' : 'pill', pressed: s[key] === id ? 'true' : 'false',

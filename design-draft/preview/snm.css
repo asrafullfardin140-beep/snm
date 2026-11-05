@@ -232,6 +232,7 @@ button{cursor:pointer}
   .slide{height:460px}
   .hero-slider .slide{height:720px}
   .hs-c .w{padding-bottom:96px;gap:20px}
+  .hero-slider .hero-shade{background:linear-gradient(180deg,rgba(10,9,8,.45) 0%,rgba(10,9,8,.55) 35%,rgba(10,9,8,.9) 100%)}
   .slide-tag{display:none}
   .sl-foot .count{display:none}
   .sl-foot{bottom:32px}

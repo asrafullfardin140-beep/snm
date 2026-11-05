@@ -6,6 +6,13 @@ SRC = Path(sys.argv[1])   # design-draft/canvas
 OUT = Path(sys.argv[2])   # design-draft/preview
 BLOBS = {
     "03963753ad4feea4c43c038b7e4e2ca4": "../media/hero.mp4",
+    "685608b5d6a42dbb4f39260428cd87cf": "../media/wall-blue.webp",
+    "70884c43f9b445a960e4868c706628bc": "../media/wall-blue-slide.webp",
+    "feea8874ee5016a7b870ae2910fdc5ce": "../media/wall-day.webp",
+    "b72c6f496010df0062ac6bca9e1ec197": "../media/wall-amber.webp",
+    "82e87a578a2c5f0a8af9f26663e44216": "../media/table-blue.webp",
+    "86207d1a6f531ed2863316c04efb4d2e": "../media/table-red.webp",
+    "426098e6f3da8f4e047089b6fe7db596": "../media/resin-bark.webp",
     "2b8ae7be5c7fe40f4858b904094f27d1": "../media/cad1.jpg",
     "340e2fb6c2ca3da1bb98503c569e6663": "../media/cad2.jpg",
     "90a69e6b5d9712f0a5c86e6f41109bd7": "../media/cnc1.jpg",
