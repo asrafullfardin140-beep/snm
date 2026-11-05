@@ -95,11 +95,19 @@
       </div>
       <p class="p" style="grid-column: 8 / span 5">A resin river feature wall for a restaurant dining room. Drawn, built in our shop and installed by our own crew.</p>
     </div>
-    <ol class="c2c" aria-label="The wall, from bare drywall to finished">
-      <li><figure><img src="/_blob/01229eb242c0f434ed4b8706f34db641" alt="Bare dining room wall with timber mounting rails fixed in place" loading="lazy"><figcaption><span class="meta num">01 &middot; Before</span><span class="d5">Bare wall, mounting rails set</span></figcaption></figure></li>
-      <li><figure><img src="/_blob/a0a9d9ab9a1b52dc7dd9b89e77dcb7b0" alt="Two SnM installers fitting live-edge wood panels to the wall from a ladder" loading="lazy"><figcaption><span class="meta num">02 &middot; During</span><span class="d5">Our crew fitting the panels</span></figcaption></figure></li>
-      <li><figure><img src="/_blob/18a33541275aad83fcbfcfe3c0ea58ee" alt="Finished live-edge wood feature wall with a resin river through the middle" loading="lazy"><figcaption><span class="meta num">03 &middot; After</span><span class="d5">The finished resin river wall</span></figcaption></figure></li>
-    </ol>
+    <div class="cmp" style="--pos: {{ cmpPos }}%">
+      <img class="cmp-after" src="/_blob/07e0eb46652808a317ff316c01b0cddb" alt="After: the finished resin river feature wall above the dining booths" loading="lazy">
+      <div class="cmp-before"><img src="/_blob/6e93d6098c93464bd924811ebd6a6be4" alt="Before: the bare dining room wall with timber mounting rails" loading="lazy"></div>
+      <span class="cmp-tag cmp-l meta">Before</span>
+      <span class="cmp-tag cmp-r meta">After</span>
+      <span class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 6l-5 5 5 5M14 6l5 5-5 5"/></svg></span></span>
+      <input class="cmp-range" type="range" min="0" max="100" step="0.5" value="{{ cmpPos }}" aria-label="Before and after: drag to compare" onInput="{{ cmpMove }}">
+    </div>
+    <div class="cmp-foot">
+      <span><span class="meta" style="color: #B9AFA2">Before</span> Bare wall, mounting rails set</span>
+      <span class="p cmp-hint">Drag the line to compare</span>
+      <span style="text-align: right"><span class="meta" style="color: #F5A546">After</span> The finished resin river wall</span>
+    </div>
   </div>
 </section>
 
@@ -291,6 +299,8 @@ class Component extends DCLogic {
     ];
     const pad = (n) => String(n).padStart(2, '0');
     return {
+      cmpPos: this.cmpPos == null ? 50 : this.cmpPos,
+      cmpMove: (e) => { this.cmpPos = Number(e.target.value); const box = e.target.closest('.cmp'); if (box) box.style.setProperty('--pos', this.cmpPos + '%'); },
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),

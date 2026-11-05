@@ -17,7 +17,7 @@
     <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
       <span class="meta" style="color: #F5A546">Not part of the website</span>
       <h1 class="d2">Image library</h1>
-      <p class="p">Every SnM photo on file, numbered. "Live" photos are on the site now. "Alternate" photos are kept for swapping in later: ask for "library #12 on the homepage" and it goes in. AI-edited images are marked and kept off the live pages.</p>
+      <p class="p">Every SnM photo on file, numbered. "Live" photos are on the site now. "Alternate" photos are kept for swapping in later: ask for "library #12 on the homepage" and it goes in. AI-edited and AI-enhanced images are marked, so you always know which photos show the work exactly as built.</p>
     </div>
 
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
@@ -47,10 +47,10 @@
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":3200}}'>
 class Component extends DCLogic {
   renderVals() {
-    const C = { live: '#F5A546', alt: '#5FC9CC', ai: '#E5735C' };
+    const C = { live: '#F5A546', liveai: '#F5A546', alt: '#5FC9CC', ai: '#E5735C' };
     const row = (n, id, file, name, status, where) => ({
       n, src: id, file, name, where,
-      status: status === 'live' ? 'Live' : status === 'alt' ? 'Alternate' : 'Alternate · AI-edited',
+      status: status === 'live' ? 'Live' : status === 'liveai' ? 'Live · AI-enhanced' : status === 'alt' ? 'Alternate' : 'Alternate · AI-edited',
       color: C[status]
     });
     const groups = [
@@ -59,17 +59,19 @@ class Component extends DCLogic {
         row(2, '/_blob/70884c43f9b445a960e4868c706628bc', 'wall-blue-slide.webp', 'River wall, blue LEDs (slider crop)', 'live', 'Homepage B: slide 1'),
         row(3, '/_blob/feea8874ee5016a7b870ae2910fdc5ce', 'wall-day.webp', 'River wall, lights off', 'live', 'Commercial: hero and gallery'),
         row(4, '/_blob/b72c6f496010df0062ac6bca9e1ec197', 'wall-amber.webp', 'River wall, amber and blue', 'live', 'Commercial: gallery'),
-        row(5, '/_blob/01229eb242c0f434ed4b8706f34db641', 'step-before.webp', 'Bare wall with mounting rails', 'live', 'Homepage: One wall, step 01'),
-        row(6, '/_blob/a0a9d9ab9a1b52dc7dd9b89e77dcb7b0', 'step-during.webp', 'Crew fitting the panels', 'live', 'Homepage: One wall, step 02'),
-        row(7, '/_blob/18a33541275aad83fcbfcfe3c0ea58ee', 'step-after.webp', 'Finished wall (portrait crop)', 'live', 'Homepage: One wall, step 03'),
         row(8, '/_blob/99990602ecc04e579e868394633d175c', 'install-crew.webp', 'Crew installing the wall (full)', 'live', 'Commercial: gallery, Fit-out'),
         row(9, '/_blob/1cfecb4602b04070270cdfba4a10ee51', 'team-site.webp', 'Team on site', 'live', 'About and Homepage: Built by our own crew'),
         row(10, '/_blob/9b0849c67a375543de2a3ea0157538ae', 'table-blue-v2.webp', 'Blue river table', 'live', 'Homepage B slider, Epoxy gallery'),
         row(11, '/_blob/88e55e2663be0a3058413c3b1172ef09', 'table-red-v2.webp', 'Red river table', 'live', 'Homepage B slider, Epoxy gallery'),
         row(12, '/_blob/41b8f5a2185621fe193e3d740088cdb6', 'resin-bark-v2.webp', 'Bark set before the pour', 'live', 'Epoxy gallery'),
-        row(13, '/_blob/426098e6f3da8f4e047089b6fe7db596', 'resin-bark.webp', 'Bark set before the pour (portrait)', 'live', 'About: small tile')
+        row(13, '/_blob/426098e6f3da8f4e047089b6fe7db596', 'resin-bark.webp', 'Bark set before the pour (portrait)', 'live', 'About: small tile'),
+        row(19, '/_blob/07e0eb46652808a317ff316c01b0cddb', 'cmp-after.webp', 'River wall with booths, wide', 'liveai', 'Homepage: before/after slider, After side'),
+        row(20, '/_blob/6e93d6098c93464bd924811ebd6a6be4', 'cmp-before.webp', 'Bare wall, straightened', 'live', 'Homepage: before/after slider, Before side')
       ] },
       { title: 'Alternates, not in use', items: [
+        row(5, '/_blob/01229eb242c0f434ed4b8706f34db641', 'step-before.webp', 'Bare wall with mounting rails', 'alt', 'Was the homepage step 01; the drag slider uses #20'),
+        row(6, '/_blob/a0a9d9ab9a1b52dc7dd9b89e77dcb7b0', 'step-during.webp', 'Crew fitting the panels', 'alt', 'Was the homepage step 02'),
+        row(7, '/_blob/18a33541275aad83fcbfcfe3c0ea58ee', 'step-after.webp', 'Finished wall (portrait crop)', 'alt', 'Was the homepage step 03'),
         row(14, '/_blob/82e87a578a2c5f0a8af9f26663e44216', 'table-blue.webp', 'Blue river table, first retouch', 'alt', 'Replaced by #10'),
         row(15, '/_blob/86207d1a6f531ed2863316c04efb4d2e', 'table-red.webp', 'Red river table, first retouch (portrait)', 'alt', 'Replaced by #11'),
         row(16, '/_blob/77a9848682d5e064a04c191260262834', 'ai-wall-staged.webp', 'River wall, staged with booths and decor', 'ai', 'Booths, decor and wall details are AI-made'),

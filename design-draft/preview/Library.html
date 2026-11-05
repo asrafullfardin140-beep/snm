@@ -4,10 +4,10 @@
 <script src="runtime.js"></script><script>
 class Component extends DCLogic {
   renderVals() {
-    const C = { live: '#F5A546', alt: '#5FC9CC', ai: '#E5735C' };
+    const C = { live: '#F5A546', liveai: '#F5A546', alt: '#5FC9CC', ai: '#E5735C' };
     const row = (n, id, file, name, status, where) => ({
       n, src: id, file, name, where,
-      status: status === 'live' ? 'Live' : status === 'alt' ? 'Alternate' : 'Alternate · AI-edited',
+      status: status === 'live' ? 'Live' : status === 'liveai' ? 'Live · AI-enhanced' : status === 'alt' ? 'Alternate' : 'Alternate · AI-edited',
       color: C[status]
     });
     const groups = [
@@ -16,17 +16,19 @@ class Component extends DCLogic {
         row(2, '../media/wall-blue-slide.webp', 'wall-blue-slide.webp', 'River wall, blue LEDs (slider crop)', 'live', 'Homepage B: slide 1'),
         row(3, '../media/wall-day.webp', 'wall-day.webp', 'River wall, lights off', 'live', 'Commercial: hero and gallery'),
         row(4, '../media/wall-amber.webp', 'wall-amber.webp', 'River wall, amber and blue', 'live', 'Commercial: gallery'),
-        row(5, '../media/step-before.webp', 'step-before.webp', 'Bare wall with mounting rails', 'live', 'Homepage: One wall, step 01'),
-        row(6, '../media/step-during.webp', 'step-during.webp', 'Crew fitting the panels', 'live', 'Homepage: One wall, step 02'),
-        row(7, '../media/step-after.webp', 'step-after.webp', 'Finished wall (portrait crop)', 'live', 'Homepage: One wall, step 03'),
         row(8, '../media/install-crew.webp', 'install-crew.webp', 'Crew installing the wall (full)', 'live', 'Commercial: gallery, Fit-out'),
         row(9, '../media/team-site.webp', 'team-site.webp', 'Team on site', 'live', 'About and Homepage: Built by our own crew'),
         row(10, '../media/table-blue-v2.webp', 'table-blue-v2.webp', 'Blue river table', 'live', 'Homepage B slider, Epoxy gallery'),
         row(11, '../media/table-red-v2.webp', 'table-red-v2.webp', 'Red river table', 'live', 'Homepage B slider, Epoxy gallery'),
         row(12, '../media/resin-bark-v2.webp', 'resin-bark-v2.webp', 'Bark set before the pour', 'live', 'Epoxy gallery'),
-        row(13, '../media/resin-bark.webp', 'resin-bark.webp', 'Bark set before the pour (portrait)', 'live', 'About: small tile')
+        row(13, '../media/resin-bark.webp', 'resin-bark.webp', 'Bark set before the pour (portrait)', 'live', 'About: small tile'),
+        row(19, '../media/cmp-after.webp', 'cmp-after.webp', 'River wall with booths, wide', 'liveai', 'Homepage: before/after slider, After side'),
+        row(20, '../media/cmp-before.webp', 'cmp-before.webp', 'Bare wall, straightened', 'live', 'Homepage: before/after slider, Before side')
       ] },
       { title: 'Alternates, not in use', items: [
+        row(5, '../media/step-before.webp', 'step-before.webp', 'Bare wall with mounting rails', 'alt', 'Was the homepage step 01; the drag slider uses #20'),
+        row(6, '../media/step-during.webp', 'step-during.webp', 'Crew fitting the panels', 'alt', 'Was the homepage step 02'),
+        row(7, '../media/step-after.webp', 'step-after.webp', 'Finished wall (portrait crop)', 'alt', 'Was the homepage step 03'),
         row(14, '../media/table-blue.webp', 'table-blue.webp', 'Blue river table, first retouch', 'alt', 'Replaced by #10'),
         row(15, '../media/table-red.webp', 'table-red.webp', 'Red river table, first retouch (portrait)', 'alt', 'Replaced by #11'),
         row(16, '../media/library/ai-wall-staged.webp', 'ai-wall-staged.webp', 'River wall, staged with booths and decor', 'ai', 'Booths, decor and wall details are AI-made'),
@@ -43,7 +45,7 @@ class Component extends DCLogic {
     <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
       <span class="meta" style="color: #F5A546">Not part of the website</span>
       <h1 class="d2">Image library</h1>
-      <p class="p">Every SnM photo on file, numbered. "Live" photos are on the site now. "Alternate" photos are kept for swapping in later: ask for "library #12 on the homepage" and it goes in. AI-edited images are marked and kept off the live pages.</p>
+      <p class="p">Every SnM photo on file, numbered. "Live" photos are on the site now. "Alternate" photos are kept for swapping in later: ask for "library #12 on the homepage" and it goes in. AI-edited and AI-enhanced images are marked, so you always know which photos show the work exactly as built.</p>
     </div>
 
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
