@@ -12,7 +12,6 @@ Every SnM photo on file, numbered the same way as the "Image library" board on t
 | 3 | `wall-day.webp` | River wall, lights off | Commercial: hero and gallery |
 | 4 | `wall-amber.webp` | River wall, amber and blue | Commercial: gallery |
 | 8 | `install-crew.webp` | Crew installing the wall, full frame | Commercial: gallery (Fit-out) |
-| 9 | `team-site.webp` | Team on site | About; Homepage: Built by our own crew |
 | 10 | `table-blue-v2.webp` | Blue river table | Homepage B slider; Epoxy gallery |
 | 11 | `table-red-v2.webp` | Red river table | Homepage B slider; Epoxy gallery |
 | 12 | `resin-bark-v2.webp` | Bark set before the pour | Epoxy gallery |
@@ -27,6 +26,7 @@ Every SnM photo on file, numbered the same way as the "Image library" board on t
 
 | # | File | Shows | Note |
 |---|---|---|---|
+| 9 | `../team-site.webp` | Team on site (selfie) | Removed from the site at your request |
 | 20 | `../cmp-before.webp` | Bare wall, straightened | Was the slider Before side; replaced by #21 |
 | 5 | `../step-before.webp` | Bare wall with mounting rails | Was the homepage step 01 |
 | 6 | `../step-during.webp` | Crew fitting the panels | Was the homepage step 02 |
