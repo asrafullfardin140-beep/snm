@@ -270,6 +270,14 @@ button{cursor:pointer}
 .cmp-foot .meta{margin-right:10px;font-family:Cinzel,serif}
 .cmp-hint{font-family:Jost,sans-serif;font-size:14px;text-align:center}
 
+/* Service cards on the Services page */
+.svc-card{display:flex;flex-direction:column;gap:14px;text-decoration:none;color:var(--ivory)}
+.svc-card img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.svc-card:hover img{transform:scale(1.03)}
+.svc-card .tl{align-self:flex-start;margin-top:4px}
+.svc-card:hover .d4{color:var(--gold)}
+.trade-note{grid-column:6 / span 7;border-left:2px solid var(--gold);padding-left:18px;font-size:15px}
+
 /* Footer, opened by the resin river (the one river per page) */
 .river{display:block;width:100%;height:120px}
 .ftr{background:var(--bg-3);color:var(--ivory-2);font-size:15px}

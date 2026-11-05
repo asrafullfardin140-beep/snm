@@ -18,20 +18,19 @@ Every SnM photo on file, numbered the same way as the "Image library" board on t
 | 12 | `resin-bark-v2.webp` | Bark set before the pour | Epoxy gallery |
 | 13 | `resin-bark.webp` | Bark set before the pour, portrait | About: small tile |
 | 19 | `cmp-after.webp` | River wall with booths, wide (AI-enhanced) | Homepage: before/after slider, After side |
-| 21 | `cmp-before-v2.webp` | Bare wall, crew starting the install (AI-edited) | Homepage: before/after slider, Before side |
-| 16 | `library/ai-wall-staged.webp` | River wall staged with booths and decor (AI-edited) | Homepage B: slider slide 2 |
-| 17 | `library/ai-pour-team.webp` | Team pouring blue resin (AI-made) | Epoxy: How a resin piece is made |
-| 18 | `library/ai-fitout-sanding.webp` | Fit-out with sanding (AI-edited) | About: small tile beside the team photo |
+| 20 | `cmp-before.webp` | Bare wall, straightened | Homepage: before/after slider, Before side |
 
 ## Alternates, not in use
 
 | # | File | Shows | Note |
 |---|---|---|---|
-| 20 | `../cmp-before.webp` | Bare wall, straightened | Was the slider Before side; replaced by #21 |
 | 5 | `../step-before.webp` | Bare wall with mounting rails | Was the homepage step 01 |
 | 6 | `../step-during.webp` | Crew fitting the panels | Was the homepage step 02 |
 | 7 | `../step-after.webp` | Finished wall, portrait crop | Was the homepage step 03 |
 | 14 | `../table-blue.webp` | Blue river table, first retouch | Replaced by #10 |
 | 15 | `../table-red.webp` | Red river table, first retouch | Replaced by #11 |
+| 16 | `ai-wall-staged.webp` | River wall staged with booths and decor | AI-edited: booths, decor and wall details are AI-made |
+| 17 | `ai-pour-team.webp` | Team pouring blue resin | AI-made scene |
+| 18 | `ai-fitout-sanding.webp` | Fit-out with sanding | AI-edited: selfie replaced by an AI-made worker |
 
-AI-edited and AI-enhanced images are marked. #16 to #19 and #21 are live by request.
+AI-edited and AI-enhanced images are marked. #19 (AI-enhanced) is live by request; #16 to #18 stay off the site.

@@ -59,7 +59,7 @@ BLOBS = {
     "faf9cd1b3c871428ecdd2bf7b9be2641": "../media/ws2.jpg", "9e14a600c1b751ac712fe76f953d8182": "../media/hero.mp4",
     "8f30b34b5892b7bd592280b8b52e80e8": "../media/resin.mp4",
 }
-PAGES = ["Main", "Home-Slider", "Commercial", "Residential", "Services", "Epoxy", "Millwork", "Design", "FitOut", "Quote", "About", "Library"]
+PAGES = ["Main", "Home-Slider", "Commercial", "Residential", "Services", "Epoxy", "Millwork", "Design", "FitOut", "Fabrication", "Installation", "Trades", "Quote", "About", "Library"]
 
 
 def unblob(text):
