@@ -171,14 +171,14 @@ class Component extends DCLogic {
     </div>
     <div class="cmp" ref="{{ cmpRef }}" style="--pos: {{ cmpPos }}%">
       <img class="cmp-after" src="../media/cmp-after.webp" alt="After: the finished resin river feature wall above the dining booths" loading="lazy">
-      <div class="cmp-before"><img src="../media/cmp-before.webp" alt="Before: the bare dining room wall with timber mounting rails" loading="lazy"></div>
+      <div class="cmp-before"><img src="../media/cmp-before-v2.webp" alt="Before: the bare dining room wall as our crew starts the install" loading="lazy"></div>
       <span class="cmp-tag cmp-l meta">Before</span>
       <span class="cmp-tag cmp-r meta">After</span>
       <span class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 6l-5 5 5 5M14 6l5 5-5 5"/></svg></span></span>
       <input class="cmp-range" type="range" min="0" max="100" step="0.5" value="{{ cmpPos }}" aria-label="Before and after: drag to compare" onInput="{{ cmpMove }}">
     </div>
     <div class="cmp-foot">
-      <span><span class="meta" style="color: #B9AFA2">Before</span> Bare wall, mounting rails set</span>
+      <span><span class="meta" style="color: #B9AFA2">Before</span> The bare wall, install under way</span>
       <span class="p cmp-hint">Drag the line to compare</span>
       <span style="text-align: right"><span class="meta" style="color: #F5A546">After</span> The finished resin river wall</span>
     </div>
@@ -308,7 +308,7 @@ class Component extends DCLogic {
     </div>
     <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
       <a class="btn" href="Quote.html">Get a Quote</a>
-      <span class="p" style="font-size: 15px">Or call <a href="#">[phone]</a></span>
+      <span class="p" style="font-size: 15px">Or call <a class="call" href="#">[phone]</a></span>
     </div>
   </div>
 </section>
