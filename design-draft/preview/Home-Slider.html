@@ -37,6 +37,32 @@ class Component extends DCLogic {
     const pad = (n) => String(n).padStart(2, '0');
     return {
       cmpPos: this.cmpPos == null ? 50 : this.cmpPos,
+      cmpRef: (el) => {
+        if (!el || this.cmpHinted || el.__hint) return;
+        el.__hint = true;
+        if (typeof IntersectionObserver === 'undefined' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+        const io = new IntersectionObserver((es) => {
+          if (!es[0].isIntersecting || this.cmpHinted) return;
+          this.cmpHinted = true; io.disconnect();
+          let stop = false;
+          ['pointerdown', 'keydown', 'touchstart'].forEach((ev) => el.addEventListener(ev, () => { stop = true; }, { once: true }));
+          const set = (p) => { this.cmpPos = Math.round(p * 2) / 2; el.style.setProperty('--pos', this.cmpPos + '%'); const r = el.querySelector('.cmp-range'); if (r) r.value = this.cmpPos; };
+          const keys = [[0, 50], [700, 68], [1500, 34], [2200, 50]];
+          const ease = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+          const t0 = Date.now();
+          const step = () => {
+            if (stop) return;
+            const t = Date.now() - t0;
+            const i = keys.findIndex((k) => k[0] > t);
+            if (i === -1) { set(50); return; }
+            const [ta, pa] = keys[i - 1], [tb, pb] = keys[i];
+            set(pa + (pb - pa) * ease((t - ta) / (tb - ta)));
+            setTimeout(step, 16);
+          };
+          setTimeout(step, 350);
+        }, { threshold: 0.6 });
+        io.observe(el);
+      },
       cmpMove: (e) => { this.cmpPos = Number(e.target.value); const box = e.target.closest('.cmp'); if (box) box.style.setProperty('--pos', this.cmpPos + '%'); },
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
@@ -177,7 +203,7 @@ class Component extends DCLogic {
       </div>
       <p class="p" style="grid-column: 8 / span 5">A resin river feature wall for a restaurant dining room. Drawn, built in our shop and installed by our own crew.</p>
     </div>
-    <div class="cmp" style="--pos: {{ cmpPos }}%">
+    <div class="cmp" ref="{{ cmpRef }}" style="--pos: {{ cmpPos }}%">
       <img class="cmp-after" src="../media/cmp-after.webp" alt="After: the finished resin river feature wall above the dining booths" loading="lazy">
       <div class="cmp-before"><img src="../media/cmp-before.webp" alt="Before: the bare dining room wall with timber mounting rails" loading="lazy"></div>
       <span class="cmp-tag cmp-l meta">Before</span>
