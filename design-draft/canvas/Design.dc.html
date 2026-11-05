@@ -98,10 +98,29 @@
       <h2 class="d2">Drawn, then built exactly.</h2>
       <p class="p">The drawing you approve is the drawing the shop builds from. [Confirm: CNC programmed directly from the drawings.]</p>
     </div>
-    <div style="grid-column: 6 / span 7; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><div class="ph im im-samp1 r-45"><i>[Sketch]</i></div><figcaption class="p" style="font-size: 15px">Materials</figcaption></figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><div class="ph im im-cad1 r-45"><i>[Render]</i></div><figcaption class="p" style="font-size: 15px">3D model</figcaption></figure>
-      <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px"><div class="ph im im-k4 r-45"><i>[Installed]</i></div><figcaption class="p" style="font-size: 15px">Installed</figcaption></figure>
+    <div style="grid-column: 6 / span 7; display: flex; flex-direction: column; gap: 14px">
+      <div class="cmp" ref="{{ cmpRef }}" style="--pos: {{ cmpPos }}%">
+        <img class="cmp-after" src="/_blob/56c65e64119f22c1036fce578f430f59" alt="Built: a finished kitchen in wood and black cabinetry" loading="lazy">
+        <div class="cmp-before"><div class="cmp-paper" role="img" aria-label="Drawing: a dimensioned shop drawing of a kitchen wall elevation"><svg viewBox="0 0 300 300" aria-hidden="true">
+        <g fill="none" stroke="#5C534A" stroke-width="1">
+          <rect x="30" y="40" width="240" height="78"/><line x1="90" y1="40" x2="90" y2="118"/><line x1="150" y1="40" x2="150" y2="118"/><line x1="210" y1="40" x2="210" y2="118"/>
+          <line x1="22" y1="170" x2="278" y2="170" stroke-width="2"/>
+          <rect x="30" y="174" width="240" height="96"/><line x1="110" y1="174" x2="110" y2="270"/><line x1="190" y1="174" x2="190" y2="270"/>
+          <line x1="30" y1="206" x2="110" y2="206"/><line x1="30" y1="238" x2="110" y2="238"/>
+          <line x1="60" y1="190" x2="80" y2="190"/><line x1="60" y1="222" x2="80" y2="222"/><line x1="60" y1="254" x2="80" y2="254"/>
+          <line x1="180" y1="200" x2="180" y2="240"/><line x1="200" y1="200" x2="200" y2="240"/>
+          <line x1="30" y1="286" x2="270" y2="286" stroke="#A74710"/><line x1="30" y1="281" x2="30" y2="291" stroke="#A74710"/><line x1="270" y1="281" x2="270" y2="291" stroke="#A74710"/>
+          <line x1="14" y1="40" x2="14" y2="270" stroke="#A74710"/><line x1="9" y1="40" x2="19" y2="40" stroke="#A74710"/><line x1="9" y1="270" x2="19" y2="270" stroke="#A74710"/>
+        </g>
+        <text x="150" y="298" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" fill="#A74710">3048</text>
+        <text x="8" y="160" font-family="Jost, sans-serif" font-size="9" fill="#A74710" transform="rotate(-90 8 160)">2286</text>
+      </svg></div></div>
+        <span class="cmp-tag cmp-l meta">Drawing</span>
+        <span class="cmp-tag cmp-r meta">Built</span>
+        <span class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 6l-5 5 5 5M14 6l5 5-5 5"/></svg></span></span>
+        <input class="cmp-range" type="range" min="0" max="100" step="0.5" value="{{ cmpPos }}" aria-label="Drawing and finished kitchen: drag to compare" onInput="{{ cmpMove }}">
+      </div>
+      <p class="p" style="font-size: 14px">Drag the line. [Pair a real SnM drawing with the finished job before launch.]</p>
     </div>
   </div>
 </section>
@@ -180,6 +199,34 @@ class Component extends DCLogic {
       toggle: () => this.setState({ open: s.open === i ? -1 : i })
     }));
     return {
+      cmpPos: this.cmpPos == null ? 50 : this.cmpPos,
+      cmpRef: (el) => {
+        if (!el || this.cmpHinted || el.__hint) return;
+        el.__hint = true;
+        if (typeof IntersectionObserver === 'undefined' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+        const io = new IntersectionObserver((es) => {
+          if (!es[0].isIntersecting || this.cmpHinted) return;
+          this.cmpHinted = true; io.disconnect();
+          let stop = false;
+          ['pointerdown', 'keydown', 'touchstart'].forEach((ev) => el.addEventListener(ev, () => { stop = true; }, { once: true }));
+          const set = (p) => { this.cmpPos = Math.round(p * 2) / 2; el.style.setProperty('--pos', this.cmpPos + '%'); const r = el.querySelector('.cmp-range'); if (r) r.value = this.cmpPos; };
+          const keys = [[0, 50], [700, 68], [1500, 34], [2200, 50]];
+          const ease = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+          const t0 = Date.now();
+          const step = () => {
+            if (stop) return;
+            const t = Date.now() - t0;
+            const i = keys.findIndex((k) => k[0] > t);
+            if (i === -1) { set(50); return; }
+            const [ta, pa] = keys[i - 1], [tb, pb] = keys[i];
+            set(pa + (pb - pa) * ease((t - ta) / (tb - ta)));
+            setTimeout(step, 16);
+          };
+          setTimeout(step, 350);
+        }, { threshold: 0.6 });
+        io.observe(el);
+      },
+      cmpMove: (e) => { this.cmpPos = Number(e.target.value); const box = e.target.closest('.cmp'); if (box) box.style.setProperty('--pos', this.cmpPos + '%'); },
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),

@@ -14,6 +14,19 @@
 </helmet>
 <div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif; position: relative">
 
+<sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
+  <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
+    <div class="intro-zoom">
+      <div class="intro-row">
+        <span class="intro-l">S</span><span class="intro-l intro-n">n</span>
+        <span class="intro-win"><img src="/_blob/685608b5d6a42dbb4f39260428cd87cf" alt=""></span>
+        <span class="intro-l">M</span>
+      </div>
+      <span class="intro-sub meta">Millwork Manufacturing</span>
+    </div>
+  </div>
+</sc-if>
+
 <header class="hdr over">
   <div class="w hdr-in">
     <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/90b8c00073b2615e54a7ab42cfb6a110" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
@@ -159,6 +172,13 @@
       <span class="p cmp-hint">Drag the line to compare</span>
       <span style="text-align: right"><span class="meta" style="color: #F5A546">After</span> The finished resin river wall</span>
     </div>
+  </div>
+</section>
+
+<!-- 3b. Statement: the words light up as you scroll -->
+<section class="s lit" ref="{{ litRef }}" aria-label="How we work">
+  <div class="w">
+    <p class="lit-text"><span class="lw">Every</span> <span class="lw">piece</span> <span class="lw">we</span> <span class="lw">make</span> <span class="lw">is</span> <span class="lw">drawn</span> <span class="lw">for</span> <span class="lw">one</span> <span class="lw">room,</span> <span class="lw">built</span> <span class="lw">in</span> <span class="lw g">our</span> <span class="lw g">own</span> <span class="lw g">shop</span> <span class="lw">and</span> <span class="lw">installed</span> <span class="lw">by</span> <span class="lw">the</span> <span class="lw">people</span> <span class="lw">who</span> <span class="lw">made</span> <span class="lw">it.</span> <span class="lw">That</span> <span class="lw">is</span> <span class="lw">how</span> <span class="lw">a</span> <span class="lw">sketch</span> <span class="lw">becomes</span> <span class="lw">something</span> <span class="lw">you</span> <span class="lw">can</span> <span class="lw g">run</span> <span class="lw g">your</span> <span class="lw g">hand</span> <span class="lw g">along.</span></p>
   </div>
 </section>
 
@@ -321,17 +341,18 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { menuOpen: false, slide: 0, slidesPaused: false, dragPx: 0, dragging: false, review: 0, reviewsPaused: false };
+    this.state = { introDone: (() => { try { if (sessionStorage.getItem('snmIntro') === '1') return true; } catch (e) {} return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); })(), menuOpen: false, slide: 0, slidesPaused: false, dragPx: 0, dragging: false, review: 0, reviewsPaused: false };
     this.drag = null;
   }
   componentDidMount() {
     this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!this.state.introDone) { try { sessionStorage.setItem('snmIntro', '1'); } catch (e) {} this.it = setTimeout(() => this.setState({ introDone: true }), 3000); }
     if (this.reduce) return;
     this.rt = setInterval(() => this.setState({ rot: (this.state.rot || 0) + 1 }), 3200);
     this.t1 = setInterval(() => { if (!this.state.slidesPaused && !this.drag) this.setState({ slide: (this.state.slide + 1) % (this.nSlides || 6) }); }, 7000);
     this.t2 = setInterval(() => { if (!this.state.reviewsPaused) this.setState({ review: (this.state.review + 1) % 5 }); }, 7000);
   }
-  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); if (this.onStory) { window.removeEventListener('scroll', this.onStory); window.removeEventListener('resize', this.onStory); } }
+  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); clearTimeout(this.it); if (this.onLit) { window.removeEventListener('scroll', this.onLit); window.removeEventListener('resize', this.onLit); } if (this.onStory) { window.removeEventListener('scroll', this.onStory); window.removeEventListener('resize', this.onStory); } }
   renderVals() {
     const s = this.state;
     const slides = [
@@ -355,6 +376,27 @@ class Component extends DCLogic {
     this.nSlides = slides.length;
     const pad = (n) => String(n).padStart(2, '0');
     return {
+      showIntro: !this.state.introDone,
+      skipIntro: () => { clearTimeout(this.it); this.setState({ introDone: true }); },
+      litRef: (el) => {
+        if (!el) return;
+        if (!this.litBound) {
+          this.litBound = true;
+          this.onLit = () => {
+            const box = document.querySelector('.lit');
+            if (!box) return;
+            const ws = box.querySelectorAll('.lw');
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { ws.forEach((w) => w.classList.add('on')); return; }
+            const r = box.getBoundingClientRect();
+            const p = Math.min(1, Math.max(0, (window.innerHeight * 0.8 - r.top) / (r.height * 0.9)));
+            const k = Math.round(p * ws.length);
+            ws.forEach((w, i) => w.classList.toggle('on', i < k));
+          };
+          window.addEventListener('scroll', this.onLit, { passive: true });
+          window.addEventListener('resize', this.onLit);
+        }
+        setTimeout(this.onLit, 0);
+      },
       storyRef: (el) => {
         if (!el) return;
         if (!this.storyBound) {

@@ -321,6 +321,7 @@ button{cursor:pointer}
 .story-hint{position:absolute;right:40px;bottom:52px;color:var(--ivory-2)}
 @media (max-width:900px){
   .story{height:380vh}
+  .lit{padding:96px 0}
   .story .story-ui{padding:92px 20px 88px}
   .story-frame:nth-child(1),.story-frame:nth-child(2){object-position:20% 50%}
   .story-shade{background:linear-gradient(180deg,rgba(10,9,8,.7) 0%,rgba(10,9,8,.15) 30%,rgba(10,9,8,.35) 55%,rgba(10,9,8,.88) 100%)}
@@ -339,6 +340,35 @@ button{cursor:pointer}
   .story-caps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
   .story-cap{position:static;translate:none;opacity:1!important;visibility:visible!important;transform:none!important}
 }
+
+/* Logo intro (homepages, once per visit): S n M, the wall opens between the letters, then the view zooms in */
+.intro{position:fixed;inset:0;z-index:100;background:#0A0908;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;animation:intro-out .7s ease 2.25s forwards}
+.intro-zoom{display:flex;flex-direction:column;align-items:center;gap:22px;animation:intro-zoom 1s cubic-bezier(.7,0,.2,1) 1.6s forwards}
+.intro-row{display:flex;align-items:center}
+.intro-l{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(46px,13vw,190px);line-height:1;color:var(--ivory);padding:0 .08em;opacity:0;animation:intro-l .7s cubic-bezier(.16,1,.3,1) forwards}
+.intro-l:nth-child(2){animation-delay:.08s}.intro-l:nth-child(4){animation-delay:.16s}
+.intro-n{font-style:italic;color:var(--gold)}
+.intro-win{display:block;width:0;height:clamp(48px,12vw,170px);overflow:hidden;border-radius:2px;margin:0 .1em;animation:intro-win 1s cubic-bezier(.7,0,.2,1) .55s forwards}
+.intro-win img{width:clamp(120px,34vw,520px);max-width:none;height:100%;object-fit:cover}
+.intro-sub{color:var(--ivory-2);opacity:0;animation:intro-l .6s ease .9s forwards}
+@keyframes intro-l{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes intro-win{to{width:clamp(120px,34vw,520px)}}
+@keyframes intro-zoom{to{transform:scale(6);opacity:0}}
+@keyframes intro-out{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){.intro{display:none}}
+
+/* Statement whose words light up as you scroll */
+.lit{padding:160px 0}
+.lit-text{margin:0;max-width:1060px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(32px,4.4vw,62px);line-height:1.2;letter-spacing:-.005em}
+.lw{color:rgba(243,238,230,.16);transition:color .45s ease}
+.lw.on{color:var(--ivory)}
+.lw.g{font-style:italic}
+.lw.g.on{color:var(--gold)}
+@media (prefers-reduced-motion:reduce){.lw{color:var(--ivory);transition:none}.lw.g{color:var(--gold)}}
+
+/* Drawing side of the Design page slider */
+.cmp-paper{position:absolute;inset:0;background:#F3EEE6;display:flex;align-items:center;justify-content:center;padding:5%}
+.cmp-paper svg{height:100%;width:auto;max-width:100%}
 
 /* Footer, opened by the resin river (the one river per page) */
 .river{display:block;width:100%;height:120px}
