@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SnM Millwork: Image Library</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="snm.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#121212}</style>
+</helmet>
+<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif; padding: 72px 0 96px">
+  <div class="w" style="display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+      <span class="meta" style="color: #F5A546">Not part of the website</span>
+      <h1 class="d2">Image library</h1>
+      <p class="p">Every SnM photo on file, numbered. "Live" photos are on the site now. "Alternate" photos are kept for swapping in later: ask for "library #12 on the homepage" and it goes in. AI-edited images are marked and kept off the live pages.</p>
+    </div>
+
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+      <section style="display: flex; flex-direction: column; gap: 24px">
+        <h2 class="d4" style="border-bottom: 1px solid #2E2A26; padding-bottom: 14px">{{ g.title }}</h2>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+            <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px">
+              <div style="position: relative; aspect-ratio: 4 / 3; background: #1C1A18; border-radius: 2px; overflow: hidden">
+                <img src="{{ it.src }}" alt="{{ it.name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain">
+                <span class="num" style="position: absolute; left: 10px; top: 10px; padding: 4px 9px; background: rgba(10,9,8,.85); border-radius: 2px; font-size: 14px">#{{ it.n }}</span>
+              </div>
+              <figcaption style="display: flex; flex-direction: column; gap: 4px">
+                <span class="meta" style="color: {{ it.color }}">{{ it.status }}</span>
+                <span style="font-weight: 500">{{ it.name }}</span>
+                <span class="p" style="font-size: 14px">{{ it.where }}</span>
+                <span class="p" style="font-size: 13px; color: #8F867B">{{ it.file }}</span>
+              </figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":3200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const C = { live: '#F5A546', alt: '#5FC9CC', ai: '#E5735C' };
+    const row = (n, id, file, name, status, where) => ({
+      n, src: id, file, name, where,
+      status: status === 'live' ? 'Live' : status === 'alt' ? 'Alternate' : 'Alternate · AI-edited',
+      color: C[status]
+    });
+    const groups = [
+      { title: 'On the site now', items: [
+        row(1, '/_blob/685608b5d6a42dbb4f39260428cd87cf', 'wall-blue.webp', 'River wall, blue LEDs', 'live', 'Homepage: For builders and designers'),
+        row(2, '/_blob/70884c43f9b445a960e4868c706628bc', 'wall-blue-slide.webp', 'River wall, blue LEDs (slider crop)', 'live', 'Homepage B: slide 1'),
+        row(3, '/_blob/feea8874ee5016a7b870ae2910fdc5ce', 'wall-day.webp', 'River wall, lights off', 'live', 'Commercial: hero and gallery'),
+        row(4, '/_blob/b72c6f496010df0062ac6bca9e1ec197', 'wall-amber.webp', 'River wall, amber and blue', 'live', 'Commercial: gallery'),
+        row(5, '/_blob/01229eb242c0f434ed4b8706f34db641', 'step-before.webp', 'Bare wall with mounting rails', 'live', 'Homepage: One wall, step 01'),
+        row(6, '/_blob/a0a9d9ab9a1b52dc7dd9b89e77dcb7b0', 'step-during.webp', 'Crew fitting the panels', 'live', 'Homepage: One wall, step 02'),
+        row(7, '/_blob/18a33541275aad83fcbfcfe3c0ea58ee', 'step-after.webp', 'Finished wall (portrait crop)', 'live', 'Homepage: One wall, step 03'),
+        row(8, '/_blob/99990602ecc04e579e868394633d175c', 'install-crew.webp', 'Crew installing the wall (full)', 'live', 'Commercial: gallery, Fit-out'),
+        row(9, '/_blob/1cfecb4602b04070270cdfba4a10ee51', 'team-site.webp', 'Team on site', 'live', 'About and Homepage: Built by our own crew'),
+        row(10, '/_blob/9b0849c67a375543de2a3ea0157538ae', 'table-blue-v2.webp', 'Blue river table', 'live', 'Homepage B slider, Epoxy gallery'),
+        row(11, '/_blob/88e55e2663be0a3058413c3b1172ef09', 'table-red-v2.webp', 'Red river table', 'live', 'Homepage B slider, Epoxy gallery'),
+        row(12, '/_blob/41b8f5a2185621fe193e3d740088cdb6', 'resin-bark-v2.webp', 'Bark set before the pour', 'live', 'Epoxy gallery'),
+        row(13, '/_blob/426098e6f3da8f4e047089b6fe7db596', 'resin-bark.webp', 'Bark set before the pour (portrait)', 'live', 'About: small tile')
+      ] },
+      { title: 'Alternates, not in use', items: [
+        row(14, '/_blob/82e87a578a2c5f0a8af9f26663e44216', 'table-blue.webp', 'Blue river table, first retouch', 'alt', 'Replaced by #10'),
+        row(15, '/_blob/86207d1a6f531ed2863316c04efb4d2e', 'table-red.webp', 'Red river table, first retouch (portrait)', 'alt', 'Replaced by #11'),
+        row(16, '/_blob/77a9848682d5e064a04c191260262834', 'ai-wall-staged.webp', 'River wall, staged with booths and decor', 'ai', 'Booths, decor and wall details are AI-made'),
+        row(17, '/_blob/2373938fb43dadc6e0bd7e3f69535802', 'ai-pour-team.webp', 'Team pouring blue resin', 'ai', 'AI-made scene'),
+        row(18, '/_blob/e4017eab663939ac5a98025960688587', 'ai-fitout-sanding.webp', 'Fit-out with sanding', 'ai', 'Selfie replaced by an AI-made worker')
+      ] }
+    ];
+    return { groups };
+  }
+}
+</script>
+</body>
+</html>

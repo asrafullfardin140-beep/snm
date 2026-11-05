@@ -49,14 +49,18 @@
 <section class="s" style="padding-top: 88px">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 56px">
 
-    <div style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 40px">
+    <div class="qf" style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 40px">
 
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-        <div style="display: flex; flex-direction: column; gap: 24px; padding: 56px 0">
-          <h1 class="d1">Thank you. We have your project.</h1>
-          <p class="lede" style="color: #B9AFA2">A confirmation is on its way to your inbox. [Name] from our team will reply within [X business days] with next steps and a budget range.</p>
+        <div class="q-step" style="display: flex; flex-direction: column; gap: 28px; padding: 40px 0">
+          <span class="q-done" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2.5 6.2l2.3 2.3 4.7-4.9"/></svg></span>
+          <h1 class="d1" style="font-size: 72px">Thank you{{ thanksName }}.</h1>
+          <p class="lede" style="color: #B9AFA2">Your project is with us. A confirmation is on its way to {{ sentTo }}, and [Name] from our team will reply within [X business days] with questions and a budget range.</p>
+          <dl class="q-recap">
+            <sc-for list="{{ recap }}" as="r" hint-placeholder-count="4"><div><dt class="meta">{{ r.k }}</dt><dd>{{ r.v }}</dd></div></sc-for>
+          </dl>
           <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
-            <a class="btn btn-ink" href="Main.dc.html">Back to home</a>
+            <a class="btn" href="Main.dc.html">Back to home</a>
             <a class="btn btn-line" href="Epoxy.dc.html">Browse resin pieces</a>
           </div>
         </div>
@@ -64,74 +68,108 @@
 
       <sc-if value="{{ editing }}" hint-placeholder-val="{{ true }}">
         <div style="display: flex; flex-direction: column; gap: 40px">
-          <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 16px">
             <h1 class="d1" style="font-size: 72px">Tell us about your project.</h1>
-            <p class="lede" style="color: #B9AFA2">Four short steps, about three minutes. Drawings and photos help but aren't required.</p>
+            <p class="lede" style="color: #B9AFA2">Five quick steps, about two minutes. Tap an answer and we move you on.</p>
           </div>
 
-          <ol aria-label="Progress" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
-            <sc-for list="{{ steps }}" as="st" hint-placeholder-count="4">
-              <li aria-current="{{ st.current }}" style="display: flex; flex-direction: column; gap: 10px">
-                <span style="display: block; height: 3px; border-radius: 2px; background: {{ st.bar }}"></span>
-                <span style="font-size: 14px; color: {{ st.color }}">{{ st.label }}</span>
-              </li>
-            </sc-for>
-          </ol>
+          <div class="q-prog" role="group" aria-label="Progress">
+            <div class="q-prog-top"><span class="meta num">Step {{ stepNum }} of 5</span><span class="q-prog-name">{{ stepName }}</span></div>
+            <div class="q-track"><span style="width: {{ pct }}%"></span></div>
+            <sc-if value="{{ hasPicks }}" hint-placeholder-val="{{ false }}">
+              <div class="q-picks" aria-label="Your answers so far">
+                <sc-for list="{{ picks }}" as="k" hint-placeholder-count="2"><button type="button" class="q-pick" onClick="{{ k.go }}" aria-label="{{ k.aria }}">{{ k.v }}</button></sc-for>
+              </div>
+            </sc-if>
+          </div>
 
-          <form onSubmit="{{ submit }}" style="display: flex; flex-direction: column; gap: 28px">
+          <form onSubmit="{{ submit }}" novalidate style="display: flex; flex-direction: column; gap: 36px">
 
             <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
-              <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px">
-                <legend class="d3" style="margin-bottom: 20px">Who is the project for?</legend>
-                <div class="g" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
-                  <button type="button" class="{{ comCls }}" aria-pressed="{{ comPressed }}" onClick="{{ pickCom }}"><span class="d4">A business</span><span class="p" style="font-size: 15px">Contractor, designer, developer or business owner.</span></button>
-                  <button type="button" class="{{ resCls }}" aria-pressed="{{ resPressed }}" onClick="{{ pickRes }}"><span class="d4">My home</span><span class="p" style="font-size: 15px">Kitchen, bath, closet, built-in or a resin piece.</span></button>
+              <fieldset class="{{ stepCls }}">
+                <legend class="d3">Who is the project for?</legend>
+                <div class="q-grid q-grid-2">
+                  <sc-for list="{{ whoOpts }}" as="o" hint-placeholder-count="2">
+                    <button type="button" class="{{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.pick }}">
+                      <span class="tile-img"><img src="{{ o.img }}" alt=""></span>
+                      <span class="tile-body"><span class="d4">{{ o.label }}</span><span class="p" style="font-size: 15px">{{ o.sub }}</span></span>
+                      <span class="mark"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-4.9"/></svg></span>
+                    </button>
+                  </sc-for>
                 </div>
               </fieldset>
             </sc-if>
 
             <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
-              <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px">
-                <legend class="d3" style="margin-bottom: 20px">The project</legend>
-                <div class="field"><label for="q-type">What do you need?</label>
-                  <sc-if value="{{ isCom }}" hint-placeholder-val="{{ true }}"><select id="q-type"><option>Millwork package from drawings</option><option>Reception or feature desk</option><option>Retail fixtures</option><option>Full interior fit-out</option><option>Resin bar or counter top</option><option>Something else</option></select></sc-if>
-                  <sc-if value="{{ isRes }}" hint-placeholder-val="{{ false }}"><select id="q-type"><option>Kitchen</option><option>Vanity or bath</option><option>Closet</option><option>Built-in or media wall</option><option>Resin table or piece</option><option>Something else</option></select></sc-if>
+              <fieldset class="{{ stepCls }}">
+                <legend class="d3">What do you need?</legend>
+                <div class="q-grid q-grid-3">
+                  <sc-for list="{{ needOpts }}" as="o" hint-placeholder-count="6">
+                    <button type="button" class="{{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.pick }}">
+                      <span class="tile-body"><span class="d5">{{ o.label }}</span><span class="p" style="font-size: 14px">{{ o.sub }}</span></span>
+                      <span class="mark"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-4.9"/></svg></span>
+                    </button>
+                  </sc-for>
                 </div>
-                <div class="g" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
-                  <div class="field"><label for="q-loc">Project location</label><input id="q-loc" type="text" autocomplete="address-level2" placeholder="City or postal code"></div>
-                  <div class="field"><label for="q-when">When do you need it?</label><select id="q-when"><option>Within 1 month</option><option>1 to 3 months</option><option>3 to 6 months</option><option>Just planning</option></select></div>
-                </div>
-                <div class="field"><label for="q-budget">Budget range</label><select id="q-budget"><option>Not sure yet</option><option>[Under $10,000]</option><option>[$10,000 to $30,000]</option><option>[$30,000 to $75,000]</option><option>[Over $75,000]</option></select><span class="hint">A range helps us suggest the right materials. It doesn't lock you in.</span></div>
               </fieldset>
             </sc-if>
 
             <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
-              <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px">
-                <legend class="d3" style="margin-bottom: 20px">Details and files</legend>
-                <div class="field"><label for="q-desc">Describe the project</label><textarea id="q-desc" rows="5" placeholder="Sizes, materials you like, anything that matters to you"></textarea></div>
-                <div class="field"><label for="q-files">Drawings, photos or inspiration</label><input id="q-files" type="file" multiple><span class="hint">PDF, DWG, JPG or PNG, up to [25 MB] each.</span></div>
-                <sc-if value="{{ isCom }}" hint-placeholder-val="{{ true }}"><div class="field"><label for="q-tender">Tender closing date (if any)</label><input id="q-tender" type="date"></div></sc-if>
+              <fieldset class="{{ stepCls }}">
+                <legend class="d3">Timing and budget</legend>
+                <div class="q-group">
+                  <span class="meta q-label" id="q-when-l">When do you need it?</span>
+                  <div class="q-chips" role="group" aria-labelledby="q-when-l">
+                    <sc-for list="{{ whenOpts }}" as="o" hint-placeholder-count="4"><button type="button" class="{{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.pick }}">{{ o.label }}</button></sc-for>
+                  </div>
+                </div>
+                <div class="q-group">
+                  <span class="meta q-label" id="q-budget-l">Budget range</span>
+                  <div class="q-chips" role="group" aria-labelledby="q-budget-l">
+                    <sc-for list="{{ budgetOpts }}" as="o" hint-placeholder-count="5"><button type="button" class="{{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.pick }}">{{ o.label }}</button></sc-for>
+                  </div>
+                  <span class="hint">A range helps us suggest the right materials. It doesn't lock you in.</span>
+                </div>
               </fieldset>
             </sc-if>
 
             <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
-              <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px">
-                <legend class="d3" style="margin-bottom: 20px">How do we reach you?</legend>
-                <div class="g" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
-                  <div class="field"><label for="q-name">Full name</label><input id="q-name" type="text" autocomplete="name" required></div>
-                  <sc-if value="{{ isCom }}" hint-placeholder-val="{{ true }}"><div class="field"><label for="q-co">Company</label><input id="q-co" type="text" autocomplete="organization"></div></sc-if>
-                  <div class="field"><label for="q-email">Email</label><input id="q-email" type="email" autocomplete="email" required></div>
-                  <div class="field"><label for="q-phone">Phone</label><input id="q-phone" type="tel" autocomplete="tel"></div>
-                </div>
-                <div class="field"><label for="q-pref">Best way to reach you</label><select id="q-pref"><option>Email</option><option>Phone call</option><option>Text message</option></select></div>
+              <fieldset class="{{ stepCls }}">
+                <legend class="d3">Details and files <span class="q-opt">Optional</span></legend>
+                <div class="field"><label for="q-desc">Describe the project</label><textarea id="q-desc" rows="4" placeholder="Sizes, materials you like, anything that matters to you">{{ v.desc }}</textarea></div>
+                <label class="q-drop" for="q-files">
+                  <input id="q-files" type="file" multiple accept=".pdf,.dwg,.jpg,.jpeg,.png" onChange="{{ pickFiles }}">
+                  <span class="d5">{{ filesTitle }}</span>
+                  <span class="p" style="font-size: 14px">{{ filesSub }}</span>
+                </label>
+                <sc-if value="{{ isCom }}" hint-placeholder-val="{{ true }}"><div class="field"><label for="q-tender">Tender closing date, if any</label><input id="q-tender" type="date" value="{{ v.tender }}"></div></sc-if>
               </fieldset>
             </sc-if>
 
-            <div class="stk" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid #2E2A26; padding-top: 28px">
-              <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}"><button type="button" class="btn btn-line" onClick="{{ back }}">Back</button></sc-if>
-              <sc-if value="{{ noBack }}" hint-placeholder-val="{{ true }}"><span class="p" style="font-size: 15px">Step {{ stepNum }} of 4</span></sc-if>
-              <sc-if value="{{ notLast }}" hint-placeholder-val="{{ true }}"><button type="button" class="btn btn-ink" onClick="{{ next }}">Continue</button></sc-if>
-              <sc-if value="{{ isLast }}" hint-placeholder-val="{{ false }}"><button type="submit" class="btn">Send my project</button></sc-if>
+            <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+              <fieldset class="{{ stepCls }}">
+                <legend class="d3">How do we reach you?</legend>
+                <div class="q-fields">
+                  <div class="{{ nameCls }}"><label for="q-name">Full name</label><input id="q-name" type="text" autocomplete="name" value="{{ v.name }}" aria-invalid="{{ nameInvalid }}" aria-describedby="q-name-e"><span class="q-err" id="q-name-e" role="alert">{{ err.name }}</span></div>
+                  <sc-if value="{{ isCom }}" hint-placeholder-val="{{ true }}"><div class="field"><label for="q-co">Company</label><input id="q-co" type="text" autocomplete="organization" value="{{ v.co }}"></div></sc-if>
+                  <div class="{{ emailCls }}"><label for="q-email">Email</label><input id="q-email" type="email" autocomplete="email" value="{{ v.email }}" aria-invalid="{{ emailInvalid }}" aria-describedby="q-email-e"><span class="q-err" id="q-email-e" role="alert">{{ err.email }}</span></div>
+                  <div class="field"><label for="q-phone">Phone</label><input id="q-phone" type="tel" autocomplete="tel" value="{{ v.phone }}"></div>
+                  <div class="field"><label for="q-loc">Project location</label><input id="q-loc" type="text" autocomplete="address-level2" placeholder="City or postal code" value="{{ v.loc }}"></div>
+                </div>
+                <div class="q-group">
+                  <span class="meta q-label" id="q-pref-l">Best way to reach you</span>
+                  <div class="q-chips" role="group" aria-labelledby="q-pref-l">
+                    <sc-for list="{{ prefOpts }}" as="o" hint-placeholder-count="3"><button type="button" class="{{ o.cls }}" aria-pressed="{{ o.pressed }}" onClick="{{ o.pick }}">{{ o.label }}</button></sc-for>
+                  </div>
+                </div>
+              </fieldset>
+            </sc-if>
+
+            <div class="q-nav">
+              <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}"><button type="button" class="q-back" onClick="{{ back }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M14 8H3M7 4L3 8l4 4"/></svg><span>Back</span></button></sc-if>
+              <sc-if value="{{ noBack }}" hint-placeholder-val="{{ true }}"><span class="p" style="font-size: 14px">Takes about two minutes.</span></sc-if>
+              <sc-if value="{{ showNext }}" hint-placeholder-val="{{ false }}"><button type="button" class="btn q-next" onClick="{{ next }}"><span>{{ nextLabel }}</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></sc-if>
+              <sc-if value="{{ isLast }}" hint-placeholder-val="{{ false }}"><button type="submit" class="btn q-next"><span>Send my project</span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></sc-if>
             </div>
           </form>
         </div>
@@ -178,38 +216,138 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2600}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":2000}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { menuOpen: false, step: 1, who: 'com', sent: false };
+    this.state = {
+      menuOpen: false, step: 1, dir: 'fwd', sent: false,
+      who: '', need: '', when: '', budget: '', pref: 'Email',
+      v: { desc: '', tender: '', name: '', co: '', email: '', phone: '', loc: '' },
+      files: [], err: { name: '', email: '' }
+    };
+    this.timer = null;
+  }
+  componentWillUnmount() { clearTimeout(this.timer); }
+  // Keep typed answers when moving between steps: read the current step's fields before it unmounts.
+  grab() {
+    const v = { ...this.state.v };
+    ['desc', 'tender', 'name', 'co', 'email', 'phone', 'loc'].forEach((k) => {
+      const el = document.getElementById('q-' + k);
+      if (el) v[k] = el.value.trim();
+    });
+    return v;
+  }
+  go(step) {
+    clearTimeout(this.timer);
+    const s = this.state;
+    this.setState({ v: this.grab(), step, dir: step < s.step ? 'back' : 'fwd', still: false });
+    if (typeof window !== 'undefined' && window.scrollY > 260) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  // Tap an answer: show it selected, then move on by itself.
+  pickThen(patch, nextStep) {
+    clearTimeout(this.timer);
+    this.setState({ ...patch, still: true });
+    if (nextStep) this.timer = setTimeout(() => this.go(nextStep), 420);
   }
   renderVals() {
     const s = this.state;
-    const labels = ['Who it’s for', 'The project', 'Details and files', 'Contact'];
+    const isCom = s.who === 'com';
+    const names = ['Who it’s for', 'What you need', 'Timing and budget', 'Details and files', 'Contact'];
+    const opt = (list, key, after) => list.map((o) => {
+      const label = typeof o === 'string' ? o : o.label;
+      const on = s[key] === (o.id || label);
+      return {
+        ...(typeof o === 'string' ? { label } : o),
+        cls: (after === 'chip' ? 'q-chip' : 'tile') + (on ? ' on' : ''),
+        pressed: on ? 'true' : 'false',
+        pick: () => {
+          const val = o.id || label;
+          const patch = { [key]: val };
+          if (key === 'who' && val !== s.who) patch.need = '';
+          let nextStep = 0;
+          if (key === 'who') nextStep = 2;
+          if (key === 'need') nextStep = 3;
+          if (key === 'when' && s.budget) nextStep = 4;
+          if (key === 'budget' && s.when) nextStep = 4;
+          this.pickThen(patch, nextStep);
+        }
+      };
+    });
+    const needCom = [
+      { label: 'Millwork package', sub: 'Priced from your drawings' },
+      { label: 'Reception or feature desk', sub: 'A one-off centrepiece' },
+      { label: 'Feature wall', sub: 'Wood, resin or lit panels' },
+      { label: 'Retail fixtures', sub: 'Displays, cash wraps, shelving' },
+      { label: 'Full interior fit-out', sub: 'Coordinated with your trades' },
+      { label: 'Something else', sub: 'Tell us in the next steps' }
+    ];
+    const needRes = [
+      { label: 'Kitchen', sub: 'Cabinets, island, counters' },
+      { label: 'Vanity or bath', sub: 'Made to your room' },
+      { label: 'Closet', sub: 'Walk-in or reach-in' },
+      { label: 'Built-in or media wall', sub: 'Shelving, panelling, storage' },
+      { label: 'Resin table or piece', sub: 'River tables and more' },
+      { label: 'Something else', sub: 'Tell us in the next steps' }
+    ];
+    const whoLabel = s.who === 'com' ? 'A business' : s.who === 'res' ? 'My home' : '';
+    const picks = [
+      whoLabel && { v: whoLabel, step: 1 },
+      s.need && { v: s.need, step: 2 },
+      s.when && { v: s.when, step: 3 },
+      s.budget && { v: s.budget, step: 3 }
+    ].filter(Boolean).filter((p) => p.step < s.step).map((p) => ({ v: p.v, aria: 'Change: ' + p.v, go: () => this.go(p.step) }));
+    const err = s.err;
+    const n = s.files.length;
     return {
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
       sent: s.sent, editing: !s.sent,
-      s1: s.step === 1, s2: s.step === 2, s3: s.step === 3, s4: s.step === 4,
-      stepNum: s.step,
-      isCom: s.who === 'com', isRes: s.who === 'res',
-      comCls: s.who === 'com' ? 'choice on' : 'choice', comPressed: s.who === 'com' ? 'true' : 'false',
-      resCls: s.who === 'res' ? 'choice on' : 'choice', resPressed: s.who === 'res' ? 'true' : 'false',
-      pickCom: () => this.setState({ who: 'com' }),
-      pickRes: () => this.setState({ who: 'res' }),
-      steps: labels.map((label, i) => ({
-        label,
-        bar: i + 1 <= s.step ? '#F5A546' : '#2E2A26',
-        color: i + 1 === s.step ? '#F3EEE6' : '#B9AFA2',
-        current: i + 1 === s.step ? 'step' : 'false'
-      })),
+      s1: s.step === 1, s2: s.step === 2, s3: s.step === 3, s4: s.step === 4, s5: s.step === 5,
+      stepCls: s.still ? 'q-step' : 'q-step ' + (s.dir === 'back' ? 'q-in-back' : 'q-in'),
+      stepNum: s.step, stepName: names[s.step - 1], pct: Math.round((s.step - 1) / 5 * 100 + 10),
+      picks, hasPicks: picks.length > 0,
+      isCom, v: s.v, err,
+      whoOpts: opt([
+        { id: 'com', label: 'A business', sub: 'Contractor, designer, developer or business owner.', img: '/_blob/feea8874ee5016a7b870ae2910fdc5ce' },
+        { id: 'res', label: 'My home', sub: 'Kitchen, bath, closet, built-in or a resin piece.', img: '/_blob/301cccebed344a1d214746fbfdff3600' }
+      ], 'who'),
+      needOpts: opt(isCom ? needCom : needRes, 'need'),
+      whenOpts: opt(['Within 1 month', '1 to 3 months', '3 to 6 months', 'Just planning'], 'when', 'chip'),
+      budgetOpts: opt(['Not sure yet', '[Under $10,000]', '[$10,000 to $30,000]', '[$30,000 to $75,000]', '[Over $75,000]'], 'budget', 'chip'),
+      prefOpts: opt(['Email', 'Phone call', 'Text message'], 'pref', 'chip'),
+      filesTitle: n ? n + (n === 1 ? ' file added' : ' files added') : 'Add drawings, photos or inspiration',
+      filesSub: n ? s.files.slice(0, 3).join(', ') + (n > 3 ? ' and ' + (n - 3) + ' more' : '') : 'PDF, DWG, JPG or PNG, up to [25 MB] each. Tap to choose files.',
+      pickFiles: (e) => this.setState({ v: this.grab(), still: true, files: Array.from(e.target.files || []).map((f) => f.name) }),
+      nameCls: 'field' + (err.name ? ' bad' : ''), emailCls: 'field' + (err.email ? ' bad' : ''),
+      nameInvalid: err.name ? 'true' : 'false', emailInvalid: err.email ? 'true' : 'false',
       canBack: s.step > 1, noBack: s.step === 1,
-      notLast: s.step < 4, isLast: s.step === 4,
-      back: () => this.setState({ step: Math.max(1, s.step - 1) }),
-      next: () => this.setState({ step: Math.min(4, s.step + 1) }),
-      submit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+      showNext: (s.step === 2 && s.need) || (s.step === 3 && s.when && s.budget) || s.step === 4,
+      nextLabel: 'Continue',
+      isLast: s.step === 5,
+      back: () => this.go(Math.max(1, s.step - 1)),
+      next: () => this.go(Math.min(5, s.step + 1)),
+      submit: (e) => {
+        e.preventDefault();
+        const v = this.grab();
+        const e2 = { name: '', email: '' };
+        if (!v.name) e2.name = 'Please add your name so we know who to reply to.';
+        if (!v.email) e2.email = 'Please add your email. Your confirmation goes there.';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) e2.email = 'That email looks incomplete. Check for a typo, like a missing @ or .com.';
+        if (e2.name || e2.email) {
+          this.setState({ v, err: e2, still: true });
+          setTimeout(() => { const el = document.getElementById(e2.name ? 'q-name' : 'q-email'); if (el) el.focus(); }, 30);
+          return;
+        }
+        this.setState({ v, err: e2, sent: true });
+        if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      thanksName: s.v.name ? ', ' + s.v.name.split(' ')[0] : '',
+      sentTo: s.v.email || 'your inbox',
+      recap: [
+        { k: 'For', v: whoLabel }, { k: 'Project', v: s.need }, { k: 'Timing', v: s.when }, { k: 'Budget', v: s.budget }
+      ].filter((r) => r.v)
     };
   }
 }

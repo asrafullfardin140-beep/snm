@@ -7,6 +7,16 @@ OUT = Path(sys.argv[2])   # design-draft/preview
 BLOBS = {
     "03963753ad4feea4c43c038b7e4e2ca4": "../media/hero.mp4",
     "685608b5d6a42dbb4f39260428cd87cf": "../media/wall-blue.webp",
+    "01229eb242c0f434ed4b8706f34db641": "../media/step-before.webp",
+    "a0a9d9ab9a1b52dc7dd9b89e77dcb7b0": "../media/step-during.webp",
+    "18a33541275aad83fcbfcfe3c0ea58ee": "../media/step-after.webp",
+    "9b0849c67a375543de2a3ea0157538ae": "../media/table-blue-v2.webp",
+    "88e55e2663be0a3058413c3b1172ef09": "../media/table-red-v2.webp",
+    "41b8f5a2185621fe193e3d740088cdb6": "../media/resin-bark-v2.webp",
+    "99990602ecc04e579e868394633d175c": "../media/install-crew.webp",
+    "2373938fb43dadc6e0bd7e3f69535802": "../media/library/ai-pour-team.webp",
+    "77a9848682d5e064a04c191260262834": "../media/library/ai-wall-staged.webp",
+    "e4017eab663939ac5a98025960688587": "../media/library/ai-fitout-sanding.webp",
     "1cfecb4602b04070270cdfba4a10ee51": "../media/team-site.webp",
     "70884c43f9b445a960e4868c706628bc": "../media/wall-blue-slide.webp",
     "feea8874ee5016a7b870ae2910fdc5ce": "../media/wall-day.webp",
@@ -46,7 +56,7 @@ BLOBS = {
     "faf9cd1b3c871428ecdd2bf7b9be2641": "../media/ws2.jpg", "9e14a600c1b751ac712fe76f953d8182": "../media/hero.mp4",
     "8f30b34b5892b7bd592280b8b52e80e8": "../media/resin.mp4",
 }
-PAGES = ["Main", "Home-Slider", "Commercial", "Residential", "Services", "Epoxy", "Millwork", "Design", "FitOut", "Quote", "About"]
+PAGES = ["Main", "Home-Slider", "Commercial", "Residential", "Services", "Epoxy", "Millwork", "Design", "FitOut", "Quote", "About", "Library"]
 
 
 def unblob(text):

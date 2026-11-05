@@ -21,7 +21,8 @@ class Component extends DCLogic {
       { src: '../media/wall-blue-slide.webp', alt: 'Resin river feature wall with blue LED lighting in a restaurant', kind: 'Commercial', name: 'Resin river feature wall' },
       { src: '../media/shop1.jpg', alt: 'Woodworking shop with table saw and stacked lumber', kind: 'Our shop', name: '[Built in our own shop]' },
       { src: '../media/rec1.jpg', alt: 'Reception desk with a wood-slat feature wall', kind: 'Commercial', name: '[Office reception desk]' },
-      { src: '../media/table-blue.webp', alt: 'Live-edge slabs with a blue resin river and bark inlays', kind: 'Epoxy & Resin', name: 'Blue river table' },
+      { src: '../media/table-blue-v2.webp', alt: 'Live-edge slabs with a blue resin river and bark inlays', kind: 'Epoxy & Resin', name: 'Blue river table' },
+      { src: '../media/table-red-v2.webp', alt: 'Live-edge slabs with a deep red resin river and bark inlays', kind: 'Epoxy & Resin', name: 'Red river table' },
       { src: '../media/off2.jpg', alt: 'Executive office with walnut millwork and lit shelving', kind: 'Commercial', name: '[Executive office millwork]' },
       { src: '../media/kit1.jpg', alt: 'Kitchen with wood and black cabinetry', kind: 'Residential', name: '[Wood and black kitchen]' },
       { src: '../media/cnc1.jpg', alt: 'CNC machine cutting a wood panel', kind: 'Fabrication', name: '[CNC precision cutting]' }
@@ -164,6 +165,24 @@ class Component extends DCLogic {
   </div>
 </section>
 
+<!-- 3. From concept to completion: one real wall, three moments -->
+<section class="s bg-ebony" aria-labelledby="c2c-h">
+  <div class="w" style="display: flex; flex-direction: column; gap: 56px">
+    <div class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: end">
+      <div style="grid-column: 1 / span 7; display: flex; flex-direction: column; gap: 18px">
+        <span class="meta" style="color: #F5A546">Recent project &middot; Restaurant feature wall</span>
+        <h2 id="c2c-h" class="d2">One wall, start to finish.</h2>
+      </div>
+      <p class="p" style="grid-column: 8 / span 5">A resin river feature wall for a restaurant dining room. Drawn, built in our shop and installed by our own crew.</p>
+    </div>
+    <ol class="c2c" aria-label="The wall, from bare drywall to finished">
+      <li><figure><img src="../media/step-before.webp" alt="Bare dining room wall with timber mounting rails fixed in place" loading="lazy"><figcaption><span class="meta num">01 &middot; Before</span><span class="d5">Bare wall, mounting rails set</span></figcaption></figure></li>
+      <li><figure><img src="../media/step-during.webp" alt="Two SnM installers fitting live-edge wood panels to the wall from a ladder" loading="lazy"><figcaption><span class="meta num">02 &middot; During</span><span class="d5">Our crew fitting the panels</span></figcaption></figure></li>
+      <li><figure><img src="../media/step-after.webp" alt="Finished live-edge wood feature wall with a resin river through the middle" loading="lazy"><figcaption><span class="meta num">03 &middot; After</span><span class="d5">The finished resin river wall</span></figcaption></figure></li>
+    </ol>
+  </div>
+</section>
+
 <!-- 4. Drawn first, built once -->
 <section class="s bg-sand">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
@@ -236,6 +255,19 @@ class Component extends DCLogic {
       <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: #F5A546">3</span><h3 class="d4">Build</h3><p class="p" style="font-size: 16px">Made in our shop, with progress photos sent along the way.</p></li>
       <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: #F5A546">4</span><h3 class="d4">Install</h3><p class="p" style="font-size: 16px">Our crew installs and finishes on site, then walks you through it.</p></li>
     </ol>
+  </div>
+</section>
+
+<!-- 7b. Our own crew -->
+<section class="s bg-ebony">
+  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
+    <img class="cover r-32" src="../media/team-site.webp" alt="SnM's install team on site during a restaurant fit-out" loading="lazy" style="grid-column: 1 / span 7; height: auto">
+    <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
+      <span class="meta" style="color: #F5A546">Our people</span>
+      <h2 class="d2">Built by our own crew.</h2>
+      <p class="p">The people who build your piece in our shop are the people who install it on site. No subcontractors, one point of contact.</p>
+      <a class="tl" href="About.html" style="align-self: flex-start">Meet the team</a>
+    </div>
   </div>
 </section>
 

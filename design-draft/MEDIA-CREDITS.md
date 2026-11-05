@@ -47,5 +47,10 @@ Supplied by SnM. Retouched for the web (cropped, straightened, colour and light 
 | `table-red.webp` | Red river table | Epoxy gallery |
 | `resin-bark.webp` | Bark and live-edge strips set before a pour | Epoxy gallery, About |
 | `team-site.webp` | SnM's install team on a restaurant fit-out (team agreed to be shown) | About page |
+| `step-before.webp`, `step-during.webp`, `step-after.webp` | One restaurant wall: bare rails, install, finished | Homepage: One wall, start to finish |
+| `install-crew.webp` | Crew installing the river wall | Commercial gallery |
+| `table-blue-v2.webp`, `table-red-v2.webp`, `resin-bark-v2.webp` | Cleaned-up top-down shots of the resin pieces | Homepage B slider, Epoxy gallery |
+
+The full numbered list, including alternates and AI-edited images kept off the site, is in `media/library/README.md`.
 
 `snm-logo.png` is SnM's own logo from the SnM Brand Book, with its black background removed.

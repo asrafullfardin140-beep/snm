@@ -5,7 +5,7 @@ class DCLogic {
   forceUpdate() { scheduleRender(); }
 }
 let comp, tpl, root, pending = false;
-function scheduleRender() { if (pending) return; pending = true; requestAnimationFrame(() => { pending = false; render(); }); }
+function scheduleRender() { if (pending) return; pending = true; setTimeout(() => { pending = false; render(); }, 0); }
 function lookup(path, scope) {
   path = path.trim();
   if (path === 'true') return true; if (path === 'false') return false;

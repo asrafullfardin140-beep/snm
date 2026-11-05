@@ -216,9 +216,9 @@ class Component extends DCLogic {
     const R = { teal: ['Ocean teal', '#0D999E'], clear: ['Clear', '#CFE0DD'], smoke: ['Smoke', '#3A3633'], amber: ['Amber', '#DE701E'] };
     const s = this.state;
     const shots = [
-      { cat: 'Table', name: 'Blue river table', src: '/_blob/82e87a578a2c5f0a8af9f26663e44216', alt: 'Live-edge slabs with a blue resin river and bark inlays' },
-      { cat: 'Table', name: 'Red river table', src: '/_blob/86207d1a6f531ed2863316c04efb4d2e', alt: 'Live-edge slabs with a deep red resin river and bark inlays' },
-      { cat: 'In the shop', name: 'Bark set before the pour', src: '/_blob/426098e6f3da8f4e047089b6fe7db596', alt: 'Bark pieces and live-edge strips laid in a mould before the resin pour' }
+      { cat: 'Table', name: 'Blue river table', src: '/_blob/9b0849c67a375543de2a3ea0157538ae', alt: 'Live-edge slabs with a blue resin river and bark inlays' },
+      { cat: 'Table', name: 'Red river table', src: '/_blob/88e55e2663be0a3058413c3b1172ef09', alt: 'Live-edge slabs with a deep red resin river and bark inlays' },
+      { cat: 'In the shop', name: 'Bark set before the pour', src: '/_blob/41b8f5a2185621fe193e3d740088cdb6', alt: 'Bark pieces and live-edge strips laid in a mould before the resin pour' }
     ];
     const opts = (map, key) => Object.keys(map).map((id) => ({
       label: map[id][0], cls: s[key] === id ? 'pill on' : 'pill', pressed: s[key] === id ? 'true' : 'false',
