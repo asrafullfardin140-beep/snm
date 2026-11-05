@@ -12,9 +12,10 @@ class Component extends DCLogic {
     this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (this.reduce && this.vid) { this.vid.pause(); this.setState({ vidPlaying: false }); }
     if (this.reduce) return;
+    this.rt = setInterval(() => this.setState({ rot: (this.state.rot || 0) + 1 }), 3200);
     this.t2 = setInterval(() => { if (!this.state.reviewsPaused) this.setState({ review: (this.state.review + 1) % 5 }); }, 7000);
   }
-  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); }
+  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); }
   renderVals() {
     const s = this.state;
     const slides = [
@@ -34,6 +35,7 @@ class Component extends DCLogic {
     ];
     const pad = (n) => String(n).padStart(2, '0');
     return {
+      rotWords: ['Custom Millwork.', 'Kitchens & Vanities.', 'Epoxy River Tables.', 'Reception Desks.', 'Feature Walls.', 'Interior Fit-Outs.'].map((w, i, a) => { const c = (this.state.rot || 0) % a.length, p = (c + a.length - 1) % a.length; return { t: w, cls: i === c ? 'on' : (i === p && this.state.rot ? 'out' : '') }; }),
       cmpPos: this.cmpPos == null ? 50 : this.cmpPos,
       cmpRef: (el) => {
         if (!el || this.cmpHinted || el.__hint) return;
@@ -129,7 +131,7 @@ class Component extends DCLogic {
   <video ref="{{ vidRef }}" src="../media/hero.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
   <div class="hero-shade"></div>
   <div class="w hero-c">
-    <h1 class="d1" style="max-width: 940px">Fine millwork, cabinetry and resin, made to measure.</h1>
+    <h1 class="d1 rot-h" style="max-width: 980px"><span class="sr-only">We design, build and install custom millwork, kitchens and vanities, epoxy river tables, reception desks, feature walls and interior fit-outs.</span><span aria-hidden="true">We design, build &amp; install<span class="rot"><sc-for list="{{ rotWords }}" as="w" hint-placeholder-count="6"><span class="{{ w.cls }}">{{ w.t }}</span></sc-for></span></span></h1>
     <div class="stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px">
       <p class="lede" style="color: #E4DCD0">Designed, built in our own shop and installed by one team, for commercial interiors and private homes across [service area].</p>
       <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
