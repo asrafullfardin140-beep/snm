@@ -7,6 +7,7 @@ OUT = Path(sys.argv[2])   # design-draft/preview
 BLOBS = {
     "03963753ad4feea4c43c038b7e4e2ca4": "../media/hero.mp4",
     "685608b5d6a42dbb4f39260428cd87cf": "../media/wall-blue.webp",
+    "1cfecb4602b04070270cdfba4a10ee51": "../media/team-site.webp",
     "70884c43f9b445a960e4868c706628bc": "../media/wall-blue-slide.webp",
     "feea8874ee5016a7b870ae2910fdc5ce": "../media/wall-day.webp",
     "b72c6f496010df0062ac6bca9e1ec197": "../media/wall-amber.webp",

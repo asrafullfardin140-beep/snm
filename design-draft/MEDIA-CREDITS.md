@@ -45,6 +45,7 @@ Supplied by SnM. Retouched for the web (cropped, straightened, colour and light 
 | `wall-amber.webp` | Resin river wall, amber and blue LEDs | Commercial gallery |
 | `table-blue.webp` | Blue river table | Homepage B slider, Epoxy gallery |
 | `table-red.webp` | Red river table | Epoxy gallery |
-| `resin-bark.webp` | Bark and live-edge strips set before a pour | Epoxy gallery |
+| `resin-bark.webp` | Bark and live-edge strips set before a pour | Epoxy gallery, About |
+| `team-site.webp` | SnM's install team on a restaurant fit-out (team agreed to be shown) | About page |
 
 `snm-logo.png` is SnM's own logo from the SnM Brand Book, with its black background removed.
