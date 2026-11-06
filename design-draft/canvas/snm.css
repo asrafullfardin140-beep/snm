@@ -341,19 +341,19 @@ button{cursor:pointer}
   .story-cap{position:static;translate:none;opacity:1!important;visibility:visible!important;transform:none!important}
 }
 
-/* Logo intro (homepages, once per visit): S n M, the wall opens between the letters, then the view zooms in */
-.intro{position:fixed;inset:0;z-index:100;background:#0A0908;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;animation:intro-out .7s ease 2.25s forwards}
-.intro-zoom{display:flex;flex-direction:column;align-items:center;gap:22px;animation:intro-zoom 1s cubic-bezier(.7,0,.2,1) 1.6s forwards}
-.intro-row{display:flex;align-items:center}
-.intro-l{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(46px,13vw,190px);line-height:1;color:var(--ivory);padding:0 .08em;opacity:0;animation:intro-l .7s cubic-bezier(.16,1,.3,1) forwards}
-.intro-l:nth-child(2){animation-delay:.08s}.intro-l:nth-child(4){animation-delay:.16s}
-.intro-n{font-style:italic;color:var(--gold)}
-.intro-win{display:block;width:0;height:clamp(48px,12vw,170px);overflow:hidden;border-radius:2px;margin:0 .1em;animation:intro-win 1s cubic-bezier(.7,0,.2,1) .55s forwards}
-.intro-win img{width:clamp(120px,34vw,520px);max-width:none;height:100%;object-fit:cover}
-.intro-sub{color:var(--ivory-2);opacity:0;animation:intro-l .6s ease .9s forwards}
-@keyframes intro-l{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-@keyframes intro-win{to{width:clamp(120px,34vw,520px)}}
-@keyframes intro-zoom{to{transform:scale(6);opacity:0}}
+/* Logo intro: on the first page of a visit, the SnM logo is revealed, polished by a sheen, then hands over to the page */
+.intro{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:radial-gradient(60% 50% at 50% 48%,#17130F 0%,#0A0908 70%);overflow:hidden;cursor:pointer;animation:intro-out .7s cubic-bezier(.4,0,.2,1) 2.15s forwards}
+.intro-stage{display:flex;flex-direction:column;align-items:center;gap:26px;animation:intro-recede .8s cubic-bezier(.4,0,.2,1) 2s forwards}
+.intro-logo{position:relative;width:clamp(240px,46vw,560px);aspect-ratio:1000/399;filter:drop-shadow(0 18px 40px rgba(0,0,0,.6))}
+.intro-logo img{width:100%;height:100%;object-fit:contain;clip-path:inset(0 100% 0 0);animation:intro-reveal 1.05s cubic-bezier(.65,0,.25,1) .25s forwards}
+.intro-edge{position:absolute;top:-6%;bottom:-6%;left:0;width:2px;opacity:0;background:linear-gradient(180deg,rgba(13,153,158,0),#5FC9CC 30%,#F5A546 70%,rgba(245,165,70,0));box-shadow:0 0 18px 4px rgba(95,201,204,.55),0 0 40px 10px rgba(245,165,70,.25);animation:intro-edge 1.05s cubic-bezier(.65,0,.25,1) .25s forwards}
+.intro-shine{position:absolute;inset:0;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;background:linear-gradient(105deg,transparent 35%,rgba(255,240,215,.75) 48%,rgba(255,255,255,.9) 50%,rgba(255,240,215,.75) 52%,transparent 65%);background-size:300% 100%;background-position:120% 0;opacity:0;mix-blend-mode:screen;animation:intro-shine 1s cubic-bezier(.4,0,.2,1) 1.25s forwards}
+.intro-tag{color:var(--ivory-2);letter-spacing:.32em;opacity:0;transform:translateY(10px);animation:intro-tag .7s cubic-bezier(.16,1,.3,1) 1.15s forwards}
+@keyframes intro-reveal{to{clip-path:inset(0 0 0 0)}}
+@keyframes intro-edge{0%{left:0;opacity:0}8%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
+@keyframes intro-shine{0%{opacity:1;background-position:120% 0}100%{opacity:1;background-position:-20% 0}}
+@keyframes intro-tag{to{opacity:1;transform:none}}
+@keyframes intro-recede{to{transform:scale(.94);opacity:0}}
 @keyframes intro-out{to{opacity:0;visibility:hidden}}
 @media (prefers-reduced-motion:reduce){.intro{display:none}}
 

@@ -33,6 +33,8 @@ class Component extends DCLogic {
     ];
     const pad = (x) => String(x).padStart(2, '0');
     return {
+      showIntro: this._intro === undefined ? (this._intro = (() => { try { if (sessionStorage.getItem('snmIntro') === '1') return false; sessionStorage.setItem('snmIntro', '1'); } catch (e) { return false; } if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; setTimeout(() => { this._intro = false; }, 3200); return true; })()) : this._intro,
+      skipIntro: () => { this._intro = false; this.setState({}); },
       year: new Date().getFullYear(),
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
@@ -58,6 +60,19 @@ class Component extends DCLogic {
 }
 </script></head><body><template id="tpl">
 <div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+
+<sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
+  <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
+    <div class="intro-stage">
+      <div class="intro-logo">
+        <img src="../media/snm-logo.webp" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(../media/snm-logo.webp); mask-image: url(../media/snm-logo.webp)"></span>
+        <span class="intro-edge"></span>
+      </div>
+      <span class="intro-tag meta">From Concept to Completion.</span>
+    </div>
+  </div>
+</sc-if>
 
 <header class="hdr">
   <div class="w hdr-in">

@@ -17,6 +17,19 @@
 </helmet>
 <div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
 
+<sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
+  <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
+    <div class="intro-stage">
+      <div class="intro-logo">
+        <img src="/_blob/ddaee12b1d02cb40e277077a4e9a76b5" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(/_blob/ddaee12b1d02cb40e277077a4e9a76b5); mask-image: url(/_blob/ddaee12b1d02cb40e277077a4e9a76b5)"></span>
+        <span class="intro-edge"></span>
+      </div>
+      <span class="intro-tag meta">From Concept to Completion.</span>
+    </div>
+  </div>
+</sc-if>
+
 <header class="hdr">
   <div class="w hdr-in">
     <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/ddaee12b1d02cb40e277077a4e9a76b5" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
@@ -317,6 +330,8 @@ class Component extends DCLogic {
     const err = s.err;
     const n = s.files.length;
     return {
+      showIntro: this._intro === undefined ? (this._intro = (() => { try { if (sessionStorage.getItem('snmIntro') === '1') return false; sessionStorage.setItem('snmIntro', '1'); } catch (e) { return false; } if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; setTimeout(() => { this._intro = false; }, 3200); return true; })()) : this._intro,
+      skipIntro: () => { this._intro = false; this.setState({}); },
       year: new Date().getFullYear(),
       sending: !!s.sending, sendLabel: s.sending ? 'Sending\u2026' : 'Send my project', hasSendError: !!s.sendError, sendError: s.sendError || '',
       menuOpen: s.menuOpen,

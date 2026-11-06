@@ -5,18 +5,17 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { introDone: (() => { try { if (sessionStorage.getItem('snmIntro') === '1') return true; } catch (e) {} return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); })(), menuOpen: false, slide: 0, slidesPaused: false, review: 0, reviewsPaused: false, vidPlaying: true };
+    this.state = { menuOpen: false, slide: 0, slidesPaused: false, review: 0, reviewsPaused: false, vidPlaying: true };
     this.vid = null;
   }
   componentDidMount() {
     this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!this.state.introDone) { try { sessionStorage.setItem('snmIntro', '1'); } catch (e) {} this.it = setTimeout(() => this.setState({ introDone: true }), 3000); }
     if (this.reduce && this.vid) { this.vid.pause(); this.setState({ vidPlaying: false }); }
     if (this.reduce) return;
     this.rt = setInterval(() => this.setState({ rot: (this.state.rot || 0) + 1 }), 3200);
     this.t2 = setInterval(() => { if (!this.state.reviewsPaused) this.setState({ review: (this.state.review + 1) % 5 }); }, 7000);
   }
-  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); clearTimeout(this.it); if (this.onLit) { window.removeEventListener('scroll', this.onLit); window.removeEventListener('resize', this.onLit); } if (this.onStory) { window.removeEventListener('scroll', this.onStory); window.removeEventListener('resize', this.onStory); } }
+  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); if (this.onLit) { window.removeEventListener('scroll', this.onLit); window.removeEventListener('resize', this.onLit); } if (this.onStory) { window.removeEventListener('scroll', this.onStory); window.removeEventListener('resize', this.onStory); } }
   renderVals() {
     const s = this.state;
     const slides = [
@@ -36,9 +35,9 @@ class Component extends DCLogic {
     ];
     const pad = (n) => String(n).padStart(2, '0');
     return {
+      showIntro: this._intro === undefined ? (this._intro = (() => { try { if (sessionStorage.getItem('snmIntro') === '1') return false; sessionStorage.setItem('snmIntro', '1'); } catch (e) { return false; } if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; setTimeout(() => { this._intro = false; }, 3200); return true; })()) : this._intro,
+      skipIntro: () => { this._intro = false; this.setState({}); },
       year: new Date().getFullYear(),
-      showIntro: !this.state.introDone,
-      skipIntro: () => { clearTimeout(this.it); this.setState({ introDone: true }); },
       litRef: (el) => {
         if (!el) return;
         if (!this.litBound) {
@@ -151,13 +150,13 @@ class Component extends DCLogic {
 
 <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
   <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
-    <div class="intro-zoom">
-      <div class="intro-row">
-        <span class="intro-l">S</span><span class="intro-l intro-n">n</span>
-        <span class="intro-win"><img src="../media/wall-blue.webp" alt=""></span>
-        <span class="intro-l">M</span>
+    <div class="intro-stage">
+      <div class="intro-logo">
+        <img src="../media/snm-logo.webp" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(../media/snm-logo.webp); mask-image: url(../media/snm-logo.webp)"></span>
+        <span class="intro-edge"></span>
       </div>
-      <span class="intro-sub meta">Millwork Manufacturing</span>
+      <span class="intro-tag meta">From Concept to Completion.</span>
     </div>
   </div>
 </sc-if>
