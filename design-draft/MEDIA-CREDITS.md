@@ -6,7 +6,8 @@ Photos are chosen to match the services in SnM's services document.
 
 | File | Shows | Pexels link |
 |---|---|---|
-| `hero.mp4` | Walkthrough of an open living and dining space (homepage A hero video) | https://www.pexels.com/video/7578552/ |
+| `showreel.mp4` | 30 s demo reel on homepage A, added at the owner's request. **Edited from third-party clips (Pinterest/Klickpin, YouTube) that are not SnM's work or licensed. Replace with SnM's own footage before launch.** | n/a |
+| `hero.mp4` | Walkthrough of an open living and dining space (licensed fallback hero, not in use) | https://www.pexels.com/video/7578552/ |
 | `resin.mp4` | Resin pour on wood | https://www.pexels.com/video/7253679/ |
 | `shop1.webp` | Woodworking shop, table saw | https://www.pexels.com/photo/10316634/ |
 | `cnc1.webp` | CNC machine cutting a panel | https://www.pexels.com/photo/7480234/ |
