@@ -1,100 +1,161 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><base href="/design-draft/preview/"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | SnM Millwork Manufacturing</title><meta name="description" content="The page you were looking for isn't here. Find SnM Millwork Manufacturing's services, projects and quote form instead."><meta name="robots" content="noindex"><link rel="icon" type="image/png" href="../media/favicon-64.png"><link rel="apple-touch-icon" href="../media/favicon-180.png"><link rel="stylesheet" href="snm.css">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SnM Millwork Manufacturing | Coming soon</title>
+<meta name="description" content="SnM Millwork Manufacturing is building something new. From Concept to Completion.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/design-draft/media/favicon-64.png">
+<link rel="apple-touch-icon" href="/design-draft/media/favicon-180.png">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
-<script src="runtime.js"></script><script>
-class Component extends DCLogic {
-  constructor(props) {
-    super(props);
-    this.state = { menuOpen: false };
-  }
-  renderVals() {
-    return {
-      year: new Date().getFullYear(),
-      menuOpen: this.state.menuOpen,
-      menuOpenStr: this.state.menuOpen ? 'true' : 'false',
-      toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen })
-    };
-  }
+<style>
+:root{--bg:#0A0908;--ivory:#F3EEE6;--mute:#B9AFA2;--gold:#F5A546;--teal:#0D999E;--line:#2E2A26}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(16px,3vh,32px);padding:40px 20px;text-align:center;color:var(--ivory);font-family:Jost,system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:radial-gradient(70% 60% at 50% 38%,#18130F 0%,var(--bg) 72%);overflow-x:hidden}
+.meta{font-family:Cinzel,serif;font-weight:600;font-size:12px;letter-spacing:.3em;text-transform:uppercase}
+
+/* Logo: revealed left to right behind a light edge, then a sheen */
+.logo{position:relative;width:clamp(210px,32vw,400px);aspect-ratio:1877/616;filter:drop-shadow(0 18px 40px rgba(0,0,0,.6))}
+.logo img{display:block;width:100%;height:100%;object-fit:contain;clip-path:inset(0 100% 0 0);animation:reveal 1.1s cubic-bezier(.65,0,.25,1) .2s forwards}
+.edge{position:absolute;top:-6%;bottom:-6%;left:0;width:2px;opacity:0;background:linear-gradient(180deg,rgba(13,153,158,0),#5FC9CC 30%,#F5A546 70%,rgba(245,165,70,0));box-shadow:0 0 18px 4px rgba(95,201,204,.55),0 0 40px 10px rgba(245,165,70,.25);animation:edge 1.1s cubic-bezier(.65,0,.25,1) .2s forwards}
+.shine{position:absolute;inset:0;-webkit-mask:url(/design-draft/media/snm-logo-v2.webp) center/contain no-repeat;mask:url(/design-draft/media/snm-logo-v2.webp) center/contain no-repeat;background:linear-gradient(105deg,transparent 35%,rgba(255,240,215,.75) 48%,rgba(255,255,255,.9) 50%,rgba(255,240,215,.75) 52%,transparent 65%);background-size:300% 100%;background-position:120% 0;opacity:0;mix-blend-mode:screen;animation:shine 1s cubic-bezier(.4,0,.2,1) 1.25s forwards}
+@keyframes reveal{to{clip-path:inset(0 0 0 0)}}
+@keyframes edge{0%{left:0;opacity:0}8%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0}}
+@keyframes shine{0%{opacity:1;background-position:120% 0}100%{opacity:1;background-position:-20% 0}}
+
+/* The scene: a wall builds itself, the resin river flows through it, the lights come on */
+.scene{width:min(92vw,640px);opacity:0;animation:fade .8s ease 1.9s forwards}
+.scene svg{display:block;width:100%;height:auto;overflow:visible}
+.rail{fill:#2B2724}
+.plank{opacity:0;transform-box:fill-box;animation:plank 10s cubic-bezier(.2,.7,.2,1) infinite;animation-delay:calc(2s + var(--i) * .12s)}
+.grain{fill:none;stroke:rgba(40,18,6,.45);stroke-width:1;opacity:0;animation:plank 10s linear infinite;animation-delay:calc(2s + var(--i) * .12s)}
+@keyframes plank{0%{opacity:0;transform:translateY(-70px)}5%{opacity:1}12%,82%{opacity:1;transform:none}92%,100%{opacity:0;transform:none}}
+.river-bed{fill:none;stroke:#0A0908;stroke-width:34;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;animation:river 10s ease-in-out infinite;animation-delay:2s}
+.river{fill:none;stroke:#0D999E;stroke-width:24;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;filter:drop-shadow(0 0 8px rgba(13,153,158,.7));animation:river 10s ease-in-out infinite;animation-delay:2s}
+.river-hi{fill:none;stroke:rgba(190,255,250,.55);stroke-width:3;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;animation:river 10s ease-in-out infinite;animation-delay:2s}
+@keyframes river{0%,34%{stroke-dashoffset:900;opacity:1}56%,86%{stroke-dashoffset:0;opacity:1}93%,100%{stroke-dashoffset:0;opacity:0}}
+.led{fill:#6FB6FF;opacity:0;filter:drop-shadow(0 0 5px #4DA3FF);animation:led 10s ease infinite;animation-delay:calc(2s + var(--i) * .06s)}
+@keyframes led{0%,56%{opacity:0}62%,86%{opacity:1}93%,100%{opacity:0}}
+.hammer{transform-box:fill-box;transform-origin:20% 90%;animation:tap .7s ease-in-out infinite}
+@keyframes tap{0%,100%{transform:rotate(18deg)}45%{transform:rotate(-26deg)}}
+.shav{fill:#C98648;opacity:0;transform-box:fill-box;animation:shav 2.6s ease-in infinite;animation-delay:calc(2.4s + var(--i) * .4s)}
+@keyframes shav{0%{opacity:0;transform:translate(0,-6px) rotate(0)}15%{opacity:.9}100%{opacity:0;transform:translate(10px,46px) rotate(140deg)}}
+.tape{width:min(92vw,640px);height:9px;border-radius:2px;background:repeating-linear-gradient(-45deg,#F5A546 0 12px,#1A1714 12px 24px);background-size:34px 34px;opacity:.9;animation:tape 1.4s linear infinite,fade .6s ease 2.1s both;opacity:0}
+@keyframes tape{to{background-position:34px 0}}
+
+/* Words */
+.words{display:flex;flex-direction:column;align-items:center;gap:14px;opacity:0;animation:fade .8s ease 2.2s forwards}
+.words .meta{color:var(--gold)}
+h1{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(34px,6vw,60px);line-height:1.08;letter-spacing:-.01em}
+h1 em{color:var(--gold)}
+.msg{position:relative;height:1.8em;width:min(90vw,520px);font-size:clamp(16px,2.1vw,19px);color:var(--mute)}
+.msg span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:msg 18s ease infinite;animation-delay:calc(2.8s + var(--m) * 3s)}
+@keyframes msg{0%{opacity:0;transform:translateY(8px)}2.5%,14.2%{opacity:1;transform:none}16.7%,100%{opacity:0;transform:translateY(-8px)}}
+.foot{color:#8F867B;font-size:13px;letter-spacing:.04em;opacity:0;animation:fade .8s ease 2.6s forwards}
+@keyframes fade{to{opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  .logo img{clip-path:none}.edge,.shine,.hammer,.shav{display:none}
+  .scene,.tape,.words,.foot{opacity:1}
+  .plank,.grain,.led{opacity:1}.river-bed,.river,.river-hi{stroke-dashoffset:0}
+  .msg span{opacity:0}.msg span:first-child{opacity:1}
 }
-</script></head><body><template id="tpl">
-<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
-
-<header class="hdr">
-  <div class="w hdr-in">
-    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo.webp" alt="SnM Millwork Manufacturing Inc." width="170" height="68"></a>
-    <nav class="nav" aria-label="Main">
-      <a href="Main.html">Home</a>
-      <a href="Commercial.html">Commercial</a>
-      <a href="Residential.html">Residential</a>
-      <div class="dd">
-        <a href="Services.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
-        <div class="menu">
-          <a href="Millwork.html">Millwork &amp; Cabinetry</a>
-          <a class="sig" href="Epoxy.html">Epoxy &amp; Resin</a>
-          <a href="Design.html">Design &amp; Engineering</a>
-          <a href="FitOut.html">Interior Fit-Out</a>
-          <a href="Fabrication.html">Custom Fabrication</a>
-          <a href="Installation.html">Installation</a>
-          <a href="Trades.html">Trade Coordination</a>
-        </div>
-      </div>
-      <a class="btn" href="Quote.html">Get a Quote</a>
-    </nav>
-    <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
+</style>
+</head>
+<body>
+  <div class="logo" role="img" aria-label="SnM Millwork Manufacturing Inc.">
+    <img src="/design-draft/media/snm-logo-v2.webp" alt="">
+    <span class="shine" aria-hidden="true"></span>
+    <span class="edge" aria-hidden="true"></span>
   </div>
-  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-    <nav class="mnav" aria-label="Mobile">
-      <a href="Main.html">Home</a>
-      <a href="Commercial.html">Commercial</a>
-      <a href="Residential.html">Residential</a>
-      <a href="Services.html">Services</a>
-      <div class="mnav-sub">
-        <a href="Millwork.html">Millwork &amp; Cabinetry</a>
-        <a href="Epoxy.html">Epoxy &amp; Resin</a>
-        <a href="Design.html">Design &amp; Engineering</a>
-        <a href="FitOut.html">Interior Fit-Out</a>
-        <a href="Fabrication.html">Custom Fabrication</a>
-        <a href="Installation.html">Installation</a>
-        <a href="Trades.html">Trade Coordination</a>
-      </div>
-      <a href="About.html">About</a>
-      <a class="btn" href="Quote.html">Get a Quote</a>
-    </nav>
-  </sc-if>
-</header>
 
-<main>
-<section class="s nf">
-  <div class="w" style="display: flex; flex-direction: column; gap: 28px; max-width: 900px">
-    <span class="meta" style="color: #F5A546">Error 404</span>
-    <h1 class="d1">This page isn&rsquo;t here.</h1>
-    <p class="lede" style="color: #B9AFA2">The link may be old or mistyped. Here is where to go instead.</p>
-    <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
-      <a class="btn" href="Main.html">Back to home</a>
-      <a class="btn btn-line" href="Quote.html">Get a Quote</a>
+  <div class="scene" aria-hidden="true">
+    <svg viewBox="0 0 640 200">
+      <rect class="rail" x="10" y="20" width="620" height="10" rx="1"/>
+      <rect class="rail" x="10" y="170" width="620" height="10" rx="1"/>
+      <rect class="plank" style="--i:0" x="20" y="30" width="28" height="140" rx="1" fill="#B8743A"/>
+      <rect class="plank" style="--i:1" x="50" y="30" width="28" height="140" rx="1" fill="#A8652E"/>
+      <rect class="plank" style="--i:2" x="80" y="30" width="28" height="140" rx="1" fill="#C98648"/>
+      <rect class="plank" style="--i:3" x="110" y="30" width="28" height="140" rx="1" fill="#B8743A"/>
+      <rect class="plank" style="--i:4" x="140" y="30" width="28" height="140" rx="1" fill="#A8652E"/>
+      <rect class="plank" style="--i:5" x="170" y="30" width="28" height="140" rx="1" fill="#C98648"/>
+      <rect class="plank" style="--i:6" x="200" y="30" width="28" height="140" rx="1" fill="#B8743A"/>
+      <rect class="plank" style="--i:7" x="230" y="30" width="28" height="140" rx="1" fill="#A8652E"/>
+      <rect class="plank" style="--i:8" x="260" y="30" width="28" height="140" rx="1" fill="#C98648"/>
+      <rect class="plank" style="--i:9" x="290" y="30" width="28" height="140" rx="1" fill="#B8743A"/>
+      <rect class="plank" style="--i:10" x="320" y="30" width="28" height="140" rx="1" fill="#A8652E"/>
+      <rect class="plank" style="--i:11" x="350" y="30" width="28" height="140" rx="1" fill="#C98648"/>
+      <rect class="plank" style="--i:12" x="380" y="30" width="28" height="140" rx="1" fill="#B8743A"/>
+      <rect class="plank" style="--i:13" x="410" y="30" width="28" height="140" rx="1" fill="#A8652E"/>
+      <rect class="plank" style="--i:14" x="440" y="30" width="28" height="140" rx="1" fill="#C98648"/>
+      <rect class="plank" style="--i:15" x="470" y="30" width="28" height="140" rx="1" fill="#B8743A"/>
+      <rect class="plank" style="--i:16" x="500" y="30" width="28" height="140" rx="1" fill="#A8652E"/>
+      <rect class="plank" style="--i:17" x="530" y="30" width="28" height="140" rx="1" fill="#C98648"/>
+      <rect class="plank" style="--i:18" x="560" y="30" width="28" height="140" rx="1" fill="#B8743A"/>
+      <rect class="plank" style="--i:19" x="590" y="30" width="28" height="140" rx="1" fill="#A8652E"/>
+      <path class="grain" style="--i:0" d="M25 44 q6 40 0 82 M34 60 q-4 30 0 70" />
+      <path class="grain" style="--i:1" d="M55 44 q6 40 0 82 M64 60 q-4 30 0 70" />
+      <path class="grain" style="--i:2" d="M85 44 q6 40 0 82 M94 60 q-4 30 0 70" />
+      <path class="grain" style="--i:3" d="M115 44 q6 40 0 82 M124 60 q-4 30 0 70" />
+      <path class="grain" style="--i:4" d="M145 44 q6 40 0 82 M154 60 q-4 30 0 70" />
+      <path class="grain" style="--i:5" d="M175 44 q6 40 0 82 M184 60 q-4 30 0 70" />
+      <path class="grain" style="--i:6" d="M205 44 q6 40 0 82 M214 60 q-4 30 0 70" />
+      <path class="grain" style="--i:7" d="M235 44 q6 40 0 82 M244 60 q-4 30 0 70" />
+      <path class="grain" style="--i:8" d="M265 44 q6 40 0 82 M274 60 q-4 30 0 70" />
+      <path class="grain" style="--i:9" d="M295 44 q6 40 0 82 M304 60 q-4 30 0 70" />
+      <path class="grain" style="--i:10" d="M325 44 q6 40 0 82 M334 60 q-4 30 0 70" />
+      <path class="grain" style="--i:11" d="M355 44 q6 40 0 82 M364 60 q-4 30 0 70" />
+      <path class="grain" style="--i:12" d="M385 44 q6 40 0 82 M394 60 q-4 30 0 70" />
+      <path class="grain" style="--i:13" d="M415 44 q6 40 0 82 M424 60 q-4 30 0 70" />
+      <path class="grain" style="--i:14" d="M445 44 q6 40 0 82 M454 60 q-4 30 0 70" />
+      <path class="grain" style="--i:15" d="M475 44 q6 40 0 82 M484 60 q-4 30 0 70" />
+      <path class="grain" style="--i:16" d="M505 44 q6 40 0 82 M514 60 q-4 30 0 70" />
+      <path class="grain" style="--i:17" d="M535 44 q6 40 0 82 M544 60 q-4 30 0 70" />
+      <path class="grain" style="--i:18" d="M565 44 q6 40 0 82 M574 60 q-4 30 0 70" />
+      <path class="grain" style="--i:19" d="M595 44 q6 40 0 82 M604 60 q-4 30 0 70" />
+      <path class="river-bed" d="M20 100 C 120 58, 200 142, 320 100 S 520 58, 620 100"/>
+      <path class="river" d="M20 100 C 120 58, 200 142, 320 100 S 520 58, 620 100"/>
+      <path class="river-hi" d="M20 96 C 120 54, 200 138, 320 96 S 520 54, 620 96"/>
+      <rect class="led" style="--i:0" x="58" y="56" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:1" x="108" y="94" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:2" x="158" y="70" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:3" x="208" y="122" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:4" x="258" y="64" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:5" x="308" y="92" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:6" x="358" y="74" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:7" x="408" y="126" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:8" x="458" y="62" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:9" x="508" y="96" width="2.4" height="14" rx="1"/>
+      <rect class="led" style="--i:10" x="558" y="68" width="2.4" height="14" rx="1"/>
+      <path class="shav" style="--i:0" d="M70 172 q8 -10 14 -2 q-6 6 -14 2z"/>
+      <path class="shav" style="--i:1" d="M160 172 q8 -10 14 -2 q-6 6 -14 2z"/>
+      <path class="shav" style="--i:2" d="M250 172 q8 -10 14 -2 q-6 6 -14 2z"/>
+      <path class="shav" style="--i:3" d="M340 172 q8 -10 14 -2 q-6 6 -14 2z"/>
+      <path class="shav" style="--i:4" d="M430 172 q8 -10 14 -2 q-6 6 -14 2z"/>
+      <path class="shav" style="--i:5" d="M520 172 q8 -10 14 -2 q-6 6 -14 2z"/>
+      <g class="hammer">
+        <rect x="598" y="-2" width="5" height="34" rx="2" fill="#B8743A"/>
+        <rect x="586" y="-8" width="26" height="12" rx="2" fill="#8F867B"/>
+      </g>
+    </svg>
+  </div>
+  <div class="tape" aria-hidden="true"></div>
+
+  <div class="words">
+    <span class="meta">Site under construction</span>
+    <h1>We&rsquo;re building something <em>new.</em></h1>
+    <div class="msg" aria-live="off">
+      <span style="--m:0">Measuring twice. Cutting once.</span>
+      <span style="--m:1">Sanding the rough edges off the website.</span>
+      <span style="--m:2">Waiting for the resin to cure. Please do not touch.</span>
+      <span style="--m:3">The crew is on a ladder somewhere.</span>
+      <span style="--m:4">Fitting the last panel. We promise.</span>
+      <span style="--m:5">Checking that every joint is perfectly level.</span>
     </div>
-    <nav class="nf-links" aria-label="Popular pages">
-      <a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="About.html">About</a>
-    </nav>
   </div>
-</section>
-</main>
-
-<footer>
-  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
-  <div class="ftr">
-    <div class="w ftr-g">
-      <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="../media/snm-logo.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="88" style="width: 220px; height: auto">
-        <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
-      </div>
-      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
-      <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a><a href="Fabrication.html">Custom Fabrication</a><a href="Installation.html">Installation</a><a href="Trades.html">Trade Coordination</a></div>
-      <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
-    </div>
-    <div class="w ftr-b"><span>© {{ year }} SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
-  </div>
-</footer>
-
-</div>
-</template><div id="root"></div></body></html>
+  <p class="foot">SnM Millwork Manufacturing Inc. &middot; From Concept to Completion.</p>
+</body>
+</html>

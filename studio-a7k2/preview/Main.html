@@ -1,34 +1,31 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SnM Millwork Manufacturing | Custom Millwork, Cabinetry and Epoxy Resin</title><meta name="description" content="SnM Millwork Manufacturing designs, builds and installs custom millwork, cabinetry, epoxy resin pieces and interior fit-outs for businesses and homes. From Concept to Completion."><link rel="icon" type="image/png" href="../media/favicon-64.png"><link rel="apple-touch-icon" href="../media/favicon-180.png"><link rel="stylesheet" href="snm.css">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SnM Millwork Manufacturing | Custom Millwork, Cabinetry and Epoxy Resin</title><meta name="description" content="SnM Millwork Manufacturing designs, builds and installs custom millwork, cabinetry, epoxy resin pieces and interior fit-outs for businesses and homes. From Concept to Completion."><link rel="icon" type="image/png" href="../../design-draft/media/favicon-64.png"><link rel="apple-touch-icon" href="../../design-draft/media/favicon-180.png"><link rel="stylesheet" href="snm.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
 <script src="runtime.js"></script><script>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { menuOpen: false, slide: 0, slidesPaused: false, dragPx: 0, dragging: false, review: 0, reviewsPaused: false };
-    this.drag = null;
+    this.state = { menuOpen: false, slide: 0, slidesPaused: false, review: 0, reviewsPaused: false, vidPlaying: true };
+    this.vid = null;
   }
   componentDidMount() {
     this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.reduce && this.vid) { this.vid.pause(); this.setState({ vidPlaying: false }); }
     if (this.reduce) return;
     this.rt = setInterval(() => this.setState({ rot: (this.state.rot || 0) + 1 }), 3200);
-    this.t1 = setInterval(() => { if (!this.state.slidesPaused && !this.drag) this.setState({ slide: (this.state.slide + 1) % (this.nSlides || 6) }); }, 7000);
     this.t2 = setInterval(() => { if (!this.state.reviewsPaused) this.setState({ review: (this.state.review + 1) % 5 }); }, 7000);
   }
   componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); if (this.onLit) { window.removeEventListener('scroll', this.onLit); window.removeEventListener('resize', this.onLit); } if (this.onStory) { window.removeEventListener('scroll', this.onStory); window.removeEventListener('resize', this.onStory); } }
   renderVals() {
     const s = this.state;
     const slides = [
-      { src: '../media/wall-blue-slide.webp', alt: 'Resin river feature wall with blue LED lighting in a restaurant', kind: 'Commercial', name: 'Resin river feature wall' },
-      { src: '../media/library/ai-wall-staged.webp', alt: 'Resin river feature wall above red leather booths in a restaurant', kind: 'Commercial', name: 'Restaurant feature wall' },
-      { src: '../media/shop1.webp', alt: 'Woodworking shop with table saw and stacked lumber', kind: 'Our shop', name: '[Built in our own shop]' },
-      { src: '../media/rec1.webp', alt: 'Reception desk with a wood-slat feature wall', kind: 'Commercial', name: '[Office reception desk]' },
-      { src: '../media/table-blue-v2.webp', alt: 'Live-edge slabs with a blue resin river and bark inlays', kind: 'Epoxy & Resin', name: 'Blue river table' },
-      { src: '../media/table-red-v2.webp', alt: 'Live-edge slabs with a deep red resin river and bark inlays', kind: 'Epoxy & Resin', name: 'Red river table' },
-      { src: '../media/off2.webp', alt: 'Executive office with walnut millwork and lit shelving', kind: 'Commercial', name: '[Executive office millwork]' },
-      { src: '../media/kit1.webp', alt: 'Kitchen with wood and black cabinetry', kind: 'Residential', name: '[Wood and black kitchen]' },
-      { src: '../media/cnc1.webp', alt: 'CNC machine cutting a wood panel', kind: 'Fabrication', name: '[CNC precision cutting]' }
-    ].map((x, i) => ({ ...x, pos: (i + 1) + ' of 6', cls: 'slide ' + (i % 2 ? 'kb-out' : 'kb-in') + (i === s.slide ? ' on' : '') }));
+      { src: '../../design-draft/media/kit1.webp', alt: 'Kitchen with oak cabinets and dark tall units', kind: 'Residential', name: '[Oak and charcoal kitchen]' },
+      { src: '../../design-draft/media/rec1.webp', alt: 'Sculpted white reception desk in a lobby', kind: 'Commercial', name: '[Sculpted reception desk]' },
+      { src: '../../design-draft/media/t1.webp', alt: 'Live-edge wood slab set against black resin', kind: 'Epoxy & Resin', name: '[Live-edge resin table]' },
+      { src: '../../design-draft/media/ret1.webp', alt: 'Bar counter with lit shelving', kind: 'Hospitality', name: '[Restaurant bar]' },
+      { src: '../../design-draft/media/clo1.webp', alt: 'Walk-in dressing room with lit shelving', kind: 'Residential', name: '[Dressing room]' },
+      { src: '../../design-draft/media/kit2.webp', alt: 'Walnut kitchen with a large island', kind: 'Residential', name: '[Walnut kitchen and island]' }
+    ].map((x, i) => ({ ...x, pos: (i + 1) + ' of 6' }));
     const reviews = [
       { q: 'They turned a rough sketch into a reception desk our whole office talks about. On time, on budget, and the install crew left the site spotless.', name: '[Sample: Daniel R.]', meta: 'Commercial, office reception' },
       { q: 'Our walnut kitchen is the best decision we made in the renovation. Every drawer lines up and the finish is perfect.', name: '[Sample: Priya and Sam K.]', meta: 'Residential, kitchen' },
@@ -36,7 +33,6 @@ class Component extends DCLogic {
       { q: 'Shop drawings came back fast and clean. As a GC, that is exactly what we need from a millwork trade.', name: '[Sample: Mike T.]', meta: 'Commercial, general contractor' },
       { q: 'Honest pricing, clear updates with photos, and a closet that finally fits everything.', name: '[Sample: Angela P.]', meta: 'Residential, walk-in closet' }
     ];
-    this.nSlides = slides.length;
     const pad = (n) => String(n).padStart(2, '0');
     return {
       showIntro: this._intro === undefined ? (this._intro = (() => { try { if (sessionStorage.getItem('snmIntro') === '1') return false; sessionStorage.setItem('snmIntro', '1'); } catch (e) { return false; } if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; setTimeout(() => { this._intro = false; }, 3200); return true; })()) : this._intro,
@@ -129,29 +125,12 @@ class Component extends DCLogic {
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      vidRef: (el) => { this.vid = el; },
+      vidPlaying: s.vidPlaying, vidPaused: !s.vidPlaying,
+      vidLabel: s.vidPlaying ? 'Pause background video' : 'Play background video',
+      toggleVideo: () => { if (!this.vid) return; if (s.vidPlaying) this.vid.pause(); else this.vid.play(); this.setState({ vidPlaying: !s.vidPlaying }); },
       slides,
-      sliderCls: s.dragging ? 'slider hero-slider dragging' : 'slider hero-slider',
       slideX: (-100 * s.slide) + '%',
-      dragPx: s.dragPx,
-      slideDots: slides.map((x, i) => ({ cls: i === s.slide ? 'dot on' : 'dot', pressed: i === s.slide ? 'true' : 'false', label: 'Slide ' + (i + 1), pick: () => this.setState({ slide: i }) })),
-      // Swipe with a finger or drag with a mouse; a short move still counts as a tap on buttons.
-      dragStart: (e) => { if (e.target.closest && e.target.closest('button, a')) return; this.drag = { x: e.clientX, dx: 0 }; },
-      dragMove: (e) => {
-        if (!this.drag) return;
-        const dx = e.clientX - this.drag.x; this.drag.dx = dx;
-        if (Math.abs(dx) > 6) this.setState({ dragPx: dx, dragging: true });
-      },
-      dragEnd: () => {
-        if (!this.drag) return;
-        const dx = this.drag.dx; this.drag = null;
-        const n = slides.length; let i = this.state.slide;
-        if (dx < -50) i = (i + 1) % n; else if (dx > 50) i = (i + n - 1) % n;
-        this.setState({ slide: i, dragPx: 0, dragging: false });
-      },
-      onKey: (e) => {
-        if (e.key === 'ArrowRight') { e.preventDefault(); this.setState({ slide: (s.slide + 1) % slides.length }); }
-        if (e.key === 'ArrowLeft') { e.preventDefault(); this.setState({ slide: (s.slide + slides.length - 1) % slides.length }); }
-      },
       slideCount: pad(s.slide + 1) + ' / ' + pad(slides.length),
       prevSlide: () => this.setState({ slide: (s.slide + slides.length - 1) % slides.length }),
       nextSlide: () => this.setState({ slide: (s.slide + 1) % slides.length }),
@@ -173,8 +152,8 @@ class Component extends DCLogic {
   <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
     <div class="intro-stage">
       <div class="intro-logo">
-        <img src="../media/snm-logo-v2.webp" alt="">
-        <span class="intro-shine" style="-webkit-mask-image: url(../media/snm-logo-v2.webp); mask-image: url(../media/snm-logo-v2.webp)"></span>
+        <img src="../../design-draft/media/snm-logo-v2.webp" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(../../design-draft/media/snm-logo-v2.webp); mask-image: url(../../design-draft/media/snm-logo-v2.webp)"></span>
         <span class="intro-edge"></span>
       </div>
       <span class="intro-tag meta">From Concept to Completion.</span>
@@ -184,7 +163,7 @@ class Component extends DCLogic {
 
 <header class="hdr over">
   <div class="w hdr-in">
-    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="207" height="68"></a>
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../../design-draft/media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="207" height="68"></a>
     <nav class="nav" aria-label="Main">
       <a class="cur" href="Main.html" aria-current="page">Home</a>
       <a href="Commercial.html">Commercial</a>
@@ -207,7 +186,7 @@ class Component extends DCLogic {
   </div>
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav class="mnav" aria-label="Mobile">
-      <a href="Main.html">Home</a>
+      <a href="Main.html" aria-current="page">Home</a>
       <a href="Commercial.html">Commercial</a>
       <a href="Residential.html">Residential</a>
       <a href="Services.html">Services</a>
@@ -228,49 +207,34 @@ class Component extends DCLogic {
 
 <main>
 
-<!-- 1. Hero image slider (after Magna Cabinets): swipe, drag, edge arrows, keyboard -->
-<section class="{{ sliderCls }}" aria-roledescription="carousel" aria-label="Featured projects" tabindex="0" onKeyDown="{{ onKey }}" onMouseEnter="{{ pauseSlides }}" onMouseLeave="{{ resumeSlides }}" onPointerDown="{{ dragStart }}" onPointerMove="{{ dragMove }}" onPointerUp="{{ dragEnd }}" onPointerCancel="{{ dragEnd }}" onPointerLeave="{{ dragEnd }}">
-  <div class="track" style="transform: translateX(calc({{ slideX }} + {{ dragPx }}px))">
-    <sc-for list="{{ slides }}" as="s" hint-placeholder-count="6">
-      <figure class="{{ s.cls }}" role="group" aria-roledescription="slide" aria-label="{{ s.pos }}" style="margin: 0">
-        <img src="{{ s.src }}" alt="{{ s.alt }}" draggable="false">
-        <figcaption class="slide-tag"><span class="meta" style="color: #F5A546">{{ s.kind }}</span><span class="d5">{{ s.name }}</span></figcaption>
-      </figure>
-    </sc-for>
-  </div>
+<!-- 1. Hero video (after Swan Canada) -->
+<section class="hero" aria-label="Introduction">
+  <video ref="{{ vidRef }}" src="../../design-draft/media/showreel.mp4" poster="../../design-draft/media/showreel-poster.webp" preload="auto" autoplay muted loop playsinline aria-hidden="true"></video>
   <div class="hero-shade"></div>
-  <div class="hs-c">
-    <div class="w">
-      <h1 class="d1 rot-h" style="max-width: 980px"><span class="sr-only">We design, build and install custom millwork, kitchens and vanities, epoxy river tables, reception desks, feature walls and interior fit-outs.</span><span aria-hidden="true">We design, build &amp; install<span class="rot"><sc-for list="{{ rotWords }}" as="w" hint-placeholder-count="6"><span class="{{ w.cls }}">{{ w.t }}</span></sc-for></span></span></h1>
-      <div class="stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px">
-        <p class="lede" style="color: #E4DCD0">Designed, built in our own shop and installed by one team, for commercial interiors and private homes across [service area].</p>
-        <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
-          <a class="btn" href="Quote.html">Get a Quote</a>
-          <a class="btn btn-line" href="#work">See our work</a>
-        </div>
+  <div class="w hero-c">
+    <h1 class="d1 rot-h" style="max-width: 980px"><span class="sr-only">We design, build and install custom millwork, kitchens and vanities, epoxy river tables, reception desks, feature walls and interior fit-outs.</span><span aria-hidden="true">We design, build &amp; install<span class="rot"><sc-for list="{{ rotWords }}" as="w" hint-placeholder-count="6"><span class="{{ w.cls }}">{{ w.t }}</span></sc-for></span></span></h1>
+    <div class="stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px">
+      <p class="lede" style="color: #E4DCD0">Designed, built in our own shop and installed by one team, for commercial interiors and private homes across [service area].</p>
+      <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
+        <a class="btn" href="Quote.html">Get a Quote</a>
+        <a class="btn btn-line" href="#work">See our work</a>
       </div>
     </div>
   </div>
-  <button type="button" class="arrow edge l" aria-label="Previous slide" onClick="{{ prevSlide }}"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M11 3L5 9l6 6"/></svg></button>
-  <button type="button" class="arrow edge r" aria-label="Next slide" onClick="{{ nextSlide }}"><svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 3l6 6-6 6"/></svg></button>
-  <div class="sl-foot">
-    <div class="dots" role="group" aria-label="Choose a slide">
-      <sc-for list="{{ slideDots }}" as="d" hint-placeholder-count="6">
-        <button type="button" class="{{ d.cls }}" aria-label="{{ d.label }}" aria-pressed="{{ d.pressed }}" onClick="{{ d.pick }}"><span></span></button>
-      </sc-for>
-    </div>
-    <span class="count num" aria-live="polite">{{ slideCount }}</span>
-  </div>
+  <button type="button" class="vid-btn" aria-label="{{ vidLabel }}" onClick="{{ toggleVideo }}">
+    <sc-if value="{{ vidPlaying }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg></sc-if>
+    <sc-if value="{{ vidPaused }}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 1l10 6-10 6z"/></svg></sc-if>
+  </button>
 </section>
 
 <!-- 2b. Scroll story: one wall, from bare drywall to lights on -->
 <section class="story" ref="{{ storyRef }}" aria-labelledby="story-h">
   <div class="story-pin">
     <div class="story-frames">
-        <img class="story-frame" src="../media/cmp-before-v2.webp" alt="The bare dining room wall as our crew starts the install" loading="lazy">
-        <img class="story-frame" src="../media/install-crew.webp" alt="Two SnM installers fitting live-edge wood panels from a ladder" loading="lazy">
-        <img class="story-frame" src="../media/wall-day.webp" alt="The finished live-edge wood feature wall with a resin river" loading="lazy">
-        <img class="story-frame" src="../media/wall-blue.webp" alt="The finished wall lit by blue LEDs along the river" loading="lazy">
+        <img class="story-frame" src="../../design-draft/media/cmp-before-v2.webp" alt="The bare dining room wall as our crew starts the install" loading="lazy">
+        <img class="story-frame" src="../../design-draft/media/install-crew.webp" alt="Two SnM installers fitting live-edge wood panels from a ladder" loading="lazy">
+        <img class="story-frame" src="../../design-draft/media/wall-day.webp" alt="The finished live-edge wood feature wall with a resin river" loading="lazy">
+        <img class="story-frame" src="../../design-draft/media/wall-blue.webp" alt="The finished wall lit by blue LEDs along the river" loading="lazy">
       <div class="story-glow" aria-hidden="true"></div>
       <div class="story-shade" aria-hidden="true"></div>
     </div>
@@ -300,13 +264,13 @@ class Component extends DCLogic {
 <section id="work" class="s">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
     <a href="Commercial.html" style="grid-column: 1 / span 7; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
-      <img class="cover r-32" src="../media/wall-blue.webp" alt="Resin river feature wall with blue LED lighting in a restaurant" style="height: auto">
+      <img class="cover r-32" src="../../design-draft/media/wall-blue.webp" alt="Resin river feature wall with blue LED lighting in a restaurant" style="height: auto">
       <h2 class="d3">For builders and designers</h2>
       <p class="p">Shop drawings, tender pricing and installs that keep to your schedule, for offices, retail, hospitality, healthcare and institutions.</p>
       <span class="tl" style="align-self: flex-start">Commercial work</span>
     </a>
     <a href="Residential.html" style="grid-column: 8 / span 5; margin-top: 160px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
-      <img class="cover r-45" src="../media/clo1.webp" alt="Walk-in dressing room with lit shelving" style="height: auto">
+      <img class="cover r-45" src="../../design-draft/media/clo1.webp" alt="Walk-in dressing room with lit shelving" style="height: auto">
       <h2 class="d3">For homeowners</h2>
       <p class="p">Kitchens, vanities, closets and built-ins, measured and made for your home.</p>
       <span class="tl" style="align-self: flex-start">Residential work</span>
@@ -325,8 +289,8 @@ class Component extends DCLogic {
       <p class="p" style="grid-column: 8 / span 5">A resin river feature wall for a restaurant dining room. Drawn, built in our shop and installed by our own crew.</p>
     </div>
     <div class="cmp" ref="{{ cmpRef }}" style="--pos: {{ cmpPos }}%">
-      <img class="cmp-after" src="../media/cmp-after.webp" alt="After: the finished resin river feature wall above the dining booths" loading="lazy">
-      <div class="cmp-before"><img src="../media/cmp-before-v2.webp" alt="Before: the bare dining room wall as our crew starts the install" loading="lazy"></div>
+      <img class="cmp-after" src="../../design-draft/media/cmp-after.webp" alt="After: the finished resin river feature wall above the dining booths" loading="lazy">
+      <div class="cmp-before"><img src="../../design-draft/media/cmp-before-v2.webp" alt="Before: the bare dining room wall as our crew starts the install" loading="lazy"></div>
       <span class="cmp-tag cmp-l meta">Before</span>
       <span class="cmp-tag cmp-r meta">After</span>
       <span class="cmp-line" aria-hidden="true"><span class="cmp-knob"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 6l-5 5 5 5M14 6l5 5-5 5"/></svg></span></span>
@@ -374,7 +338,7 @@ class Component extends DCLogic {
         <figcaption class="meta" style="color: #4A4038">The drawing</figcaption>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px">
-        <img class="cover" src="../media/tv2.webp" alt="Finished kitchen with gloss island" style="flex: 1 1 auto; min-height: 280px">
+        <img class="cover" src="../../design-draft/media/tv2.webp" alt="Finished built-in wall unit with lit shelves" style="flex: 1 1 auto; min-height: 280px">
         <div class="meta" style="color: #B9AFA2">The result</div>
       </div>
     </figure>
@@ -384,7 +348,7 @@ class Component extends DCLogic {
 <!-- 5. Signature: Epoxy & Resin -->
 <section class="s bg-teal">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: end">
-    <video class="cover r-169" src="../media/resin.mp4" autoplay muted loop playsinline aria-hidden="true" style="grid-column: 1 / span 7; height: auto"></video>
+    <video class="cover r-169" src="../../design-draft/media/resin.mp4" autoplay muted loop playsinline aria-hidden="true" style="grid-column: 1 / span 7; height: auto"></video>
     <div style="grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 24px">
       <h2 class="d2">Wood and resin, poured as one piece.</h2>
       <p class="p">River tables, bar tops and feature walls. We choose the slabs and pour in our own shop, in colours mixed for your room.</p>
@@ -425,7 +389,7 @@ class Component extends DCLogic {
 <!-- 7b. Our own crew -->
 <section class="s bg-ebony">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
-    <img class="cover r-32" src="../media/install-crew.webp" alt="SnM installers fitting a live-edge feature wall in a restaurant" loading="lazy" style="grid-column: 1 / span 7; height: auto">
+    <img class="cover r-32" src="../../design-draft/media/install-crew.webp" alt="SnM installers fitting a live-edge feature wall in a restaurant" loading="lazy" style="grid-column: 1 / span 7; height: auto">
     <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
       <span class="meta" style="color: #F5A546">Our people</span>
       <h2 class="d2">Built by our own crew.</h2>
@@ -482,7 +446,7 @@ class Component extends DCLogic {
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="../media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
+        <img src="../../design-draft/media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
       <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
@@ -496,8 +460,8 @@ class Component extends DCLogic {
 <!-- Demo only: switch between the two homepage versions -->
 <nav class="demo-switch" aria-label="Homepage version">
   <span>Homepage:</span>
-  <a href="Main.html">A · Video</a>
-  <a class="on" href="Home-Slider.html" aria-current="page">B · Slider</a>
+  <a class="on" href="Main.html" aria-current="page">A · Video</a>
+  <a href="Home-Slider.html">B · Slider</a>
 </nav>
 
 </div>

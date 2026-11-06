@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Epoxy and Resin Tables, Counters and Wall Pieces | SnM Millwork</title><meta name="description" content="River tables, epoxy countertops, bar tops and lit resin wall pieces, with slabs chosen and resin poured in our own shop."><link rel="icon" type="image/png" href="../media/favicon-64.png"><link rel="apple-touch-icon" href="../media/favicon-180.png"><link rel="stylesheet" href="snm.css">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Epoxy and Resin Tables, Counters and Wall Pieces | SnM Millwork</title><meta name="description" content="River tables, epoxy countertops, bar tops and lit resin wall pieces, with slabs chosen and resin poured in our own shop."><link rel="icon" type="image/png" href="../../design-draft/media/favicon-64.png"><link rel="apple-touch-icon" href="../../design-draft/media/favicon-180.png"><link rel="stylesheet" href="snm.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
 <script src="runtime.js"></script><script>
@@ -12,9 +12,9 @@ class Component extends DCLogic {
     const R = { teal: ['Ocean teal', '#0D999E'], clear: ['Clear', '#CFE0DD'], smoke: ['Smoke', '#3A3633'], amber: ['Amber', '#DE701E'] };
     const s = this.state;
     const shots = [
-      { cat: 'Table', name: 'Blue river table', src: '../media/table-blue-v2.webp', alt: 'Live-edge slabs with a blue resin river and bark inlays' },
-      { cat: 'Table', name: 'Red river table', src: '../media/table-red-v2.webp', alt: 'Live-edge slabs with a deep red resin river and bark inlays' },
-      { cat: 'In the shop', name: 'Bark set before the pour', src: '../media/resin-bark-v2.webp', alt: 'Bark pieces and live-edge strips laid in a mould before the resin pour' }
+      { cat: 'Table', name: 'Blue river table', src: '../../design-draft/media/table-blue-v2.webp', alt: 'Live-edge slabs with a blue resin river and bark inlays' },
+      { cat: 'Table', name: 'Red river table', src: '../../design-draft/media/table-red-v2.webp', alt: 'Live-edge slabs with a deep red resin river and bark inlays' },
+      { cat: 'In the shop', name: 'Bark set before the pour', src: '../../design-draft/media/resin-bark-v2.webp', alt: 'Bark pieces and live-edge strips laid in a mould before the resin pour' }
     ];
     const opts = (map, key) => Object.keys(map).map((id) => ({
       label: map[id][0], cls: s[key] === id ? 'pill on' : 'pill', pressed: s[key] === id ? 'true' : 'false',
@@ -59,8 +59,8 @@ class Component extends DCLogic {
   <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
     <div class="intro-stage">
       <div class="intro-logo">
-        <img src="../media/snm-logo-v2.webp" alt="">
-        <span class="intro-shine" style="-webkit-mask-image: url(../media/snm-logo-v2.webp); mask-image: url(../media/snm-logo-v2.webp)"></span>
+        <img src="../../design-draft/media/snm-logo-v2.webp" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(../../design-draft/media/snm-logo-v2.webp); mask-image: url(../../design-draft/media/snm-logo-v2.webp)"></span>
         <span class="intro-edge"></span>
       </div>
       <span class="intro-tag meta">From Concept to Completion.</span>
@@ -70,7 +70,7 @@ class Component extends DCLogic {
 
 <header class="hdr">
   <div class="w hdr-in">
-    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="207" height="68"></a>
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../../design-draft/media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="207" height="68"></a>
     <nav class="nav" aria-label="Main">
       <a href="Main.html">Home</a>
       <a href="Commercial.html">Commercial</a>
@@ -126,7 +126,7 @@ class Component extends DCLogic {
         <a class="btn btn-line" href="#gallery">See finished pieces</a>
       </div>
     </div>
-    <video class="cover r-45" src="../media/resin.mp4" autoplay muted loop playsinline aria-hidden="true" style="grid-column: 7 / span 6; height: auto; border-radius: 2px 2px 0 0"></video>
+    <video class="cover r-45" src="../../design-draft/media/resin.mp4" autoplay muted loop playsinline aria-hidden="true" style="grid-column: 7 / span 6; height: auto; border-radius: 2px 2px 0 0"></video>
   </div>
 </section>
 
@@ -186,7 +186,7 @@ class Component extends DCLogic {
 <section class="s">
   <div class="w" style="display: flex; flex-direction: column; gap: 56px">
     <h2 class="d2" style="max-width: 720px">How a resin piece is made</h2>
-    <img class="cover r-219" src="../media/library/ai-pour-team.webp" alt="Three SnM makers pouring blue resin into a live-edge table mould" loading="lazy" style="height: auto; object-position: 50% 30%">
+    <img class="cover r-219" src="../../design-draft/media/library/ai-pour-team.webp" alt="Three SnM makers pouring blue resin into a live-edge table mould" loading="lazy" style="height: auto; object-position: 50% 30%">
     <ol class="g" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 32px">
       <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">1</span><h3 class="d5">Choose the slab</h3><p class="p" style="font-size: 16px">Visit the shop or pick from photos of slabs in stock.</p></li>
       <li class="rule-top" style="display: flex; flex-direction: column; gap: 10px"><span class="d3 num" style="color: #F5A546">2</span><h3 class="d5">Design the pour</h3><p class="p" style="font-size: 16px">Size, colour and edge are drawn and approved.</p></li>
@@ -262,7 +262,7 @@ class Component extends DCLogic {
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="../media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
+        <img src="../../design-draft/media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
       <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>

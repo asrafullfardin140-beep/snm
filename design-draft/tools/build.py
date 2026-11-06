@@ -4,6 +4,7 @@ from pathlib import Path
 
 SRC = Path(sys.argv[1])   # design-draft/canvas
 OUT = Path(sys.argv[2])   # design-draft/preview
+MEDIA = sys.argv[3] if len(sys.argv) > 3 else "../media/"   # where the built pages find the photos and videos
 BLOBS = {
     "03963753ad4feea4c43c038b7e4e2ca4": "../media/hero.mp4",
     "685608b5d6a42dbb4f39260428cd87cf": "../media/wall-blue.webp",
@@ -70,7 +71,7 @@ PAGES = ["Main", "Home-Slider", "Commercial", "Residential", "Services", "Epoxy"
 
 
 def unblob(text):
-    return re.sub(r"/_blob/([0-9a-f]{32})", lambda m: BLOBS[m.group(1)], text)
+    return re.sub(r"/_blob/([0-9a-f]{32})", lambda m: BLOBS[m.group(1)].replace("../media/", MEDIA), text)
 
 
 (OUT / "snm.css").write_text(unblob((SRC / "snm.css").read_text()))

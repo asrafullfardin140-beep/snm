@@ -1,5 +1,8 @@
 {
-  "redirects": [
-    { "source": "/", "destination": "/design-draft/preview/Main.html", "permanent": false }
+  "rewrites": [
+    { "source": "/design-draft/preview/:path*", "destination": "/index.html" }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
   ]
 }
