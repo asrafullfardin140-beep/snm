@@ -12,17 +12,17 @@
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#FFFFFF}</style>
 </helmet>
-<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+<div style="background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif">
 
 <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
   <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
     <div class="intro-stage">
       <div class="intro-logo">
-        <img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="">
-        <span class="intro-shine" style="-webkit-mask-image: url(/_blob/10a9d5890da064401c5342e90147ab64); mask-image: url(/_blob/10a9d5890da064401c5342e90147ab64)"></span>
+        <img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(/_blob/43e824b4c6b12e9f8027592f9786f0a5); mask-image: url(/_blob/43e824b4c6b12e9f8027592f9786f0a5)"></span>
         <span class="intro-edge"></span>
       </div>
       <span class="intro-tag meta">From Concept to Completion.</span>
@@ -32,11 +32,10 @@
 
 <header class="hdr">
   <div class="w hdr-in">
-    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="SnM Millwork Manufacturing Inc." width="207" height="68"></a>
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="SnM Millwork Manufacturing Inc." width="189" height="62"></a>
     <nav class="nav" aria-label="Main">
       <a href="Main.dc.html">Home</a>
-      <a class="cur" href="Commercial.dc.html" aria-current="page">Commercial</a>
-      <a href="Residential.dc.html">Residential</a>
+      <a class="cur" href="Projects.dc.html">Projects</a>
       <div class="dd">
         <a href="Services.dc.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
         <div class="menu">
@@ -49,6 +48,7 @@
           <a href="Trades.dc.html">Trade Coordination</a>
         </div>
       </div>
+      <a href="About.dc.html">About</a>
       <a class="btn" href="Quote.dc.html">Get a Quote</a>
     </nav>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
@@ -56,8 +56,7 @@
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav class="mnav" aria-label="Mobile">
       <a href="Main.dc.html">Home</a>
-      <a href="Commercial.dc.html" aria-current="page">Commercial</a>
-      <a href="Residential.dc.html">Residential</a>
+      <a href="Projects.dc.html">Projects</a>
       <a href="Services.dc.html">Services</a>
       <div class="mnav-sub">
         <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
@@ -79,9 +78,9 @@
 <!-- Hero -->
 <section class="bg-ebony" style="padding-top: 104px">
   <div class="w" style="display: flex; flex-direction: column; gap: 32px">
-    <h1 class="d1" style="max-width: 980px">Commercial millwork that arrives on schedule and installs clean.</h1>
+    <h1 class="d1" style="max-width: 980px">Commercial millwork that arrives on schedule and installs <span class="sf">clean.</span></h1>
     <div class="stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px">
-      <p class="lede" style="color: #B9AFA2">For general contractors, designers and property owners. We price from your drawings, produce shop drawings, build in house and install with our own crew.</p>
+      <p class="lede" style="color: var(--ink-2)">For general contractors, designers and property owners. We price from your drawings, produce shop drawings, build in house and install with our own crew.</p>
       <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
         <a class="btn" href="Quote.dc.html">Request a tender quote</a>
         <a class="btn btn-line" href="#">Capability statement [PDF]</a>
@@ -108,7 +107,7 @@
 <!-- What contractors get -->
 <section class="s">
   <div class="w" style="display: flex; flex-direction: column; gap: 56px">
-    <h2 class="d2" style="max-width: 720px">Built around your schedule, not ours.</h2>
+    <h2 class="d2" style="max-width: 720px">Built around your schedule, not <span class="sf">ours.</span></h2>
     <div class="g" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px">
       <div class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><h3 class="d4">Tender-ready pricing</h3><p class="p">Itemised pricing from your architectural set within [X working days], with clear allowances and exclusions.</p></div>
       <div class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><h3 class="d4">Shop drawings in house</h3><p class="p">Our drafting team produces shop drawings and samples for consultant review, revised until approved.</p></div>
@@ -121,7 +120,7 @@
 <section class="s bg-sand">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
     <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 20px">
-      <h2 class="d2">Sectors we build for</h2>
+      <h2 class="d2">Sectors we build <span class="sf">for</span></h2>
       <p class="p">[Confirm with SnM which sectors to list, and drop any they don't serve.]</p>
     </div>
     <ul class="g" style="grid-column: 6 / span 7; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px">
@@ -139,7 +138,7 @@
 <section id="gallery" class="s">
   <div class="w" style="display: flex; flex-direction: column; gap: 36px">
     <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
-      <h2 class="d2">Commercial gallery</h2>
+      <h2 class="d2">Commercial <span class="sf">gallery</span></h2>
       <p class="p">A selection of our recent commercial work.</p>
     </div>
     <div role="group" aria-label="Filter by sector" style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap">
@@ -151,7 +150,7 @@
       <sc-for list="{{ shots }}" as="p" hint-placeholder-count="6">
         <button type="button" aria-label="{{ p.open }}" onClick="{{ p.view }}">
           <img src="{{ p.src }}" alt="{{ p.alt }}">
-          <span class="cap"><span class="meta" style="color: #F5A546; display: block">{{ p.cat }}</span><span class="d5">{{ p.name }}</span></span>
+          <span class="cap"><span class="meta" style="color: var(--accent); display: block">{{ p.cat }}</span><span class="d5">{{ p.name }}</span></span>
         </button>
       </sc-for>
     </div>
@@ -162,12 +161,12 @@
 <section class="s bg-ebony">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
     <div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 22px">
-      <h2 class="d2">[Project name]</h2>
+      <h2 class="d2">[Project <span class="sf">name]</span></h2>
       <p class="p">[Two or three sentences: the client, the brief, the constraint (schedule, budget, site) and how SnM solved it.]</p>
       <dl class="num" style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 24px; font-size: 15px">
-        <dt style="color: #F5A546">Client</dt><dd style="margin: 0">[General contractor]</dd>
-        <dt style="color: #F5A546">Scope</dt><dd style="margin: 0">[Reception, boardroom, 4 kitchenettes]</dd>
-        <dt style="color: #F5A546">Delivered</dt><dd style="margin: 0">[X weeks from approval]</dd>
+        <dt style="color: var(--accent)">Client</dt><dd style="margin: 0">[General contractor]</dd>
+        <dt style="color: var(--accent)">Scope</dt><dd style="margin: 0">[Reception, boardroom, 4 kitchenettes]</dd>
+        <dt style="color: var(--accent)">Delivered</dt><dd style="margin: 0">[X weeks from approval]</dd>
       </dl>
     </div>
     <div style="grid-column: 6 / span 7; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
@@ -194,14 +193,14 @@
 <section class="s" aria-roledescription="carousel" aria-label="Client reviews" onMouseEnter="{{ pauseReviews }}" onMouseLeave="{{ resumeReviews }}">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: start">
     <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 20px">
-      <h2 class="d2">What contractors say</h2>
+      <h2 class="d2">What contractors <span class="sf">say</span></h2>
       <p class="p" style="font-size: 15px">[Sample reviews. Replace with real reviews from SnM's commercial clients.]</p>
     </div>
     <figure style="grid-column: 6 / span 7; margin: 0; display: flex; flex-direction: column; gap: 24px; min-height: 300px" aria-live="polite">
       <div class="stars" role="img" aria-label="5 out of 5 stars"><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L10 15l-5.4 3 1.2-6L1.3 7.8l6.1-.7z"/></svg></div>
       <blockquote class="d3" style="margin: 0; font-style: italic; line-height: 1.3">“{{ review.q }}”</blockquote>
       <figcaption style="display: flex; flex-direction: column; gap: 2px"><span class="d5">{{ review.name }}</span><span class="p" style="font-size: 15px">{{ review.meta }}</span></figcaption>
-      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #2E2A26; padding-top: 20px">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding-top: 20px">
         <div class="dots" role="group" aria-label="Choose a review">
           <sc-for list="{{ reviewDots }}" as="d" hint-placeholder-count="4">
             <button type="button" class="{{ d.cls }}" aria-label="{{ d.label }}" aria-pressed="{{ d.pressed }}" onClick="{{ d.pick }}"><span></span></button>
@@ -220,7 +219,7 @@
 <section class="s bg-sand">
   <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
     <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
-      <h2 class="d2">Send us your drawings.</h2>
+      <h2 class="d2">Send us your <span class="sf">drawings.</span></h2>
       <p class="p">Upload the set and your tender date. We confirm receipt the same day and send pricing within [X working days].</p>
     </div>
     <a class="btn" href="Quote.dc.html">Request a tender quote</a>
@@ -233,7 +232,7 @@
 <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
   <div class="lb" role="dialog" aria-modal="true" aria-label="Project photo viewer">
     <div class="lb-top">
-      <div style="display: flex; flex-direction: column"><span class="meta" style="color: #F5A546">{{ lb.cat }}</span><span class="d4">{{ lb.name }}</span></div>
+      <div style="display: flex; flex-direction: column"><span class="meta" style="color: var(--accent)">{{ lb.cat }}</span><span class="d4">{{ lb.name }}</span></div>
       <div style="display: flex; align-items: center; gap: 20px"><span class="count num">{{ lbCount }}</span><button type="button" class="arrow" aria-label="Close viewer" onClick="{{ closeLb }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button></div>
     </div>
     <div class="lb-mid">
@@ -245,14 +244,14 @@
 </sc-if>
 
 <footer>
-  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #1C1A18"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: var(--bg-2)"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#25262B"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
+        <img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
-      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Projects.dc.html">Projects</a><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.dc.html">Millwork &amp; Cabinetry</a><a href="Epoxy.dc.html">Epoxy &amp; Resin</a><a href="Design.dc.html">Design &amp; Engineering</a><a href="FitOut.dc.html">Interior Fit-Out</a><a href="Fabrication.dc.html">Custom Fabrication</a><a href="Installation.dc.html">Installation</a><a href="Trades.dc.html">Trade Coordination</a></div>
       <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>

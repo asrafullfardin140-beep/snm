@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Get a Quote | SnM Millwork Manufacturing</title><meta name="description" content="Tell us about your project in five quick steps. We reply with questions and a budget range."><link rel="icon" type="image/png" href="../../design-draft/media/favicon-64.png"><link rel="apple-touch-icon" href="../../design-draft/media/favicon-180.png"><link rel="stylesheet" href="snm.css">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#FFFFFF}</style>
 <script src="runtime.js"></script><script>
 class Component extends DCLogic {
   constructor(props) {
@@ -148,14 +148,14 @@ class Component extends DCLogic {
   }
 }
 </script></head><body><template id="tpl">
-<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+<div style="background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif">
 
 <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
   <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
     <div class="intro-stage">
       <div class="intro-logo">
-        <img src="../../design-draft/media/snm-logo-v2.webp" alt="">
-        <span class="intro-shine" style="-webkit-mask-image: url(../../design-draft/media/snm-logo-v2.webp); mask-image: url(../../design-draft/media/snm-logo-v2.webp)"></span>
+        <img src="../../design-draft/media/snm-logo-v3.webp" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(../../design-draft/media/snm-logo-v3.webp); mask-image: url(../../design-draft/media/snm-logo-v3.webp)"></span>
         <span class="intro-edge"></span>
       </div>
       <span class="intro-tag meta">From Concept to Completion.</span>
@@ -165,11 +165,10 @@ class Component extends DCLogic {
 
 <header class="hdr">
   <div class="w hdr-in">
-    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../../design-draft/media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="207" height="68"></a>
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../../design-draft/media/snm-logo-v3.webp" alt="SnM Millwork Manufacturing Inc." width="189" height="62"></a>
     <nav class="nav" aria-label="Main">
       <a href="Main.html">Home</a>
-      <a href="Commercial.html">Commercial</a>
-      <a href="Residential.html">Residential</a>
+      <a href="Projects.html">Projects</a>
       <div class="dd">
         <a href="Services.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
         <div class="menu">
@@ -182,6 +181,7 @@ class Component extends DCLogic {
           <a href="Trades.html">Trade Coordination</a>
         </div>
       </div>
+      <a href="About.html">About</a>
       <a class="btn" href="Quote.html" aria-current="page">Get a Quote</a>
     </nav>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
@@ -189,8 +189,7 @@ class Component extends DCLogic {
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav class="mnav" aria-label="Mobile">
       <a href="Main.html">Home</a>
-      <a href="Commercial.html">Commercial</a>
-      <a href="Residential.html">Residential</a>
+      <a href="Projects.html">Projects</a>
       <a href="Services.html">Services</a>
       <div class="mnav-sub">
         <a href="Millwork.html">Millwork &amp; Cabinetry</a>
@@ -216,8 +215,8 @@ class Component extends DCLogic {
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
         <div class="q-step" style="display: flex; flex-direction: column; gap: 28px; padding: 40px 0">
           <span class="q-done" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2.5 6.2l2.3 2.3 4.7-4.9"/></svg></span>
-          <h1 class="d1" style="font-size: 72px">Thank you{{ thanksName }}.</h1>
-          <p class="lede" style="color: #B9AFA2">Your project is with us. A confirmation is on its way to {{ sentTo }}, and [Name] from our team will reply within [X business days] with questions and a budget range.</p>
+          <h1 class="d1">Thank you{{ thanksName }}.</h1>
+          <p class="lede" style="color: var(--ink-2)">Your project is with us. A confirmation is on its way to {{ sentTo }}, and [Name] from our team will reply within [X business days] with questions and a budget range.</p>
           <dl class="q-recap">
             <sc-for list="{{ recap }}" as="r" hint-placeholder-count="4"><div><dt class="meta">{{ r.k }}</dt><dd>{{ r.v }}</dd></div></sc-for>
           </dl>
@@ -231,8 +230,8 @@ class Component extends DCLogic {
       <sc-if value="{{ editing }}" hint-placeholder-val="{{ true }}">
         <div style="display: flex; flex-direction: column; gap: 40px">
           <div style="display: flex; flex-direction: column; gap: 16px">
-            <h1 class="d1" style="font-size: 72px">Tell us about your project.</h1>
-            <p class="lede" style="color: #B9AFA2">Five quick steps, about two minutes. Tap an answer and we move you on.</p>
+            <h1 class="d1">Tell us about your <span class="sf">project.</span></h1>
+            <p class="lede" style="color: var(--ink-2)">Five quick steps, about two minutes. Tap an answer and we move you on.</p>
           </div>
 
           <div class="q-prog" role="group" aria-label="Progress">
@@ -342,7 +341,7 @@ class Component extends DCLogic {
     <aside style="grid-column: 10 / span 3; display: flex; flex-direction: column; gap: 32px; padding-top: 12px">
       <div style="display: flex; flex-direction: column; gap: 16px">
         <h2 class="d4">What happens next</h2>
-        <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; color: #B9AFA2; font-size: 16px">
+        <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; color: var(--ink-2); font-size: 16px">
           <li>We confirm we've received it the same day.</li>
           <li>We reply within [X business days] with questions and a budget range.</li>
           <li>We book a site visit or a call.</li>
@@ -362,14 +361,14 @@ class Component extends DCLogic {
 </main>
 
 <footer>
-  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: var(--bg)"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#25262B"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="../../design-draft/media/snm-logo-v2.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
+        <img src="../../design-draft/media/snm-logo-v3.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
-      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Projects.html">Projects</a><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a><a href="Fabrication.html">Custom Fabrication</a><a href="Installation.html">Installation</a><a href="Trades.html">Trade Coordination</a></div>
       <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>

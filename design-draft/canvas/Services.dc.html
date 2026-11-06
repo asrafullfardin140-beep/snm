@@ -12,17 +12,17 @@
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#FFFFFF}</style>
 </helmet>
-<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+<div style="background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif">
 
 <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
   <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
     <div class="intro-stage">
       <div class="intro-logo">
-        <img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="">
-        <span class="intro-shine" style="-webkit-mask-image: url(/_blob/10a9d5890da064401c5342e90147ab64); mask-image: url(/_blob/10a9d5890da064401c5342e90147ab64)"></span>
+        <img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(/_blob/43e824b4c6b12e9f8027592f9786f0a5); mask-image: url(/_blob/43e824b4c6b12e9f8027592f9786f0a5)"></span>
         <span class="intro-edge"></span>
       </div>
       <span class="intro-tag meta">From Concept to Completion.</span>
@@ -32,13 +32,12 @@
 
 <header class="hdr">
   <div class="w hdr-in">
-    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="SnM Millwork Manufacturing Inc." width="207" height="68"></a>
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="SnM Millwork Manufacturing Inc." width="189" height="62"></a>
     <nav class="nav" aria-label="Main">
       <a href="Main.dc.html">Home</a>
-      <a href="Commercial.dc.html">Commercial</a>
-      <a href="Residential.dc.html">Residential</a>
+      <a href="Projects.dc.html">Projects</a>
       <div class="dd">
-        <a class="cur" href="Services.dc.html" aria-current="page" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <a class="cur" aria-current="page" href="Services.dc.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
         <div class="menu">
           <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
           <a class="sig" href="Epoxy.dc.html">Epoxy &amp; Resin</a>
@@ -49,6 +48,7 @@
           <a href="Trades.dc.html">Trade Coordination</a>
         </div>
       </div>
+      <a href="About.dc.html">About</a>
       <a class="btn" href="Quote.dc.html">Get a Quote</a>
     </nav>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
@@ -56,8 +56,7 @@
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav class="mnav" aria-label="Mobile">
       <a href="Main.dc.html">Home</a>
-      <a href="Commercial.dc.html">Commercial</a>
-      <a href="Residential.dc.html">Residential</a>
+      <a href="Projects.dc.html">Projects</a>
       <a href="Services.dc.html" aria-current="page">Services</a>
       <div class="mnav-sub">
         <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
@@ -78,8 +77,8 @@
 
 <section class="s" style="padding-top: 104px; padding-bottom: 96px">
   <div class="w stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px">
-    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 760px"><span class="meta" style="color: #F5A546">Custom Millwork. Innovative Design. Complete Building Solutions.</span><h1 class="d1">One partner, from concept to completion.</h1></div>
-    <p class="lede" style="color: #B9AFA2; max-width: 420px">Design, manufacturing, installation and trade coordination under one roof. Use one service or all of them, and nothing gets lost in hand-offs.</p>
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 760px"><span class="meta" style="color: var(--accent)">Custom Millwork. Innovative Design. Complete Building Solutions.</span><h1 class="d1">One partner, from concept to <span class="sf">completion.</span></h1></div>
+    <p class="lede" style="color: var(--ink-2); max-width: 420px">Design, manufacturing, installation and trade coordination under one roof. Use one service or all of them, and nothing gets lost in hand-offs.</p>
   </div>
 </section>
 
@@ -90,7 +89,7 @@
     <article class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
       <div class="ph im im-k3 r-32" style="grid-column: 1 / span 7"><i>[Photo: cabinetry detail]</i></div>
       <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
-        <h2 class="d2">Millwork &amp; Cabinetry</h2>
+        <h2 class="d2">Millwork &amp; <span class="sf">Cabinetry</span></h2>
         <p class="p">Cabinets, panelling, counters, doors and architectural woodwork, in solid wood, veneer or lacquer.</p>
         <a class="tl" href="Millwork.dc.html" style="align-self: flex-start">Millwork &amp; Cabinetry</a>
       </div>
@@ -98,8 +97,8 @@
 
     <article class="bg-teal g bleed" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center; padding: 64px; margin: 0 -64px; border-radius: 2px">
       <div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 20px">
-        <span class="meta" style="color: #F5A546">Our signature</span>
-        <h2 class="d2">Epoxy &amp; Resin</h2>
+        <span class="meta" style="color: var(--accent)">Our signature</span>
+        <h2 class="d2">Epoxy &amp; <span class="sf">Resin</span></h2>
         <p class="p">River tables, bar tops, countertops and wall pieces, with slabs chosen and resin poured in our own shop.</p>
         <a class="btn" href="Epoxy.dc.html" style="align-self: flex-start">Explore Epoxy &amp; Resin</a>
       </div>
@@ -109,7 +108,7 @@
     <article class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
       <div class="ph im im-cad1 r-32" style="grid-column: 1 / span 7"><i>[Image: 3D render beside its shop drawing]</i></div>
       <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
-        <h2 class="d2">Design &amp; Engineering</h2>
+        <h2 class="d2">Design &amp; <span class="sf">Engineering</span></h2>
         <p class="p">Concepts, 3D models and shop drawings, so you can see and approve the work before it is built.</p>
         <a class="tl" href="Design.dc.html" style="align-self: flex-start">Design &amp; Engineering</a>
       </div>
@@ -117,7 +116,7 @@
 
     <article class="g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
       <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 20px">
-        <h2 class="d2">Interior Fit-Out</h2>
+        <h2 class="d2">Interior <span class="sf">Fit-Out</span></h2>
         <p class="p">Complete interiors, with millwork, finishes and trades coordinated by one site lead.</p>
         <a class="tl" href="FitOut.dc.html" style="align-self: flex-start">Interior Fit-Out</a>
       </div>
@@ -130,7 +129,7 @@
 <!-- The three delivery services -->
 <section class="s bg-ebony">
   <div class="w" style="display: flex; flex-direction: column; gap: 48px">
-    <h2 class="d2" style="max-width: 760px">Made, installed and coordinated.</h2>
+    <h2 class="d2" style="max-width: 760px">Made, installed and <span class="sf">coordinated.</span></h2>
     <div class="g" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
       <a class="svc-card" href="Fabrication.dc.html"><img src="/_blob/78eb8fbf0e90225ae7db8f6be7f49bf4" alt="" loading="lazy"><span class="d4">Custom Fabrication</span><span class="p">CNC machining, prototypes, components and production runs from our shop.</span><span class="tl">Custom Fabrication</span></a>
       <a class="svc-card" href="Installation.dc.html"><img src="/_blob/99990602ecc04e579e868394633d175c" alt="" loading="lazy"><span class="d4">Installation</span><span class="p">Measured, fitted and finished on site by our own crew.</span><span class="tl">Installation</span></a>
@@ -143,7 +142,7 @@
 <section class="s">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
     <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 16px">
-      <h2 class="d2">Additional services</h2>
+      <h2 class="d2">Additional <span class="sf">services</span></h2>
       <p class="p">Extras that keep your project simple to run. [Confirm each with SnM before launch.]</p>
     </div>
     <div class="g" style="grid-column: 6 / span 7; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px">
@@ -161,7 +160,7 @@
 <!-- Which service do I need? -->
 <section class="s bg-sand">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
-    <h2 class="d2" style="grid-column: 1 / span 4">Not sure which you need?</h2>
+    <h2 class="d2" style="grid-column: 1 / span 4">Not sure which you <span class="sf">need?</span></h2>
     <dl style="grid-column: 6 / span 7; margin: 0">
       <div class="rule-top" style="padding-bottom: 24px"><dt class="d4">You have drawings and need it built</dt><dd class="p" style="margin: 6px 0 0">Start with Millwork &amp; Cabinetry.</dd></div>
       <div class="rule-top" style="padding-bottom: 24px"><dt class="d4">You have an idea but no drawings yet</dt><dd class="p" style="margin: 6px 0 0">Start with Design &amp; Engineering, then we build it.</dd></div>
@@ -169,7 +168,7 @@
       <div class="rule-top" style="padding-bottom: 24px"><dt class="d4">You need a whole space delivered</dt><dd class="p" style="margin: 6px 0 0">Interior Fit-Out covers it end to end.</dd></div>
       <div class="rule-top" style="padding-bottom: 24px"><dt class="d4">You need a batch of pieces made</dt><dd class="p" style="margin: 6px 0 0">Custom Fabrication handles prototypes and production runs.</dd></div>
       <div class="rule-top" style="padding-bottom: 24px"><dt class="d4">You have the pieces and need them fitted</dt><dd class="p" style="margin: 6px 0 0">Our Installation crew measures, fits and finishes.</dd></div>
-      <div class="rule-top" style="padding-bottom: 24px; border-bottom: 1px solid #2E2A26"><dt class="d4">You need electrical or plumbing too</dt><dd class="p" style="margin: 6px 0 0">Trade Coordination brings in qualified partners on one schedule.</dd></div>
+      <div class="rule-top" style="padding-bottom: 24px; border-bottom: 1px solid var(--line)"><dt class="d4">You need electrical or plumbing too</dt><dd class="p" style="margin: 6px 0 0">Trade Coordination brings in qualified partners on one schedule.</dd></div>
     </dl>
   </div>
 </section>
@@ -177,7 +176,7 @@
 <section class="s">
   <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
     <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
-      <h2 class="d2">Tell us what you're building.</h2>
+      <h2 class="d2">Tell us what you're <span class="sf">building.</span></h2>
       <p class="p">We'll point you to the right service and send a budget range within [X business days].</p>
     </div>
     <a class="btn" href="Quote.dc.html">Get a Quote</a>
@@ -187,14 +186,14 @@
 </main>
 
 <footer>
-  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: var(--bg)"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#25262B"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
+        <img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
-      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Projects.dc.html">Projects</a><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.dc.html">Millwork &amp; Cabinetry</a><a href="Epoxy.dc.html">Epoxy &amp; Resin</a><a href="Design.dc.html">Design &amp; Engineering</a><a href="FitOut.dc.html">Interior Fit-Out</a><a href="Fabrication.dc.html">Custom Fabrication</a><a href="Installation.dc.html">Installation</a><a href="Trades.dc.html">Trade Coordination</a></div>
       <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>

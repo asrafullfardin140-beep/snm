@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Image Library (internal) | SnM Millwork</title><meta name="description" content="Internal list of SnM project photos. Not part of the public website."><meta name="robots" content="noindex"><link rel="icon" type="image/png" href="../../design-draft/media/favicon-64.png"><link rel="apple-touch-icon" href="../../design-draft/media/favicon-180.png"><link rel="stylesheet" href="snm.css">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>body{margin:0;background:#121212}</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#FFFFFF}</style>
 <script src="runtime.js"></script><script>
 class Component extends DCLogic {
   renderVals() {
@@ -41,21 +41,21 @@ class Component extends DCLogic {
   }
 }
 </script></head><body><template id="tpl">
-<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif; padding: 72px 0 96px">
+<div style="background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; padding: 72px 0 96px">
   <div class="w" style="display: flex; flex-direction: column; gap: 48px">
     <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
-      <span class="meta" style="color: #F5A546">Not part of the website</span>
-      <h1 class="d2">Image library</h1>
+      <span class="meta" style="color: var(--accent)">Not part of the website</span>
+      <h1 class="d2">Image <span class="sf">library</span></h1>
       <p class="p">Every SnM photo on file, numbered. "Live" photos are on the site now. "Alternate" photos are kept for swapping in later: ask for "library #12 on the homepage" and it goes in. AI-edited and AI-enhanced images are marked, so you always know which photos show the work exactly as built.</p>
     </div>
 
     <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
       <section style="display: flex; flex-direction: column; gap: 24px">
-        <h2 class="d4" style="border-bottom: 1px solid #2E2A26; padding-bottom: 14px">{{ g.title }}</h2>
+        <h2 class="d4" style="border-bottom: 1px solid var(--line); padding-bottom: 14px">{{ g.title }}</h2>
         <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
           <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
             <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px">
-              <div style="position: relative; aspect-ratio: 4 / 3; background: #1C1A18; border-radius: 2px; overflow: hidden">
+              <div style="position: relative; aspect-ratio: 4 / 3; background: var(--bg-2); border-radius: 2px; overflow: hidden">
                 <img src="{{ it.src }}" alt="{{ it.name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: contain">
                 <span class="num" style="position: absolute; left: 10px; top: 10px; padding: 4px 9px; background: rgba(10,9,8,.85); border-radius: 2px; font-size: 14px">#{{ it.n }}</span>
               </div>
@@ -63,7 +63,7 @@ class Component extends DCLogic {
                 <span class="meta" style="color: {{ it.color }}">{{ it.status }}</span>
                 <span style="font-weight: 500">{{ it.name }}</span>
                 <span class="p" style="font-size: 14px">{{ it.where }}</span>
-                <span class="p" style="font-size: 13px; color: #8F867B">{{ it.file }}</span>
+                <span class="p" style="font-size: 13px; color: var(--ink-2)">{{ it.file }}</span>
               </figcaption>
             </figure>
           </sc-for>

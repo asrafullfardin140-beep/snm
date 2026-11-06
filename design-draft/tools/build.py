@@ -13,6 +13,7 @@ BLOBS = {
     "59092c77a0d8b7d4bc1783b90cd33a83": "../media/hero-poster.webp",
     "ddaee12b1d02cb40e277077a4e9a76b5": "../media/snm-logo.webp",
     "10a9d5890da064401c5342e90147ab64": "../media/snm-logo-v2.webp",
+    "43e824b4c6b12e9f8027592f9786f0a5": "../media/snm-logo-v3.webp",
     "7eaae759c1a76744ae37e0861c5897d7": "../media/favicon-64.png",
     "93a0c92b99ffa8e064234a231ffa0a91": "../media/favicon-180.png",
     "c337d2f2d5033cae7564bf652c1112a8": "../media/cmp-before-v2.webp",
@@ -67,7 +68,7 @@ BLOBS = {
     "faf9cd1b3c871428ecdd2bf7b9be2641": "../media/ws2.jpg", "9e14a600c1b751ac712fe76f953d8182": "../media/hero.mp4",
     "8f30b34b5892b7bd592280b8b52e80e8": "../media/resin.mp4",
 }
-PAGES = ["Main", "Home-Slider", "Commercial", "Residential", "Services", "Epoxy", "Millwork", "Design", "FitOut", "Fabrication", "Installation", "Trades", "Quote", "About", "Library", "NotFound"]
+PAGES = ["Main", "Home-Slider", "Commercial", "Residential", "Services", "Epoxy", "Millwork", "Design", "FitOut", "Fabrication", "Installation", "Trades", "Quote", "About", "Library", "NotFound", "Projects"]
 
 
 def unblob(text):

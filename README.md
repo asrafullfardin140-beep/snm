@@ -12,6 +12,10 @@
 - `vercel.json` rewrites `/design-draft/preview/*` to the construction page and tells search engines not to index anything.
 - `404.html` is a copy of the construction page, so any wrong address shows it too.
 
+## Design theme
+
+The site now uses the **Light Gallery** theme: white ground, charcoal text, one teal accent, heavy sans caps (Archivo) with one light serif word (Cormorant Garamond), Inter for text. Navigation: Home, Projects, Services, About, Get a Quote. A filterable **Projects** gallery (by industry and by service) replaces the separate Commercial and Residential galleries; those two pages remain linked from the footer and the homepage.
+
 ## Folders
 
 - `design-draft/`: source of the design: `canvas/` (page source), `media/` (photos, videos, logo), `tools/build.py`, notes.

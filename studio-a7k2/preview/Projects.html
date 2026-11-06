@@ -1,0 +1,213 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projects | SnM Millwork Manufacturing</title><meta name="description" content="Selected SnM projects by industry and by service: millwork, epoxy and resin, fabrication, installation and interior fit-outs."><link rel="icon" type="image/png" href="../../design-draft/media/favicon-64.png"><link rel="apple-touch-icon" href="../../design-draft/media/favicon-180.png"><link rel="stylesheet" href="snm.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#FFFFFF}</style>
+<script src="runtime.js"></script><script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, ind: 'all', svc: 'all', lb: -1 };
+  }
+  renderVals() {
+    const s = this.state;
+    const IND = [['office', 'Offices'], ['hosp', 'Restaurants & hospitality'], ['retail', 'Retail'], ['health', 'Healthcare'], ['home', 'Homes']];
+    const SVC = [['millwork', 'Millwork & cabinetry'], ['epoxy', 'Epoxy & resin'], ['fabrication', 'Fabrication'], ['install', 'Installation'], ['fitout', 'Interior fit-out'], ['design', 'Design & engineering']];
+    const all = [
+      { n: 'Resin river feature wall', ind: 'hosp', svc: ['millwork', 'epoxy', 'fabrication', 'install'], src: '../../design-draft/media/wall-blue.webp', alt: 'Resin river feature wall lit with blue LEDs in a restaurant dining room', sample: false },
+      { n: 'River wall by day', ind: 'hosp', svc: ['millwork', 'epoxy', 'fabrication', 'install'], src: '../../design-draft/media/wall-day.webp', alt: 'Live-edge wood feature wall with a resin river, installed in a restaurant', sample: false },
+      { n: 'River wall, warm light', ind: 'hosp', svc: ['millwork', 'epoxy', 'fabrication', 'install'], src: '../../design-draft/media/wall-amber.webp', alt: 'Resin river wall lit with amber and blue LEDs', sample: false },
+      { n: 'Installing the river wall', ind: 'hosp', svc: ['install', 'fitout'], src: '../../design-draft/media/install-crew.webp', alt: 'SnM installers fitting a live-edge feature wall in a restaurant', sample: false },
+      { n: 'Blue river table', ind: 'home', svc: ['epoxy', 'fabrication'], src: '../../design-draft/media/table-blue-v2.webp', alt: 'Live-edge slabs with a blue resin river and bark inlays', sample: false },
+      { n: 'Red river table', ind: 'home', svc: ['epoxy', 'fabrication'], src: '../../design-draft/media/table-red-v2.webp', alt: 'Live-edge slabs with a deep red resin river and bark inlays', sample: false },
+      { n: 'Bark inlay before the pour', ind: 'home', svc: ['epoxy', 'fabrication'], src: '../../design-draft/media/resin-bark-v2.webp', alt: 'Bark pieces and live-edge strips laid in a mould before a resin pour', sample: false },
+      { n: 'Office reception desk', ind: 'office', svc: ['millwork', 'install'], src: '../../design-draft/media/rec1.webp', alt: 'Office reception desk with a wood-slat feature wall', sample: true },
+      { n: 'Reception lounge', ind: 'office', svc: ['millwork', 'fitout'], src: '../../design-draft/media/rec3.webp', alt: 'Wood reception area with a lit front', sample: true },
+      { n: 'Executive office', ind: 'office', svc: ['millwork', 'fitout'], src: '../../design-draft/media/off2.webp', alt: 'Executive office with walnut millwork and lit shelving', sample: true },
+      { n: 'Retail display wall', ind: 'retail', svc: ['millwork', 'fabrication'], src: '../../design-draft/media/ret1.webp', alt: 'Retail display wall with lit shelving', sample: true },
+      { n: 'Office fit-out', ind: 'office', svc: ['fitout', 'install'], src: '../../design-draft/media/reno1.webp', alt: 'Office interior being fitted out', sample: true },
+      { n: 'Wood feature wall', ind: 'office', svc: ['millwork'], src: '../../design-draft/media/w1.webp', alt: 'Vertical slatted wood wall panels', sample: true },
+      { n: 'Kitchen in oak', ind: 'home', svc: ['millwork', 'install'], src: '../../design-draft/media/kit1.webp', alt: 'Kitchen with wood and black cabinetry', sample: true },
+      { n: 'Kitchen with island', ind: 'home', svc: ['millwork'], src: '../../design-draft/media/kit2.webp', alt: 'Wood kitchen with an island', sample: true },
+      { n: 'Vanity', ind: 'home', svc: ['millwork'], src: '../../design-draft/media/van1.webp', alt: 'Bathroom vanity in wood and white', sample: true },
+      { n: 'Walk-in closet', ind: 'home', svc: ['millwork'], src: '../../design-draft/media/clo1.webp', alt: 'Walk-in closet with lit shelving', sample: true },
+      { n: 'Walnut closet', ind: 'home', svc: ['millwork'], src: '../../design-draft/media/clo2.webp', alt: 'Walnut-panelled walk-in closet', sample: true },
+      { n: 'Media wall', ind: 'home', svc: ['millwork', 'install'], src: '../../design-draft/media/tv2.webp', alt: 'Built-in wood media wall with lit shelves', sample: true },
+      { n: 'Kitchen installation', ind: 'home', svc: ['install'], src: '../../design-draft/media/inst3.webp', alt: 'Kitchen cabinets being installed', sample: true },
+      { n: 'CNC machining', ind: '', svc: ['fabrication'], src: '../../design-draft/media/cnc1.webp', alt: 'CNC machine cutting a wood panel', sample: true },
+      { n: 'Spray finishing', ind: '', svc: ['fabrication'], src: '../../design-draft/media/fin1.webp', alt: 'Spray finishing a wood panel', sample: true },
+      { n: '3D design', ind: '', svc: ['design'], src: '../../design-draft/media/cad1.webp', alt: 'Designer working on a 3D model in CAD', sample: true },
+      { n: 'Drawings at the workstation', ind: '', svc: ['design'], src: '../../design-draft/media/cad2.webp', alt: 'Drawings and a monitor at a design workstation', sample: true }
+    ];
+    const indLabel = Object.fromEntries(IND), svcLabel = Object.fromEntries(SVC);
+    const match = (p, ind, svc) => (ind === 'all' || p.ind === ind) && (svc === 'all' || p.svc.includes(svc));
+    const shown = all.filter((p) => match(p, s.ind, s.svc));
+    const n = shown.length;
+    const chips = (list, key) => [['all', 'All']].concat(list.filter(([id]) => all.some((p) => (key === 'ind' ? p.ind === id : p.svc.includes(id))))).map(([id, label]) => {
+      const on = s[key] === id;
+      const count = all.filter((p) => (key === 'ind' ? match(p, id, s.svc) : match(p, s.ind, id))).length;
+      return { label, cls: (on ? 'on' : '') + (count === 0 ? ' off' : ''), pressed: on ? 'true' : 'false', pick: () => this.setState({ [key]: id, lb: -1 }) };
+    });
+    const tags = (p) => [indLabel[p.ind], p.svc.map((x) => svcLabel[x]).join(', ')].filter(Boolean).join(' \u00b7 ');
+    const pad = (x) => String(x).padStart(2, '0');
+    const open = s.lb >= 0 && s.lb < n;
+    const cur = open ? shown[s.lb] : shown[0] || all[0];
+    return {
+      year: new Date().getFullYear(),
+      menuOpen: s.menuOpen,
+      menuOpenStr: s.menuOpen ? 'true' : 'false',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      industries: chips(IND, 'ind'),
+      services: chips(SVC, 'svc'),
+      countText: n + (n === 1 ? ' project' : ' projects'),
+      empty: n === 0,
+      shots: shown.map((p, i) => ({ src: p.src, alt: p.alt, name: p.n, tags: tags(p), sample: p.sample, open: 'Open photo: ' + p.n, view: () => this.setState({ lb: i }) })),
+      lbOpen: open,
+      lb: { cat: tags(cur), name: cur.n, src: cur.src, alt: cur.alt },
+      lbCount: pad(s.lb + 1) + ' / ' + pad(n),
+      closeLb: () => this.setState({ lb: -1 }),
+      prevLb: () => this.setState({ lb: (s.lb + n - 1) % n }),
+      nextLb: () => this.setState({ lb: (s.lb + 1) % n })
+    };
+  }
+}
+</script></head><body><template id="tpl">
+<div style="background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif">
+
+<sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
+  <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
+    <div class="intro-stage">
+      <div class="intro-logo">
+        <img src="../../design-draft/media/snm-logo-v3.webp" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(../../design-draft/media/snm-logo-v3.webp); mask-image: url(../../design-draft/media/snm-logo-v3.webp)"></span>
+        <span class="intro-edge"></span>
+      </div>
+      <span class="intro-tag meta">From Concept to Completion.</span>
+    </div>
+  </div>
+</sc-if>
+
+<header class="hdr">
+  <div class="w hdr-in">
+    <a class="logo" href="Main.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="../../design-draft/media/snm-logo-v3.webp" alt="SnM Millwork Manufacturing Inc." width="189" height="62"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="Main.html">Home</a>
+      <a class="cur" aria-current="page" href="Projects.html">Projects</a>
+      <div class="dd">
+        <a href="Services.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
+        <div class="menu">
+          <a href="Millwork.html">Millwork &amp; Cabinetry</a>
+          <a class="sig" href="Epoxy.html">Epoxy &amp; Resin</a>
+          <a href="Design.html">Design &amp; Engineering</a>
+          <a href="FitOut.html">Interior Fit-Out</a>
+          <a href="Fabrication.html">Custom Fabrication</a>
+          <a href="Installation.html">Installation</a>
+          <a href="Trades.html">Trade Coordination</a>
+        </div>
+      </div>
+      <a href="About.html">About</a>
+      <a class="btn" href="Quote.html">Get a Quote</a>
+    </nav>
+    <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav class="mnav" aria-label="Mobile">
+      <a href="Main.html">Home</a>
+      <a href="Projects.html" aria-current="page">Projects</a>
+      <a href="Services.html">Services</a>
+      <div class="mnav-sub">
+        <a href="Millwork.html">Millwork &amp; Cabinetry</a>
+        <a href="Epoxy.html">Epoxy &amp; Resin</a>
+        <a href="Design.html">Design &amp; Engineering</a>
+        <a href="FitOut.html">Interior Fit-Out</a>
+        <a href="Fabrication.html">Custom Fabrication</a>
+        <a href="Installation.html">Installation</a>
+        <a href="Trades.html">Trade Coordination</a>
+      </div>
+      <a href="About.html">About</a>
+      <a class="btn" href="Quote.html">Get a Quote</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+
+<section class="s" style="padding-top: 80px; padding-bottom: 48px">
+  <div class="w" style="display: flex; flex-direction: column; gap: 22px">
+    <span class="meta" style="color: var(--accent)">Selected work</span>
+    <h1 class="d1" style="max-width: 900px">Made once, for real <span class="sf">rooms.</span></h1>
+    <p class="lede" style="color: var(--ink-2)">Browse by industry or by what we did. Photos marked <em>Sample</em> are placeholders until SnM&rsquo;s own project photos are added.</p>
+  </div>
+</section>
+
+<section style="padding-bottom: 120px">
+  <div class="w" style="display: flex; flex-direction: column; gap: 32px">
+    <div class="pf" role="group" aria-label="Filter projects">
+      <div class="pf-row">
+        <span class="meta pf-l">Industry</span>
+        <div class="pf-list">
+          <sc-for list="{{ industries }}" as="f" hint-placeholder-count="5"><button type="button" class="{{ f.cls }}" aria-pressed="{{ f.pressed }}" onClick="{{ f.pick }}">{{ f.label }}</button></sc-for>
+        </div>
+      </div>
+      <div class="pf-row">
+        <span class="meta pf-l">Service</span>
+        <div class="pf-list">
+          <sc-for list="{{ services }}" as="f" hint-placeholder-count="6"><button type="button" class="{{ f.cls }}" aria-pressed="{{ f.pressed }}" onClick="{{ f.pick }}">{{ f.label }}</button></sc-for>
+        </div>
+      </div>
+    </div>
+    <p class="p" aria-live="polite" style="font-size: 14px">{{ countText }}</p>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}"><p class="lede" style="color: var(--ink-2)">Nothing matches both filters yet. Try another combination.</p></sc-if>
+    <div class="pg">
+      <sc-for list="{{ shots }}" as="p" hint-placeholder-count="6">
+        <figure class="pg-item">
+          <button type="button" class="pg-btn" aria-label="{{ p.open }}" onClick="{{ p.view }}"><img src="{{ p.src }}" alt="{{ p.alt }}" loading="lazy"></button>
+          <figcaption><span class="d5">{{ p.name }}</span><span class="meta">{{ p.tags }}</span><sc-if value="{{ p.sample }}" hint-placeholder-val="{{ false }}"><span class="pg-s">Sample photo</span></sc-if></figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section class="s bg-sand">
+  <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
+      <h2 class="d2">Have a room in <span class="sf">mind?</span></h2>
+      <p class="p">Tell us about the space. We&rsquo;ll reply with questions and a budget range.</p>
+    </div>
+    <a class="btn" href="Quote.html">Get a Quote</a>
+  </div>
+</section>
+
+</main>
+
+<sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+  <div class="lb" role="dialog" aria-modal="true" aria-label="Project photo viewer">
+    <div class="lb-top">
+      <div style="display: flex; flex-direction: column"><span class="meta" style="color: var(--accent)">{{ lb.cat }}</span><span class="d4">{{ lb.name }}</span></div>
+      <div style="display: flex; align-items: center; gap: 20px"><span class="count num">{{ lbCount }}</span><button type="button" class="arrow" aria-label="Close viewer" onClick="{{ closeLb }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button></div>
+    </div>
+    <div class="lb-mid">
+      <button type="button" class="arrow" aria-label="Previous photo" onClick="{{ prevLb }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M11 3L5 9l6 6"/></svg></button>
+      <img src="{{ lb.src }}" alt="{{ lb.alt }}">
+      <button type="button" class="arrow" aria-label="Next photo" onClick="{{ nextLb }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 3l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+</sc-if>
+
+<footer>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: var(--bg)"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#25262B"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <div class="ftr">
+    <div class="w ftr-g">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <img src="../../design-draft/media/snm-logo-v3.webp" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
+        <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
+      </div>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Projects.html">Projects</a><a href="Commercial.html">Commercial</a><a href="Residential.html">Residential</a><a href="Services.html">Services</a><a href="About.html">About</a><a href="Quote.html">Get a Quote</a></nav>
+      <div><h2 class="meta">Services</h2><a href="Millwork.html">Millwork &amp; Cabinetry</a><a href="Epoxy.html">Epoxy &amp; Resin</a><a href="Design.html">Design &amp; Engineering</a><a href="FitOut.html">Interior Fit-Out</a><a href="Fabrication.html">Custom Fabrication</a><a href="Installation.html">Installation</a><a href="Trades.html">Trade Coordination</a></div>
+      <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
+    </div>
+    <div class="w ftr-b"><span>© {{ year }} SnM Millwork Manufacturing Inc.</span><span>[Instagram] [LinkedIn]</span></div>
+  </div>
+</footer>
+
+</div>
+</template><div id="root"></div></body></html>

@@ -13,17 +13,17 @@
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&amp;family=Cormorant+Garamond:ital,wght@0,500;1,500&amp;family=Jost:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>body{margin:0;background:#121212}a{color:#F5A546}a:hover{color:#FFC27A}</style>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0;background:#FFFFFF}</style>
 </helmet>
-<div style="background: #121212; color: #F3EEE6; font-family: Jost, sans-serif">
+<div style="background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif">
 
 <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ false }}">
   <div class="intro" aria-hidden="true" onClick="{{ skipIntro }}">
     <div class="intro-stage">
       <div class="intro-logo">
-        <img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="">
-        <span class="intro-shine" style="-webkit-mask-image: url(/_blob/10a9d5890da064401c5342e90147ab64); mask-image: url(/_blob/10a9d5890da064401c5342e90147ab64)"></span>
+        <img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="">
+        <span class="intro-shine" style="-webkit-mask-image: url(/_blob/43e824b4c6b12e9f8027592f9786f0a5); mask-image: url(/_blob/43e824b4c6b12e9f8027592f9786f0a5)"></span>
         <span class="intro-edge"></span>
       </div>
       <span class="intro-tag meta">From Concept to Completion.</span>
@@ -33,11 +33,10 @@
 
 <header class="hdr">
   <div class="w hdr-in">
-    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="SnM Millwork Manufacturing Inc." width="207" height="68"></a>
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="SnM Millwork Manufacturing Inc." width="189" height="62"></a>
     <nav class="nav" aria-label="Main">
       <a href="Main.dc.html">Home</a>
-      <a href="Commercial.dc.html">Commercial</a>
-      <a href="Residential.dc.html">Residential</a>
+      <a href="Projects.dc.html">Projects</a>
       <div class="dd">
         <a href="Services.dc.html" aria-haspopup="true">Services <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a>
         <div class="menu">
@@ -50,6 +49,7 @@
           <a href="Trades.dc.html">Trade Coordination</a>
         </div>
       </div>
+      <a href="About.dc.html">About</a>
       <a class="btn" href="Quote.dc.html">Get a Quote</a>
     </nav>
     <button class="burger" type="button" aria-label="Menu" aria-expanded="{{ menuOpenStr }}" onClick="{{ toggleMenu }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h16M2 14h16"/></svg></button>
@@ -57,8 +57,7 @@
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav class="mnav" aria-label="Mobile">
       <a href="Main.dc.html">Home</a>
-      <a href="Commercial.dc.html">Commercial</a>
-      <a href="Residential.dc.html">Residential</a>
+      <a href="Projects.dc.html">Projects</a>
       <a href="Services.dc.html">Services</a>
       <div class="mnav-sub">
         <a href="Millwork.dc.html">Millwork &amp; Cabinetry</a>
@@ -78,9 +77,9 @@
 <main>
 <section class="s nf">
   <div class="w" style="display: flex; flex-direction: column; gap: 28px; max-width: 900px">
-    <span class="meta" style="color: #F5A546">Error 404</span>
-    <h1 class="d1">This page isn&rsquo;t here.</h1>
-    <p class="lede" style="color: #B9AFA2">The link may be old or mistyped. Here is where to go instead.</p>
+    <span class="meta" style="color: var(--accent)">Error 404</span>
+    <h1 class="d1">This page isn&rsquo;t <span class="sf">here.</span></h1>
+    <p class="lede" style="color: var(--ink-2)">The link may be old or mistyped. Here is where to go instead.</p>
     <div class="stk" style="display: flex; gap: 14px; flex-wrap: wrap">
       <a class="btn" href="Main.dc.html">Back to home</a>
       <a class="btn btn-line" href="Quote.dc.html">Get a Quote</a>
@@ -93,14 +92,14 @@
 </main>
 
 <footer>
-  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: #121212"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#0A0908"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: var(--bg)"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#25262B"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
-        <img src="/_blob/10a9d5890da064401c5342e90147ab64" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
+        <img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="SnM Millwork Manufacturing Inc." width="220" height="72" style="width: 220px; height: auto">
         <p style="margin: 0; max-width: 300px">Custom Millwork. Innovative Design. Complete Building Solutions. From Concept to Completion.</p>
       </div>
-      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
+      <nav aria-label="Footer"><h2 class="meta">Explore</h2><a href="Projects.dc.html">Projects</a><a href="Commercial.dc.html">Commercial</a><a href="Residential.dc.html">Residential</a><a href="Services.dc.html">Services</a><a href="About.dc.html">About</a><a href="Quote.dc.html">Get a Quote</a></nav>
       <div><h2 class="meta">Services</h2><a href="Millwork.dc.html">Millwork &amp; Cabinetry</a><a href="Epoxy.dc.html">Epoxy &amp; Resin</a><a href="Design.dc.html">Design &amp; Engineering</a><a href="FitOut.dc.html">Interior Fit-Out</a><a href="Fabrication.dc.html">Custom Fabrication</a><a href="Installation.dc.html">Installation</a><a href="Trades.dc.html">Trade Coordination</a></div>
       <div><h2 class="meta">Contact</h2><a href="tel:[PHONE]">[Phone]</a><a href="mailto:[EMAIL]">[Email]</a><span style="display: block; padding: 5px 0">[Workshop address]</span><span style="display: block; padding: 5px 0">[Hours]</span></div>
     </div>
