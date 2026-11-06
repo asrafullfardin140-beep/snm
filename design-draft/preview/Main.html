@@ -210,7 +210,7 @@ class Component extends DCLogic {
 
 <!-- 1. Hero video (after Swan Canada) -->
 <section class="hero" aria-label="Introduction">
-  <video ref="{{ vidRef }}" src="../media/hero.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+  <video ref="{{ vidRef }}" src="../media/hero.mp4" poster="../media/hero-poster.webp" preload="auto" autoplay muted loop playsinline aria-hidden="true"></video>
   <div class="hero-shade"></div>
   <div class="w hero-c">
     <h1 class="d1 rot-h" style="max-width: 980px"><span class="sr-only">We design, build and install custom millwork, kitchens and vanities, epoxy river tables, reception desks, feature walls and interior fit-outs.</span><span aria-hidden="true">We design, build &amp; install<span class="rot"><sc-for list="{{ rotWords }}" as="w" hint-placeholder-count="6"><span class="{{ w.cls }}">{{ w.t }}</span></sc-for></span></span></h1>
