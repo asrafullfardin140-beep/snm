@@ -15,7 +15,7 @@ class Component extends DCLogic {
     this.t1 = setInterval(() => { if (!this.state.slidesPaused && !this.drag) this.setState({ slide: (this.state.slide + 1) % (this.nSlides || 6) }); }, 7000);
     this.t2 = setInterval(() => { if (!this.state.reviewsPaused) this.setState({ review: (this.state.review + 1) % 5 }); }, 7000);
   }
-  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); if (this.onLit) { window.removeEventListener('scroll', this.onLit); window.removeEventListener('resize', this.onLit); } if (this.onStory) { window.removeEventListener('scroll', this.onStory); window.removeEventListener('resize', this.onStory); } }
+  componentWillUnmount() { clearInterval(this.t1); clearInterval(this.t2); clearInterval(this.rt); }
   renderVals() {
     const s = this.state;
     const slides = [
@@ -42,61 +42,6 @@ class Component extends DCLogic {
       showIntro: this._intro === undefined ? (this._intro = (() => { try { if (sessionStorage.getItem('snmIntro') === '1') return false; sessionStorage.setItem('snmIntro', '1'); } catch (e) { return false; } if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; setTimeout(() => { this._intro = false; }, 3200); return true; })()) : this._intro,
       skipIntro: () => { this._intro = false; this.setState({}); },
       year: new Date().getFullYear(),
-      litRef: (el) => {
-        if (!el) return;
-        if (!this.litBound) {
-          this.litBound = true;
-          this.onLit = () => {
-            const box = document.querySelector('.lit');
-            if (!box) return;
-            const ws = box.querySelectorAll('.lw');
-            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { ws.forEach((w) => w.classList.add('on')); return; }
-            const r = box.getBoundingClientRect();
-            const p = Math.min(1, Math.max(0, (window.innerHeight * 0.8 - r.top) / (r.height * 0.9)));
-            const k = Math.round(p * ws.length);
-            ws.forEach((w, i) => w.classList.toggle('on', i < k));
-          };
-          window.addEventListener('scroll', this.onLit, { passive: true });
-          window.addEventListener('resize', this.onLit);
-        }
-        setTimeout(this.onLit, 0);
-      },
-      storyRef: (el) => {
-        if (!el) return;
-        if (!this.storyBound) {
-          this.storyBound = true;
-          this.onStory = () => {
-            const box = document.querySelector('.story');
-            if (!box || box.offsetParent === null) return;
-            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            const r = box.getBoundingClientRect();
-            const run = Math.max(1, r.height - window.innerHeight);
-            const p = Math.min(1, Math.max(0, -r.top / run));
-            const n = 4, x = p * (n - 1);
-            box.style.setProperty('--p', p.toFixed(4));
-            box.querySelectorAll('.story-frame').forEach((f, i) => {
-              const d = Math.abs(x - i);
-              f.style.opacity = Math.max(0, Math.min(1, 1.6 - d * 1.6)).toFixed(3);
-              f.style.transform = 'scale(' + (1.1 - 0.1 * Math.min(1, Math.max(0, x - i + 1) / 2)).toFixed(4) + ')';
-            });
-            box.querySelectorAll('.story-cap').forEach((c, i) => {
-              const d = x - i;
-              const o = Math.max(0, 1 - Math.abs(d) * 2.2);
-              c.style.opacity = o.toFixed(3);
-              c.style.transform = 'translateY(' + (d * -36).toFixed(1) + 'px)';
-              c.style.visibility = o > 0.02 ? 'visible' : 'hidden';
-            });
-            box.querySelectorAll('.story-tick').forEach((t, i) => t.classList.toggle('on', Math.round(x) >= i));
-            const glow = box.querySelector('.story-glow');
-            if (glow) glow.style.opacity = Math.max(0, Math.min(1, (x - 2.3) / 0.7)).toFixed(3);
-            const hint = box.querySelector('.story-hint');
-            if (hint) hint.style.opacity = Math.max(0, 1 - p * 8).toFixed(3);
-          };
-          window.addEventListener('scroll', this.onStory, { passive: true });
-          window.addEventListener('resize', this.onStory);
-        }
-        setTimeout(this.onStory, 0);
-      },
       rotWords: ['Custom Millwork.', 'Kitchens & Vanities.', 'Epoxy River Tables.', 'Reception Desks.', 'Feature Walls.', 'Interior Fit-Outs.'].map((w, i, a) => { const c = (this.state.rot || 0) % a.length, p = (c + a.length - 1) % a.length; return { t: w, cls: i === c ? 'on' : (i === p && this.state.rot ? 'out' : '') }; }),
       cmpPos: this.cmpPos == null ? 50 : this.cmpPos,
       cmpRef: (el) => {
@@ -279,44 +224,11 @@ class Component extends DCLogic {
   </div>
 </section>
 
-<!-- 2b. Scroll story: one wall, from bare drywall to lights on -->
-<section class="story" ref="{{ storyRef }}" aria-labelledby="story-h">
-  <div class="story-pin">
-    <div class="story-frames">
-        <img class="story-frame" src="../../design-draft/media/cmp-before-v2.webp" alt="The bare dining room wall as our crew starts the install" loading="lazy">
-        <img class="story-frame" src="../../design-draft/media/install-crew.webp" alt="Two SnM installers fitting live-edge wood panels from a ladder" loading="lazy">
-        <img class="story-frame" src="../../design-draft/media/wall-day.webp" alt="The finished live-edge wood feature wall with a resin river" loading="lazy">
-        <img class="story-frame" src="../../design-draft/media/wall-blue.webp" alt="The finished wall lit by blue LEDs along the river" loading="lazy">
-      <div class="story-glow" aria-hidden="true"></div>
-      <div class="story-shade" aria-hidden="true"></div>
-    </div>
-    <div class="w story-ui">
-      <div class="story-head"><span class="meta" style="color: var(--accent)">Recent project &middot; Restaurant feature wall</span><h2 id="story-h" class="d4">One wall, from concept to completion</h2></div>
-      <div class="story-caps">
-        <div class="story-cap"><span class="meta num">01 &middot; Before</span><h3 class="d2">A bare dining-room <span class="sf">wall.</span></h3><p class="p">Rails fixed and levelled to carry every panel.</p></div>
-        <div class="story-cap"><span class="meta num">02 &middot; Install</span><h3 class="d2">Fitted panel by <span class="sf">panel.</span></h3><p class="p">Our own crew sets each live-edge board in place.</p></div>
-        <div class="story-cap"><span class="meta num">03 &middot; Complete</span><h3 class="d2">One continuous <span class="sf">river.</span></h3><p class="p">Live-edge boards, end-grain rounds and bark in a single wall.</p></div>
-        <div class="story-cap"><span class="meta num">04 &middot; Lights on</span><h3 class="d2">Then the lights come <span class="sf">on.</span></h3><p class="p">Blue LEDs trace the river from end to end.</p></div>
-      </div>
-      <div class="story-track" aria-hidden="true">
-        <div class="story-bar"><span></span></div>
-        <ol>
-          <li class="story-tick"><span class="meta num">01</span><span>Before</span></li>
-          <li class="story-tick"><span class="meta num">02</span><span>Install</span></li>
-          <li class="story-tick"><span class="meta num">03</span><span>Complete</span></li>
-          <li class="story-tick"><span class="meta num">04</span><span>Lights on</span></li>
-        </ol>
-      </div>
-      <span class="story-hint meta" aria-hidden="true">Scroll</span>
-    </div>
-  </div>
-</section>
-
 <!-- 2. Two audiences -->
-<section id="work" class="s">
+<section id="work" class="s" style="padding-top: 0">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px">
     <a href="Commercial.html" style="grid-column: 1 / span 7; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 22px">
-      <img class="cover r-32" src="../../design-draft/media/wall-blue.webp" alt="Resin river feature wall with blue LED lighting in a restaurant" style="height: auto">
+      <img class="cover r-32" src="../../design-draft/media/rec1.webp" alt="Office reception desk with a wood-slat feature wall" style="height: auto">
       <h2 class="d3">For builders and <span class="sf">designers</span></h2>
       <p class="p">Shop drawings, tender pricing and installs that keep to your schedule, for offices, retail, hospitality, healthcare and institutions.</p>
       <span class="tl" style="align-self: flex-start">Commercial work</span>
@@ -356,59 +268,6 @@ class Component extends DCLogic {
   </div>
 </section>
 
-<!-- 3b. Statement: the words light up as you scroll -->
-<section class="s lit" ref="{{ litRef }}" aria-label="How we work">
-  <div class="w">
-    <p class="lit-text"><span class="lw">Every</span> <span class="lw">piece</span> <span class="lw">we</span> <span class="lw">make</span> <span class="lw">is</span> <span class="lw">drawn</span> <span class="lw">for</span> <span class="lw">one</span> <span class="lw">room,</span> <span class="lw">built</span> <span class="lw">in</span> <span class="lw g">our</span> <span class="lw g">own</span> <span class="lw g">shop</span> <span class="lw">and</span> <span class="lw">installed</span> <span class="lw">by</span> <span class="lw">the</span> <span class="lw">people</span> <span class="lw">who</span> <span class="lw">made</span> <span class="lw">it.</span> <span class="lw">That</span> <span class="lw">is</span> <span class="lw">how</span> <span class="lw">a</span> <span class="lw">sketch</span> <span class="lw">becomes</span> <span class="lw">something</span> <span class="lw">you</span> <span class="lw">can</span> <span class="lw g">run</span> <span class="lw g">your</span> <span class="lw g">hand</span> <span class="lw g">along.</span></p>
-  </div>
-</section>
-
-<!-- 4. Drawn first, built once -->
-<section class="s bg-sand">
-  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
-    <div style="grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 24px">
-      <h2 class="d2">Drawn first. Built <span class="sf">once.</span></h2>
-      <p class="p">Every project starts as a shop drawing with real dimensions, materials and hardware. You approve it before we cut a single board, so what arrives on site is exactly what you signed off.</p>
-      <a class="tl" href="Design.html" style="align-self: flex-start">How we design and engineer</a>
-    </div>
-    <figure style="grid-column: 6 / span 7; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
-      <div style="background: #FFFFFF; border: 1px solid var(--line); border-radius: 2px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
-        <svg viewBox="0 0 300 300" role="img" aria-label="Shop drawing of a kitchen wall elevation with dimensions" style="width: 100%; height: auto">
-          <g fill="none" stroke="#5C534A" stroke-width="1">
-            <rect x="30" y="40" width="240" height="78"/><line x1="90" y1="40" x2="90" y2="118"/><line x1="150" y1="40" x2="150" y2="118"/><line x1="210" y1="40" x2="210" y2="118"/>
-            <line x1="22" y1="170" x2="278" y2="170" stroke-width="2"/>
-            <rect x="30" y="174" width="240" height="96"/><line x1="110" y1="174" x2="110" y2="270"/><line x1="190" y1="174" x2="190" y2="270"/>
-            <line x1="30" y1="206" x2="110" y2="206"/><line x1="30" y1="238" x2="110" y2="238"/>
-            <line x1="60" y1="190" x2="80" y2="190"/><line x1="60" y1="222" x2="80" y2="222"/><line x1="60" y1="254" x2="80" y2="254"/>
-            <line x1="180" y1="200" x2="180" y2="240"/><line x1="200" y1="200" x2="200" y2="240"/>
-            <line x1="30" y1="286" x2="270" y2="286" stroke="#A74710"/><line x1="30" y1="281" x2="30" y2="291" stroke="#A74710"/><line x1="270" y1="281" x2="270" y2="291" stroke="#A74710"/>
-            <line x1="14" y1="40" x2="14" y2="270" stroke="#A74710"/><line x1="9" y1="40" x2="19" y2="40" stroke="#A74710"/><line x1="9" y1="270" x2="19" y2="270" stroke="#A74710"/>
-          </g>
-          <text x="150" y="298" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" fill="#A74710">3048</text>
-          <text x="8" y="160" font-family="Jost, sans-serif" font-size="9" fill="#A74710" transform="rotate(-90 8 160)">2286</text>
-        </svg>
-        <figcaption class="meta" style="color: #4A4038">The drawing</figcaption>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px">
-        <img class="cover" src="../../design-draft/media/tv2.webp" alt="Finished kitchen with gloss island" style="flex: 1 1 auto; min-height: 280px">
-        <div class="meta" style="color: var(--ink-2)">The result</div>
-      </div>
-    </figure>
-  </div>
-</section>
-
-<!-- 5. Signature: Epoxy & Resin -->
-<section class="s bg-teal">
-  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: end">
-    <video class="cover r-169" src="../../design-draft/media/resin.mp4" autoplay muted loop playsinline aria-hidden="true" style="grid-column: 1 / span 7; height: auto"></video>
-    <div style="grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 24px">
-      <h2 class="d2">Wood and resin, poured as one <span class="sf">piece.</span></h2>
-      <p class="p">River tables, bar tops and feature walls. We choose the slabs and pour in our own shop, in colours mixed for your room.</p>
-      <a class="btn" href="Epoxy.html" style="align-self: flex-start">Explore Epoxy &amp; Resin</a>
-    </div>
-  </div>
-</section>
-
 <!-- 6. Services -->
 <section class="s">
   <div class="w" style="display: flex; flex-direction: column; gap: 48px">
@@ -422,37 +281,8 @@ class Component extends DCLogic {
   </div>
 </section>
 
-<!-- 7. Process -->
-<section class="s bg-sand">
-  <div class="w" style="display: flex; flex-direction: column; gap: 56px">
-    <div class="stk" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px">
-      <h2 class="d2">From Concept to <span class="sf">Completion.</span></h2>
-      <p class="p" style="max-width: 380px">One team carries the project through four stages, so nothing is lost between designer, shop and installer.</p>
-    </div>
-    <ol class="g" style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px">
-      <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: var(--accent)">1</span><h3 class="d4">Design &amp; Planning</h3><p class="p" style="font-size: 16px">We learn the vision, requirements, materials and technical details, then give you a clear scope and budget range.</p></li>
-      <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: var(--accent)">2</span><h3 class="d4">Engineering &amp; Coordination</h3><p class="p" style="font-size: 16px">Shop drawings you approve before anything is built, with every trade lined up.</p></li>
-      <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: var(--accent)">3</span><h3 class="d4">Manufacturing &amp; Fabrication</h3><p class="p" style="font-size: 16px">Made in our shop to the agreed specification, with progress photos along the way.</p></li>
-      <li class="rule-top" style="display: flex; flex-direction: column; gap: 12px"><span class="d2 num" style="color: var(--accent)">4</span><h3 class="d4">Installation &amp; Completion</h3><p class="p" style="font-size: 16px">Our crew installs, finishes and fixes any details on site, then walks you through it.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- 7b. Our own crew -->
-<section class="s bg-ebony">
-  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: center">
-    <img class="cover r-32" src="../../design-draft/media/install-crew.webp" alt="SnM installers fitting a live-edge feature wall in a restaurant" loading="lazy" style="grid-column: 1 / span 7; height: auto">
-    <div style="grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 20px">
-      <span class="meta" style="color: var(--accent)">Our people</span>
-      <h2 class="d2">Built by our own <span class="sf">crew.</span></h2>
-      <p class="p">The people who build your piece in our shop are the people who install it on site. Electrical, plumbing and other trades come through qualified partners we coordinate, so you keep one point of contact.</p>
-      <a class="tl" href="About.html" style="align-self: flex-start">Meet the team</a>
-    </div>
-  </div>
-</section>
-
 <!-- 8. Review slider -->
-<section class="s" aria-roledescription="carousel" aria-label="Client reviews" onMouseEnter="{{ pauseReviews }}" onMouseLeave="{{ resumeReviews }}">
+<section class="s bg-sand" aria-roledescription="carousel" aria-label="Client reviews" onMouseEnter="{{ pauseReviews }}" onMouseLeave="{{ resumeReviews }}">
   <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; align-items: start">
     <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 20px">
       <h2 class="d2">What clients <span class="sf">say</span></h2>
@@ -478,7 +308,7 @@ class Component extends DCLogic {
 </section>
 
 <!-- 9. Closing CTA -->
-<section class="s bg-sand">
+<section class="s">
   <div class="w stk" style="display: flex; justify-content: space-between; align-items: center; gap: 40px">
     <div style="display: flex; flex-direction: column; gap: 18px; max-width: 640px">
       <h2 class="d2">Tell us what you're <span class="sf">building.</span></h2>
@@ -494,7 +324,7 @@ class Component extends DCLogic {
 </main>
 
 <footer>
-  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: var(--bg-2)"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#25262B"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
+  <svg class="river" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="background: var(--bg)"><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58 L1440 120 L0 120 Z" fill="#25262B"/><path d="M0 80 C 220 30, 400 118, 640 70 S 980 18, 1190 64 S 1380 102, 1440 58" fill="none" stroke="#0D999E" stroke-width="4"/></svg>
   <div class="ftr">
     <div class="w ftr-g">
       <div style="display: flex; flex-direction: column; gap: 16px">
