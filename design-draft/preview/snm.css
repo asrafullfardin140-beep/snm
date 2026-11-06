@@ -344,7 +344,7 @@ button{cursor:pointer}
 /* Logo intro: on the first page of a visit, the SnM logo is revealed, polished by a sheen, then hands over to the page */
 .intro{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:radial-gradient(60% 50% at 50% 48%,#17130F 0%,#0A0908 70%);overflow:hidden;cursor:pointer;animation:intro-out .7s cubic-bezier(.4,0,.2,1) 2.15s forwards}
 .intro-stage{display:flex;flex-direction:column;align-items:center;gap:26px;animation:intro-recede .8s cubic-bezier(.4,0,.2,1) 2s forwards}
-.intro-logo{position:relative;width:clamp(240px,46vw,560px);aspect-ratio:1000/399;filter:drop-shadow(0 18px 40px rgba(0,0,0,.6))}
+.intro-logo{position:relative;width:clamp(240px,46vw,560px);aspect-ratio:1877/616;filter:drop-shadow(0 18px 40px rgba(0,0,0,.6))}
 .intro-logo img{width:100%;height:100%;object-fit:contain;clip-path:inset(0 100% 0 0);animation:intro-reveal 1.05s cubic-bezier(.65,0,.25,1) .25s forwards}
 .intro-edge{position:absolute;top:-6%;bottom:-6%;left:0;width:2px;opacity:0;background:linear-gradient(180deg,rgba(13,153,158,0),#5FC9CC 30%,#F5A546 70%,rgba(245,165,70,0));box-shadow:0 0 18px 4px rgba(95,201,204,.55),0 0 40px 10px rgba(245,165,70,.25);animation:intro-edge 1.05s cubic-bezier(.65,0,.25,1) .25s forwards}
 .intro-shine{position:absolute;inset:0;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;background:linear-gradient(105deg,transparent 35%,rgba(255,240,215,.75) 48%,rgba(255,255,255,.9) 50%,rgba(255,240,215,.75) 52%,transparent 65%);background-size:300% 100%;background-position:120% 0;opacity:0;mix-blend-mode:screen;animation:intro-shine 1s cubic-bezier(.4,0,.2,1) 1.25s forwards}

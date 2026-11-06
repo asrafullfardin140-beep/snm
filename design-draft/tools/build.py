@@ -11,6 +11,7 @@ BLOBS = {
     "b047282dff9c31b77831971d98221f02": "../media/showreel-poster.webp",
     "59092c77a0d8b7d4bc1783b90cd33a83": "../media/hero-poster.webp",
     "ddaee12b1d02cb40e277077a4e9a76b5": "../media/snm-logo.webp",
+    "10a9d5890da064401c5342e90147ab64": "../media/snm-logo-v2.webp",
     "7eaae759c1a76744ae37e0861c5897d7": "../media/favicon-64.png",
     "93a0c92b99ffa8e064234a231ffa0a91": "../media/favicon-180.png",
     "c337d2f2d5033cae7564bf652c1112a8": "../media/cmp-before-v2.webp",
