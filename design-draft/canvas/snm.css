@@ -503,3 +503,16 @@ blockquote.d3{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-t
   }
 }
 @media (min-width:769px){.hero .btn,.hs-c .btn{min-width:210px}}
+
+/* Photo strip on service pages: three photos on desktop, swipeable row on phones */
+.ph-strip{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:20px}
+.ph-i{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ph-i img{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bg-3);transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.ph-i{overflow:hidden}.ph-i:hover img{transform:scale(1.03)}
+.ph-i .meta{color:var(--ink-2)}
+@media (max-width:720px){
+  .ph-strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ph-strip::-webkit-scrollbar{display:none}
+  .ph-i{flex:0 0 78%;scroll-snap-align:center}
+}
+@media (max-width:768px){.ftr a{display:inline-flex;align-items:center;min-height:44px}}
