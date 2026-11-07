@@ -312,9 +312,12 @@ class Component extends DCLogic {
         const START = 5;
         const seek = () => { try { el.currentTime = START; } catch (e) {} };
         if (el.readyState > 0) seek(); else el.addEventListener('loadedmetadata', seek, { once: true });
+        // loop from second 5 without waiting for 'ended' (that causes a visible stall on phones)
+        el.addEventListener('timeupdate', () => {
+          if (el.duration && el.currentTime > el.duration - 0.35) seek();
+          else if (el.currentTime < START - 0.4) seek();
+        });
         el.addEventListener('ended', () => { seek(); el.play().catch(() => {}); });
-        // whatever resets the clip (a reload, the loop point), it always comes back to second 5
-        el.addEventListener('timeupdate', () => { if (el.currentTime < START - 0.4) seek(); });
       },
       vidPlaying: s.vidPlaying, vidPaused: !s.vidPlaying,
       vidLabel: s.vidPlaying ? 'Pause background video' : 'Play background video',
