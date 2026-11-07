@@ -32,7 +32,7 @@
 
 <header class="hdr over">
   <div class="w hdr-in">
-    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="SnM Millwork Manufacturing Inc." width="189" height="62"></a>
+    <a class="logo" href="Main.dc.html" aria-label="SnM Millwork Manufacturing Inc., home"><img src="/_blob/43e824b4c6b12e9f8027592f9786f0a5" alt="SnM Millwork Manufacturing Inc." width="210" height="72"></a>
     <nav class="nav" aria-label="Main">
       <a class="cur" aria-current="page" href="Main.dc.html">Home</a>
       <a href="Projects.dc.html">Projects</a>
@@ -77,7 +77,7 @@
 
 <!-- 1. Hero video (after Swan Canada) -->
 <section class="hero" aria-label="Introduction">
-  <video ref="{{ vidRef }}" src="/_blob/10f842f5b3c455fb49dd3bc47b3d91ab" poster="/_blob/b047282dff9c31b77831971d98221f02" preload="auto" autoplay muted loop playsinline aria-hidden="true"></video>
+  <video ref="{{ vidRef }}" src="/_blob/10f842f5b3c455fb49dd3bc47b3d91ab" poster="/_blob/b047282dff9c31b77831971d98221f02" preload="auto" autoplay muted playsinline aria-hidden="true"></video>
   <div class="hero-shade"></div>
   <div class="w hero-c">
     <h1 class="d1 rot-h" style="max-width: 980px"><span class="sr-only">We design, build and install custom millwork, kitchens and vanities, epoxy river tables, reception desks, feature walls and interior fit-outs.</span><span aria-hidden="true">We design, build &amp; install<span class="rot"><sc-for list="{{ rotWords }}" as="w" hint-placeholder-count="6"><span class="{{ w.cls }}">{{ w.t }}</span></sc-for></span></span></h1>
@@ -305,7 +305,17 @@ class Component extends DCLogic {
       menuOpen: s.menuOpen,
       menuOpenStr: s.menuOpen ? 'true' : 'false',
       toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
-      vidRef: (el) => { this.vid = el; },
+      vidRef: (el) => {
+        this.vid = el;
+        if (!el || el.dataset.cut) return;
+        el.dataset.cut = '1';
+        const START = 5;
+        const seek = () => { try { el.currentTime = START; } catch (e) {} };
+        if (el.readyState > 0) seek(); else el.addEventListener('loadedmetadata', seek, { once: true });
+        el.addEventListener('ended', () => { seek(); el.play().catch(() => {}); });
+        // whatever resets the clip (a reload, the loop point), it always comes back to second 5
+        el.addEventListener('timeupdate', () => { if (el.currentTime < START - 0.4) seek(); });
+      },
       vidPlaying: s.vidPlaying, vidPaused: !s.vidPlaying,
       vidLabel: s.vidPlaying ? 'Pause background video' : 'Play background video',
       toggleVideo: () => { if (!this.vid) return; if (s.vidPlaying) this.vid.pause(); else this.vid.play(); this.setState({ vidPlaying: !s.vidPlaying }); },
