@@ -32,8 +32,8 @@ function build(node, scope, out) {
   const el = node.namespaceURI === 'http://www.w3.org/1999/xhtml' ? document.createElement(node.localName) : document.createElementNS(node.namespaceURI, node.localName);
   for (const a of node.attributes) {
     const n = a.name;
-    if (n.startsWith('on')) { const fn = interp(a.value, scope); if (typeof fn === 'function') el.addEventListener(n.slice(2), fn); continue; }
-    if (n === 'ref') { const fn = interp(a.value, scope); if (typeof fn === 'function') queueMicrotask(() => fn(el)); continue; }
+    if (n.startsWith('on')) { const fn = interp(a.value, scope); if (typeof fn === 'function') (el.__on = el.__on || {})[n.slice(2)] = fn; continue; }
+    if (n === 'ref') { const fn = interp(a.value, scope); if (typeof fn === 'function') el.__ref = fn; continue; }
     if (n.startsWith('hint-')) continue;
     const v = interp(a.value, scope);
     if (v === false || v == null) continue;
@@ -44,11 +44,51 @@ function build(node, scope, out) {
   if (tag === 'video' && node.hasAttribute('muted')) el.muted = true;
   out.appendChild(el);
 }
+// Patch the live DOM instead of replacing it, so the video keeps playing and nothing re-runs its entrance animation.
+const KEEP = { VIDEO: ['src', 'poster', 'loop'], DETAILS: ['open'] };
+function bindHandlers(el, handlers) {
+  el.__on = handlers || {};
+  for (const t of Object.keys(el.__on)) {
+    el.__bound = el.__bound || {};
+    if (!el.__bound[t]) { el.__bound[t] = true; el.addEventListener(t, (e) => { const f = el.__on && el.__on[t]; if (f) return f.call(el, e); }); }
+  }
+}
+function patchEl(oldEl, newEl) {
+  const keep = KEEP[oldEl.tagName] || [];
+  for (const a of [...oldEl.attributes]) if (!newEl.hasAttribute(a.name) && !keep.includes(a.name) && !a.name.startsWith('data-')) oldEl.removeAttribute(a.name);
+  for (const a of newEl.attributes) {
+    if (keep.includes(a.name) && oldEl.hasAttribute(a.name)) continue;
+    if (oldEl.getAttribute(a.name) !== a.value) oldEl.setAttribute(a.name, a.value);
+  }
+  const tag = oldEl.tagName;
+  if ((tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') && oldEl !== document.activeElement && oldEl.type !== 'file') {
+    const v = tag === 'TEXTAREA' ? newEl.textContent : newEl.getAttribute('value');
+    if (v != null && oldEl.value !== v) oldEl.value = v;
+  }
+  bindHandlers(oldEl, newEl.__on);
+  oldEl.__ref = newEl.__ref;
+  if (tag === 'TEXTAREA') return;
+  morph(oldEl, newEl);
+}
+function morph(oldP, newP) {
+  const olds = [...oldP.childNodes], news = [...newP.childNodes];
+  news.forEach((n, i) => {
+    const o = olds[i];
+    if (!o) { bindAll(n); oldP.appendChild(n); return; }
+    if (o.nodeType === n.nodeType && (o.nodeType === 3 ? true : o.localName === n.localName && o.namespaceURI === n.namespaceURI)) {
+      if (o.nodeType === 3) { if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue; } else patchEl(o, n);
+    } else { bindAll(n); oldP.replaceChild(n, o); }
+  });
+  for (let i = olds.length - 1; i >= news.length; i--) oldP.removeChild(olds[i]);
+}
+function bindAll(node) { if (node.nodeType !== 1) return; if (node.__on) bindHandlers(node, node.__on); node.childNodes.forEach(bindAll); }
+function runRefs(node) { if (node.nodeType !== 1) return; if (node.__ref) node.__ref(node); node.childNodes.forEach(runRefs); }
 function render() {
   const vals = comp.renderVals();
-  const frag = document.createDocumentFragment();
-  tpl.content.childNodes.forEach((c) => build(c, vals, frag));
-  root.replaceChildren(frag);
+  const next = document.createElement('div');
+  tpl.content.childNodes.forEach((c) => build(c, vals, next));
+  if (!root.firstChild) { next.childNodes.forEach(bindAll); root.append(...next.childNodes); } else morph(root, next);
+  root.childNodes.forEach(runRefs);
 }
 window.addEventListener('DOMContentLoaded', () => {
   tpl = document.getElementById('tpl'); root = document.getElementById('root');
