@@ -62,8 +62,10 @@ class Component extends DCLogic {
     <nav class="mnav" aria-label="Mobile">
       <a href="Main.html">Home</a>
       <a href="Projects.html">Projects</a>
-      <a href="Services.html">Services</a>
-      <div class="mnav-sub">
+      <details class="mnav-dd">
+        <summary>Services<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6l5 5 5-5"/></svg></summary>
+        <div class="mnav-sub">
+          <a href="Services.html">All services</a>
         <a href="Millwork.html">Millwork &amp; Cabinetry</a>
         <a href="Epoxy.html">Epoxy &amp; Resin</a>
         <a href="Design.html">Design &amp; Engineering</a>
@@ -71,7 +73,8 @@ class Component extends DCLogic {
         <a href="Fabrication.html">Custom Fabrication</a>
         <a href="Installation.html">Installation</a>
         <a href="Trades.html">Trade Coordination</a>
-      </div>
+        </div>
+      </details>
       <a href="About.html">About</a>
       <a class="btn" href="Quote.html">Get a Quote</a>
     </nav>

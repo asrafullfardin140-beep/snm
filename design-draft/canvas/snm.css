@@ -563,3 +563,13 @@ blockquote.d3{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-t
   .burger{flex:none;width:44px;height:44px}
   .hdr-q{margin-right:0;padding:0 12px}
 }
+
+/* Mobile menu: Services dropdown */
+.mnav-dd{border-bottom:1px solid var(--line)}
+.mnav-dd>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:15px 0;min-height:44px;color:var(--ink);font-family:Georgia,'Times New Roman',serif;font-size:21px;font-weight:700}
+.mnav-dd>summary::-webkit-details-marker{display:none}
+.mnav-dd>summary.cur{color:var(--accent)}
+.mnav-dd>summary svg{width:22px;height:22px;flex:none;transition:transform .35s cubic-bezier(.65,0,.25,1)}
+.mnav-dd[open]>summary svg{transform:rotate(180deg)}
+.mnav-dd .mnav-sub{border-bottom:0;padding-top:0}
+@media (prefers-reduced-motion:no-preference){.mnav-dd[open] .mnav-sub{animation:ddin .35s ease both}@keyframes ddin{from{opacity:0;transform:translateY(-6px)}}}
