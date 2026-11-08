@@ -74,15 +74,22 @@ class Component extends DCLogic {
         this.vid = el;
         if (!el || el.dataset.cut) return;
         el.dataset.cut = '1';
-        const START = 5;
-        const seek = () => { try { el.currentTime = START; } catch (e) {} };
+        // phones get the vertical clip (starts at 5s); wide screens get the landscape clip so it is not stretched
+        const wide = window.matchMedia('(min-width: 769px)').matches;
+        const START = wide ? 0 : 5;
+        if (wide) el.poster = '../../design-draft/media/hero-poster.webp';
+        el.src = wide ? '../../design-draft/media/hero.mp4' : '../../design-draft/media/showreel.mp4';
+        el.play().catch(() => {});
+        const seek = () => { try { if (START) el.currentTime = START; } catch (e) {} };
         if (el.readyState > 0) seek(); else el.addEventListener('loadedmetadata', seek, { once: true });
         // loop from second 5 without waiting for 'ended' (that causes a visible stall on phones)
         el.addEventListener('timeupdate', () => {
+          if (!START) return;
           if (el.duration && el.currentTime > el.duration - 0.35) seek();
           else if (el.currentTime < START - 0.4) seek();
         });
         el.addEventListener('ended', () => { seek(); el.play().catch(() => {}); });
+        if (!START) el.loop = true;
       },
       vidPlaying: s.vidPlaying, vidPaused: !s.vidPlaying,
       vidLabel: s.vidPlaying ? 'Pause background video' : 'Play background video',
@@ -170,7 +177,7 @@ class Component extends DCLogic {
 
 <!-- 1. Hero video (after Swan Canada) -->
 <section class="hero" aria-label="Introduction">
-  <video ref="{{ vidRef }}" src="../../design-draft/media/showreel.mp4" poster="../../design-draft/media/showreel-poster.webp" preload="auto" autoplay muted playsinline aria-hidden="true"></video>
+  <video ref="{{ vidRef }}" poster="../../design-draft/media/showreel-poster.webp" preload="metadata" autoplay muted playsinline aria-hidden="true"></video>
   <div class="hero-shade"></div>
   <div class="w hero-c">
     <h1 class="d1 rot-h" style="max-width: 980px"><span class="sr-only">We design, build and install custom millwork, kitchens and vanities, epoxy river tables, reception desks, feature walls and interior fit-outs.</span><span aria-hidden="true">We design, build &amp; install<span class="rot"><sc-for list="{{ rotWords }}" as="w" hint-placeholder-count="6"><span class="{{ w.cls }}">{{ w.t }}</span></sc-for></span></span></h1>

@@ -1,8 +1,28 @@
 {
   "rewrites": [
-    { "source": "/design-draft/preview/:path*", "destination": "/index.html" }
+    {
+      "source": "/design-draft/preview/:path*",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
-    { "source": "/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/design-draft/media/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    }
   ]
 }

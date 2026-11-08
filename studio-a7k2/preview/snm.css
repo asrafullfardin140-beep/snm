@@ -2,7 +2,7 @@
    The earlier Dark Luxury version is saved as the git tag dark-luxury-v1. */
 :root{
   --bg:#FFFFFF; --bg-2:#F5F3EF; --bg-3:#ECE8E1;
-  --ink:#25262B; --ink-2:#6B6A67; --ink-rgb:37 38 43;
+  --ink:#25262B; --ink-2:#5F5E5B; --ink-rgb:37 38 43;
   --line:#E4E1DB; --line-2:#CFCBC3;
   --accent:#0B6E72; --amber:#DE701E; --teal:#0D999E; --deep-teal:#E6EFEF; --walnut:#5E2306;
 }
@@ -105,13 +105,13 @@ button{cursor:pointer}
 .nav .btn::after{width:32px;height:32px;font-size:14px}
 .nav .btn:hover{color:var(--bg)}
 .dd{position:relative}
-.menu{display:none;position:absolute;top:100%;left:-24px;min-width:270px;padding:10px 0;--ink:#25262B;--ink-2:#6B6A67;--accent:#0B6E72;--line:#E4E1DB;background:#fff;border:1px solid #E4E1DB;box-shadow:0 18px 40px rgba(37,38,43,.12)}
+.menu{display:none;position:absolute;top:100%;left:-24px;min-width:270px;padding:10px 0;--ink:#25262B;--ink-2:#5F5E5B;--accent:#0B6E72;--line:#E4E1DB;background:#fff;border:1px solid #E4E1DB;box-shadow:0 18px 40px rgba(37,38,43,.12)}
 .dd:hover .menu,.dd:focus-within .menu{display:block}
 .menu a{display:block;padding:10px 26px;color:var(--ink);text-decoration:none;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:700}
 .menu a:hover{color:var(--accent);background:#F5F3EF}
 .menu a.sig{color:var(--accent)}
 .burger{display:none;width:48px;height:48px;border-radius:0;border:1px solid var(--line-2);background:none;color:var(--ink);align-items:center;justify-content:center}
-.mnav{display:flex;flex-direction:column;padding:0 20px 24px;background:#fff;--ink:#25262B;--ink-2:#6B6A67;--accent:#0B6E72;--line:#E4E1DB;--bg:#fff;border-bottom:1px solid #E4E1DB}
+.mnav{display:flex;flex-direction:column;padding:0 20px 24px;background:#fff;--ink:#25262B;--ink-2:#5F5E5B;--accent:#0B6E72;--line:#E4E1DB;--bg:#fff;border-bottom:1px solid #E4E1DB}
 .mnav a{color:var(--ink);text-decoration:none;padding:15px 0;border-bottom:1px solid var(--line);font-family:Georgia,'Times New Roman',serif;font-size:21px;font-weight:700}
 .mnav a.btn{margin-top:16px;padding:0 6px 0 26px;color:var(--bg);font-family:Inter,system-ui,sans-serif;font-size:12px}
 
@@ -573,3 +573,10 @@ blockquote.d3{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-t
 .mnav-dd[open]>summary svg{transform:rotate(180deg)}
 .mnav-dd .mnav-sub{border-bottom:0;padding-top:0}
 @media (prefers-reduced-motion:no-preference){.mnav-dd[open] .mnav-sub{animation:ddin .35s ease both}@keyframes ddin{from{opacity:0;transform:translateY(-6px)}}}
+
+/* Bigger tap areas without changing the look */
+.dot{position:relative}
+.dot::before{content:"";position:absolute;inset:-8px -4px}
+.pf-list button{min-height:44px}
+@media (max-width:768px){.sl-foot .dot{width:32px;height:44px}.pf-list button{padding:10px 0}}
+@media (min-width:769px){.ftr a{padding:9px 0}}
