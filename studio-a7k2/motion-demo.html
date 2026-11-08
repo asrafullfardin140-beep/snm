@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>SnM motion examples</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#25262B;--bg:#fff;--bg2:#F5F3EF;--acc:#0B6E72;--line:#E4E1DB}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:700;margin:0}
+header{padding:48px 0 12px}h1{font-size:clamp(30px,6vw,52px);line-height:1.05}
+header p{color:#5F5E5B;max-width:56ch;line-height:1.6}
+section{padding:56px 0;border-top:1px solid var(--line)}section:nth-of-type(even){background:var(--bg2)}
+.tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600}
+h2{font-size:clamp(24px,4vw,34px);margin:8px 0 6px}.sub{color:#5F5E5B;margin:0 0 28px;max-width:60ch;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.cell{display:flex;flex-direction:column;gap:14px;align-items:flex-start}.cap{font-size:13px;color:#5F5E5B}.cap b{color:var(--ink);font-weight:600}
+/* base pill */
+.b{font:600 12px Inter;letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:18px;min-height:52px;padding:0 6px 0 26px;border-radius:50px;border:0;background:var(--ink);color:#fff;cursor:pointer;text-decoration:none}
+.b i{font-style:normal;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;font-size:16px;transition:transform .5s cubic-bezier(.65,0,.25,1)}
+/* 1 tilt + sheen */
+.tilt{perspective:600px;display:inline-block}
+.tilt .b{transition:transform .25s ease-out;transform:rotateX(var(--rx,0)) rotateY(var(--ry,0));transform-style:preserve-3d;position:relative;overflow:hidden}
+.tilt .b::before{content:"";position:absolute;inset:0;background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.35),transparent 60%);opacity:0;transition:opacity .3s}
+.tilt .b:hover::before{opacity:1}.tilt .b:hover i{transform:rotate(-45deg)}
+/* 2 pressable extruded */
+.ext{background:var(--acc);box-shadow:0 6px 0 #064a4d,0 14px 22px rgba(0,0,0,.2);transform:translateY(0);transition:transform .12s,box-shadow .12s}
+.ext:hover{transform:translateY(-2px);box-shadow:0 8px 0 #064a4d,0 18px 26px rgba(0,0,0,.22)}
+.ext:active{transform:translateY(6px);box-shadow:0 0 0 #064a4d,0 4px 8px rgba(0,0,0,.2)}
+.ext i{color:var(--acc)}
+/* 3 flip label */
+.flip{overflow:hidden;position:relative}.flip .t{display:block;transition:transform .45s cubic-bezier(.65,0,.25,1)}
+.flip .t2{position:absolute;left:26px;top:0;height:100%;display:flex;align-items:center;transform:translateY(110%);transition:transform .45s cubic-bezier(.65,0,.25,1)}
+.flip:hover .t{transform:translateY(-120%)}.flip:hover .t2{transform:none}
+/* 4 magnetic */
+.mag{display:inline-block;padding:18px}.mag .b{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+/* 5 fill sweep */
+.sweep{position:relative;overflow:hidden;isolation:isolate}
+.sweep::before{content:"";position:absolute;inset:0;background:var(--acc);border-radius:50px;transform:translateX(-101%);transition:transform .5s cubic-bezier(.65,0,.25,1);z-index:-1}
+.sweep:hover::before{transform:none}.sweep:hover i{transform:translateX(4px) rotate(0)}
+/* 6 ripple pulse */
+.pulse{position:relative}.pulse::after{content:"";position:absolute;inset:0;border-radius:50px;border:2px solid var(--ink);animation:pl 2.2s ease-out infinite}
+@keyframes pl{from{opacity:.6;transform:scale(1)}to{opacity:0;transform:scale(1.22,1.5)}}
+/* headline reveal */
+.rv{font-size:clamp(30px,6vw,54px);line-height:1.08;max-width:15ch}.rv span{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em}
+.rv span em{font-style:normal;display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i)*70ms)}
+.rv.go span em{transform:none}.rv .a{color:var(--acc)}
+.ct{display:flex;gap:36px;flex-wrap:wrap}.ct div{font-family:Georgia,serif;font-weight:700;font-size:44px}.ct small{display:block;font:500 12px Inter;letter-spacing:.14em;text-transform:uppercase;color:#5F5E5B}
+.replay{margin-top:24px;font:600 12px Inter;letter-spacing:.12em;text-transform:uppercase;background:none;border:1px solid var(--ink);border-radius:40px;padding:12px 20px;cursor:pointer}
+.par{height:300px;overflow:hidden;border-radius:6px;position:relative}.par img{position:absolute;left:0;top:-20%;width:100%;height:140%;object-fit:cover;will-change:transform}
+/* tilt card */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;perspective:900px}
+.card{position:relative;border-radius:8px;overflow:hidden;background:#fff;transform:rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .25s ease-out;transform-style:preserve-3d;box-shadow:0 12px 30px rgba(0,0,0,.12)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}.card p{margin:0;padding:14px 16px;font-family:Georgia,serif;font-weight:700}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.38),transparent 60%);pointer-events:none;opacity:var(--g,0);transition:opacity .3s}
+/* depth hero */
+.dh{position:relative;height:380px;border-radius:8px;overflow:hidden;background:#111;perspective:900px;touch-action:none}
+.dh .l{position:absolute;inset:-6%;transition:transform .2s ease-out}
+.dh .bg{background:url(../design-draft/media/hero-poster.webp) center/cover}
+.dh .sh{background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.65))}
+.dh .tx{display:flex;flex-direction:column;justify-content:flex-end;padding:11% 12%;color:#fff}.dh .tx h3{font-size:clamp(26px,5vw,42px);line-height:1.05}
+.dh .chip{inset:auto;right:9%;top:12%;background:rgba(255,255,255,.9);color:var(--ink);padding:10px 16px;border-radius:40px;font:600 12px Inter;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 14px 30px rgba(0,0,0,.35)}
+/* 3d plank */
+.stage{height:300px;display:grid;place-items:center;perspective:900px}
+.plank{--d:70px;position:relative;width:280px;height:70px;transform-style:preserve-3d;animation:spin 9s linear infinite}
+.plank div{position:absolute;backface-visibility:visible}
+.f{width:280px;height:70px;background:repeating-linear-gradient(92deg,#B8743A 0 14px,#A8652E 14px 27px,#C98648 27px 41px,#94561F 41px 52px)}
+.f.fr{transform:translateZ(35px)}.f.bk{transform:rotateY(180deg) translateZ(35px)}
+.f.tp{height:70px;transform:rotateX(90deg) translateZ(35px);background:linear-gradient(90deg,#B8743A 0 38%,#0D999E 38% 48%,#5FC9CC 48% 52%,#0D999E 52% 62%,#B8743A 62%)}
+.f.bt{height:70px;transform:rotateX(-90deg) translateZ(35px);background:#7a4a20}
+.f.lf{width:70px;transform:rotateY(-90deg) translateZ(35px)}.f.rt{width:70px;left:210px;transform:rotateY(90deg) translateZ(35px)}
+@keyframes spin{from{transform:rotateX(-24deg) rotateY(0)}to{transform:rotateX(-24deg) rotateY(360deg)}}
+.note{background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-size:13px;color:#5F5E5B;margin-top:18px;line-height:1.55}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header><div class="w"><span class="tag">SnM · motion examples</span><h1>Pick what feels right.</h1>
+<p>Everything below is live. Hover on desktop, or touch and drag on your phone. Tell me the letter or number of the ones you want on the real pages.</p></div></header>
+
+<section><div class="w"><span class="tag">1 · Button animation</span><h2>Six button feels</h2><p class="sub">All six keep the pill and circle arrow you already chose.</p>
+<div class="grid">
+<div class="cell"><span class="tilt" id="t1"><a class="b" href="#">Get a quote <i>→</i></a></span><div class="cap"><b>A · 3D tilt + light.</b> Leans toward your finger or cursor, with a soft shine that follows.</div></div>
+<div class="cell"><a class="b ext" href="#">Get a quote <i>→</i></a><div class="cap"><b>B · Pressable 3D.</b> Looks like a solid key. Tap it to feel it go down.</div></div>
+<div class="cell"><a class="b flip" href="#"><span class="t">See our work</span><span class="t2">Let's go</span><i>→</i></a><div class="cap"><b>C · Text flip.</b> The label rolls up and swaps.</div></div>
+<div class="cell"><span class="mag" id="m1"><a class="b" href="#">Start a project <i>→</i></a></span><div class="cap"><b>D · Magnetic.</b> The button drifts toward your cursor (desktop).</div></div>
+<div class="cell"><a class="b sweep" href="#">View services <i>→</i></a><div class="cap"><b>E · Fill sweep.</b> Teal slides in from the left.</div></div>
+<div class="cell"><a class="b pulse" href="#">Call now <i>→</i></a><div class="cap"><b>F · Soft pulse.</b> A ring ripples out. Good for one main call to action.</div></div>
+</div></div></section>
+
+<section><div class="w"><span class="tag">2 · Page animation</span><h2>Text, numbers, parallax</h2><p class="sub">These make the page feel alive as you scroll.</p>
+<h3 class="rv" id="rv"></h3><div class="ct" style="margin-top:34px"><div><b data-n="25">0</b><small>Years of craft</small></div><div><b data-n="480">0</b><small>Projects built</small></div><div><b data-n="12">0</b><small>Crew in shop</small></div></div>
+<button class="replay" id="rp">Replay</button>
+<div class="note"><b>G · Word-by-word headline</b> and <b>H · count-up numbers</b> (placeholder numbers). Below, <b>I · parallax</b>: scroll the page and watch the photo move at its own speed inside its frame.</div>
+<div class="par" style="margin-top:22px"><img id="px" src="../design-draft/media/wall-day.webp" alt=""></div></div></section>
+
+<section><div class="w"><span class="tag">3 · 3D</span><h2>Three levels of 3D</h2><p class="sub">Card tilt (CSS only), layered depth, and a rotating plank.</p>
+<h3 style="margin-bottom:14px;font-size:18px">J · Tilt cards with shine (move over them)</h3>
+<div class="cards">
+<div class="card"><img src="../design-draft/media/table-blue.webp" alt=""><p>Blue river table</p></div>
+<div class="card"><img src="../design-draft/media/wall-day.webp" alt=""><p>Resin river wall</p></div>
+<div class="card"><img src="../design-draft/media/resin-bark.webp" alt=""><p>Before the pour</p></div></div>
+<h3 style="margin:36px 0 14px;font-size:18px">K · Depth hero (drag or hover: photo, text and chip move at different distances)</h3>
+<div class="dh" id="dh"><div class="l bg" data-z="10"></div><div class="l sh" data-z="0"></div><div class="l tx" data-z="26"><h3>We design, build &amp; install.</h3></div><div class="l chip" data-z="46">Get a quote</div></div>
+<h3 style="margin:36px 0 6px;font-size:18px">L · Rotating wood plank with resin river</h3>
+<div class="stage"><div class="plank"><div class="f fr"></div><div class="f bk"></div><div class="f tp"></div><div class="f bt"></div><div class="f lf"></div><div class="f rt"></div></div></div>
+<div class="note">L is a stand-in made with CSS so you can judge the idea. The real version would use Three.js: true lighting, a wood texture from SnM photos, and a resin river that glows. It costs about 600KB more on the page.</div></div></section>
+
+<script>
+const fine=matchMedia('(hover:hover)').matches;
+function lean(el,box,max){box=box||el;const mv=e=>{const r=box.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;el.style.setProperty('--ry',((x-.5)*max)+'deg');el.style.setProperty('--rx',((.5-y)*max)+'deg');el.style.setProperty('--mx',x*100+'%');el.style.setProperty('--my',y*100+'%');el.style.setProperty('--g',1)};const out=()=>{['--rx','--ry'].forEach(k=>el.style.setProperty(k,'0deg'));el.style.setProperty('--g',0)};box.addEventListener('pointermove',mv);box.addEventListener('pointerdown',mv);box.addEventListener('pointerleave',out);box.addEventListener('pointerup',out)}
+const t1=document.getElementById('t1');lean(t1.querySelector('.b'),t1,18);
+document.querySelectorAll('.card').forEach(c=>lean(c,c,12));
+const m=document.getElementById('m1'),mb=m.querySelector('.b');m.addEventListener('pointermove',e=>{const r=m.getBoundingClientRect();mb.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.35}px,${(e.clientY-r.top-r.height/2)*.35}px)`});m.addEventListener('pointerleave',()=>mb.style.transform='');
+const dh=document.getElementById('dh');const dl=[...dh.querySelectorAll('.l')];
+function dp(e){const r=dh.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;dl.forEach(l=>{const z=+l.dataset.z;l.style.transform=`translate(${-x*z}px,${-y*z}px)`})}
+dh.addEventListener('pointermove',dp);dh.addEventListener('pointerleave',()=>dl.forEach(l=>l.style.transform=''));
+const rv=document.getElementById('rv');rv.innerHTML='We design, build and <span class="a"></span>'.split(' ').map((w,i)=>w.includes('<span')?'':'').join('');
+const words='Made once, for one room.'.split(' ');rv.innerHTML=words.map((w,i)=>`<span><em style="--i:${i}"${i>=3?' class="a"':''}>${w}</em></span> `).join('');
+function run(){rv.classList.remove('go');document.querySelectorAll('[data-n]').forEach(n=>n.textContent=0);void rv.offsetWidth;rv.classList.add('go');document.querySelectorAll('[data-n]').forEach(n=>{const to=+n.dataset.n,t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1400);n.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)})}
+let seen=false;new IntersectionObserver(es=>{if(es[0].isIntersecting&&!seen){seen=true;run()}},{threshold:.4}).observe(rv);document.getElementById('rp').onclick=run;
+const px=document.getElementById('px');addEventListener('scroll',()=>{const r=px.parentElement.getBoundingClientRect(),p=(r.top+r.height/2-innerHeight/2)/innerHeight;px.style.transform=`translateY(${p*-70}px)`},{passive:true});
+</script></body></html>
