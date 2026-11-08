@@ -54,6 +54,7 @@ function bindHandlers(el, handlers) {
   }
 }
 function patchEl(oldEl, newEl) {
+  const VARS = ['--rx', '--ry', '--mx', '--my'], saved = VARS.map((k) => oldEl.style && oldEl.style.getPropertyValue(k));
   const keep = KEEP[oldEl.tagName] || [];
   for (const a of [...oldEl.attributes]) if (!newEl.hasAttribute(a.name) && !keep.includes(a.name) && !a.name.startsWith('data-')) oldEl.removeAttribute(a.name);
   for (const a of newEl.attributes) {
@@ -65,6 +66,7 @@ function patchEl(oldEl, newEl) {
     const v = tag === 'TEXTAREA' ? newEl.textContent : newEl.getAttribute('value');
     if (v != null && oldEl.value !== v) oldEl.value = v;
   }
+  VARS.forEach((k, i) => { if (saved[i]) oldEl.style.setProperty(k, saved[i]); });
   bindHandlers(oldEl, newEl.__on);
   oldEl.__ref = newEl.__ref;
   if (tag === 'TEXTAREA') return;
@@ -96,3 +98,30 @@ window.addEventListener('DOMContentLoaded', () => {
   render();
   if (comp.componentDidMount) setTimeout(() => comp.componentDidMount(), 50);
 });
+
+// 3D tilt: buttons (mouse and touch) and cards (mouse only). One delegated listener, so it survives page patching.
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const SEL = '.btn, .svc-card, .sw-item, .pg-item';
+  let cur = null;
+  const off = (el) => { if (!el) return; el.removeAttribute('data-tilt'); ['--rx', '--ry'].forEach((k) => el.style.setProperty(k, '0deg')); };
+  const on = (e) => {
+    const el = e.target.closest && e.target.closest(SEL);
+    if (cur && cur !== el) { off(cur); cur = null; }
+    if (!el) return;
+    const isBtn = el.classList.contains('btn');
+    if (!isBtn && e.pointerType !== 'mouse') return;
+    const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height, max = isBtn ? 16 : 7;
+    el.style.setProperty('--ry', ((x - 0.5) * max).toFixed(1) + 'deg');
+    el.style.setProperty('--rx', ((0.5 - y) * max).toFixed(1) + 'deg');
+    el.style.setProperty('--mx', (x * 100).toFixed(0) + '%');
+    el.style.setProperty('--my', (y * 100).toFixed(0) + '%');
+    el.setAttribute('data-tilt','1'); cur = el;
+  };
+  const end = () => { off(cur); cur = null; };
+  document.addEventListener('pointermove', on, { passive: true });
+  document.addEventListener('pointerdown', on, { passive: true });
+  document.addEventListener('pointerup', end, { passive: true });
+  document.addEventListener('pointercancel', end, { passive: true });
+  document.documentElement.addEventListener('pointerleave', end);
+})();

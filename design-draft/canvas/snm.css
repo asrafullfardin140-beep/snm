@@ -483,7 +483,7 @@ blockquote.d3{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-t
   html{scroll-behavior:smooth}
   @keyframes vt-out{to{opacity:0}}
   @keyframes vt-in{from{opacity:0}}
-  @keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+  @keyframes rise{from{opacity:0;translate:0 34px}to{opacity:1;translate:0 0}}
   @keyframes settle{from{scale:1.14}to{scale:1}}
   @keyframes prog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
   @keyframes hero-in{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
@@ -547,12 +547,8 @@ blockquote.d3{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-t
 }
 /* Extra motion (CSS only) */
 @media (prefers-reduced-motion:no-preference){
-  .hero .btn:not(.btn-line)::after{animation:nudge 2.8s ease-in-out 2s infinite}
-  @keyframes nudge{0%,70%,100%{transform:none}80%{transform:translateX(5px)}90%{transform:none}}
   .tl{text-decoration:none;background:linear-gradient(var(--accent),var(--accent)) 0 100%/100% 1px no-repeat;padding-bottom:5px;transition:background-size .5s cubic-bezier(.65,0,.25,1),color .3s}
   .tl:hover{background-size:0 1px;background-position:100% 100%}
-  .svc-card,.sw-item{transition:transform .5s cubic-bezier(.16,1,.3,1)}
-  @media (hover:hover){.svc-card:hover,.sw-item:hover{transform:translateY(-4px)}}
   .ftr a{transition:transform .3s,color .3s}
   @media (hover:hover){.ftr a:hover{transform:translateX(4px)}}
   .btn{position:relative;overflow:hidden}
@@ -580,3 +576,25 @@ blockquote.d3{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-t
 .pf-list button{min-height:44px}
 @media (max-width:768px){.sl-foot .dot{width:32px;height:44px}.pf-list button{padding:10px 0}}
 @media (min-width:769px){.ftr a{padding:9px 0}}
+
+/* 3D button tilt with moving light (A) and soft pulse on the main call to action (F) */
+.btn{position:relative;overflow:hidden;transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:background .4s,color .4s,border-color .4s,transform .25s ease-out}
+.btn:active{transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(.97)}
+.btn::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(110px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.32),transparent 62%);opacity:0;transition:opacity .3s}
+.btn-line::before{background:radial-gradient(110px circle at var(--mx,50%) var(--my,50%),rgba(11,110,114,.16),transparent 62%)}
+.hero .btn-line::before,.hs-c .btn-line::before{background:radial-gradient(110px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.28),transparent 62%)}
+.btn[data-tilt]::before{opacity:1}
+.hero .btn:not(.btn-line),.hs-c .btn:not(.btn-line){--ring:245,243,239}
+.btn{--ring:37,38,43}
+@media (prefers-reduced-motion:no-preference){
+  .btn.pulse,.hero .btn:not(.btn-line),.hs-c .btn:not(.btn-line){animation:ring 2.4s ease-out 1.5s infinite}
+  .btn[data-tilt]{animation:none}
+  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(var(--ring),.5)}70%,100%{box-shadow:0 0 0 18px rgba(var(--ring),0)}}
+}
+@media (max-width:768px){.nav .btn{animation:none}}
+/* 3D card tilt with shine (J), mouse only */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .svc-card,.sw-item,.pg-item{position:relative;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s ease-out;will-change:transform}
+  .svc-card::after,.sw-item::after,.pg-item::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.3),transparent 60%);opacity:0;transition:opacity .3s;mix-blend-mode:soft-light}
+  .svc-card[data-tilt]::after,.sw-item[data-tilt]::after,.pg-item[data-tilt]::after{opacity:1}
+}
