@@ -96,11 +96,12 @@ class Component extends DCLogic {
       s1: s.step === 1, s2: s.step === 2, s3: s.step === 3, s4: s.step === 4, s5: s.step === 5,
       stepCls: s.still ? 'q-step' : 'q-step ' + (s.dir === 'back' ? 'q-in-back' : 'q-in'),
       stepNum: s.step, stepName: names[s.step - 1], pct: Math.round((s.step - 1) / 5 * 100 + 10),
+      steps: ['Who', 'Need', 'Timing', 'Details', 'Contact'].map((name, i) => ({ n: i + 1 < s.step ? '\u2713' : String(i + 1), name, cls: 'q-st' + (i + 1 < s.step ? ' done' : i + 1 === s.step ? ' now' : '') })),
       picks, hasPicks: picks.length > 0,
       isCom, v: s.v, err,
       whoOpts: opt([
-        { id: 'com', label: 'A business', sub: 'Contractor, designer, developer or business owner.', img: '../../design-draft/media/wall-day.webp' },
-        { id: 'res', label: 'My home', sub: 'Kitchen, bath, closet, built-in or a resin piece.', img: '../../design-draft/media/kit2.webp' }
+        { id: 'com', label: 'A business', sub: 'Contractor, designer, developer or business owner.', img: '../../design-draft/media/install-crew.webp' },
+        { id: 'res', label: 'My home', sub: 'Kitchen, bath, closet, built-in or a resin piece.', img: '../../design-draft/media/kit1.webp' }
       ], 'who'),
       needOpts: opt(isCom ? needCom : needRes, 'need'),
       whenOpts: opt(['Within 1 month', '1 to 3 months', '3 to 6 months', 'Just planning'], 'when', 'chip'),
@@ -211,10 +212,10 @@ class Component extends DCLogic {
 </header>
 
 <main>
-<section class="s" style="padding-top: 88px">
-  <div class="w g" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 56px">
+<section class="s q-page" style="padding-top: 72px">
+  <div class="w g q-wrap" style="display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 40px; align-items: start">
 
-    <div class="qf" style="grid-column: 1 / span 8; display: flex; flex-direction: column; gap: 40px">
+    <div class="qf q-card" style="display: flex; flex-direction: column; gap: 40px">
 
       <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
         <div class="q-step" style="display: flex; flex-direction: column; gap: 28px; padding: 40px 0">
@@ -240,7 +241,9 @@ class Component extends DCLogic {
 
           <div class="q-prog" role="group" aria-label="Progress">
             <div class="q-prog-top"><span class="meta num">Step {{ stepNum }} of 5</span><span class="q-prog-name">{{ stepName }}</span></div>
-            <div class="q-track"><span style="width: {{ pct }}%"></span></div>
+            <ol class="q-steps" aria-hidden="true">
+              <sc-for list="{{ steps }}" as="t" hint-placeholder-count="5"><li class="{{ t.cls }}"><span class="q-dot">{{ t.n }}</span><span class="q-sn">{{ t.name }}</span></li></sc-for>
+            </ol>
             <sc-if value="{{ hasPicks }}" hint-placeholder-val="{{ false }}">
               <div class="q-picks" aria-label="Your answers so far">
                 <sc-for list="{{ picks }}" as="k" hint-placeholder-count="2"><button type="button" class="q-pick" onClick="{{ k.go }}" aria-label="{{ k.aria }}">{{ k.v }}</button></sc-for>
@@ -342,22 +345,34 @@ class Component extends DCLogic {
       </sc-if>
     </div>
 
-    <aside style="grid-column: 10 / span 3; display: flex; flex-direction: column; gap: 32px; padding-top: 12px">
-      <div style="display: flex; flex-direction: column; gap: 16px">
+    <aside class="q-side">
+      <figure class="q-photo">
+        <img src="../../design-draft/media/stock/stock-workshop.webp" alt="A craftsperson planing a wooden board in the SnM workshop" loading="lazy">
+        <figcaption>
+          <span class="meta">SnM Millwork Manufacturing</span>
+          <span class="q-photo-t">From Concept to Completion.</span>
+          <ul class="q-trust">
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.6"/></svg>Reply within [X business days]</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.6"/></svg>[Free site visit]</li>
+            <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.6"/></svg>[Licensed and insured]</li>
+          </ul>
+        </figcaption>
+      </figure>
+      <div class="q-box">
         <h2 class="d4">What happens next</h2>
-        <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; color: var(--ink-2); font-size: 16px">
-          <li>We confirm we've received it the same day.</li>
-          <li>We reply within [X business days] with questions and a budget range.</li>
-          <li>We book a site visit or a call.</li>
+        <ol class="q-next-l">
+          <li><span>1</span>We confirm we've received it the same day.</li>
+          <li><span>2</span>We reply within [X business days] with questions and a budget range.</li>
+          <li><span>3</span>We book a site visit or a call.</li>
         </ol>
       </div>
-      <div class="rule-top" style="display: flex; flex-direction: column; gap: 8px">
+      <div class="q-box q-talk">
         <h2 class="d4">Prefer to talk?</h2>
-        <a href="tel:[PHONE]" style="font-size: 20px">[Phone]</a>
+        <a href="tel:[PHONE]" class="q-tel">[Phone]</a>
         <a href="mailto:[EMAIL]">[Email]</a>
         <span class="p" style="font-size: 15px">[Weekday hours]</span>
+        <p class="p" style="font-size: 13px; margin: 6px 0 0">We only use your details to reply about this project.</p>
       </div>
-      <p class="p" style="font-size: 14px">We only use your details to reply about this project.</p>
     </aside>
 
   </div>
