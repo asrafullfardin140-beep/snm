@@ -104,5 +104,7 @@ for name in PAGES:
     page = (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{unblob(head_extra)}'
             f'<link rel="stylesheet" href="snm.css">{helmet}<script src="runtime.js"></script><script>{unblob(script)}</script></head>'
             f'<body><template id="tpl">{unblob(body).replace(".dc.html", ".html")}</template><div id="root"></div></body></html>')
+    if name in ("Main", "Home-Slider"):
+        page = page.replace("</body>", '<script src="sound.js"></script></body>')
     (OUT / f"{name}.html").write_text(page)
     print("built", name)
