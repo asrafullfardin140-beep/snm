@@ -691,3 +691,8 @@ html[data-fx] .ss-p:nth-child(n+2)>img{transform:translateY(calc((1 - var(--k,0)
   .q-sn{font-size:11px;letter-spacing:0}
   .q-nav{border-radius:0}
 }
+/* Quote page: footer wave matches the page tint; photo framing */
+body:has(.q-page) .river{background:#EFEBE4!important}
+.q-photo img{object-position:50% 30%}
+.q-photo{min-height:380px}
+@media (min-width:901px) and (max-width:1100px){.q-card{padding:36px 32px 32px}.q-wrap{gap:24px!important}}

@@ -2,15 +2,16 @@
 
 "From Concept to Completion."
 
-## How the live site is set up right now (work in progress)
+## How the live site is set up right now
 
 | Address | What visitors see |
 |---|---|
-| `/` and `/design-draft/preview/*` (the link sent to the client) | The **under-construction page** (`index.html`), so the client doesn't see changes as we make them. |
-| `/studio-a7k2/` | The **real work-in-progress website** (hidden link, not in search engines, share only with the owner). |
+| `/` (redirects to `/design-draft/preview/Main.html`) and `/design-draft/preview/*` (the link sent to the client) | The **real website** (served from `studio-a7k2/preview/` by a rewrite in `vercel.json`). Published for client review on 2026-11-10 at the owner's request. |
+| `/studio-a7k2/` | The same site at its original hidden address (not in search engines). |
+| `/index.html`, `/404.html` | The old under-construction page (kept; used for 404s). |
 
-- `vercel.json` rewrites `/design-draft/preview/*` to the construction page and tells search engines not to index anything.
-- `404.html` is a copy of the construction page, so any wrong address shows it too.
+- `vercel.json` rewrites `/design-draft/preview/*` to `/studio-a7k2/preview/*`, redirects `/` to the homepage, and still tells search engines not to index anything (draft).
+- **To hide the site again from the client:** put back the rewrite `/design-draft/preview/:path*` -> `/index.html`, and remove the `/` redirect (see git history of `vercel.json`).
 
 ## Design theme
 
