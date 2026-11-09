@@ -598,3 +598,11 @@ blockquote.d3{font-family:Georgia,'Times New Roman',serif;font-weight:700;text-t
   .svc-card::after,.sw-item::after,.pg-item::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.3),transparent 60%);opacity:0;transition:opacity .3s;mix-blend-mode:soft-light}
   .svc-card[data-tilt]::after,.sw-item[data-tilt]::after,.pg-item[data-tilt]::after{opacity:1}
 }
+
+/* Homepage scroll animation (needs scroll-fx.js; without it everything is simply visible) */
+.wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
+.wd>i{font-style:normal;display:inline-block}
+html[data-fx] .wd>i{transform:translateY(112%);transition:transform 1s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i)*70ms)}
+html[data-fx] [data-in] .wd>i,html[data-fx] [data-in].wd>i{transform:none}
+html[data-fx] .sw-img,html[data-fx] img.cover{clip-path:inset(0 50% 0 50%);transition:clip-path 1.25s cubic-bezier(.77,0,.18,1)}
+html[data-fx] .sw-img[data-in],html[data-fx] img.cover[data-in]{clip-path:inset(0)}

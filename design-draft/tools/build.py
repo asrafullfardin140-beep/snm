@@ -94,6 +94,23 @@ def unblob(text):
 
 
 (OUT / "snm.css").write_text(unblob((SRC / "snm.css").read_text()))
+
+def split_headings(html):
+    """Wrap each word of the section headings in a span so it can rise into place (text nodes only, tags kept)."""
+    counter = [0]
+    def words(m):
+        open_tag, inner, close = m.group(1), m.group(2), m.group(3)
+        if "{{" in inner:
+            return m.group(0)
+        i = [0]
+        def txt(tm):
+            def w(wm):
+                i[0] += 1
+                return f'<span class="wd"><i style="--i:{i[0]}">{wm.group(0)}</i></span>'
+            return re.sub(r"[^\s]+", w, tm.group(0))
+        return open_tag + re.sub(r"(?<=>)[^<]+|^[^<]+", txt, inner) + close
+    return re.sub(r'(<h2 class="d[23]"[^>]*>)(.*?)(</h2>)', words, html, flags=re.S)
+
 for name in PAGES:
     src = (SRC / f"{name}.dc.html").read_text()
     helmet = re.search(r"<helmet>(.*?)</helmet>", src, re.S).group(1)
@@ -105,6 +122,7 @@ for name in PAGES:
             f'<link rel="stylesheet" href="snm.css">{helmet}<script src="runtime.js"></script><script>{unblob(script)}</script></head>'
             f'<body><template id="tpl">{unblob(body).replace(".dc.html", ".html")}</template><div id="root"></div></body></html>')
     if name in ("Main", "Home-Slider"):
-        page = page.replace("</body>", '<script src="sound.js"></script></body>')
+        page = split_headings(page)
+        page = page.replace("</body>", '<script src="scroll-fx.js"></script><script src="sound.js"></script></body>')
     (OUT / f"{name}.html").write_text(page)
     print("built", name)

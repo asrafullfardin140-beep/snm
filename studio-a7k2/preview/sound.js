@@ -21,22 +21,22 @@
     chime(c, t) { [[784, 0.16], [1175, 0.1], [1568, 0.06]].forEach(([f, v], i) => { const o = c.createOscillator(), g = c.createGain(); o.type = 'sine'; o.frequency.value = f; g.gain.setValueAtTime(0.0001, t + i * 0.07); g.gain.linearRampToValueAtTime(v, t + i * 0.07 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 1.4); o.connect(g).connect(c.destination); o.start(t + i * 0.07); o.stop(t + 1.5); }); },
     tick(c, t) { tone(c, 'triangle', 1500, 0, t, 0.05, 0.1); }
   };
-  const LIST = [['knock', 'Wood knock'], ['hammer', 'Hammer taps'], ['saw', 'Hand saw'], ['sander', 'Sanding'], ['drill', 'Drill whirr'], ['pour', 'Resin pour'], ['cabinet', 'Cabinet door'], ['plank', 'Plank slide'], ['tape', 'Tape measure'], ['stapler', 'Staple gun'], ['level', 'Level ping'], ['chime', 'Finish chime']];
+  const LIST = [['chime', 'Finish chime']]; const _OLD = [['knock', 'Wood knock'], ['hammer', 'Hammer taps'], ['saw', 'Hand saw'], ['sander', 'Sanding'], ['drill', 'Drill whirr'], ['pour', 'Resin pour'], ['cabinet', 'Cabinet door'], ['plank', 'Plank slide'], ['tape', 'Tape measure'], ['stapler', 'Staple gun'], ['level', 'Level ping'], ['chime', 'Finish chime']];
   const play = (n, force) => { if (!on && !force) return; try { const c = ac(); S[n](c, c.currentTime); } catch (e) {} };
 
   // which sound belongs to which homepage section (by order on the page)
-  const MAP = { 1: ['plank', 'Selected work'], 2: ['cabinet', 'Builders and homeowners'], 3: ['pour', 'One wall, start to finish'], 4: ['saw', 'Services'], 5: ['chime', 'Reviews'], 6: ['tape', 'Get a quote'] };
+  const MAP = { 3: ['chime', 'One wall, start to finish'], 4: ['chime', 'Services'], 6: ['chime', 'Get a quote'] };
 
   function ui() {
     const css = document.createElement('style');
     css.textContent = '.snd-w{position:fixed;right:12px;bottom:12px;z-index:60;font:500 13px Inter,system-ui,sans-serif;display:flex;flex-direction:column;align-items:flex-end;gap:8px}.snd-b{border:0;border-radius:40px;min-height:44px;padding:0 16px;background:#25262B;color:#fff;font:600 12px Inter,system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25)}.snd-b.on{background:#0B6E72}.snd-p{width:min(300px,calc(100vw - 24px));background:#fff;color:#25262B;border:1px solid #E4E1DB;border-radius:12px;padding:14px;box-shadow:0 16px 40px rgba(0,0,0,.2)}.snd-p h4{margin:0 0 4px;font:700 16px Georgia,serif}.snd-p p{margin:0 0 10px;color:#5F5E5B;font-size:12px;line-height:1.5}.snd-g{display:grid;grid-template-columns:1fr 1fr;gap:6px}.snd-g button{font:500 13px Inter,system-ui,sans-serif;border:1px solid #E4E1DB;background:#F5F3EF;border-radius:8px;min-height:44px;padding:0 10px;text-align:left;cursor:pointer}.snd-g button:active{background:#0B6E72;color:#fff}.snd-t{display:flex;gap:6px;margin-bottom:10px}.snd-t button{flex:1;min-height:44px;border-radius:8px;border:1px solid #25262B;background:none;font:600 12px Inter,system-ui,sans-serif;cursor:pointer}.snd-t button.on{background:#25262B;color:#fff}@media (max-width:768px){.snd-w{bottom:76px}}';
     document.head.appendChild(css);
     const w = document.createElement('div'); w.className = 'snd-w'; w.setAttribute('data-keep', '');
-    w.innerHTML = '<div class="snd-p" hidden><h4>Workshop sounds (demo)</h4><p>Tap any sound to hear it. Switch scroll sounds on to hear them as each section arrives.</p><div class="snd-t"><button type="button" id="snd-on">Scroll sounds: off</button></div><div class="snd-g">' + LIST.map(([k, l]) => '<button type="button" data-k="' + k + '">' + l + '</button>').join('') + '</div></div><button class="snd-b" type="button" aria-expanded="false">Sounds</button>';
+    w.innerHTML = '<div class="snd-p" hidden><h4>Sound (demo)</h4><p>A soft finish chime as key sections arrive. Off by default.</p><div class="snd-t"><button type="button" id="snd-on">Scroll sounds: off</button></div><div class="snd-g">' + LIST.map(([k, l]) => '<button type="button" data-k="' + k + '">' + l + '</button>').join('') + '</div></div><button class="snd-b" type="button" aria-expanded="false">Sounds</button>';
     document.body.appendChild(w);
     const p = w.querySelector('.snd-p'), b = w.querySelector('.snd-b'), t = w.querySelector('#snd-on');
     b.onclick = () => { open = !open; p.hidden = !open; b.setAttribute('aria-expanded', open); };
-    t.onclick = () => { on = !on; t.textContent = 'Scroll sounds: ' + (on ? 'on' : 'off'); t.classList.toggle('on', on); b.classList.toggle('on', on); if (on) play('knock', true); };
+    t.onclick = () => { on = !on; t.textContent = 'Scroll sounds: ' + (on ? 'on' : 'off'); t.classList.toggle('on', on); b.classList.toggle('on', on); if (on) play('chime', true); };
     w.querySelectorAll('[data-k]').forEach((x) => { x.onclick = () => play(x.dataset.k, true); });
   }
 
@@ -44,8 +44,8 @@
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting && !e.target.__snd) { e.target.__snd = 1; play(MAP[e.target.__i][0]); } }), { rootMargin: '0px 0px -35% 0px', threshold: 0 });
     const scan = () => document.querySelectorAll('#root section').forEach((s, i) => { if (MAP[i] && s.__i == null) { s.__i = i; io.observe(s); } });
     scan(); setInterval(scan, 1000);
-    document.addEventListener('pointerdown', (e) => { if (e.target.closest && e.target.closest('.btn')) play('knock'); }, { passive: true });
-    document.addEventListener('pointerover', (e) => { const l = e.target.closest && e.target.closest('.btn, .svc-card, .sw-item'); if (l && e.pointerType === 'mouse' && l !== document.__sl) { document.__sl = l; play('tick'); } }, { passive: true });
+    document.addEventListener('pointerdown', (e) => {  }, { passive: true });
+    document.addEventListener('pointerover', (e) => { const l = e.target.closest && e.target.closest('.btn, .svc-card, .sw-item'); if (l && e.pointerType === 'mouse' && l !== document.__sl) { document.__sl = l;  } }, { passive: true });
   }
   addEventListener('DOMContentLoaded', () => setTimeout(() => { ui(); triggers(); }, 400));
 })();
