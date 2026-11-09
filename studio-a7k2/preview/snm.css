@@ -606,3 +606,15 @@ html[data-fx] .wd>i{transform:translateY(112%);transition:transform 1s cubic-bez
 html[data-fx] [data-in] .wd>i,html[data-fx] [data-in].wd>i{transform:none}
 html[data-fx] .sw-img,html[data-fx] img.cover{clip-path:inset(0 50% 0 50%);transition:clip-path 1.25s cubic-bezier(.77,0,.18,1)}
 html[data-fx] .sw-img[data-in],html[data-fx] img.cover[data-in]{clip-path:inset(0)}
+
+/* Slide story: panels slide over each other while the screen stays put */
+.ss-p{position:relative;height:70svh;min-height:420px;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#0A0908}
+.ss-p img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ss-p::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(0,0,0,.72));z-index:1}
+.ss-t{position:relative;z-index:2;padding:0 clamp(20px,6vw,80px) clamp(36px,9vh,90px);max-width:760px;display:flex;flex-direction:column;gap:12px}
+.ss-t .meta{color:#CFCBC3;--ink-rgb:245 243 239}.ss-t h2{font-size:clamp(34px,6vw,68px);line-height:1.04;color:#fff;margin:0}.ss-t p{margin:0;color:#E4E1DB;font-size:clamp(15px,2vw,18px);line-height:1.6;max-width:46ch}
+html[data-fx] .ss{height:340svh;position:relative}
+html[data-fx] .ss-stk{position:sticky;top:0;height:100svh;overflow:hidden;background:#0A0908}
+html[data-fx] .ss-p{position:absolute;inset:0;height:auto;min-height:0}
+html[data-fx] .ss-p:nth-child(n+2){transform:translateY(calc((1 - var(--k,0)) * 100%))}
+html[data-fx] .ss-p:nth-child(n+2)>img{transform:translateY(calc((1 - var(--k,0)) * -18%)) scale(1.18)}

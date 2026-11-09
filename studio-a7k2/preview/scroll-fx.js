@@ -8,5 +8,17 @@
   const scan = () => document.querySelectorAll('#root h2.d2, #root h2.d3, #root .sw-img, #root img.cover, #root .cmp').forEach((el) => {
     if (!el.__fx) { el.__fx = 1; io.observe(el); }
   });
-  addEventListener('DOMContentLoaded', () => { scan(); setInterval(scan, 800); });
+  // slide story: scrub the panels with scroll
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  let ticking = false;
+  const slide = () => {
+    ticking = false;
+    const sec = document.querySelector('#root .ss'); if (!sec) return;
+    const ps = [...sec.querySelectorAll('.ss-p')], r = sec.getBoundingClientRect();
+    const p = clamp(-r.top / (r.height - innerHeight), 0, 1) * (ps.length - 1);
+    ps.forEach((el, i) => { if (i) el.style.setProperty('--k', clamp(p - (i - 1), 0, 1).toFixed(3)); });
+  };
+  const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(slide); } };
+  addEventListener('scroll', req, { passive: true }); addEventListener('resize', req);
+  addEventListener('DOMContentLoaded', () => { scan(); setInterval(() => { scan(); slide(); }, 800); });
 })();

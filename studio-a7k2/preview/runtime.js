@@ -54,7 +54,7 @@ function bindHandlers(el, handlers) {
   }
 }
 function patchEl(oldEl, newEl) {
-  const VARS = ['--rx', '--ry', '--mx', '--my'], saved = VARS.map((k) => oldEl.style && oldEl.style.getPropertyValue(k));
+  const VARS = ['--rx', '--ry', '--mx', '--my', '--k'], saved = VARS.map((k) => oldEl.style && oldEl.style.getPropertyValue(k));
   const keep = KEEP[oldEl.tagName] || [];
   for (const a of [...oldEl.attributes]) if (!newEl.hasAttribute(a.name) && !keep.includes(a.name) && !a.name.startsWith('data-')) oldEl.removeAttribute(a.name);
   for (const a of newEl.attributes) {
