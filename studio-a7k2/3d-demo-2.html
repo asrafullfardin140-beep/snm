@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>SnM 3D scroll examples, set 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#25262B;--bg2:#F5F3EF;--acc:#0B6E72;--teal:#0D999E}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg2);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:700;margin:0;line-height:1.1}
+.w{max-width:900px;margin:0 auto;padding:0 20px}
+.tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600}
+.top{padding:72px 0 40px;display:flex;flex-direction:column;gap:16px}
+.top h1{font-size:clamp(34px,7vw,60px)}.top p{color:#5F5E5B;max-width:60ch;margin:0}
+.idx{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.idx a{font:500 13px Inter;border:1px solid var(--ink);color:var(--ink);text-decoration:none;border-radius:40px;padding:10px 16px;min-height:44px;display:inline-flex;align-items:center}
+.intro{padding:56px 0 28px;display:flex;flex-direction:column;gap:10px}
+.intro h2{font-size:clamp(28px,5vw,44px)}.intro p{margin:0;color:#5F5E5B;max-width:62ch}
+.intro .where{font-size:14px;color:var(--ink)}.intro .where b{color:var(--acc)}
+.track{height:320vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg2)}
+.stage.dark{background:#0B1A21;background-image:linear-gradient(rgba(13,153,158,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(13,153,158,.10) 1px,transparent 1px);background-size:40px 40px;color:#fff}
+.stage.warm{background:radial-gradient(ellipse at 50% 70%,#fff,#E9E4DB)}
+.stage.ink{background:#111214;color:#fff}
+.stage.sky{background:linear-gradient(#E9EEF0,#D9D2C5);}
+.fit{position:absolute;left:50%;top:50%;width:0;height:0;perspective:1100px}
+.obj{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.part{position:absolute;left:0;top:0;backface-visibility:visible}
+.cabp{border:1px solid rgba(13,153,158,.8);background:rgba(13,153,158,.07);transition:border-color .4s}
+.cabp::after{content:"";position:absolute;inset:0;opacity:var(--w,0);background:repeating-linear-gradient(92deg,rgba(0,0,0,.06) 0 2px,transparent 2px 11px),linear-gradient(180deg,#C48B58,#A96F3F)}
+.cabp.solid{border-color:rgba(70,35,12,.7)}
+.cabp.wall::after{background:linear-gradient(180deg,#F1ECE2,#E0D8C8)}
+.cabp.flo::after{background:repeating-linear-gradient(90deg,rgba(0,0,0,.07) 0 2px,transparent 2px 34px),linear-gradient(180deg,#D8BE98,#C9A97C)}
+.pho{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;z-index:2;pointer-events:none}
+/* cnc */
+.sheet{position:absolute;left:0;top:0;width:400px;height:260px;margin:-130px 0 0 -200px;transform-style:preserve-3d;will-change:transform}
+.sheet svg{position:absolute;inset:0;width:100%;height:100%;display:block;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
+.piece{position:absolute;left:60px;top:40px;width:280px;height:180px;border-radius:18px;background:repeating-linear-gradient(92deg,rgba(0,0,0,.07) 0 2px,transparent 2px 11px),linear-gradient(180deg,#B2804F,#8E6139);box-shadow:0 0 0 1px rgba(60,30,10,.4),0 0 0 4px rgba(0,0,0,.05);opacity:0}
+.piece i{position:absolute;width:24px;height:24px;border-radius:50%;background:#2a1608;top:78px;box-shadow:inset 0 2px 4px rgba(0,0,0,.6)}
+.cut{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d}
+.bit{position:absolute;left:-4px;top:0;width:8px;height:84px;background:linear-gradient(90deg,#9aa0a6,#e9ecef,#6b7075);transform-origin:top;transform:rotateX(90deg);border-radius:0 0 3px 3px}
+.glow{position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:radial-gradient(#fff,rgba(13,153,158,.9) 40%,transparent 70%)}
+.chip{position:absolute;left:0;top:0;width:5px;height:5px;border-radius:1px;background:#E3B67A}
+/* kitchen layers */
+.lay{position:absolute;left:0;top:0}
+.door{background:repeating-linear-gradient(92deg,rgba(0,0,0,.06) 0 2px,transparent 2px 11px),linear-gradient(180deg,#C48B58,#A96F3F);border:1px solid rgba(60,30,10,.5);border-radius:3px}
+.door::after{content:"";position:absolute;right:12px;top:50%;width:6px;height:38px;margin-top:-19px;border-radius:3px;background:linear-gradient(90deg,#f1d9a0,#b98a3a)}
+/* corridor */
+.cor{backface-visibility:visible}
+.tg{background:rgba(255,255,255,.92);color:#25262B;font:600 13px Inter;letter-spacing:.12em;text-transform:uppercase;padding:12px 18px;border-radius:40px;white-space:nowrap}
+/* video */
+.vwrap{position:absolute;left:50%;top:46%;width:min(900px,90vw);aspect-ratio:16/9;transform:translate(-50%,-50%);perspective:1200px}
+.vwrap video{width:100%;height:100%;object-fit:cover;border-radius:10px;box-shadow:0 40px 80px rgba(0,0,0,.5);will-change:transform;background:#000}
+.tc{position:absolute;right:14px;top:12px;font:600 12px Inter;letter-spacing:.14em;color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:40px}
+/* slabs */
+.slab{border-radius:8px;overflow:hidden;box-shadow:0 30px 50px rgba(0,0,0,.25);background:#222;backface-visibility:hidden}
+.slab img{width:100%;height:100%;object-fit:cover;display:block}
+.slab::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent calc(var(--g,50) * 1% - 22%),rgba(255,255,255,.42) calc(var(--g,50) * 1%),transparent calc(var(--g,50) * 1% + 22%))}
+.slab span{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font:600 11px Inter;letter-spacing:.14em;text-transform:uppercase}
+/* ring and drum */
+.pan{border-radius:6px;overflow:hidden;background:#222;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.pan img{width:100%;height:100%;object-fit:cover;display:block}
+.pan span{position:absolute;left:12px;top:12px;background:rgba(10,9,8,.72);color:#fff;font:600 11px Inter;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:40px}
+.drum{border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(4px);backface-visibility:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;color:#fff;text-align:center}
+.drum b{font:700 54px/1 Georgia,serif;color:#8EDADB}.drum span{font:500 14px Inter;opacity:.9;max-width:260px}
+.cap{position:absolute;left:0;right:0;bottom:0;padding:0 20px 26px;display:flex;flex-direction:column;gap:6px;max-width:900px;margin:0 auto;pointer-events:none;z-index:4}
+.cap .n{font:600 11px Inter;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+.cap b{font:700 clamp(22px,4vw,32px) Georgia,serif}.cap span{font-size:15px;opacity:.85;max-width:52ch}
+.cap i{display:block;height:3px;background:rgba(127,127,127,.3);border-radius:3px;margin-top:8px;overflow:hidden}
+.cap u{display:block;height:100%;width:0;background:var(--teal);text-decoration:none}
+.hint{position:absolute;top:18px;left:0;right:0;text-align:center;font:600 11px Inter;letter-spacing:.18em;text-transform:uppercase;opacity:.6;z-index:4;pointer-events:none}
+.end{padding:60px 0 100px}.end p{color:#5F5E5B;max-width:62ch}
+@media (prefers-reduced-motion:reduce){.track{height:auto}.stage{position:relative;height:90vh}}
+</style></head><body>
+<header class="w top">
+  <span class="tag">SnM · 3D scroll examples · set 2</span>
+  <h1>Eight more ways to show the work.</h1>
+  <p>Scroll slowly through each one. They run in the browser with no plug-ins. The shapes are drawn stand-ins, and the photos and video are the ones already on the site. Studio link only, not linked from the site.</p>
+  <nav class="idx" aria-label="Examples"><a href="#e1">1 Blueprint to room</a><a href="#e2">2 CNC cutting</a><a href="#e3">3 Layered kitchen</a><a href="#e4">4 Walk into the project</a><a href="#e5">5 Scroll the footage</a><a href="#e6">6 Material close-ups</a><a href="#e7">7 Workshop tour</a><a href="#e8">8 Stats drum</a></nav>
+</header>
+<div id="app"></div>
+<div class="w end"><h2 style="font-size:28px;margin-bottom:10px">Which ones do you like?</h2><p>Tell me the numbers (1 to 8). I'll build the chosen ones into the real pages with SnM's own photos. For #5 we'd film or photograph one finished piece from all sides; for #3 and #4 I can use your real project photos.</p></div>
+
+<script>
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const sm = (a, b, x) => { x = clamp((x - a) / (b - a)); return x * x * (3 - 2 * x); };
+const M = '../design-draft/media/';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const mk = (cls, w, h, parent) => { const d = document.createElement('div'); d.className = 'part ' + cls; d.style.width = w + 'px'; d.style.height = h + 'px'; d.style.marginLeft = -w / 2 + 'px'; d.style.marginTop = -h / 2 + 'px'; parent.appendChild(d); return d; };
+const T = (x, y, z, rx, ry) => `translate3d(${x}px,${y}px,${z}px) rotateX(${rx || 0}deg) rotateY(${ry || 0}deg)`;
+const CFG = [
+  ['e1', 'dark', 'Blueprint becomes a room', 'A flat floor plan folds up into walls, the cabinets rise from the plan, and the finished photo fades in.', 'Homepage, "Concept to Completion" story.', 'fit'],
+  ['e2', 'ink', 'The CNC cutting path', 'A cutter follows the cut line as you scroll, chips fly, and the finished cabinet door lifts out of the sheet.', 'Millwork page, "how we make it".', 'fit'],
+  ['e3', 'sky', 'The kitchen in layers', 'Flat layers at different depths, wall, cabinets, island, lights. The camera moves through them as you scroll.', 'Residential page or a kitchen project page.', 'fit'],
+  ['e4', 'ink', 'Walk into the project', 'You walk down a corridor toward a real feature wall. Tags about the materials pass by on the way.', 'Commercial page, one big project.', 'fit'],
+  ['e5', 'ink', 'Scroll the footage', 'Your scroll controls the video, forward and back. With a video or photos of one finished piece from all sides, it works as a 360° viewer.', 'Epoxy & Resin page, one hero piece.', ''],
+  ['e6', 'warm', 'Material close-ups', 'Finish samples tilt in 3D and the light slides across them as you scroll.', 'Services pages, finishes and materials.', 'fit'],
+  ['e7', 'dark', 'Workshop tour', 'You stand inside a ring of photos. Scrolling turns you from station to station: shop, CNC, finishing, install.', 'About page, "inside the workshop".', 'fit'],
+  ['e8', 'dark', 'The stats drum', 'Key facts on a turning 3D drum. Numbers here are placeholders until SnM gives real ones.', 'Homepage or About page.', 'fit']
+];
+document.getElementById('app').innerHTML = CFG.map(([id, cls, t, d, where, fit], i) => `<section id="${id}"><div class="w intro"><span class="tag">Example ${i + 1}</span><h2>${t}</h2><p>${d}</p><p class="where"><b>Where it could go:</b> ${where}</p></div><div class="track"><div class="stage ${cls}"><div class="hint">Scroll</div>${fit ? '<div class="fit"><div class="obj"></div></div>' : ''}<div class="cap"><span class="n"></span><b></b><span></span><i><u></u></i></div></div></div></section>`).join('');
+const demos = [];
+const $s = (id) => document.getElementById(id);
+
+/* 1 blueprint to room */
+(function () {
+  const sec = $s('e1'), stage = sec.querySelector('.stage'), obj = sec.querySelector('.obj');
+  const W = 520, D = 340, H = 240;
+  const floor = mk('cabp flo', W, D, obj); floor.style.transform = T(0, 0, 0, 90, 0);
+  const pivot = () => { const p = document.createElement('div'); p.style.cssText = 'position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d'; obj.appendChild(p); return p; };
+  const pb = pivot(), pl = pivot(), pr = pivot();
+  const wb = mk('cabp wall', W, H, pb); wb.style.marginTop = -H + 'px';
+  const wl = mk('cabp wall', D, H, pl); wl.style.marginTop = -H + 'px'; wl.style.transform = 'rotateY(90deg)';
+  const wr = mk('cabp wall', D, H, pr); wr.style.marginTop = -H + 'px'; wr.style.transform = 'rotateY(90deg)';
+  const boxes = [];
+  const addBox = (o) => { const f = mk('cabp', o.w, 100, obj), l = mk('cabp', o.d, 100, obj), r = mk('cabp', o.d, 100, obj), t = mk('cabp', o.w, o.d, obj); f.style.filter = 'brightness(.9)'; l.style.filter = r.style.filter = 'brightness(.75)'; boxes.push({ o, f, l, r, t }); };
+  [-176, -80, 16, 112].forEach((x) => { addBox({ x, z: -D / 2 + 31, w: 92, d: 62, h: 88, y0: 0 }); addBox({ x, z: -D / 2 + 18, w: 92, d: 34, h: 70, y0: 140 }); });
+  addBox({ x: 212, z: -D / 2 + 31, w: 84, d: 62, h: 210, y0: 0 });
+  addBox({ x: -20, z: 50, w: 200, d: 76, h: 88, y0: 0 });
+  const caps = [[0, 'The drawing', 'A flat floor plan, straight from the shop drawings.'], [.22, 'Walls fold up', 'The room takes shape from the plan.'], [.45, 'Cabinets rise', 'Every unit built to the drawing.'], [.8, 'The finished kitchen', 'The real result, photographed on site.']];
+  const pho = document.createElement('div'); pho.className = 'pho'; pho.style.backgroundImage = 'url(' + M + 'kit1.webp)'; stage.appendChild(pho);
+  demos.push({ sec, caps, fit: 600, zoom: .85, update(p) {
+    const kw = sm(.12, .45, p), kc = sm(.4, .75, p), w = sm(.45, .7, p), th = (1 - kw) * 90;
+    pb.style.transform = `translate3d(0,0,${-D / 2}px) rotateX(${th}deg)`;
+    pl.style.transform = `translate3d(${-W / 2}px,0,0) rotateZ(${-th}deg)`;
+    pr.style.transform = `translate3d(${W / 2}px,0,0) rotateZ(${th}deg)`;
+    [floor, wb, wl, wr].forEach((e) => { e.style.setProperty('--w', w); e.classList.toggle('solid', w > .5); });
+    boxes.forEach(({ o, f, l, r, t }) => { const hh = Math.max(.01, o.h * kc), s = hh / 100, cy = -(o.y0 * kc + hh / 2);
+      [f, l, r, t].forEach((e) => { e.style.setProperty('--w', w); e.classList.toggle('solid', w > .5); });
+      f.style.transform = `translate3d(${o.x}px,${cy}px,${o.z + o.d / 2}px) scaleY(${s})`;
+      l.style.transform = `translate3d(${o.x - o.w / 2}px,${cy}px,${o.z}px) rotateY(90deg) scaleY(${s})`;
+      r.style.transform = `translate3d(${o.x + o.w / 2}px,${cy}px,${o.z}px) rotateY(90deg) scaleY(${s})`;
+      t.style.transform = `translate3d(${o.x}px,${-(o.y0 * kc + hh)}px,${o.z}px) rotateX(90deg)`; });
+    const tilt = -78 + sm(0, .6, p) * 62, spin = -sm(.1, .9, p) * 26;
+    obj.style.transform = `translateY(${60 - kw * 30}px) rotateX(${tilt}deg) rotateY(${spin}deg)`;
+    pho.style.opacity = sm(.84, .98, p);
+  } });
+})();
+
+/* 2 CNC */
+(function () {
+  const sec = $s('e2'), obj = sec.querySelector('.obj');
+  const D = 'M78,40 H322 A18,18 0 0 1 340,58 V202 A18,18 0 0 1 322,220 H78 A18,18 0 0 1 60,202 V58 A18,18 0 0 1 78,40 Z';
+  const sheet = document.createElement('div'); sheet.className = 'sheet'; obj.appendChild(sheet);
+  sheet.innerHTML = `<svg viewBox="0 0 400 260" aria-hidden="true"><defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B2804F"/><stop offset="1" stop-color="#8E6139"/></linearGradient></defs><rect width="400" height="260" rx="4" fill="url(#sw)"/><g stroke="rgba(60,30,10,.22)" fill="none"><path d="M0,14 C100,6 200,22 400,10"/><path d="M0,240 C110,232 250,248 400,238"/><path d="M0,128 C120,120 260,136 400,126"/><path d="M0,70 C100,64 250,78 400,68"/><path d="M0,190 C100,184 250,198 400,188"/></g><path id="hole" d="${D}" fill="#1a0f08" opacity="0"/><path id="cp" d="${D}" fill="none" stroke="#0D999E" stroke-width="3" stroke-linecap="round"/></svg>`;
+  const piece = document.createElement('div'); piece.className = 'piece'; piece.innerHTML = '<i style="left:30px"></i><i style="right:30px"></i>'; sheet.appendChild(piece);
+  const path = sheet.querySelector('#cp'), hole = sheet.querySelector('#hole'), L = path.getTotalLength();
+  path.style.strokeDasharray = L; path.style.strokeDashoffset = L;
+  const cut = document.createElement('div'); cut.className = 'cut'; cut.innerHTML = '<div class="glow"></div><div class="bit"></div>'; sheet.appendChild(cut);
+  const chips = Array.from({ length: 16 }, () => { const c = document.createElement('div'); c.className = 'chip'; sheet.appendChild(c); return c; });
+  const caps = [[0, 'Programmed', 'The cutting path comes straight from the drawing.'], [.12, 'Cutting', 'The router follows the line to the millimetre.'], [.62, 'Panel released', 'A finished cabinet door, ready for edging.']];
+  demos.push({ sec, caps, fit: 420, zoom: 1.6, update(p) {
+    const q = clamp((p - .06) / .54); path.style.strokeDashoffset = L * (1 - q);
+    const pt = path.getPointAtLength(L * q), on = q > 0 && q < 1;
+    cut.style.transform = `translate3d(${pt.x}px,${pt.y}px,${on ? 6 : 60}px)`; cut.style.opacity = q >= 1 ? sm(.7, .6, p) : 1;
+    chips.forEach((c, i) => { const a = Math.sin(i * 12.9 + p * 90), b = Math.cos(i * 7.7 + p * 77), z = Math.abs(a * b) * 34;
+      c.style.opacity = on ? .9 - Math.abs(b) * .5 : 0; c.style.transform = `translate3d(${pt.x + a * 16}px,${pt.y + b * 16}px,${z}px)`; });
+    const lift = sm(.64, .95, p);
+    hole.setAttribute('opacity', sm(.6, .66, p)); piece.style.opacity = sm(.58, .64, p);
+    piece.style.transform = `translateZ(${lift * 90}px)`; piece.style.boxShadow = `0 0 0 1px rgba(60,30,10,.4), 0 ${lift * 40}px ${lift * 50}px rgba(0,0,0,.4)`;
+    sheet.style.transform = `rotateX(${58 - lift * 10}deg) rotateZ(${-22 + p * 18}deg)`;
+  } });
+})();
+
+/* 3 kitchen layers */
+(function () {
+  const sec = $s('e3'), obj = sec.querySelector('.obj');
+  const layer = (w, h, x, y, z, bg, cls) => { const d = mk('lay ' + (cls || ''), w, h, obj); d.style.background = bg || ''; d.style.transform = `translate3d(${x}px,${y}px,${z}px)`; return d; };
+  layer(1600, 900, 0, 0, -760, 'linear-gradient(#EDE7DC,#DDD3C2)');
+  const win = layer(300, 200, 0, -80, -750, 'linear-gradient(#BFE3EE,#EAF6FA)'); win.style.border = '8px solid #fff';
+  layer(760, 130, 0, 20, -560, 'repeating-linear-gradient(90deg,rgba(255,255,255,.25) 0 2px,transparent 2px 36px),repeating-linear-gradient(0deg,rgba(255,255,255,.25) 0 2px,transparent 2px 36px),linear-gradient(135deg,#0D999E,#0B6E72)');
+  [-210, 0, 210].forEach((x) => { const d = layer(190, 170, x, -125, -520, '', 'door'); });
+  layer(700, 22, 0, 105, -440, 'linear-gradient(#F4F1EA,#D9D4C8)');
+  [-210, 0, 210].forEach((x) => { layer(190, 180, x, 205, -430, '', 'door'); });
+  layer(560, 230, 0, 215, -140, 'repeating-linear-gradient(92deg,rgba(0,0,0,.06) 0 2px,transparent 2px 11px),linear-gradient(180deg,#B2804F,#8E6139)').style.border = '1px solid rgba(60,30,10,.5)';
+  layer(600, 26, 0, 88, -140, 'linear-gradient(#FBFAF7,#D9D4C8)');
+  [-150, 0, 150].forEach((x, i) => { layer(2, 110 + i * 14, x, -230, 40, '#2a2a2e'); layer(46, 46, x, -150 + i * 14, 40, 'radial-gradient(circle at 40% 35%,#fff,#FFE7A8 45%,#E0A53A)').style.borderRadius = '50%'; });
+  const caps = [[0, 'The wall', 'Start at the back of the room.'], [.3, 'Cabinets', 'Upper and base units, each its own layer.'], [.62, 'The island', 'The centrepiece of the kitchen.'], [.85, 'The lights', 'Close enough to touch.']];
+  demos.push({ sec, caps, fit: 700, zoom: .78, update(p) { obj.style.transform = `translate3d(${(.5 - p) * 120}px,0,${p * 780}px) rotateY(${-10 + p * 20}deg)`; } });
+})();
+
+/* 4 corridor */
+(function () {
+  const sec = $s('e4'), obj = sec.querySelector('.obj');
+  const Wd = 560, Hh = 360, Ln = 1900;
+  const f = mk('cor', Wd, Ln, obj); f.style.background = 'repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0 2px,transparent 2px 120px),linear-gradient(90deg,#B99366,#C9A97C,#B99366)'; f.style.transform = T(0, Hh / 2, -Ln / 2 + 100, 90, 0);
+  const c = mk('cor', Wd, Ln, obj); c.style.background = 'repeating-linear-gradient(0deg,rgba(255,236,190,.55) 0 18px,transparent 18px 300px),#1b1a1c'; c.style.transform = T(0, -Hh / 2, -Ln / 2 + 100, 90, 0);
+  const wl = mk('cor', Ln, Hh, obj); wl.style.background = 'repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 3px,transparent 3px 60px),linear-gradient(180deg,#A56A3C,#7C4B28)'; wl.style.transform = T(-Wd / 2, 0, -Ln / 2 + 100, 0, 90);
+  const wr = mk('cor', Ln, Hh, obj); wr.style.background = wl.style.background; wr.style.transform = T(Wd / 2, 0, -Ln / 2 + 100, 0, 90);
+  const bk = mk('cor', Wd, Hh, obj); bk.style.background = 'url(' + M + 'wall-day.webp) center/cover'; bk.style.transform = T(0, 0, -Ln + 100, 0, 0);
+  [['Walnut slabs', -1, -420, -60], ['Teal resin river', 1, -900, 40], ['Hand finished', -1, -1350, -20]].forEach(([t, side, z, y]) => { const g = mk('cor tg', 190, 40, obj); g.textContent = t; g.style.display = 'flex'; g.style.alignItems = 'center'; g.style.justifyContent = 'center'; g.style.transform = T(side * (Wd / 2 - 6), y, z, 0, side * -90); });
+  const caps = [[0, 'Step inside', 'A corridor of real materials.'], [.35, 'Walk the walls', 'Tags call out the materials as you pass.'], [.8, 'The feature wall', 'The finished piece, at the end of the walk.']];
+  demos.push({ sec, caps, fit: 640, update(p) { obj.style.transform = `translate3d(0,0,${p * (Ln - 380)}px)`; } });
+})();
+
+/* 5 scroll the footage */
+(function () {
+  const sec = $s('e5'), stage = sec.querySelector('.stage');
+  const wrap = document.createElement('div'); wrap.className = 'vwrap';
+  wrap.innerHTML = '<video muted playsinline preload="auto" src="' + M + 'resin.mp4"></video><span class="tc">0:00</span>'; stage.appendChild(wrap);
+  const v = wrap.querySelector('video'), tc = wrap.querySelector('.tc'); let dur = 0;
+  v.addEventListener('loadedmetadata', () => { dur = v.duration; }); v.load();
+  const caps = [[0, 'Start', 'Your scroll is the play button.'], [.4, 'Scrub', 'Scroll back up and the footage runs in reverse.'], [.8, 'End', 'Works the same with a 360° turn of one finished piece.']];
+  demos.push({ sec, caps, update(p) {
+    v.style.transform = `rotateY(${-14 + p * 28}deg) rotateX(${4 - p * 8}deg)`;
+    if (dur) { const t = p * (dur - .05); if (Math.abs(v.currentTime - t) > .04) v.currentTime = t; tc.textContent = Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0'); }
+  } });
+})();
+
+/* 6 slabs */
+(function () {
+  const sec = $s('e6'), obj = sec.querySelector('.obj');
+  const items = [['resin-bark.webp', 'Resin and bark', -230], ['table-red.webp', 'Red resin', 0], ['samp1.webp', 'Material samples', 230]];
+  const slabs = items.map(([src, l, x]) => { const s = mk('slab', 210, 290, obj); s.innerHTML = '<img alt="" src="' + M + src + '"><span>' + l + '</span>'; return { s, x }; });
+  const caps = [[0, 'Look straight on', 'Each finish as the camera sees it.'], [.35, 'Turn it to the light', 'Watch the gloss move across the surface.'], [.7, 'See the grain', 'Real samples, real finishes.']];
+  demos.push({ sec, caps, fit: 720, update(p) { slabs.forEach(({ s, x }, i) => { const ph = p * 2 - i * .25;
+    s.style.transform = `translate3d(${x}px,${Math.sin(p * 6 + i) * 8}px,${Math.sin(p * 3 + i) * 40}px) rotateY(${Math.sin(ph * 3.1) * 38}deg) rotateX(${Math.cos(ph * 2.2) * 8}deg)`; s.style.setProperty('--g', 50 + Math.sin(ph * 3.1) * 70); }); } });
+})();
+
+/* 7 workshop ring */
+(function () {
+  const sec = $s('e7'), obj = sec.querySelector('.obj');
+  const items = [['shop1.webp', 'In the workshop'], ['cnc1.webp', 'CNC cutting'], ['stock/stock-planing.webp', 'Hand finishing'], ['install-crew.webp', 'Installation'], ['kit1.webp', 'Finished kitchens']];
+  const n = items.length, th = 360 / n, R = 420; sec.querySelector('.fit').style.perspective = '600px';
+  items.forEach(([src, l], i) => { const f = mk('pan', 420, 280, obj); f.innerHTML = '<img alt="" src="' + M + src + '"><span>' + l + '</span>'; f.style.transform = `rotateY(${i * th}deg) translateZ(${-R}px)`; });
+  const caps = items.map(([, l], i) => [i / n * .9, l, 'Station ' + (i + 1) + ' of ' + n + '.']);
+  demos.push({ sec, caps, fit: 620, update(p) { obj.style.transform = `translateZ(600px) rotateX(-2deg) rotateY(${-p * (n - 1) * th}deg)`; } });
+})();
+
+/* 8 drum */
+(function () {
+  const sec = $s('e8'), obj = sec.querySelector('.obj');
+  const items = [['[X]+', 'projects delivered'], ['[X]', 'years in business'], ['7', 'services under one roof'], ['1 team', 'concept to completion'], ['[City]', 'and the surrounding area']];
+  const n = items.length, th = 360 / n, h = 150, r = h / (2 * Math.tan(Math.PI / n));
+  items.forEach(([b, t], i) => { const f = mk('drum', 360, h, obj); f.innerHTML = '<b>' + b + '</b><span>' + t + '</span>'; f.style.transform = `rotateX(${i * th}deg) translateZ(${r}px)`; });
+  const caps = items.map(([b, t], i) => [i / n * .9, b + ' ' + t, 'Sample figures, replaced with SnM’s real numbers.']);
+  demos.push({ sec, caps, fit: 440, zoom: 1.35, update(p) { obj.style.transform = `translateZ(${-r}px) rotateY(-14deg) rotateX(${p * (n - 1) * th}deg)`; } });
+})();
+
+demos.forEach((d) => { d.track = d.sec.querySelector('.track'); d.fitEl = d.sec.querySelector('.fit'); d.n = d.sec.querySelector('.cap .n'); d.t = d.sec.querySelector('.cap b'); d.s = d.sec.querySelector('.cap span:not(.n)'); d.u = d.sec.querySelector('.cap u'); });
+let ticking = false;
+function render() {
+  ticking = false;
+  demos.forEach((d) => {
+    const r = d.track.getBoundingClientRect(), vh = innerHeight;
+    if (r.bottom < -50 || r.top > vh + 50) return;
+    if (d.fitEl) d.fitEl.style.transform = `scale(${Math.min(d.zoom || 1, (innerWidth - 24) / d.fit)})`;
+    const p = reduce ? .55 : clamp(-r.top / (r.height - vh));
+    d.update(p);
+    let k = 0; d.caps.forEach((c, i) => { if (p >= c[0] - 0.0001) k = i; });
+    d.n.textContent = (k + 1) + ' / ' + d.caps.length; d.t.textContent = d.caps[k][1]; d.s.textContent = d.caps[k][2]; d.u.style.width = (p * 100) + '%';
+  });
+}
+const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(render); } };
+addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); render();
+</script></body></html>
