@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>SnM 3D scroll examples</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#25262B;--bg:#fff;--bg2:#F5F3EF;--acc:#0B6E72;--teal:#0D999E}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg2);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;font-weight:700;margin:0;line-height:1.1}
+.w{max-width:900px;margin:0 auto;padding:0 20px}
+.tag{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:600}
+.top{padding:72px 0 40px;display:flex;flex-direction:column;gap:16px}
+.top h1{font-size:clamp(34px,7vw,60px)}.top p{color:#5F5E5B;max-width:60ch;margin:0}
+.idx{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.idx a{font:500 13px Inter;border:1px solid var(--ink);color:var(--ink);text-decoration:none;border-radius:40px;padding:10px 16px;min-height:44px;display:inline-flex;align-items:center}
+.intro{padding:56px 0 28px;display:flex;flex-direction:column;gap:10px}
+.intro h2{font-size:clamp(28px,5vw,44px)}
+.intro p{margin:0;color:#5F5E5B;max-width:62ch}
+.intro .where{font-size:14px;color:var(--ink)}
+.intro .where b{color:var(--acc)}
+.track{height:360vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg2)}
+.stage.dark{background:#0B1A21;background-image:linear-gradient(rgba(13,153,158,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(13,153,158,.10) 1px,transparent 1px);background-size:40px 40px;color:#fff}
+.stage.warm{background:radial-gradient(ellipse at 50% 70%,#fff,#E9E4DB)}
+.stage.ink{background:#111214;color:#fff}
+.fit{position:absolute;left:50%;top:50%;width:0;height:0;perspective:1400px;transform:scale(var(--fit,1))}
+.obj{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d;will-change:transform}
+.part{position:absolute;left:0;top:0;backface-visibility:visible}
+/* cabinet */
+.cabp{border:1px solid rgba(13,153,158,.8);background:rgba(13,153,158,.07);transition:border-color .4s}
+.cabp::after{content:"";position:absolute;inset:0;opacity:var(--w,0);background:repeating-linear-gradient(92deg,rgba(0,0,0,.06) 0 2px,transparent 2px 11px),linear-gradient(180deg,#C48B58,#A96F3F)}
+.cabp.solid{border-color:rgba(70,35,12,.7)}
+.knob{position:absolute;top:50%;width:9px;height:26px;border-radius:5px;background:linear-gradient(90deg,#f1d9a0,#b98a3a);margin-top:-13px;z-index:2;opacity:var(--w,0)}
+/* table */
+.tp{background-size:100% 100%;backface-visibility:hidden}
+/* tunnel */
+.tun{position:absolute;inset:0;perspective:800px;perspective-origin:50% 42%}
+.card{position:absolute;left:50%;top:50%;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);background:#222;will-change:transform,opacity}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card span{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;background:linear-gradient(transparent,rgba(0,0,0,.75));font:600 12px Inter;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.tunh{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;padding:0 20px;pointer-events:none}
+.tunh h3{font-size:clamp(28px,6vw,56px);color:#fff}
+/* prism */
+.face{border-radius:6px;overflow:hidden;backface-visibility:hidden;background:#222;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.face img{width:100%;height:100%;object-fit:cover;display:block}
+.face span{position:absolute;left:14px;top:14px;background:rgba(10,9,8,.7);color:#fff;font:600 12px Inter;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:40px}
+/* caption */
+.cap{position:absolute;left:0;right:0;bottom:0;padding:0 20px 26px;display:flex;flex-direction:column;gap:6px;max-width:900px;margin:0 auto;pointer-events:none;z-index:3}
+.cap .n{font:600 11px Inter;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+.cap b{font:700 clamp(22px,4vw,32px) Georgia,serif}
+.cap span{font-size:15px;opacity:.85;max-width:52ch}
+.cap i{display:block;height:3px;background:rgba(127,127,127,.3);border-radius:3px;margin-top:8px;overflow:hidden}
+.cap u{display:block;height:100%;width:0;background:var(--teal);text-decoration:none}
+.hint{position:absolute;top:18px;left:0;right:0;text-align:center;font:600 11px Inter;letter-spacing:.18em;text-transform:uppercase;opacity:.6;z-index:3;pointer-events:none}
+.end{padding:60px 0 100px}.end p{color:#5F5E5B;max-width:62ch}
+@media (prefers-reduced-motion:reduce){.track{height:auto}.stage{position:relative;height:90vh}}
+</style></head><body>
+<header class="w top">
+  <span class="tag">SnM · 3D scroll examples</span>
+  <h1>Show the work, not just the page.</h1>
+  <p>Four ideas where scrolling moves a 3D object that shows what SnM actually does: design, cut, build, pour and finish. Scroll slowly through each one. They run in the browser with no plug-ins. Only on the studio link, not linked from the site.</p>
+  <nav class="idx" aria-label="Examples"><a href="#d1">1 · Cabinet comes together</a><a href="#d2">2 · Resin table turns</a><a href="#d3">3 · Fly through projects</a><a href="#d4">4 · Before, during, after</a></nav>
+</header>
+
+<section id="d1" data-demo="cab">
+  <div class="w intro"><span class="tag">Example 1</span><h2>A cabinet that builds itself</h2><p>Drawn as a blueprint, exploded into the real cut panels, then assembled and finished with doors opening, all driven by your scroll.</p><p class="where"><b>Where it could go:</b> Millwork &amp; Cabinetry page, or the homepage "how we work" section.</p></div>
+  <div class="track"><div class="stage dark"><div class="hint">Scroll</div><div class="fit"><div class="obj"></div></div><div class="cap"><span class="n"></span><b></b><span></span><i><u></u></i></div></div></div>
+</section>
+
+<section id="d2" data-demo="tab">
+  <div class="w intro"><span class="tag">Example 2</span><h2>The resin river table, turning</h2><p>A live-edge table turns a full circle while the teal resin pours into the river as you scroll. This is the piece people remember.</p><p class="where"><b>Where it could go:</b> Epoxy &amp; Resin page, or above the homepage "Selected work".</p></div>
+  <div class="track"><div class="stage warm"><div class="hint" style="color:#25262B">Scroll</div><div class="fit"><div class="obj"></div></div><div class="cap" style="color:#25262B"><span class="n"></span><b></b><span></span><i><u></u></i></div></div></div>
+</section>
+
+<section id="d3" data-demo="tun">
+  <div class="w intro"><span class="tag">Example 3</span><h2>Fly through the projects</h2><p>Scrolling moves you forward through a tunnel of real SnM projects, feature wall, kitchen, install, CNC, resin, with the photos coming at you in 3D.</p><p class="where"><b>Where it could go:</b> a bold replacement for the "Selected work" row on the homepage.</p></div>
+  <div class="track"><div class="stage ink"><div class="hint">Scroll</div><div class="tun"></div><div class="tunh"><h3>Every project, one fly-through.</h3></div><div class="cap"><span class="n"></span><b></b><span></span><i><u></u></i></div></div></div>
+</section>
+
+<section id="d4" data-demo="pri">
+  <div class="w intro"><span class="tag">Example 4</span><h2>Before, during, after</h2><p>A turning 3D block with three faces from one real job. Scroll and it rotates from the empty space, to the build, to the finished result.</p><p class="where"><b>Where it could go:</b> a project page or the homepage story, with each job's own three photos.</p></div>
+  <div class="track"><div class="stage warm"><div class="hint" style="color:#25262B">Scroll</div><div class="fit" style="perspective:1300px"><div class="obj"></div></div><div class="cap" style="color:#25262B"><span class="n"></span><b></b><span></span><i><u></u></i></div></div></div>
+</section>
+
+<div class="w end"><h2 style="font-size:28px;margin-bottom:10px">Which ones do you like?</h2><p>Tell me the numbers (1 to 4). I can build the chosen ones into the homepage or the service pages with SnM's real photos. If you want true 3D, send me 3D files of your cabinets or tables (or we can scan a finished piece) and I'll show those instead of these drawn stand-ins.</p></div>
+
+<script>
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const sm = (a, b, x) => { x = clamp((x - a) / (b - a)); return x * x * (3 - 2 * x); };
+const M = '../design-draft/media/';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const mk = (cls, w, h, parent) => { const d = document.createElement('div'); d.className = 'part ' + cls; d.style.width = w + 'px'; d.style.height = h + 'px'; d.style.marginLeft = -w / 2 + 'px'; d.style.marginTop = -h / 2 + 'px'; parent.appendChild(d); return d; };
+const T = (x, y, z, rx, ry) => `translate3d(${x}px,${y}px,${z}px) rotateX(${rx || 0}deg) rotateY(${ry || 0}deg)`;
+const demos = [];
+
+/* 1 cabinet */
+(function () {
+  const sec = document.getElementById('d1'), obj = sec.querySelector('.obj');
+  const W = 240, H = 300, D = 140;
+  const parts = [
+    { n: 'left', w: D, h: H, x: -W / 2, y: 0, z: 0, ry: 90, o: [-120, 0, 0], sh: .78 },
+    { n: 'right', w: D, h: H, x: W / 2, y: 0, z: 0, ry: 90, o: [120, 0, 0], sh: .78 },
+    { n: 'top', w: W, h: D, x: 0, y: -H / 2, z: 0, rx: 90, o: [0, -120, 0], sh: 1.08 },
+    { n: 'bottom', w: W, h: D, x: 0, y: H / 2, z: 0, rx: 90, o: [0, 120, 0], sh: .7 },
+    { n: 'back', w: W, h: H, x: 0, y: 0, z: -D / 2, o: [0, 0, -150], sh: .85 },
+    { n: 'shelf', w: W - 4, h: D - 8, x: 0, y: 28, z: 0, rx: 90, o: [0, 20, 20], sh: .95 },
+    { n: 'doorL', w: W / 2, h: H - 6, x: -W / 4, y: 0, z: D / 2, o: [-50, 0, 190], sh: 1, door: -1 },
+    { n: 'doorR', w: W / 2, h: H - 6, x: W / 4, y: 0, z: D / 2, o: [50, 0, 190], sh: 1, door: 1 }
+  ].map((p) => { const el = mk('cabp', p.w, p.h, obj); el.style.filter = 'brightness(' + p.sh + ')'; if (p.door) { el.style.transformOrigin = p.door < 0 ? 'left center' : 'right center'; const k = document.createElement('i'); k.className = 'knob'; k.style[p.door < 0 ? 'right' : 'left'] = '14px'; el.appendChild(k); } p.el = el; return p; });
+  const caps = [[0, 'Drawn first', 'Every part dimensioned on the shop drawing.'], [.25, 'Cut on the CNC', 'Panels cut from real sheet to the millimetre.'], [.5, 'Assembled in our shop', 'Glued, clamped and squared by hand.'], [.8, 'Finished and fitted', 'Doors hung, hardware on, ready to install.']];
+  demos.push({ sec, caps, fit: 560, update(p) {
+    const e = p < .25 ? sm(0, .25, p) : p < .5 ? 1 : 1 - sm(.5, .8, p);
+    const w = sm(.2, .4, p), door = sm(.82, .98, p) * 74;
+    obj.style.transform = `rotateX(-16deg) rotateY(${-38 + p * 100}deg)`;
+    parts.forEach((q) => { const el = q.el; el.style.setProperty('--w', w);
+      el.classList.toggle('solid', w > .5);
+      el.style.transform = T(q.x + q.o[0] * e, q.y + q.o[1] * e, q.z + q.o[2] * e, q.rx, q.ry) + (q.door ? ` rotateY(${q.door * door}deg)` : ''); });
+  } });
+})();
+
+/* 2 resin table */
+(function () {
+  const sec = document.getElementById('d2'), obj = sec.querySelector('.obj');
+  const woodSVG = (river) => { const path = 'M0,62 C80,38 120,102 190,80 S320,48 380,70 L380,120 C320,98 260,142 190,130 S60,112 0,114 Z';
+    return river
+      ? `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 170' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='#0D999E'/><stop offset='.5' stop-color='#13B6BC'/><stop offset='1' stop-color='#0B6E72'/></linearGradient></defs><path d='${path}' fill='url(#g)'/><path d='M0,78 C80,56 130,118 190,98 S320,66 380,86' stroke='rgba(255,255,255,.45)' stroke-width='2' fill='none'/></svg>`
+      : `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 170' preserveAspectRatio='none'><defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#A3703F'/><stop offset='1' stop-color='#7D5230'/></linearGradient></defs><rect width='380' height='170' fill='url(#w)'/><g stroke='rgba(60,30,10,.28)' stroke-width='1.2' fill='none'><path d='M0,16 C100,6 200,24 380,12'/><path d='M0,34 C120,26 240,40 380,30'/><path d='M0,146 C110,138 250,154 380,144'/><path d='M0,158 C120,152 240,164 380,156'/><path d='M0,126 C100,120 200,132 380,124'/></g><path d='${path}' fill='#2a1608'/></svg>`; };
+  const url = (s) => 'url("data:image/svg+xml;utf8,' + encodeURIComponent(s) + '")';
+  const Wd = 380, Dd = 170, top = -62;
+  const wood = mk('tp', Wd, Dd, obj); wood.style.backgroundImage = url(woodSVG(false));
+  const resin = mk('tp', Wd, Dd, obj); resin.style.backgroundImage = url(woodSVG(true));
+  const edges = [[Wd, 14, 0, top + 7, Dd / 2, 0, 0], [Wd, 14, 0, top + 7, -Dd / 2, 0, 180], [Dd, 14, -Wd / 2, top + 7, 0, 0, -90], [Dd, 14, Wd / 2, top + 7, 0, 0, 90]];
+  edges.forEach(([w, h, x, y, z, rx, ry]) => { const e = mk('tp', w, h, obj); e.style.background = 'linear-gradient(180deg,#8d5e36,#6a4326)'; e.style.transform = T(x, y, z, rx, ry); });
+  [[-140], [140]].forEach(([x]) => { const l = mk('tp', 150, 100, obj); l.style.background = 'linear-gradient(180deg,#26272b,#141416)'; l.style.transform = T(x, 0, 0, 0, 90); l.style.backfaceVisibility = 'visible'; });
+  const bar = mk('tp', 280, 14, obj); bar.style.background = '#1c1d20'; bar.style.transform = T(0, 14, 0, 0, 0); bar.style.backfaceVisibility = 'visible';
+  const shadow = mk('tp', 520, 260, obj); shadow.style.background = 'radial-gradient(ellipse,rgba(0,0,0,.28),transparent 65%)'; shadow.style.transform = T(0, 52, 0, 90, 0);
+  const caps = [[0, 'Slabs matched', 'Live-edge slabs chosen and laid out by grain.'], [.3, 'Resin poured', 'Teal resin fills the river, then cures.'], [.65, 'Sanded and finished by hand', 'Smooth, level and ready for the room.']];
+  demos.push({ sec, caps, fit: 600, update(p) {
+    obj.style.transform = `rotateX(-24deg) rotateY(${-20 + p * 360}deg)`;
+    wood.style.transform = T(0, top, 0, 90, 0);
+    resin.style.transform = T(0, top - 1, 0, 90, 0);
+    const pour = sm(.08, .55, p);
+    resin.style.clipPath = `inset(0 ${(1 - pour) * 100}% 0 0)`;
+  } });
+})();
+
+/* 3 tunnel */
+(function () {
+  const sec = document.getElementById('d3'), tun = sec.querySelector('.tun'), head = sec.querySelector('.tunh');
+  const items = [['wall-blue.webp', 'Feature wall', -1], ['kit1.webp', 'Kitchen', 1], ['install-crew.webp', 'Installed on site', -1], ['cnc1.webp', 'CNC cutting', 1], ['table-blue.webp', 'Resin table', -1], ['step-after.webp', 'Finished interior', 1], ['shop1.webp', 'Our workshop', 0]];
+  const cards = items.map(([src, label, side]) => { const c = document.createElement('div'); c.className = 'card'; c.innerHTML = '<img alt="" src="' + M + src + '"><span>' + label + '</span>'; tun.appendChild(c); return { c, side }; });
+  let cw = 0, ch = 0, gap = 520;
+  const size = () => { cw = Math.min(340, innerWidth * .72); ch = cw * .66; cards.forEach(({ c }) => { c.style.width = cw + 'px'; c.style.height = ch + 'px'; c.style.marginLeft = -cw / 2 + 'px'; c.style.marginTop = -ch / 2 + 'px'; }); };
+  size(); addEventListener('resize', size);
+  const caps = items.map(([, l], i) => [i / items.length, l, 'Real SnM work, coming toward you.']);
+  demos.push({ sec, caps, update(p) {
+    const cam = p * (items.length - 1) * gap + 40, spread = Math.min(1, innerWidth / 900) * 270;
+    cards.forEach(({ c, side }, i) => { const dz = -i * gap + cam; const x = side * spread, y = side * -20 + (i % 2 ? 40 : -30);
+      const op = clamp((dz + 2700) / 900) * clamp((520 - dz) / 260);
+      c.style.opacity = op; c.style.transform = `translate3d(${x}px,${y}px,${-i * gap + cam - 0}px) rotateY(${-side * 10}deg)`; c.style.pointerEvents = 'none'; });
+    head.style.opacity = 1 - sm(0, .08, p);
+  } });
+})();
+
+/* 4 prism */
+(function () {
+  const sec = document.getElementById('d4'), obj = sec.querySelector('.obj');
+  const fw = 520, fh = 340, r = fw / (2 * Math.tan(Math.PI / 3));
+  const faces = [['step-before.webp', 'Before'], ['step-during.webp', 'During'], ['step-after.webp', 'After']].map(([src, l], i) => { const f = mk('face', fw, fh, obj); f.innerHTML = '<img alt="" src="' + M + src + '"><span>' + l + '</span>'; f.style.transform = `rotateY(${i * 120}deg) translateZ(${r}px)`; return f; });
+  const caps = [[0, 'Before', 'The empty space and the brief.'], [.34, 'During', 'Built in our shop, installed on site.'], [.67, 'After', 'Finished, handed over, lived in.']];
+  demos.push({ sec, caps, fit: 600, update(p) { obj.style.transform = `translateZ(${-r}px) rotateX(-6deg) rotateY(${-p * 240}deg)`; } });
+})();
+
+/* drive */
+demos.forEach((d) => { d.track = d.sec.querySelector('.track'); d.n = d.sec.querySelector('.cap .n'); d.t = d.sec.querySelector('.cap b'); d.s = d.sec.querySelector('.cap span:not(.n)'); d.u = d.sec.querySelector('.cap u'); });
+let ticking = false;
+function render() {
+  ticking = false;
+  const fit = Math.min(1, (innerWidth - 24) / 600); document.documentElement.style.setProperty('--fit', fit);
+  demos.forEach((d) => {
+    const r = d.track.getBoundingClientRect(), vh = innerHeight;
+    if (r.bottom < -50 || r.top > vh + 50) return;
+    const p = reduce ? .55 : clamp(-r.top / (r.height - vh));
+    d.update(p);
+    let k = 0; d.caps.forEach((c, i) => { if (p >= c[0] - 0.0001) k = i; });
+    d.n.textContent = (k + 1) + ' / ' + d.caps.length; d.t.textContent = d.caps[k][1]; d.s.textContent = d.caps[k][2]; d.u.style.width = (p * 100) + '%';
+  });
+}
+const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(render); } };
+addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); render();
+</script></body></html>
