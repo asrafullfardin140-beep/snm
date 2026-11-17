@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/design-draft/preview/:path*",
-      "destination": "/studio-a7k2/preview/:path*"
+      "destination": "/index.html"
     }
   ],
   "headers": [
@@ -23,13 +23,6 @@
           "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/design-draft/preview/Main.html",
-      "permanent": false
     }
   ]
 }
